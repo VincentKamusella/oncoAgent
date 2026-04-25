@@ -115,7 +115,7 @@ export function AgentChat({ patient }: { patient: Patient }) {
 
   if (collapsed) {
     return (
-      <aside className="hidden w-10 flex-shrink-0 flex-col items-center gap-2 border-l border-border bg-card/50 py-3 xl:flex">
+      <aside className="hidden w-12 flex-shrink-0 flex-col items-center gap-2 border-l border-border bg-card/40 py-3 xl:flex">
         <button
           type="button"
           onClick={toggle}
@@ -136,7 +136,7 @@ export function AgentChat({ patient }: { patient: Patient }) {
   }
 
   return (
-    <aside className="hidden w-[340px] flex-shrink-0 flex-col border-l border-border bg-card/50 xl:flex">
+    <aside className="hidden w-[340px] flex-shrink-0 flex-col border-l border-border bg-card/40 xl:flex">
       <header className="flex items-center justify-between border-b border-border px-5 py-3.5">
         <div className="flex items-center gap-2">
           <div className="grid h-6 w-6 place-items-center rounded-md bg-violet-100">
