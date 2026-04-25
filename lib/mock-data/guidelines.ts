@@ -1,0 +1,91 @@
+import type { GuidelinesGraph } from "../types";
+
+export const guidelinesByPatient: Record<string, GuidelinesGraph> = {
+  "maria-k": {
+    cancerType: "breast-her2",
+    title: "HER2+ early breast cancer · simplified pathway",
+    source: "NCCN BINV-J (adapted)",
+    nodes: [
+      { id: "g1", label: "Confirmed invasive\nbreast cancer", kind: "decision", patientPath: true, factKey: "diagnosis.primary" },
+      { id: "g2", label: "Receptor status", kind: "decision", patientPath: true, factKey: "diagnosis.receptors" },
+      { id: "g3", label: "HER2−", kind: "decision" },
+      { id: "g4", label: "HER2+", kind: "decision", patientPath: true },
+      { id: "g5", label: "Clinical stage", kind: "decision", patientPath: true, factKey: "staging.clinical" },
+      { id: "g6", label: "T ≤ 1 cm, N0", kind: "treatment" },
+      { id: "g7", label: "T ≥ 2 cm or N+", kind: "treatment", patientPath: true },
+      { id: "g8", label: "Adjuvant\npaclitaxel + trastuzumab", kind: "treatment" },
+      { id: "g9", label: "Neoadjuvant TCHP × 6", kind: "treatment", patientPath: true },
+      { id: "g10", label: "Surgery", kind: "treatment", patientPath: true },
+      { id: "g11", label: "Adjuvant HP\n(1 yr) + endocrine", kind: "outcome", patientPath: true },
+    ],
+    edges: [
+      { id: "e1", source: "g1", target: "g2", patientPath: true },
+      { id: "e2", source: "g2", target: "g3", label: "HER2 0–2+" },
+      { id: "e3", source: "g2", target: "g4", label: "HER2 3+ / FISH+", patientPath: true },
+      { id: "e4", source: "g4", target: "g5", patientPath: true },
+      { id: "e5", source: "g5", target: "g6", label: "Stage I" },
+      { id: "e6", source: "g5", target: "g7", label: "≥ Stage IIA", patientPath: true },
+      { id: "e7", source: "g6", target: "g8" },
+      { id: "e8", source: "g7", target: "g9", patientPath: true },
+      { id: "e9", source: "g9", target: "g10", patientPath: true },
+      { id: "e10", source: "g10", target: "g11", patientPath: true },
+    ],
+  },
+  "thomas-b": {
+    cancerType: "rectal",
+    title: "Locally advanced rectal cancer · simplified pathway",
+    source: "NCCN RECT-3 (adapted)",
+    nodes: [
+      { id: "g1", label: "Rectal\nadenocarcinoma", kind: "decision", patientPath: true, factKey: "diagnosis.primary" },
+      { id: "g2", label: "Stage by MRI", kind: "decision", patientPath: true, factKey: "staging.clinical" },
+      { id: "g3", label: "cT1–T2 N0", kind: "treatment" },
+      { id: "g4", label: "cT3 N0–N+\nor cT4 any N", kind: "decision", patientPath: true },
+      { id: "g5", label: "Local excision", kind: "treatment" },
+      { id: "g6", label: "Total Neoadjuvant\nTherapy (TNT)", kind: "treatment", patientPath: true },
+      { id: "g7", label: "Induction FOLFOX\n× 4", kind: "treatment", patientPath: true },
+      { id: "g8", label: "Long-course CRT\n(50.4 Gy + cape)", kind: "treatment", patientPath: true },
+      { id: "g9", label: "Restaging MRI", kind: "decision", patientPath: true, factKey: "imaging.restage" },
+      { id: "g10", label: "TME surgery", kind: "treatment", patientPath: true },
+      { id: "g11", label: "Watch-and-wait\n(if cCR)", kind: "outcome" },
+      { id: "g12", label: "Risk-adapted\nadjuvant", kind: "outcome", patientPath: true },
+    ],
+    edges: [
+      { id: "e1", source: "g1", target: "g2", patientPath: true },
+      { id: "e2", source: "g2", target: "g3", label: "cT1–T2 N0" },
+      { id: "e3", source: "g2", target: "g4", label: "cT3+ or N+", patientPath: true },
+      { id: "e4", source: "g3", target: "g5" },
+      { id: "e5", source: "g4", target: "g6", patientPath: true },
+      { id: "e6", source: "g6", target: "g7", patientPath: true },
+      { id: "e7", source: "g7", target: "g8", patientPath: true },
+      { id: "e8", source: "g8", target: "g9", patientPath: true },
+      { id: "e9", source: "g9", target: "g10", label: "Residual disease", patientPath: true },
+      { id: "e10", source: "g9", target: "g11", label: "Clinical CR" },
+      { id: "e11", source: "g10", target: "g12", patientPath: true },
+    ],
+  },
+  "anna-l": {
+    cancerType: "breast-er",
+    title: "ER+ early breast cancer · surveillance pathway",
+    source: "NCCN BINV-16 (adapted)",
+    nodes: [
+      { id: "g1", label: "Completed\nprimary therapy", kind: "decision", patientPath: true },
+      { id: "g2", label: "Endocrine therapy\n5–10 yrs", kind: "treatment", patientPath: true, factKey: "medication.endocrine" },
+      { id: "g3", label: "Mammogram q6mo\n× 2 yrs", kind: "treatment", patientPath: true, factKey: "imaging.surveillance" },
+      { id: "g4", label: "Then annual\nmammography", kind: "treatment" },
+      { id: "g5", label: "Recurrence\nworkup", kind: "decision" },
+      { id: "g6", label: "Continued\nsurveillance", kind: "outcome", patientPath: true },
+    ],
+    edges: [
+      { id: "e1", source: "g1", target: "g2", patientPath: true },
+      { id: "e2", source: "g1", target: "g3", patientPath: true },
+      { id: "e3", source: "g3", target: "g4" },
+      { id: "e4", source: "g3", target: "g5", label: "Abnormal" },
+      { id: "e5", source: "g3", target: "g6", label: "Stable", patientPath: true },
+      { id: "e6", source: "g4", target: "g6" },
+    ],
+  },
+};
+
+export function guidelinesFor(patientId: string): GuidelinesGraph | undefined {
+  return guidelinesByPatient[patientId];
+}

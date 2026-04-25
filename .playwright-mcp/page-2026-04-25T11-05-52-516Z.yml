@@ -1,0 +1,175 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - complementary [ref=e3]:
+      - link "oncoAgent v0.1 · vienna" [ref=e4] [cursor=pointer]:
+        - /url: /
+        - img [ref=e6]
+        - generic [ref=e9]:
+          - generic [ref=e10]: oncoAgent
+          - generic [ref=e11]: v0.1 · vienna
+      - generic [ref=e13]:
+        - img
+        - textbox "Search…" [ref=e14]
+      - generic [ref=e15]:
+        - generic [ref=e16]:
+          - generic [ref=e17]: Patients
+          - button [ref=e18]:
+            - img [ref=e19]
+        - generic [ref=e20]:
+          - generic [ref=e21]: Active
+          - generic [ref=e22]:
+            - link "MK Maria Kowalski 1 needs review" [ref=e23] [cursor=pointer]:
+              - /url: /patients/maria-k
+              - generic [ref=e24]: MK
+              - generic [ref=e25]: Maria Kowalski
+              - generic "1 needs review" [ref=e26]
+            - link "TB Thomas Berger 1 needs review" [ref=e27] [cursor=pointer]:
+              - /url: /patients/thomas-b
+              - generic [ref=e28]: TB
+              - generic [ref=e29]: Thomas Berger
+              - generic "1 needs review" [ref=e30]
+        - generic [ref=e31]:
+          - generic [ref=e32]: Surveillance
+          - link "AL Anna Lindqvist" [ref=e34] [cursor=pointer]:
+            - /url: /patients/anna-l
+            - generic [ref=e35]: AL
+            - generic [ref=e36]: Anna Lindqvist
+      - generic [ref=e37]:
+        - link "Settings" [ref=e38] [cursor=pointer]:
+          - /url: "#"
+          - img [ref=e39]
+          - text: Settings
+        - generic [ref=e42]:
+          - generic [ref=e43]: JM
+          - generic [ref=e44]:
+            - generic [ref=e45]: Dr. Julia Müller
+            - generic [ref=e46]: Med-Onc
+    - generic [ref=e47]:
+      - banner [ref=e48]:
+        - generic [ref=e49]:
+          - link "Patient vaults" [ref=e50] [cursor=pointer]:
+            - /url: /
+          - img [ref=e51]
+          - generic [ref=e53]: Thomas Berger
+          - generic [ref=e56]: Active
+          - generic [ref=e57]: MRN-198342 · 67M
+        - generic [ref=e58]:
+          - img
+          - textbox "Find anything…" [ref=e59]
+          - generic: ⌘K
+      - navigation [ref=e60]:
+        - link "Overview" [ref=e61] [cursor=pointer]:
+          - /url: /patients/thomas-b
+        - link "Plan" [ref=e62] [cursor=pointer]:
+          - /url: /patients/thomas-b/plan
+          - text: Plan
+        - link "Guidelines" [ref=e64] [cursor=pointer]:
+          - /url: /patients/thomas-b/guidelines
+        - link "Pull requests 1" [ref=e65] [cursor=pointer]:
+          - /url: /patients/thomas-b/prs
+          - text: Pull requests
+          - generic [ref=e66]: "1"
+        - link "Followup" [ref=e67] [cursor=pointer]:
+          - /url: /patients/thomas-b/followup
+        - link "Meetings 2" [ref=e68] [cursor=pointer]:
+          - /url: /patients/thomas-b/meetings
+          - text: Meetings
+          - generic [ref=e69]: "2"
+      - main [ref=e70]:
+        - generic [ref=e73]:
+          - generic [ref=e74]:
+            - text: Therapy roadmap
+            - heading "Thomas's treatment plan" [level=1] [ref=e75]
+            - paragraph [ref=e76]: The full sequence proposed by the agent and ratified at tumor board. Click any phase to see drug regimens, cycles, and rationale. Every change to the plan writes a pull request.
+          - generic [ref=e77]:
+            - generic [ref=e78]:
+              - generic [ref=e79]:
+                - generic [ref=e80]: Mar 2026
+                - generic [ref=e81]: →
+                - generic [ref=e82]: Sep 2026
+              - generic [ref=e83]:
+                - generic [ref=e85]: today
+                - button "Induction FOLFOX 4/4" [ref=e87]:
+                  - img [ref=e89]
+                  - generic [ref=e91]: Induction FOLFOX
+                  - generic [ref=e92]: 4/4
+                - button "Long-course CRT" [ref=e93]:
+                  - img [ref=e95]
+                  - generic [ref=e98]: Long-course CRT
+                - button "TME surgery" [ref=e99]:
+                  - img [ref=e101]
+                  - generic [ref=e104]: TME surgery
+                - button "Adjuvant (if indicated)" [ref=e105]:
+                  - img [ref=e107]
+                  - generic [ref=e110]: Adjuvant (if indicated)
+              - generic [ref=e111]:
+                - generic [ref=e112]: Mar 15
+                - generic [ref=e113]: May 2
+                - generic [ref=e114]: Jun 19
+                - generic [ref=e115]: Aug 6
+                - generic [ref=e116]: Sep 23
+            - generic [ref=e117]:
+              - generic [ref=e118]:
+                - generic [ref=e119]:
+                  - generic [ref=e120]:
+                    - generic [ref=e121]: Chemotherapy
+                    - generic [ref=e124]: Completed
+                  - heading "Induction FOLFOX" [level=2] [ref=e125]
+                  - paragraph [ref=e126]: Oxaliplatin + 5-FU + leucovorin, q2w × 4
+                - generic [ref=e127]:
+                  - generic [ref=e128]: 2026-03-15 → 2026-04-18
+                  - generic [ref=e129]: cycle 4 / 4
+              - generic [ref=e132]: WhyTotal neoadjuvant therapy — induction phase.
+        - complementary [ref=e133]:
+          - generic [ref=e134]:
+            - generic [ref=e135]:
+              - generic [ref=e136]: Agent
+              - generic [ref=e137]: ● online
+            - paragraph [ref=e138]: Watching Thomas's vault for new facts and conflicts.
+          - generic [ref=e139]:
+            - generic [ref=e140]:
+              - generic [ref=e141]: Now
+              - generic [ref=e142]:
+                - text: Reconciling restaging MRI vs. baseline staging
+                - 'link "PR #3 — MRI 2026-04-22" [ref=e143] [cursor=pointer]':
+                  - /url: /patients/thomas-b/prs/pr-tb-1
+                  - text: "PR #3 — MRI 2026-04-22"
+                  - img [ref=e144]
+            - generic [ref=e146]:
+              - generic [ref=e147]: Needs you (1)
+              - generic [ref=e149]:
+                - generic [ref=e152]: decision
+                - paragraph [ref=e153]: MRI 2026-04-22 suggests cT4a — change of staging vs. cT3
+                - paragraph [ref=e154]: "Anterior extension contacts visceral peritoneum. This conflicts with the prior cT3 from 2026-03-08. Possible explanations: progression on induction, MRI re-read, or interval inflammation. Plan implications: TNT may need to escalate, consider surgical re-staging."
+                - generic [ref=e155]:
+                  - button "Accept cT4a — escalate plan" [ref=e156]:
+                    - generic [ref=e157]: Accept cT4a — escalate plan
+                  - button "Request second MRI read" [ref=e158]:
+                    - generic [ref=e159]: Request second MRI read
+                  - button "Discuss at tumor board" [ref=e160]:
+                    - generic [ref=e161]: Discuss at tumor board
+                - 'link "PR #3 — MRI 2026-04-22" [ref=e162] [cursor=pointer]':
+                  - /url: /patients/thomas-b/prs/pr-tb-1
+                  - text: "PR #3 — MRI 2026-04-22"
+                  - img [ref=e163]
+            - generic [ref=e165]:
+              - generic [ref=e166]: Activity
+              - list [ref=e167]:
+                - listitem [ref=e168]:
+                  - paragraph [ref=e170]: Flagged staging conflict on MRI 2026-04-22
+                  - generic [ref=e171]:
+                    - generic [ref=e172]: 3 days ago
+                    - 'link "PR #3" [ref=e173] [cursor=pointer]':
+                      - /url: /patients/thomas-b/prs/pr-tb-1
+                - listitem [ref=e174]:
+                  - paragraph [ref=e176]: Merged FOLFOX cycle 4 infusion note
+                  - generic [ref=e178]: 7 days ago
+                - listitem [ref=e179]:
+                  - paragraph [ref=e181]: Auto-booked tumor board slot · 2026-04-26 09:00
+                  - generic [ref=e182]:
+                    - generic [ref=e183]: 3 days ago
+                    - link "Tumor board · 2026-04-26" [ref=e184] [cursor=pointer]:
+                      - /url: /patients/thomas-b/meetings/mtg-tb-1
+  - button "Open Next.js Dev Tools" [ref=e190] [cursor=pointer]:
+    - img [ref=e191]
+  - alert [ref=e194]

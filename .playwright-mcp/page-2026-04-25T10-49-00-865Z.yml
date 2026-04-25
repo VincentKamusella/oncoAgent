@@ -1,0 +1,204 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - complementary [ref=e3]:
+      - link "oncoAgent" [ref=e4] [cursor=pointer]:
+        - /url: /
+        - img [ref=e6]
+        - generic [ref=e9]: oncoAgent
+      - button "OV OncoUnit Vienna" [ref=e11]:
+        - generic [ref=e12]:
+          - generic [ref=e13]: OV
+          - generic [ref=e14]: OncoUnit Vienna
+        - img [ref=e15]
+      - generic [ref=e19]:
+        - img
+        - textbox "Search patients…" [ref=e20]
+      - generic [ref=e21]:
+        - generic [ref=e22]:
+          - generic [ref=e23]: Patients
+          - button [ref=e24]:
+            - img [ref=e25]
+        - generic [ref=e26]:
+          - generic [ref=e27]: Active · 2
+          - generic [ref=e28]:
+            - link "MK Maria Kowalski HER2+ breast cancer 1" [ref=e29] [cursor=pointer]:
+              - /url: /patients/maria-k
+              - generic [ref=e30]: MK
+              - generic [ref=e31]:
+                - generic [ref=e32]: Maria Kowalski
+                - generic [ref=e33]: HER2+ breast cancer
+              - generic [ref=e34]: "1"
+            - link "TB Thomas Berger Rectal adenocarcinoma 1" [ref=e36] [cursor=pointer]:
+              - /url: /patients/thomas-b
+              - generic [ref=e37]: TB
+              - generic [ref=e38]:
+                - generic [ref=e39]: Thomas Berger
+                - generic [ref=e40]: Rectal adenocarcinoma
+              - generic [ref=e41]: "1"
+        - generic [ref=e43]:
+          - generic [ref=e44]: Surveillance · 1
+          - link "AL Anna Lindqvist ER+ breast cancer" [ref=e46] [cursor=pointer]:
+            - /url: /patients/anna-l
+            - generic [ref=e47]: AL
+            - generic [ref=e48]:
+              - generic [ref=e49]: Anna Lindqvist
+              - generic [ref=e50]: ER+ breast cancer
+      - generic [ref=e52]:
+        - generic [ref=e53]: JM
+        - generic [ref=e54]:
+          - generic [ref=e55]: Dr. Julia Müller
+          - generic [ref=e56]: Med-Onc
+    - generic [ref=e57]:
+      - banner [ref=e58]:
+        - generic [ref=e59]:
+          - link "Patient vaults" [ref=e60] [cursor=pointer]:
+            - /url: /
+          - img [ref=e61]
+          - generic [ref=e63]:
+            - generic [ref=e64]: TB
+            - generic [ref=e65]:
+              - generic [ref=e66]: Thomas Berger
+              - generic [ref=e67]: MRN-198342 · 67M · case opened 2026-03-01
+          - generic [ref=e68]: Active treatment
+        - generic [ref=e70]:
+          - img
+          - textbox "Find anything…" [ref=e71]
+          - generic: ⌘K
+      - navigation [ref=e72]:
+        - link "Overview" [ref=e73] [cursor=pointer]:
+          - /url: /patients/thomas-b
+          - img [ref=e75]
+          - text: Overview
+        - link "Treatment plan" [ref=e80] [cursor=pointer]:
+          - /url: /patients/thomas-b/plan
+          - img [ref=e82]
+          - text: Treatment plan
+        - link "Guidelines" [ref=e85] [cursor=pointer]:
+          - /url: /patients/thomas-b/guidelines
+          - img [ref=e87]
+          - text: Guidelines
+        - link "Pull requests 1" [ref=e92] [cursor=pointer]:
+          - /url: /patients/thomas-b/prs
+          - img [ref=e94]
+          - text: Pull requests
+          - generic [ref=e98]: "1"
+        - link "Followup" [ref=e99] [cursor=pointer]:
+          - /url: /patients/thomas-b/followup
+          - img [ref=e101]
+          - text: Followup
+        - link "Meetings 2" [ref=e103] [cursor=pointer]:
+          - /url: /patients/thomas-b/meetings
+          - img [ref=e105]
+          - text: Meetings
+          - generic [ref=e108]: "2"
+      - main [ref=e109]:
+        - generic [ref=e111]:
+          - generic [ref=e112]:
+            - text: Treatment plan
+            - heading "Thomas's therapy roadmap" [level=2] [ref=e113]
+            - paragraph [ref=e114]: The full sequence proposed by the agent and ratified at tumor board. Click any phase for details. Drug regimens, cycles, and dates are kept in sync with the vault — every change writes a PR.
+          - generic [ref=e115]:
+            - generic [ref=e116]:
+              - generic [ref=e117]: Mar 2026 → Sep 2026 · 4 phases
+              - generic [ref=e118]:
+                - generic [ref=e119]: Done
+                - generic [ref=e121]: In progress
+                - generic [ref=e123]: Planned
+            - generic [ref=e125]:
+              - generic [ref=e126]:
+                - generic [ref=e128]: today
+                - button "Induction FOLFOX 4/4" [ref=e130]:
+                  - img [ref=e132]
+                  - generic [ref=e134]: Induction FOLFOX
+                  - generic [ref=e135]: 4/4
+                - button "Long-course CRT" [ref=e136]:
+                  - img [ref=e138]
+                  - generic [ref=e140]: Long-course CRT
+                - button "TME surgery" [ref=e141]:
+                  - img [ref=e143]
+                  - generic [ref=e149]: TME surgery
+                - button "Adjuvant (if indicated)" [ref=e150]:
+                  - img [ref=e152]
+                  - generic [ref=e155]: Adjuvant (if indicated)
+              - generic [ref=e156]:
+                - generic [ref=e157]: Mar 15
+                - generic [ref=e158]: May 2
+                - generic [ref=e159]: Jun 19
+                - generic [ref=e160]: Aug 6
+                - generic [ref=e161]: Sep 23
+            - generic [ref=e162]:
+              - generic [ref=e163]:
+                - generic [ref=e164]:
+                  - img [ref=e166]
+                  - generic [ref=e169]:
+                    - generic [ref=e170]:
+                      - heading "Induction FOLFOX" [level=3] [ref=e171]
+                      - generic [ref=e172]: Completed
+                    - paragraph [ref=e174]: Oxaliplatin + 5-FU + leucovorin, q2w × 4
+                - generic [ref=e175]:
+                  - generic [ref=e176]: 2026-03-15 → 2026-04-18
+                  - generic [ref=e177]: cycle 4 / 4
+              - generic [ref=e180]: WhyTotal neoadjuvant therapy — induction phase.
+          - generic [ref=e182]:
+            - img [ref=e184]
+            - generic [ref=e187]:
+              - paragraph [ref=e188]: Why this sequence
+              - paragraph [ref=e189]: Patient's diagnosis (Adenocarcinoma of the rectum, mid-rectum) and stage (cT3 cN1 cM0 (provisional → cT4a pending)) place them on the standard pathway for Rectal adenocarcinoma. The agent matched these facts to the relevant guideline (see Guidelines view) and ordered phases by clinical timing windows.
+        - complementary [ref=e190]:
+          - generic [ref=e191]:
+            - generic [ref=e192]:
+              - img [ref=e194]
+              - generic [ref=e197]:
+                - generic [ref=e198]: Agent
+                - generic [ref=e199]: Watching Thomas's vault
+            - generic [ref=e200]: Online
+          - generic [ref=e202]:
+            - generic [ref=e203]:
+              - generic [ref=e205]:
+                - img [ref=e206]
+                - generic [ref=e209]: Now
+              - generic [ref=e210]:
+                - paragraph [ref=e211]: Reconciling restaging MRI vs. baseline staging
+                - 'link "PR #3 — MRI 2026-04-22" [ref=e212] [cursor=pointer]':
+                  - /url: /patients/thomas-b/prs/pr-tb-1
+                  - text: "PR #3 — MRI 2026-04-22"
+                  - img [ref=e213]
+            - generic [ref=e215]:
+              - generic [ref=e216]:
+                - generic [ref=e217]:
+                  - img [ref=e218]
+                  - generic [ref=e220]: Needs you
+                - generic [ref=e221]: "1"
+              - generic [ref=e223]:
+                - paragraph [ref=e224]: MRI 2026-04-22 suggests cT4a — change of staging vs. cT3
+                - paragraph [ref=e225]: "Anterior extension contacts visceral peritoneum. This conflicts with the prior cT3 from 2026-03-08. Possible explanations: progression on induction, MRI re-read, or interval inflammation. Plan implications: TNT may need to escalate, consider surgical re-staging."
+                - generic [ref=e226]:
+                  - button "Accept cT4a — escalate plan" [ref=e227]
+                  - button "Request second MRI read" [ref=e228]
+                  - button "Discuss at tumor board" [ref=e229]
+                - 'link "PR #3 — MRI 2026-04-22" [ref=e230] [cursor=pointer]':
+                  - /url: /patients/thomas-b/prs/pr-tb-1
+                  - text: "PR #3 — MRI 2026-04-22"
+                  - img [ref=e231]
+            - generic [ref=e233]:
+              - generic [ref=e235]:
+                - img [ref=e236]
+                - generic [ref=e239]: Recent
+              - list [ref=e240]:
+                - listitem [ref=e241]:
+                  - paragraph [ref=e243]: Flagged staging conflict on MRI 2026-04-22
+                  - generic [ref=e244]:
+                    - generic [ref=e245]: 3 days ago
+                    - 'link "PR #3" [ref=e246] [cursor=pointer]':
+                      - /url: /patients/thomas-b/prs/pr-tb-1
+                - listitem [ref=e247]:
+                  - paragraph [ref=e249]: Merged FOLFOX cycle 4 infusion note
+                  - generic [ref=e251]: 7 days ago
+                - listitem [ref=e252]:
+                  - paragraph [ref=e254]: Auto-booked tumor board slot · 2026-04-26 09:00
+                  - generic [ref=e255]:
+                    - generic [ref=e256]: 3 days ago
+                    - link "Tumor board · 2026-04-26" [ref=e257] [cursor=pointer]:
+                      - /url: /patients/thomas-b/meetings/mtg-tb-1
+  - button "Open Next.js Dev Tools" [ref=e263] [cursor=pointer]:
+    - img [ref=e264]

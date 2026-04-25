@@ -1,0 +1,230 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - complementary [ref=e3]:
+      - link "oncoAgent" [ref=e4] [cursor=pointer]:
+        - /url: /
+        - img [ref=e6]
+        - generic [ref=e9]: oncoAgent
+      - button "OV OncoUnit Vienna" [ref=e11]:
+        - generic [ref=e12]:
+          - generic [ref=e13]: OV
+          - generic [ref=e14]: OncoUnit Vienna
+        - img [ref=e15]
+      - generic [ref=e19]:
+        - img
+        - textbox "Search patients…" [ref=e20]
+      - generic [ref=e21]:
+        - generic [ref=e22]:
+          - generic [ref=e23]: Patients
+          - button [ref=e24]:
+            - img [ref=e25]
+        - generic [ref=e26]:
+          - generic [ref=e27]: Active · 2
+          - generic [ref=e28]:
+            - link "MK Maria Kowalski HER2+ breast cancer 1" [ref=e29] [cursor=pointer]:
+              - /url: /patients/maria-k
+              - generic [ref=e30]: MK
+              - generic [ref=e31]:
+                - generic [ref=e32]: Maria Kowalski
+                - generic [ref=e33]: HER2+ breast cancer
+              - generic [ref=e34]: "1"
+            - link "TB Thomas Berger Rectal adenocarcinoma 1" [ref=e36] [cursor=pointer]:
+              - /url: /patients/thomas-b
+              - generic [ref=e37]: TB
+              - generic [ref=e38]:
+                - generic [ref=e39]: Thomas Berger
+                - generic [ref=e40]: Rectal adenocarcinoma
+              - generic [ref=e41]: "1"
+        - generic [ref=e43]:
+          - generic [ref=e44]: Surveillance · 1
+          - link "AL Anna Lindqvist ER+ breast cancer" [ref=e46] [cursor=pointer]:
+            - /url: /patients/anna-l
+            - generic [ref=e47]: AL
+            - generic [ref=e48]:
+              - generic [ref=e49]: Anna Lindqvist
+              - generic [ref=e50]: ER+ breast cancer
+      - generic [ref=e52]:
+        - generic [ref=e53]: JM
+        - generic [ref=e54]:
+          - generic [ref=e55]: Dr. Julia Müller
+          - generic [ref=e56]: Med-Onc
+    - generic [ref=e57]:
+      - banner [ref=e58]:
+        - generic [ref=e59]:
+          - link "Patient vaults" [ref=e60] [cursor=pointer]:
+            - /url: /
+          - img [ref=e61]
+          - generic [ref=e63]:
+            - generic [ref=e64]: AL
+            - generic [ref=e65]:
+              - generic [ref=e66]: Anna Lindqvist
+              - generic [ref=e67]: MRN-176104 · 48F · case opened 2024-02-19
+          - generic [ref=e68]: Surveillance
+        - generic [ref=e70]:
+          - img
+          - textbox "Find anything…" [ref=e71]
+          - generic: ⌘K
+      - navigation [ref=e72]:
+        - link "Overview" [ref=e73] [cursor=pointer]:
+          - /url: /patients/anna-l
+          - img [ref=e75]
+          - text: Overview
+        - link "Treatment plan" [ref=e81] [cursor=pointer]:
+          - /url: /patients/anna-l/plan
+          - img [ref=e83]
+          - text: Treatment plan
+        - link "Guidelines" [ref=e85] [cursor=pointer]:
+          - /url: /patients/anna-l/guidelines
+          - img [ref=e87]
+          - text: Guidelines
+        - link "Pull requests" [ref=e92] [cursor=pointer]:
+          - /url: /patients/anna-l/prs
+          - img [ref=e94]
+          - text: Pull requests
+        - link "Followup" [ref=e98] [cursor=pointer]:
+          - /url: /patients/anna-l/followup
+          - img [ref=e100]
+          - text: Followup
+        - link "Meetings" [ref=e102] [cursor=pointer]:
+          - /url: /patients/anna-l/meetings
+          - img [ref=e104]
+          - text: Meetings
+      - main [ref=e107]:
+        - generic [ref=e109]:
+          - generic [ref=e110]:
+            - generic [ref=e111]:
+              - generic [ref=e112]: AL
+              - generic [ref=e113]:
+                - heading "Anna Lindqvist" [level=2] [ref=e114]
+                - paragraph [ref=e115]: Invasive lobular carcinoma, ER+/PR+/HER2−
+                - generic [ref=e116]:
+                  - generic [ref=e117]: MRN-176104
+                  - generic [ref=e118]: ·
+                  - generic [ref=e119]: 48F · DOB 1977-11-02
+                  - generic [ref=e120]: ·
+                  - generic [ref=e121]: Dr. J. Müller, Med-Onc
+            - generic [ref=e122]:
+              - generic [ref=e123]: Clinical stage
+              - generic [ref=e124]: pT1c pN0 — Stage IA
+          - generic [ref=e125]:
+            - generic [ref=e126]:
+              - generic [ref=e127]:
+                - generic [ref=e128]:
+                  - img [ref=e130]
+                  - heading "Demographics" [level=3] [ref=e133]
+                - generic [ref=e134]: 3 facts
+              - generic [ref=e135]:
+                - generic [ref=e136]:
+                  - term [ref=e137]: Name
+                  - definition [ref=e138]: Anna Lindqvist
+                  - button "Show provenance" [ref=e140]:
+                    - img [ref=e141]
+                - generic [ref=e143]:
+                  - term [ref=e144]: Date of birth
+                  - definition [ref=e145]: 1977-11-02
+                  - button "Show provenance" [ref=e147]:
+                    - img [ref=e148]
+                - generic [ref=e150]:
+                  - term [ref=e151]: MRN
+                  - definition [ref=e152]: MRN-176104
+                  - button "Show provenance" [ref=e154]:
+                    - img [ref=e155]
+            - generic [ref=e157]:
+              - generic [ref=e158]:
+                - generic [ref=e159]:
+                  - img [ref=e161]
+                  - heading "Diagnosis" [level=3] [ref=e165]
+                - generic [ref=e166]: 2 facts
+              - generic [ref=e167]:
+                - generic [ref=e168]:
+                  - term [ref=e169]: Primary diagnosis
+                  - definition [ref=e170]: Invasive lobular carcinoma, right breast
+                  - button "Show provenance" [ref=e172]:
+                    - img [ref=e173]
+                - generic [ref=e175]:
+                  - term [ref=e176]: Receptor status
+                  - definition [ref=e177]: ER+ (98%) · PR+ (75%) · HER2 0 (negative)
+                  - button "Show provenance" [ref=e179]:
+                    - img [ref=e180]
+            - generic [ref=e182]:
+              - generic [ref=e183]:
+                - generic [ref=e184]:
+                  - img [ref=e186]
+                  - heading "Staging" [level=3] [ref=e190]
+                - generic [ref=e191]: 1 fact
+              - generic [ref=e193]:
+                - term [ref=e194]: Pathologic stage
+                - definition [ref=e195]: pT1c pN0 — Stage IA
+                - button "Show provenance" [ref=e197]:
+                  - img [ref=e198]
+            - generic [ref=e200]:
+              - generic [ref=e201]:
+                - generic [ref=e202]:
+                  - img [ref=e204]
+                  - heading "Medications" [level=3] [ref=e207]
+                - generic [ref=e208]: 1 fact
+              - generic [ref=e210]:
+                - term [ref=e211]: Endocrine therapy
+                - definition [ref=e212]: Tamoxifen 20 mg daily — start 2024-08-12, planned ≥ 5 yrs
+                - button "Show provenance" [ref=e214]:
+                  - img [ref=e215]
+            - generic [ref=e217]:
+              - generic [ref=e218]:
+                - generic [ref=e219]:
+                  - img [ref=e221]
+                  - heading "Imaging" [level=3] [ref=e226]
+                - generic [ref=e227]: 1 fact
+              - generic [ref=e229]:
+                - term [ref=e230]: Last mammogram
+                - definition [ref=e231]: Bilateral mammogram · 2025-10-14 — BI-RADS 2 (benign)
+                - button "Show provenance" [ref=e233]:
+                  - img [ref=e234]
+            - generic [ref=e236]:
+              - generic [ref=e237]:
+                - generic [ref=e238]:
+                  - img [ref=e240]
+                  - heading "Labs" [level=3] [ref=e242]
+                - generic [ref=e243]: 1 fact
+              - generic [ref=e245]:
+                - term [ref=e246]: CA 15-3
+                - definition [ref=e247]: 21 U/mL (within normal)
+                - button "Show provenance" [ref=e249]:
+                  - img [ref=e250]
+        - complementary [ref=e252]:
+          - generic [ref=e253]:
+            - generic [ref=e254]:
+              - img [ref=e256]
+              - generic [ref=e259]:
+                - generic [ref=e260]: Agent
+                - generic [ref=e261]: Watching Anna's vault
+            - generic [ref=e262]: Online
+          - generic [ref=e264]:
+            - generic [ref=e265]:
+              - generic [ref=e267]:
+                - img [ref=e268]
+                - generic [ref=e271]: Now
+              - paragraph [ref=e273]: Drafting 18-month surveillance summary
+            - generic [ref=e274]:
+              - generic [ref=e276]:
+                - img [ref=e277]
+                - generic [ref=e279]: Needs you
+              - paragraph [ref=e280]: All clear.
+            - generic [ref=e281]:
+              - generic [ref=e283]:
+                - img [ref=e284]
+                - generic [ref=e287]: Recent
+              - list [ref=e288]:
+                - listitem [ref=e289]:
+                  - paragraph [ref=e291]: Auto-booked mammogram for 2026-05-08
+                  - generic [ref=e292]:
+                    - generic [ref=e293]: 5 days ago
+                    - link "Mammography schedule" [ref=e294] [cursor=pointer]:
+                      - /url: "#"
+                - listitem [ref=e295]:
+                  - paragraph [ref=e297]: Merged CA 15-3 result · 21 U/mL
+                  - generic [ref=e299]: 21 days ago
+                - listitem [ref=e300]:
+                  - paragraph [ref=e302]: Refilled tamoxifen · 90-day supply
+                  - generic [ref=e304]: 1 month ago
+  - button "Open Next.js Dev Tools" [ref=e310] [cursor=pointer]:
+    - img [ref=e311]

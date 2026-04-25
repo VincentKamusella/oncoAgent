@@ -1,0 +1,176 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - complementary [ref=e3]:
+      - link "oncoAgent v0.1 · vienna" [ref=e4] [cursor=pointer]:
+        - /url: /
+        - img [ref=e6]
+        - generic [ref=e9]:
+          - generic [ref=e10]: oncoAgent
+          - generic [ref=e11]: v0.1 · vienna
+      - navigation [ref=e12]:
+        - link "Overview" [ref=e13] [cursor=pointer]:
+          - /url: /
+          - img [ref=e15]
+          - text: Overview
+        - link "Patient vaults" [ref=e20] [cursor=pointer]:
+          - /url: /
+          - img [ref=e22]
+          - text: Patient vaults
+        - link "Data sources" [ref=e24] [cursor=pointer]:
+          - /url: /sources
+          - img [ref=e26]
+          - text: Data sources
+      - generic [ref=e30]:
+        - link "Settings" [ref=e31] [cursor=pointer]:
+          - /url: "#"
+          - img [ref=e32]
+          - text: Settings
+        - generic [ref=e35]:
+          - generic [ref=e36]: JM
+          - generic [ref=e37]:
+            - generic [ref=e38]: Dr. Julia Müller
+            - generic [ref=e39]: Med-Onc
+    - main [ref=e40]:
+      - generic [ref=e41]:
+        - generic [ref=e42]:
+          - generic [ref=e43]: Workspace
+          - generic [ref=e44]: /
+          - generic [ref=e45]: Patient vaults
+        - generic [ref=e46]: All systems
+      - generic [ref=e49]:
+        - generic [ref=e50]:
+          - generic [ref=e51]: 3 active vaults
+          - heading "Patient vaults" [level=1] [ref=e52]
+          - paragraph [ref=e53]: Each vault is a patient's structured context base. Facts, plans, imaging, history — versioned, traceable, agent-aware.
+        - button "New patient" [ref=e54]:
+          - img
+          - text: New patient
+      - generic [ref=e56]:
+        - link "JM RP AS Maria Kowalski HER2+ breast cancer Active 11 facts · 1 open" [ref=e57] [cursor=pointer]:
+          - /url: /patients/maria-k
+          - generic [ref=e58]:
+            - generic [ref=e59]:
+              - img [ref=e60]
+              - generic [ref=e67]:
+                - generic [ref=e68]: JM
+                - generic [ref=e69]: RP
+                - generic [ref=e70]: AS
+            - img [ref=e71]
+          - generic [ref=e74]:
+            - heading "Maria Kowalski" [level=3] [ref=e75]
+            - paragraph [ref=e76]: HER2+ breast cancer
+          - generic [ref=e77]:
+            - generic [ref=e80]: Active
+            - generic [ref=e81]: 11 facts · 1 open
+        - link "CR MS KL Thomas Berger Rectal adenocarcinoma Active 9 facts · 1 conflict" [ref=e82] [cursor=pointer]:
+          - /url: /patients/thomas-b
+          - generic [ref=e83]:
+            - generic [ref=e84]:
+              - img [ref=e85]
+              - generic [ref=e92]:
+                - generic [ref=e93]: CR
+                - generic [ref=e94]: MS
+                - generic [ref=e95]: KL
+            - img [ref=e96]
+          - generic [ref=e99]:
+            - heading "Thomas Berger" [level=3] [ref=e100]
+            - paragraph [ref=e101]: Rectal adenocarcinoma
+          - generic [ref=e102]:
+            - generic [ref=e105]: Active
+            - generic [ref=e106]:
+              - text: 9 facts
+              - generic [ref=e107]: · 1 conflict
+        - link "JM RP KL Anna Lindqvist ER+ breast cancer Surveillance 9 facts" [ref=e108] [cursor=pointer]:
+          - /url: /patients/anna-l
+          - generic [ref=e109]:
+            - generic [ref=e110]:
+              - img [ref=e111]
+              - generic [ref=e118]:
+                - generic [ref=e119]: JM
+                - generic [ref=e120]: RP
+                - generic [ref=e121]: KL
+            - img [ref=e122]
+          - generic [ref=e125]:
+            - heading "Anna Lindqvist" [level=3] [ref=e126]
+            - paragraph [ref=e127]: ER+ breast cancer
+          - generic [ref=e128]:
+            - generic [ref=e131]: Surveillance
+            - generic [ref=e132]: 9 facts
+      - generic [ref=e133]:
+        - generic [ref=e134]:
+          - generic [ref=e135]: Workspace pulse
+          - generic [ref=e136]: live
+        - generic [ref=e137]:
+          - generic [ref=e138]:
+            - generic [ref=e139]:
+              - generic [ref=e140]: Agents at work
+              - generic [ref=e141]: "4"
+            - list [ref=e142]:
+              - listitem [ref=e143]:
+                - generic [ref=e144]:
+                  - generic [ref=e145]:
+                    - generic [ref=e146]: Staging reviewer
+                    - generic [ref=e147]: ·
+                    - generic [ref=e148]: Thomas
+                  - paragraph [ref=e149]: Reconciling MRI cT3 → cT4a
+                - generic [ref=e152]: Needs review
+              - listitem [ref=e153]:
+                - generic [ref=e154]:
+                  - generic [ref=e155]:
+                    - generic [ref=e156]: Cardio-onc monitor
+                    - generic [ref=e157]: ·
+                    - generic [ref=e158]: Maria
+                  - paragraph [ref=e159]: LVEF surveillance
+                - generic [ref=e162]: Active
+              - listitem [ref=e163]:
+                - generic [ref=e164]:
+                  - generic [ref=e165]:
+                    - generic [ref=e166]: Claude triage
+                    - generic [ref=e167]: ·
+                    - generic [ref=e168]: Thomas
+                  - paragraph [ref=e169]: Drafting tumor board summary
+                - generic [ref=e172]: Active
+              - listitem [ref=e173]:
+                - generic [ref=e174]:
+                  - generic [ref=e175]:
+                    - generic [ref=e176]: Surveillance scheduler
+                    - generic [ref=e177]: ·
+                    - generic [ref=e178]: Anna
+                  - paragraph [ref=e179]: Booking 18-mo mammogram
+                - generic [ref=e182]: Idle
+          - generic [ref=e183]:
+            - generic [ref=e184]:
+              - generic [ref=e185]: Data sources
+              - generic [ref=e186]: 4/6 live
+            - list [ref=e187]:
+              - listitem [ref=e188]:
+                - generic [ref=e189]:
+                  - text: PACS imaging archive
+                  - paragraph [ref=e190]: PACS · real-time
+                - generic [ref=e191]:
+                  - generic [ref=e194]: Live
+                  - generic [ref=e195]: 13 minutes ago
+              - listitem [ref=e196]:
+                - generic [ref=e197]:
+                  - text: Epic EHR connection
+                  - paragraph [ref=e198]: EHR · hourly
+                - generic [ref=e199]:
+                  - generic [ref=e202]: Live
+                  - generic [ref=e203]: 27 minutes ago
+              - listitem [ref=e204]:
+                - generic [ref=e205]:
+                  - text: Laboratory results (LIS)
+                  - paragraph [ref=e206]: LIS · hourly
+                - generic [ref=e207]:
+                  - generic [ref=e210]: Live
+                  - generic [ref=e211]: 2 hours ago
+              - listitem [ref=e212]:
+                - generic [ref=e213]:
+                  - text: Pathology dictation system
+                  - paragraph [ref=e214]: PathologyDB · daily
+                - generic [ref=e215]:
+                  - generic [ref=e218]: Stale
+                  - generic [ref=e219]: 11 hours ago
+  - button "Open Next.js Dev Tools" [ref=e225] [cursor=pointer]:
+    - img [ref=e226]
+  - alert [ref=e229]
