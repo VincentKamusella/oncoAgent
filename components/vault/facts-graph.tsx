@@ -139,14 +139,14 @@ export function FactsGraph({
 
   if (facts.length === 0) {
     return (
-      <div className="grid h-[460px] w-full place-items-center rounded-2xl border border-border bg-card text-[12.5px] italic text-muted-foreground">
+      <div className="grid h-[460px] w-full place-items-center text-[12.5px] italic text-muted-foreground">
         No facts to graph yet.
       </div>
     );
   }
 
   return (
-    <div className="h-[460px] w-full overflow-hidden rounded-2xl border border-border bg-card">
+    <div className="h-[460px] w-full">
       <InteractiveNvlWrapper
         nodes={nodes}
         rels={rels}
