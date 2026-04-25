@@ -1,11 +1,6 @@
-import { ArrowRight, Plus, Minus } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import type { Conflict, FactDelta } from "@/lib/types";
-import { FactMono } from "@/components/ui/fact-mono";
 
-/**
- * Side-by-side before/after diff with conflicts annotated inline (no separate
- * red panel — keeps things compact while preserving the qontext card frame).
- */
 export function PRDiff({
   deltas,
   conflicts = [],
@@ -17,71 +12,64 @@ export function PRDiff({
 
   if (deltas.length === 0) {
     return (
-      <p className="text-[13px] italic text-muted-foreground">No record changes proposed.</p>
+      <p className="text-[13px] italic text-muted-foreground">
+        No record changes proposed.
+      </p>
     );
   }
 
   return (
-    <div className="overflow-hidden rounded-xl border border-border bg-card">
-      <div className="grid grid-cols-[160px_1fr_1fr] border-b border-border bg-muted/40 px-4 py-2 text-[11px] uppercase tracking-wider text-muted-foreground">
-        <span>Record</span>
-        <span className="flex items-center gap-1.5">
-          <Minus className="h-3 w-3 text-rose-500" />
-          Before
-        </span>
-        <span className="flex items-center gap-1.5">
-          <Plus className="h-3 w-3 text-emerald-500" />
-          After
-        </span>
-      </div>
-      <ul className="divide-y divide-border">
-        {deltas.map((d, i) => {
-          const c = conflictByKey.get(d.factKey);
-          return (
-            <li key={i} className="grid grid-cols-[160px_1fr_1fr] items-start gap-3 px-4 py-3.5">
-              <FactMono className="text-[12px] leading-snug text-muted-foreground">
+    <ul className="flex flex-col">
+      {deltas.map((d, i) => {
+        const c = conflictByKey.get(d.factKey);
+        return (
+          <li
+            key={i}
+            className="border-t border-border py-5 first:border-t-0 first:pt-0"
+          >
+            <div className="flex items-baseline justify-between gap-3">
+              <span className="mono text-[12.5px] font-semibold tracking-tight text-foreground">
                 {d.factKey}
-                <div className="mt-0.5 text-[11.5px] text-muted-foreground/70 normal-case">
-                  {d.label}
-                </div>
-                {c && (
-                  <div className="mt-1.5 inline-flex items-center gap-1 rounded-full bg-rose-50 px-1.5 py-0.5 text-[10px] font-semibold text-rose-700">
-                    <span className="block h-1.5 w-1.5 rounded-full bg-rose-500" />
-                    {c.severity} conflict
-                  </div>
-                )}
-              </FactMono>
+              </span>
+              {c && (
+                <span className="mono text-[10.5px] font-semibold uppercase tracking-[0.14em] text-[#b91c1c]">
+                  {c.severity} conflict
+                </span>
+              )}
+            </div>
+            <span className="mono text-[11px] text-muted-foreground/70">
+              {d.label}
+            </span>
+
+            <div className="mt-3 grid gap-3 sm:grid-cols-[1fr_auto_1fr] sm:items-start">
               <div
-                className={`rounded-md border px-2.5 py-1.5 text-[12.5px] leading-snug ${
+                className={`text-[13.5px] leading-relaxed ${
                   d.before
-                    ? "border-rose-100 bg-rose-50/60 text-foreground/80 line-through decoration-rose-300/60"
-                    : "border-dashed border-border bg-muted/40 text-muted-foreground italic"
+                    ? "text-foreground/60 line-through decoration-muted-foreground/40"
+                    : "italic text-muted-foreground/60"
                 }`}
               >
                 {d.before ?? "(new)"}
               </div>
-              <div className="rounded-md border border-emerald-100 bg-emerald-50/50 px-2.5 py-1.5 text-[12.5px] font-medium leading-snug text-emerald-900">
-                <div className="flex items-start gap-1.5">
-                  <ArrowRight className="mt-0.5 h-3 w-3 flex-shrink-0 text-emerald-600" />
-                  <div>
-                    {d.after}
-                    {d.impact && (
-                      <p className="mt-1 text-[11.5px] font-normal text-emerald-800/70">
-                        {d.impact}
-                      </p>
-                    )}
-                    {c && (
-                      <p className="mt-1.5 rounded-md border border-rose-200 bg-rose-50/70 px-2 py-1 text-[11px] leading-snug text-rose-900/90">
-                        {c.rationale}
-                      </p>
-                    )}
-                  </div>
-                </div>
+              <ArrowRight className="hidden h-4 w-4 self-center text-muted-foreground/40 sm:block" />
+              <div className="text-[13.5px] leading-relaxed text-foreground">
+                {d.after}
+                {d.impact && (
+                  <p className="mt-1 text-[12px] text-muted-foreground">
+                    {d.impact}
+                  </p>
+                )}
               </div>
-            </li>
-          );
-        })}
-      </ul>
-    </div>
+            </div>
+
+            {c && (
+              <p className="mt-3 border-l-2 border-[#b91c1c] pl-3 text-[12.5px] leading-relaxed text-[#7f1d1d]">
+                {c.rationale}
+              </p>
+            )}
+          </li>
+        );
+      })}
+    </ul>
   );
 }

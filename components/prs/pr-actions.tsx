@@ -77,10 +77,10 @@ export function PRActions({ pr }: { pr: PullRequest }) {
   }
 
   return (
-    <div className="flex flex-col gap-3">
+    <div className="sticky bottom-0 -mx-8 mt-2 flex flex-col gap-3 border-t border-border bg-canvas/85 px-8 py-4 backdrop-blur">
       {showDecline && (
-        <div className="surface flex flex-col gap-3 px-5 py-4">
-          <label className="mono text-[10.5px] font-semibold uppercase tracking-wider text-muted-foreground">
+        <div className="flex flex-col gap-3 border-b border-border pb-3">
+          <label className="mono text-[10.5px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
             Decline reason (optional)
           </label>
           <textarea
@@ -88,14 +88,14 @@ export function PRActions({ pr }: { pr: PullRequest }) {
             onChange={(e) => setDeclineReason(e.target.value)}
             placeholder="Why are you declining this change?"
             rows={2}
-            className="w-full rounded-lg border border-border bg-card px-3 py-2 text-[13px] text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-violet-200"
+            className="w-full rounded-md border border-border bg-paper px-3 py-2 text-[13px] text-foreground placeholder:text-muted-foreground/60 focus:border-[#0f1f4d] focus:outline-none"
           />
           <div className="flex items-center gap-2">
             <Button
               size="sm"
               disabled={loading === "decline"}
               onClick={handleDecline}
-              className="h-8 gap-1.5 rounded-md bg-rose-500 text-[12.5px] text-white hover:bg-rose-600"
+              className="h-8 gap-1.5 rounded-md bg-[#b91c1c] text-[12.5px] text-white hover:bg-[#991b1b]"
             >
               {loading === "decline" ? (
                 <Loader2 className="h-3.5 w-3.5 animate-spin" />
@@ -108,7 +108,7 @@ export function PRActions({ pr }: { pr: PullRequest }) {
               variant="outline"
               size="sm"
               onClick={() => setShowDecline(false)}
-              className="h-8 rounded-md bg-card text-[12.5px]"
+              className="h-8 rounded-md text-[12.5px]"
             >
               Cancel
             </Button>
@@ -116,12 +116,12 @@ export function PRActions({ pr }: { pr: PullRequest }) {
         </div>
       )}
 
-      <div className="surface flex items-center justify-between gap-4 px-5 py-3.5">
+      <div className="flex items-center justify-between gap-4">
         <div className="text-[12.5px] text-muted-foreground">
           {result ? (
             <span
               className={`flex items-center gap-1.5 font-medium ${
-                result.type === "success" ? "text-emerald-700" : "text-rose-700"
+                result.type === "success" ? "text-[#15803d]" : "text-[#b91c1c]"
               }`}
             >
               {result.type === "success" ? (
@@ -132,7 +132,7 @@ export function PRActions({ pr }: { pr: PullRequest }) {
               {result.message}
             </span>
           ) : merged ? (
-            <span className="flex items-center gap-1.5 text-emerald-700">
+            <span className="flex items-center gap-1.5 text-[#15803d]">
               <CheckCircle2 className="h-3.5 w-3.5" />
               Signed off · changes applied to vault
             </span>
@@ -142,12 +142,12 @@ export function PRActions({ pr }: { pr: PullRequest }) {
               Declined
             </span>
           ) : blocked ? (
-            <span className="flex items-center gap-1.5 font-medium text-rose-700">
+            <span className="flex items-center gap-1.5 font-medium text-[#b91c1c]">
               <AlertOctagon className="h-3.5 w-3.5" />
-              Conflicts block sign-off — resolve before proceeding
+              Conflicts block sign-off
             </span>
           ) : (
-            <span>{pr.agentVerdict}</span>
+            <span className="italic text-muted-foreground/80">Ready to sign off</span>
           )}
         </div>
         {!done && (
@@ -157,7 +157,7 @@ export function PRActions({ pr }: { pr: PullRequest }) {
               size="sm"
               disabled={!!loading}
               onClick={() => setShowDecline(!showDecline)}
-              className="h-8 gap-1.5 rounded-md bg-card text-[12.5px]"
+              className="h-8 gap-1.5 rounded-md text-[12.5px]"
             >
               <X className="h-3.5 w-3.5" /> <span>Decline</span>
             </Button>
@@ -168,7 +168,7 @@ export function PRActions({ pr }: { pr: PullRequest }) {
               className={`h-8 gap-1.5 rounded-md text-[12.5px] ${
                 blocked
                   ? "bg-muted text-muted-foreground hover:bg-muted"
-                  : "bg-violet-500 text-white hover:bg-violet-600"
+                  : "bg-[#0f1f4d] text-white hover:bg-[#0a1740]"
               }`}
             >
               {loading === "sign-off" ? (
