@@ -1,9 +1,11 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
+import { usePathname } from "next/navigation";
 import {
   Send,
   Sparkles,
+  Trash2,
   PanelRightClose,
   PanelRightOpen,
 } from "lucide-react";
@@ -19,7 +21,33 @@ type Message = {
   content: string;
 };
 
-function seed(patient: Patient): Message[] {
+type PatientSession = {
+  messages: Message[];
+  sessionId: string;
+};
+
+function deriveView(pathname: string, patientId: string): string {
+  const base = `/patients/${patientId}`;
+  const rest = pathname.slice(base.length);
+
+  if (!rest || rest === "/") return "overview";
+
+  const prDetailMatch = rest.match(/^\/prs\/(.+)/);
+  if (prDetailMatch) return `pr:${prDetailMatch[1]}`;
+
+  const meetingDetailMatch = rest.match(/^\/meetings\/(.+)/);
+  if (meetingDetailMatch) return `meeting:${meetingDetailMatch[1]}`;
+
+  if (rest === "/prs") return "prs";
+  if (rest === "/meetings") return "meetings";
+  if (rest === "/plan") return "plan";
+  if (rest === "/guidelines") return "guidelines";
+  if (rest === "/followup") return "followup";
+
+  return "overview";
+}
+
+function seedMessages(patient: Patient): Message[] {
   const q = patient.agent.needsYou[0];
   if (q) {
     return [
@@ -39,72 +67,160 @@ function seed(patient: Patient): Message[] {
   ];
 }
 
-function cannedResponse(input: string, patient: Patient): string {
-  const q = input.toLowerCase();
-
-  if (q.includes("conflict") || q.includes("staging") || q.includes("cT4")) {
-    return "The restaging MRI (2026-04-22) contradicts the baseline cT3 from 2026-03-08. I've blocked auto-merge on PR #3. Recommended action: tumor board on 2026-04-26 — already on the calendar.";
-  }
-  if (q.includes("plan") || q.includes("treatment") || q.includes("regimen")) {
-    return `Current plan: ${patient.plan
-      .map((p) => p.name)
-      .join(" → ")}. ${
-      patient.plan.find((p) => p.status === "in-progress")?.name ?? "First phase"
-    } is active.`;
-  }
-  if (q.includes("merge") || q.includes("accept")) {
-    return "I can't auto-merge that change — it materially shifts prognosis and surgical plan. Multidisciplinary review is required. I've drafted talking points for the tumor board.";
-  }
-  if (q.includes("source") || q.includes("provenance") || q.includes("where")) {
-    return "Every record in the vault traces to a source — pathology report, imaging, lab feed, or a clinician note. Click any 📎 in the overview to see the underlying excerpt.";
-  }
-  if (q.includes("schedule") || q.includes("book") || q.includes("appointment")) {
-    return "I can auto-book imaging, labs, or visits. Want me to add something to the followup schedule?";
-  }
-  return `Looking through ${patient.name.split(" ")[0]}'s vault for context on that. Each record is structured and provenance-linked — I'll cite sources when I respond.`;
+function newSessionId(): string {
+  return crypto.randomUUID().slice(0, 8);
 }
 
 export function AgentChat({ patient }: { patient: Patient }) {
   const { collapsed, toggle } = useCollapsible("right");
-  const [messages, setMessages] = useState<Message[]>(() => seed(patient));
+  const pathname = usePathname();
+  const [messages, setMessages] = useState<Message[]>(() => seedMessages(patient));
   const [input, setInput] = useState("");
-  const [pending, setPending] = useState(false);
+  const [streaming, setStreaming] = useState(false);
   const scrollRef = useRef<HTMLDivElement | null>(null);
+  const abortRef = useRef<AbortController | null>(null);
+  const sessionIdRef = useRef(newSessionId());
+  const sessionsRef = useRef<Map<string, PatientSession>>(new Map());
+  const prevPatientRef = useRef(patient.id);
 
-  // re-seed on patient change
   useEffect(() => {
-    setMessages(seed(patient));
-    setInput("");
-  }, [patient.id, patient]);
+    const prev = prevPatientRef.current;
+    if (prev === patient.id) return;
 
-  // auto-scroll to bottom on new message
+    sessionsRef.current.set(prev, {
+      messages,
+      sessionId: sessionIdRef.current,
+    });
+
+    const existing = sessionsRef.current.get(patient.id);
+    if (existing) {
+      setMessages(existing.messages);
+      sessionIdRef.current = existing.sessionId;
+    } else {
+      setMessages(seedMessages(patient));
+      sessionIdRef.current = newSessionId();
+    }
+
+    setInput("");
+    prevPatientRef.current = patient.id;
+  }, [patient.id, patient, messages]);
+
   useEffect(() => {
     const el = scrollRef.current;
     if (!el) return;
     el.scrollTop = el.scrollHeight;
-  }, [messages, pending]);
+  }, [messages, streaming]);
 
-  const send = () => {
-    const text = input.trim();
-    if (!text || pending) return;
-    const userMsg: Message = {
-      id: crypto.randomUUID(),
-      role: "user",
-      content: text,
-    };
-    setMessages((m) => [...m, userMsg]);
+  const clearChat = useCallback(() => {
+    if (streaming) return;
+    sessionsRef.current.delete(patient.id);
+    sessionIdRef.current = newSessionId();
+    setMessages(seedMessages(patient));
     setInput("");
-    setPending(true);
-    setTimeout(() => {
-      const reply: Message = {
-        id: crypto.randomUUID(),
-        role: "assistant",
-        content: cannedResponse(text, patient),
-      };
-      setMessages((m) => [...m, reply]);
-      setPending(false);
-    }, 600);
-  };
+  }, [patient, streaming]);
+
+  const send = useCallback(async () => {
+    const text = input.trim();
+    if (!text || streaming) return;
+
+    const userMsg: Message = { id: crypto.randomUUID(), role: "user", content: text };
+    const assistantMsg: Message = { id: crypto.randomUUID(), role: "assistant", content: "" };
+
+    setMessages((m) => [...m, userMsg, assistantMsg]);
+    setInput("");
+    setStreaming(true);
+
+    const history = [...messages.filter((m) => m.id !== "m0"), userMsg].map((m) => ({
+      role: m.role,
+      content: m.content,
+    }));
+
+    const view = deriveView(pathname, patient.id);
+
+    const abort = new AbortController();
+    abortRef.current = abort;
+
+    try {
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ messages: history, patientId: patient.id, view, sessionId: sessionIdRef.current }),
+        signal: abort.signal,
+      });
+
+      if (!res.ok || !res.body) {
+        const errText = await res.text();
+        setMessages((m) =>
+          m.map((msg) =>
+            msg.id === assistantMsg.id
+              ? { ...msg, content: `Error: ${errText || res.statusText}` }
+              : msg
+          )
+        );
+        setStreaming(false);
+        return;
+      }
+
+      const reader = res.body.getReader();
+      const decoder = new TextDecoder();
+      let buffer = "";
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+
+        buffer += decoder.decode(value, { stream: true });
+        const lines = buffer.split("\n");
+        buffer = lines.pop() ?? "";
+
+        for (const line of lines) {
+          if (!line.startsWith("data: ")) continue;
+          const payload = line.slice(6).trim();
+          if (payload === "[DONE]") continue;
+
+          let event: { type: string; content?: string };
+          try {
+            event = JSON.parse(payload);
+          } catch {
+            continue;
+          }
+
+          if (event.type === "delta" && event.content) {
+            setMessages((m) =>
+              m.map((msg) =>
+                msg.id === assistantMsg.id
+                  ? { ...msg, content: msg.content + event.content }
+                  : msg
+              )
+            );
+          }
+
+          if (event.type === "error") {
+            setMessages((m) =>
+              m.map((msg) =>
+                msg.id === assistantMsg.id
+                  ? { ...msg, content: `Error: ${event.content}` }
+                  : msg
+              )
+            );
+          }
+        }
+      }
+    } catch (err) {
+      if ((err as Error).name !== "AbortError") {
+        setMessages((m) =>
+          m.map((msg) =>
+            msg.id === assistantMsg.id
+              ? { ...msg, content: `Connection error: ${(err as Error).message}` }
+              : msg
+          )
+        );
+      }
+    } finally {
+      setStreaming(false);
+      abortRef.current = null;
+    }
+  }, [input, streaming, messages, pathname, patient.id]);
 
   const onKey = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === "Enter" && !e.shiftKey) {
@@ -112,6 +228,8 @@ export function AgentChat({ patient }: { patient: Patient }) {
       send();
     }
   };
+
+  const hasHistory = messages.length > 1 || messages[0]?.id !== "m0";
 
   if (collapsed) {
     return (
@@ -145,6 +263,16 @@ export function AgentChat({ patient }: { patient: Patient }) {
           <span className="text-[13px] font-semibold tracking-tight">Agent</span>
         </div>
         <div className="flex items-center gap-2">
+          {hasHistory && !streaming && (
+            <button
+              onClick={clearChat}
+              className="text-muted-foreground/60 transition-colors hover:text-muted-foreground"
+              aria-label="Clear chat"
+              title="Clear chat"
+            >
+              <Trash2 className="h-3.5 w-3.5" />
+            </button>
+          )}
           <span className="mono text-[10px] text-muted-foreground">
             <span className="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-emerald-500 align-middle" />
             online
@@ -165,34 +293,20 @@ export function AgentChat({ patient }: { patient: Patient }) {
           {messages.map((m) => (
             <li
               key={m.id}
-              className={cn(
-                "flex",
-                m.role === "user" ? "justify-end" : "justify-start"
-              )}
+              className={cn("flex", m.role === "user" ? "justify-end" : "justify-start")}
             >
               <div
                 className={cn(
-                  "max-w-[88%] rounded-2xl px-3 py-2 text-[13px] leading-snug",
+                  "max-w-[88%] rounded-2xl px-3 py-2 text-[13px] leading-snug whitespace-pre-wrap",
                   m.role === "user"
                     ? "rounded-br-md bg-violet-500 text-white"
                     : "rounded-bl-md border border-border bg-card text-foreground"
                 )}
               >
-                {m.content}
+                {m.content || (streaming && m.role === "assistant" ? <TypingDots /> : null)}
               </div>
             </li>
           ))}
-          {pending && (
-            <li className="flex justify-start">
-              <div className="rounded-2xl rounded-bl-md border border-border bg-card px-3 py-2.5">
-                <span className="flex items-center gap-1">
-                  <Dot delay={0} />
-                  <Dot delay={150} />
-                  <Dot delay={300} />
-                </span>
-              </div>
-            </li>
-          )}
         </ol>
       </div>
 
@@ -202,14 +316,14 @@ export function AgentChat({ patient }: { patient: Patient }) {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={onKey}
-            placeholder="Ask about this patient…"
+            placeholder="Ask about this patient..."
             rows={1}
             className="min-h-0 max-h-32 flex-1 resize-none border-0 bg-transparent px-0 py-1.5 text-[13px] shadow-none focus-visible:ring-0 placeholder:text-muted-foreground/70"
           />
           <Button
             type="button"
             onClick={send}
-            disabled={!input.trim() || pending}
+            disabled={!input.trim() || streaming}
             size="icon-sm"
             className="h-7 w-7 flex-shrink-0 rounded-lg bg-violet-500 text-white hover:bg-violet-600 disabled:opacity-40"
             aria-label="Send"
@@ -218,10 +332,20 @@ export function AgentChat({ patient }: { patient: Patient }) {
           </Button>
         </div>
         <p className="mt-2 px-1 text-[10.5px] text-muted-foreground/70">
-          Mock agent · responses are canned for the demo.
+          Cliniarc agent · gpt-5-mini via Azure
         </p>
       </footer>
     </aside>
+  );
+}
+
+function TypingDots() {
+  return (
+    <span className="flex items-center gap-1">
+      <Dot delay={0} />
+      <Dot delay={150} />
+      <Dot delay={300} />
+    </span>
   );
 }
 
