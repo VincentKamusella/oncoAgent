@@ -1,4 +1,29 @@
+# oncoAgent
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+
+## Problem
+
+<!-- Add the core problem this project solves -->
+
+## Solutions
+
+<!-- Add the main solution(s) implemented in this project -->
+
+## Main Differences
+
+<!-- Add key differences vs alternatives, previous versions, or similar projects -->
+
+## Tech Stack
+
+- [Next.js](https://nextjs.org)
+- [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app)
+- [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts)
+- [Geist](https://vercel.com/font)
+
+## Requirements
+
+<!-- Add runtime, package manager, environment, and infrastructure requirements -->
 
 ## Getting Started
 
@@ -17,8 +42,6 @@ bun dev
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
 ## Learn More
 
