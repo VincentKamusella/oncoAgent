@@ -1,0 +1,102 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - complementary [ref=e3]:
+      - generic [ref=e4]:
+        - img [ref=e6]
+        - generic [ref=e9]: oncoAgent
+      - button "OV OncoUnit Vienna" [ref=e11]:
+        - generic [ref=e12]:
+          - generic [ref=e13]: OV
+          - generic [ref=e14]: OncoUnit Vienna
+        - img [ref=e15]
+      - navigation [ref=e18]:
+        - link "Overview" [ref=e19] [cursor=pointer]:
+          - /url: /
+          - img [ref=e21]
+          - text: Overview
+        - link "Patient vaults" [ref=e26] [cursor=pointer]:
+          - /url: /
+          - img [ref=e28]
+          - text: Patient vaults
+        - link "Data sources" [ref=e30] [cursor=pointer]:
+          - /url: /sources
+          - img [ref=e32]
+          - text: Data sources
+      - generic [ref=e36]:
+        - link "Workspace settings" [ref=e37] [cursor=pointer]:
+          - /url: "#"
+          - img [ref=e38]
+          - text: Workspace settings
+        - link "Help" [ref=e41] [cursor=pointer]:
+          - /url: "#"
+          - img [ref=e42]
+          - text: Help
+        - generic [ref=e45]:
+          - generic [ref=e46]: JM
+          - generic [ref=e47]:
+            - generic [ref=e48]: Dr. Julia Müller
+            - generic [ref=e49]: j.mueller@oncounit.at
+    - main [ref=e50]:
+      - generic [ref=e51]:
+        - generic [ref=e52]:
+          - img
+          - textbox "Search patients, facts, PRs…" [ref=e53]
+          - generic: ⌘K
+        - generic [ref=e54]: Sat, Apr 25
+      - generic [ref=e55]:
+        - generic [ref=e56]:
+          - generic [ref=e57]:
+            - text: Workspace
+            - heading "Patient vaults" [level=1] [ref=e58]
+            - paragraph [ref=e59]: Each vault holds a patient's structured context base — facts, treatment plan, imaging, and the history of every change. Agents work inside; you stay in the loop.
+          - button "New patient" [ref=e60]:
+            - img
+            - generic [ref=e61]: New patient
+        - generic [ref=e62]:
+          - link "JM RP AS KL Maria Kowalski HER2+ breast cancer · Stage IIB Active 11 facts · 1 open" [ref=e63] [cursor=pointer]:
+            - /url: /patients/maria-k
+            - generic [ref=e64]:
+              - img [ref=e65]
+              - generic [ref=e72]:
+                - generic [ref=e73]: JM
+                - generic [ref=e74]: RP
+                - generic [ref=e75]: AS
+                - generic [ref=e76]: KL
+            - generic [ref=e77]:
+              - heading "Maria Kowalski" [level=3] [ref=e78]
+              - paragraph [ref=e79]: HER2+ breast cancer · Stage IIB
+            - generic [ref=e80]:
+              - generic [ref=e81]: Active
+              - generic [ref=e83]: 11 facts · 1 open
+          - link "CR MS KL FP Thomas Berger Rectal adenocarcinoma · TNT in progress Active 9 facts · 0 open · 1 conflict" [ref=e84] [cursor=pointer]:
+            - /url: /patients/thomas-b
+            - generic [ref=e85]:
+              - img [ref=e86]
+              - generic [ref=e93]:
+                - generic [ref=e94]: CR
+                - generic [ref=e95]: MS
+                - generic [ref=e96]: KL
+                - generic [ref=e97]: FP
+            - generic [ref=e98]:
+              - heading "Thomas Berger" [level=3] [ref=e99]
+              - paragraph [ref=e100]: Rectal adenocarcinoma · TNT in progress
+            - generic [ref=e101]:
+              - generic [ref=e102]: Active
+              - generic [ref=e104]: 9 facts · 0 open · 1 conflict
+          - link "JM RP KL Anna Lindqvist ER+ breast cancer · Surveillance · 23 mo Surveillance 9 facts · 0 open" [ref=e105] [cursor=pointer]:
+            - /url: /patients/anna-l
+            - generic [ref=e106]:
+              - img [ref=e107]
+              - generic [ref=e114]:
+                - generic [ref=e115]: JM
+                - generic [ref=e116]: RP
+                - generic [ref=e117]: KL
+            - generic [ref=e118]:
+              - heading "Anna Lindqvist" [level=3] [ref=e119]
+              - paragraph [ref=e120]: ER+ breast cancer · Surveillance · 23 mo
+            - generic [ref=e121]:
+              - generic [ref=e122]: Surveillance
+              - generic [ref=e124]: 9 facts · 0 open
+  - button "Open Next.js Dev Tools" [ref=e130] [cursor=pointer]:
+    - img [ref=e131]
+  - alert [ref=e134]
