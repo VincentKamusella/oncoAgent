@@ -59,10 +59,13 @@ export function PatientSidebar({
   }
 
   return (
-    <aside className="hidden w-[260px] flex-shrink-0 flex-col rounded-2xl border border-border bg-sidebar shadow-[var(--shadow-soft)] md:flex">
-      <div className="flex items-center justify-between px-5 py-4">
-        <Link href="/" className="flex items-center gap-2.5">
-          <div className="grid h-7 w-7 place-items-center rounded-md bg-violet-500 shadow-[0_4px_12px_rgba(124,91,247,0.45)]">
+    <aside className="hidden w-[260px] flex-shrink-0 flex-col overflow-hidden rounded-2xl border border-border bg-sidebar shadow-[var(--shadow-soft)] md:flex">
+      <div className="flex h-14 flex-shrink-0 items-center justify-between px-2">
+        <Link
+          href="/"
+          className="flex items-center gap-2.5 rounded-lg border border-transparent px-2.5 py-1"
+        >
+          <div className="grid h-7 w-7 flex-shrink-0 place-items-center rounded-md bg-violet-500 shadow-[0_4px_12px_rgba(124,91,247,0.45)]">
             <Logo />
           </div>
           <span className="text-[15px] font-semibold tracking-tight">
@@ -73,38 +76,36 @@ export function PatientSidebar({
           type="button"
           onClick={toggle}
           aria-label="Collapse sidebar"
-          className="grid h-6 w-6 place-items-center rounded-md text-muted-foreground hover:bg-secondary hover:text-foreground"
+          className="mr-1.5 grid h-6 w-6 place-items-center rounded-md text-muted-foreground hover:bg-secondary hover:text-foreground"
         >
           <PanelLeftClose className="h-3.5 w-3.5" />
         </button>
       </div>
 
-      <div className="px-3">
+      <div className="flex h-12 flex-shrink-0 items-center px-2">
         <DropdownMenu>
-          <DropdownMenuTrigger className="flex w-full items-center justify-between rounded-lg border border-border bg-card px-3 py-2 text-left text-[13px] font-medium hover:bg-secondary">
-            <div className="flex items-center gap-2">
-              <span
-                className={cn(
-                  "grid h-6 w-6 flex-shrink-0 place-items-center rounded-md mono text-[10.5px] font-semibold",
-                  active
-                    ? "bg-violet-500 text-white"
-                    : "bg-violet-100 text-violet-700"
-                )}
-              >
-                {active?.initials ?? "—"}
+          <DropdownMenuTrigger className="flex w-full items-center gap-2.5 rounded-lg border border-border bg-card px-2.5 py-1 text-left hover:bg-secondary">
+            <span
+              className={cn(
+                "grid h-7 w-7 flex-shrink-0 place-items-center rounded-full mono text-[11px] font-semibold",
+                active
+                  ? "bg-violet-500 text-white"
+                  : "bg-violet-100 text-violet-700"
+              )}
+            >
+              {active?.initials ?? "—"}
+            </span>
+            <div className="flex min-w-0 flex-1 flex-col leading-tight">
+              <span className="truncate text-[13px] font-medium">
+                {active?.name ?? "Select patient"}
               </span>
-              <div className="flex min-w-0 flex-col leading-tight">
-                <span className="truncate text-[13px] font-medium">
-                  {active?.name ?? "Select patient"}
-                </span>
-                <span className="truncate text-[11px] text-muted-foreground">
-                  {active
-                    ? active.cancerLabel.split(" · ")[0]
-                    : "OncoUnit Vienna"}
-                </span>
-              </div>
+              <span className="truncate text-[11px] text-muted-foreground">
+                {active
+                  ? active.cancerLabel.split(" · ")[0]
+                  : "OncoUnit Vienna"}
+              </span>
             </div>
-            <ChevronsUpDown className="ml-2 h-3.5 w-3.5 flex-shrink-0 text-muted-foreground" />
+            <ChevronsUpDown className="h-3.5 w-3.5 flex-shrink-0 text-muted-foreground" />
           </DropdownMenuTrigger>
           <DropdownMenuContent
             align="start"
@@ -150,7 +151,7 @@ export function PatientSidebar({
       </div>
 
       {active && (
-        <div className="mt-4 flex-1 overflow-y-auto pb-3">
+        <div className="flex-1 overflow-y-auto pt-3 pb-3">
           <SpecialistTreeNav facts={facts} patientId={active.id} />
         </div>
       )}

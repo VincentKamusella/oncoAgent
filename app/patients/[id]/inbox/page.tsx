@@ -55,7 +55,7 @@ export default async function InboxPage({
           Incoming changes & open questions
         </h2>
         <p className="mt-1.5 max-w-2xl text-[13px] leading-relaxed text-muted-foreground">
-          New facts arrive as pull requests. Agents auto-merge what&apos;s
+          New records arrive as pull requests. Agents auto-merge what&apos;s
           unambiguous, block on conflicts, and raise issues when they need a
           human. Forward-scheduled items live here too — they become PRs as
           soon as the data lands.

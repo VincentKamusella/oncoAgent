@@ -42,7 +42,7 @@ export default async function PlanPage({
             <p className="mt-1 text-[13px] leading-snug text-foreground">
               Patient&apos;s diagnosis ({patient.diagnosis}) and stage ({patient.staging})
               place them on the standard pathway for {patient.cancerLabel.split("·")[0].trim()}.
-              The agent matched these facts to the relevant guideline (see Guidelines view)
+              The agent matched these records to the relevant guideline (see Guidelines view)
               and ordered phases by clinical timing windows.
             </p>
           </div>

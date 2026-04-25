@@ -1,4 +1,5 @@
 import type { Fact, Patient, TreatmentOption, BoardCase } from "../types";
+import { attachmentsMaria } from "./attachments";
 
 const factsMaria: Fact[] = [
   {
@@ -838,6 +839,7 @@ export const patients: Patient[] = [
       { initials: "KL", tone: "amber" },
     ],
     facts: factsMaria,
+    attachments: attachmentsMaria,
     options: optionsMaria,
     chosenOptionId: null,
     boardCase: boardCaseMaria,

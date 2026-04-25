@@ -23,7 +23,7 @@ export function ConflictCallout({ conflicts }: { conflicts: Conflict[] }) {
             {conflicts.length} conflict{conflicts.length === 1 ? "" : "s"} block auto-merge
           </h3>
           <p className="text-[12px] text-rose-900/70">
-            These changes contradict facts already in the vault. Resolve before merging.
+            These changes contradict records already in the vault. Resolve before merging.
           </p>
         </div>
       </header>

@@ -255,7 +255,7 @@ export function AgentChat({ patient }: { patient: Patient }) {
 
   return (
     <aside className="hidden w-[340px] flex-shrink-0 flex-col border-l border-border bg-card/40 xl:flex">
-      <header className="flex items-center justify-between border-b border-border px-5 py-3.5">
+      <header className="flex h-14 flex-shrink-0 items-center justify-between border-b border-border px-5">
         <div className="flex items-center gap-2">
           <div className="grid h-6 w-6 place-items-center rounded-md bg-violet-100">
             <Sparkles className="h-3.5 w-3.5 text-violet-600" />

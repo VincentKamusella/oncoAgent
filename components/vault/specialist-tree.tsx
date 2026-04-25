@@ -14,6 +14,7 @@ import {
   Pill,
   HeartPulse,
   UserSquare,
+  Layers,
 } from "lucide-react";
 import type { Fact, Specialty } from "@/lib/types";
 import { cn } from "@/lib/utils";
@@ -157,7 +158,7 @@ export function SpecialistTree({
     <nav className="flex flex-col gap-0.5 px-2">
       <div className="px-2 py-1.5">
         <span className="mono text-[10.5px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
-          Facts
+          Records
         </span>
       </div>
 
@@ -165,13 +166,21 @@ export function SpecialistTree({
         type="button"
         onClick={() => onSelect("all")}
         className={cn(
-          "flex w-full items-center justify-between rounded-lg px-2.5 py-1.5 text-[12.5px] font-medium transition-colors",
+          "group flex w-full items-center gap-2.5 rounded-lg px-2.5 py-1.5 text-left text-[12.5px] font-medium transition-colors",
           isActive("all")
             ? "bg-violet-50 text-violet-700"
             : "text-muted-foreground hover:bg-muted/60 hover:text-foreground"
         )}
       >
-        <span>All facts</span>
+        <span
+          className={cn(
+            "grid h-4 w-4 flex-shrink-0 place-items-center",
+            isActive("all") ? "text-violet-600" : "text-muted-foreground"
+          )}
+        >
+          <Layers className="h-3.5 w-3.5" />
+        </span>
+        <span className="flex-1 truncate">All records</span>
         <span className="mono text-[10.5px]">{facts.length}</span>
       </button>
 
@@ -193,8 +202,8 @@ export function SpecialistTree({
               >
                 <span
                   className={cn(
-                    "flex-shrink-0 text-muted-foreground",
-                    active && "text-violet-600"
+                    "grid h-4 w-4 flex-shrink-0 place-items-center",
+                    active ? "text-violet-600" : "text-muted-foreground"
                   )}
                 >
                   {f.icon}

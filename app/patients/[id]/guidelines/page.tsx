@@ -40,7 +40,7 @@ export default function GuidelinesPage({
           {graph.title}
         </h2>
         <p className="mt-1.5 max-w-2xl text-[13px] leading-relaxed text-muted-foreground">
-          The agent matched {patient.name.split(" ")[0]}&apos;s facts against this pathway. The
+          The agent matched {patient.name.split(" ")[0]}&apos;s records against this pathway. The
           highlighted route is the patient&apos;s actual trajectory; dimmed branches were not selected.
         </p>
         <div className="mt-2 mono text-[11px] text-muted-foreground">

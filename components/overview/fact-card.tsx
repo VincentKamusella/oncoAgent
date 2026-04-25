@@ -26,13 +26,13 @@ export function FactCard({ title, facts, className, emptyHint, icon }: Props) {
           </h3>
         </div>
         <span className="mono text-[10.5px] text-muted-foreground/70">
-          {facts.length} {facts.length === 1 ? "fact" : "facts"}
+          {facts.length} {facts.length === 1 ? "record" : "records"}
         </span>
       </header>
 
       {facts.length === 0 ? (
         <p className="text-[12.5px] italic text-muted-foreground">
-          {emptyHint ?? "No facts yet."}
+          {emptyHint ?? "No records yet."}
         </p>
       ) : (
         <dl className="flex flex-col">

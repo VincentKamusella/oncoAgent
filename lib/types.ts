@@ -95,6 +95,25 @@ export type AvatarTone = "violet" | "rose" | "amber" | "emerald" | "sky";
 
 export type PatientStatus = "active" | "surveillance" | "archived";
 
+export type AttachmentKind = "image" | "pdf" | "table" | "report";
+
+export type Attachment = {
+  id: string;
+  patientId: string;
+  specialty: Specialty;
+  kind: AttachmentKind;
+  name: string;
+  date: string;
+  source?: string;
+  sizeKb?: number;
+  // Offline-safe visual hints (no external URLs)
+  gradient?: string; // tailwind classes for image-kind thumbnail background
+  excerpt?: string; // first line for report kind
+  pages?: number; // pdf kind
+  rows?: number; // table kind
+  cols?: number; // table kind
+};
+
 export type Patient = {
   id: string;
   name: string;
@@ -113,6 +132,7 @@ export type Patient = {
   avatarTone: AvatarTone;
   vaultAvatars: { initials: string; tone: AvatarTone }[];
   facts: Fact[];
+  attachments?: Attachment[];
   plan: TreatmentPhase[];
   options?: TreatmentOption[];
   chosenOptionId?: string | null;
