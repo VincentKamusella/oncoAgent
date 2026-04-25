@@ -48,6 +48,7 @@ This repository includes the UI and interaction model for:
 - [TypeScript](https://www.typescriptlang.org)
 - [Tailwind CSS](https://tailwindcss.com) `4`
 - [ESLint](https://eslint.org)
+- [Entire](https://entire.io/)
 
 ## Requirements
 
