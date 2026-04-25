@@ -1,0 +1,264 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - complementary [ref=e3]:
+      - link "oncoAgent" [ref=e4] [cursor=pointer]:
+        - /url: /
+        - img [ref=e6]
+        - generic [ref=e9]: oncoAgent
+      - button "OV OncoUnit Vienna" [ref=e11]:
+        - generic [ref=e12]:
+          - generic [ref=e13]: OV
+          - generic [ref=e14]: OncoUnit Vienna
+        - img [ref=e15]
+      - generic [ref=e19]:
+        - img
+        - textbox "Search patients…" [ref=e20]
+      - generic [ref=e21]:
+        - generic [ref=e22]:
+          - generic [ref=e23]: Patients
+          - button [ref=e24]:
+            - img [ref=e25]
+        - generic [ref=e26]:
+          - generic [ref=e27]: Active · 2
+          - generic [ref=e28]:
+            - link "MK Maria Kowalski HER2+ breast cancer 1" [ref=e29] [cursor=pointer]:
+              - /url: /patients/maria-k
+              - generic [ref=e30]: MK
+              - generic [ref=e31]:
+                - generic [ref=e32]: Maria Kowalski
+                - generic [ref=e33]: HER2+ breast cancer
+              - generic [ref=e34]: "1"
+            - link "TB Thomas Berger Rectal adenocarcinoma 1" [ref=e36] [cursor=pointer]:
+              - /url: /patients/thomas-b
+              - generic [ref=e37]: TB
+              - generic [ref=e38]:
+                - generic [ref=e39]: Thomas Berger
+                - generic [ref=e40]: Rectal adenocarcinoma
+              - generic [ref=e41]: "1"
+        - generic [ref=e43]:
+          - generic [ref=e44]: Surveillance · 1
+          - link "AL Anna Lindqvist ER+ breast cancer" [ref=e46] [cursor=pointer]:
+            - /url: /patients/anna-l
+            - generic [ref=e47]: AL
+            - generic [ref=e48]:
+              - generic [ref=e49]: Anna Lindqvist
+              - generic [ref=e50]: ER+ breast cancer
+      - generic [ref=e52]:
+        - generic [ref=e53]: JM
+        - generic [ref=e54]:
+          - generic [ref=e55]: Dr. Julia Müller
+          - generic [ref=e56]: Med-Onc
+    - generic [ref=e57]:
+      - banner [ref=e58]:
+        - generic [ref=e59]:
+          - link "Patient vaults" [ref=e60] [cursor=pointer]:
+            - /url: /
+          - img [ref=e61]
+          - generic [ref=e63]:
+            - generic [ref=e64]: TB
+            - generic [ref=e65]:
+              - generic [ref=e66]: Thomas Berger
+              - generic [ref=e67]: MRN-198342 · 67M · case opened 2026-03-01
+          - generic [ref=e68]: Active treatment
+        - generic [ref=e70]:
+          - img
+          - textbox "Find anything…" [ref=e71]
+          - generic: ⌘K
+      - navigation [ref=e72]:
+        - link "Overview" [ref=e73] [cursor=pointer]:
+          - /url: /patients/thomas-b
+          - img [ref=e75]
+          - text: Overview
+        - link "Treatment plan" [ref=e80] [cursor=pointer]:
+          - /url: /patients/thomas-b/plan
+          - img [ref=e82]
+          - text: Treatment plan
+        - link "Guidelines" [ref=e84] [cursor=pointer]:
+          - /url: /patients/thomas-b/guidelines
+          - img [ref=e86]
+          - text: Guidelines
+        - link "Pull requests 1" [ref=e91] [cursor=pointer]:
+          - /url: /patients/thomas-b/prs
+          - img [ref=e93]
+          - text: Pull requests
+          - generic [ref=e97]: "1"
+        - link "Followup" [ref=e98] [cursor=pointer]:
+          - /url: /patients/thomas-b/followup
+          - img [ref=e100]
+          - text: Followup
+        - link "Meetings 2" [ref=e102] [cursor=pointer]:
+          - /url: /patients/thomas-b/meetings
+          - img [ref=e104]
+          - text: Meetings
+          - generic [ref=e107]: "2"
+      - main [ref=e109]:
+        - generic [ref=e111]:
+          - link "All meetings" [ref=e112] [cursor=pointer]:
+            - /url: /patients/thomas-b/meetings
+            - img [ref=e113]
+            - text: All meetings
+          - generic [ref=e116]:
+            - img [ref=e118]
+            - generic [ref=e121]:
+              - generic [ref=e122]:
+                - heading "Tumor board · TNT plan kickoff" [level=2] [ref=e123]
+                - generic [ref=e124]: Completed
+              - generic [ref=e126]:
+                - img [ref=e127]
+                - text: Thursday · 2026-03-12 10:00 · 22 min · 1 month ago
+          - generic [ref=e129]:
+            - generic [ref=e130]:
+              - generic [ref=e131]:
+                - generic [ref=e132]: Transcript
+                - generic [ref=e133]:
+                  - img [ref=e134]
+                  - text: 3 agent notes
+              - list [ref=e138]:
+                - listitem [ref=e139]:
+                  - generic [ref=e140]: DC
+                  - generic [ref=e141]:
+                    - generic [ref=e142]:
+                      - generic [ref=e143]: Dr. C. Romano
+                      - generic [ref=e144]: Med-Onc
+                      - generic [ref=e145]: 00:01
+                    - paragraph [ref=e146]: Mid-rectal adenocarcinoma, cT3 cN1 by MRI. CEA 8.4. Performance status 1. Proposing TNT.
+                - listitem [ref=e147]:
+                  - generic [ref=e148]: DF
+                  - generic [ref=e149]:
+                    - generic [ref=e150]:
+                      - generic [ref=e151]: Dr. F. Park
+                      - generic [ref=e152]: Surgery
+                      - generic [ref=e153]: 00:03
+                    - paragraph [ref=e154]: Tumor at 8 cm — sphincter preservation feasible if good response. Comfortable with TME after CRT.
+                - listitem [ref=e155]:
+                  - generic [ref=e156]: DN
+                  - generic [ref=e157]:
+                    - generic [ref=e158]:
+                      - generic [ref=e159]: Dr. N. Ito
+                      - generic [ref=e160]: Rad-Onc
+                      - generic [ref=e161]: 00:06
+                    - paragraph [ref=e162]: Long-course 50.4 Gy with concurrent capecitabine, standard. Start 4 weeks after final FOLFOX.
+                - listitem [ref=e163]:
+                  - generic [ref=e164]: DK
+                  - generic [ref=e165]:
+                    - generic [ref=e166]:
+                      - generic [ref=e167]: Dr. K. Lee
+                      - generic [ref=e168]: Radiology
+                      - generic [ref=e169]: 00:10
+                    - paragraph [ref=e170]: Will repeat MRI after induction to assess response and re-stage before CRT.
+                - listitem [ref=e171]:
+                  - generic [ref=e172]:
+                    - img [ref=e174]
+                    - generic [ref=e177]:
+                      - generic [ref=e178]: Agent · 00:10
+                      - paragraph [ref=e179]: Auto-scheduled restaging MRI at week 8 post-induction.
+                - listitem [ref=e180]:
+                  - generic [ref=e181]: DC
+                  - generic [ref=e182]:
+                    - generic [ref=e183]:
+                      - generic [ref=e184]: Dr. C. Romano
+                      - generic [ref=e185]: Med-Onc
+                      - generic [ref=e186]: 00:14
+                    - paragraph [ref=e187]: "Consensus: induction FOLFOX × 4 → CRT → TME → adjuvant if path response is poor."
+                - listitem [ref=e188]:
+                  - generic [ref=e189]:
+                    - img [ref=e191]
+                    - generic [ref=e194]:
+                      - generic [ref=e195]: Agent · 00:01
+                      - paragraph [ref=e196]: "Captured proposed plan: TNT (induction → CRT → TME → adjuvant)."
+                - listitem [ref=e197]:
+                  - generic [ref=e198]:
+                    - img [ref=e200]
+                    - generic [ref=e203]:
+                      - generic [ref=e204]: Agent · 00:14
+                      - paragraph [ref=e205]: "Drafted PR #1 — TNT plan adoption with cited consensus."
+            - complementary [ref=e206]:
+              - generic [ref=e207]:
+                - generic [ref=e208]:
+                  - img [ref=e210]
+                  - generic [ref=e213]: Agent summary
+                - paragraph [ref=e214]: "Tumor board adopted Total Neoadjuvant Therapy: induction FOLFOX × 4 → long-course CRT (50.4 Gy + capecitabine) → TME at 6–8 weeks post-CRT → adjuvant chemo if path response < grade 3. Restaging MRI scheduled post-induction."
+              - generic [ref=e215]:
+                - generic [ref=e216]:
+                  - img [ref=e218]
+                  - generic [ref=e222]: Proposed PRs
+                - list [ref=e223]:
+                  - listitem [ref=e224]:
+                    - link "FOLFOX cycle 4 infusion note" [ref=e225] [cursor=pointer]:
+                      - /url: /patients/thomas-b/prs/pr-tb-2
+                      - generic [ref=e226]: FOLFOX cycle 4 infusion note
+                      - img [ref=e227]
+              - generic [ref=e229]:
+                - text: Attendees
+                - list [ref=e230]:
+                  - listitem [ref=e231]:
+                    - generic [ref=e232]: Dr. C. Romano
+                    - generic [ref=e233]: Medical Oncology
+                  - listitem [ref=e234]:
+                    - generic [ref=e235]: Dr. F. Park
+                    - generic [ref=e236]: Surgical Oncology
+                  - listitem [ref=e237]:
+                    - generic [ref=e238]: Dr. K. Lee
+                    - generic [ref=e239]: Radiology
+                  - listitem [ref=e240]:
+                    - generic [ref=e241]: Dr. N. Ito
+                    - generic [ref=e242]: Radiation Oncology
+        - complementary [ref=e243]:
+          - generic [ref=e244]:
+            - generic [ref=e245]:
+              - img [ref=e247]
+              - generic [ref=e250]:
+                - generic [ref=e251]: Agent
+                - generic [ref=e252]: Watching Thomas's vault
+            - generic [ref=e253]: Online
+          - generic [ref=e255]:
+            - generic [ref=e256]:
+              - generic [ref=e258]:
+                - img [ref=e259]
+                - generic [ref=e262]: Now
+              - generic [ref=e263]:
+                - paragraph [ref=e264]: Reconciling restaging MRI vs. baseline staging
+                - 'link "PR #3 — MRI 2026-04-22" [ref=e265] [cursor=pointer]':
+                  - /url: /patients/thomas-b/prs/pr-tb-1
+                  - text: "PR #3 — MRI 2026-04-22"
+                  - img [ref=e266]
+            - generic [ref=e268]:
+              - generic [ref=e269]:
+                - generic [ref=e270]:
+                  - img [ref=e271]
+                  - generic [ref=e273]: Needs you
+                - generic [ref=e274]: "1"
+              - generic [ref=e276]:
+                - paragraph [ref=e277]: MRI 2026-04-22 suggests cT4a — change of staging vs. cT3
+                - paragraph [ref=e278]: "Anterior extension contacts visceral peritoneum. This conflicts with the prior cT3 from 2026-03-08. Possible explanations: progression on induction, MRI re-read, or interval inflammation. Plan implications: TNT may need to escalate, consider surgical re-staging."
+                - generic [ref=e279]:
+                  - button "Accept cT4a — escalate plan" [ref=e280]
+                  - button "Request second MRI read" [ref=e281]
+                  - button "Discuss at tumor board" [ref=e282]
+                - 'link "PR #3 — MRI 2026-04-22" [ref=e283] [cursor=pointer]':
+                  - /url: /patients/thomas-b/prs/pr-tb-1
+                  - text: "PR #3 — MRI 2026-04-22"
+                  - img [ref=e284]
+            - generic [ref=e286]:
+              - generic [ref=e288]:
+                - img [ref=e289]
+                - generic [ref=e292]: Recent
+              - list [ref=e293]:
+                - listitem [ref=e294]:
+                  - paragraph [ref=e296]: Flagged staging conflict on MRI 2026-04-22
+                  - generic [ref=e297]:
+                    - generic [ref=e298]: 3 days ago
+                    - 'link "PR #3" [ref=e299] [cursor=pointer]':
+                      - /url: /patients/thomas-b/prs/pr-tb-1
+                - listitem [ref=e300]:
+                  - paragraph [ref=e302]: Merged FOLFOX cycle 4 infusion note
+                  - generic [ref=e304]: 7 days ago
+                - listitem [ref=e305]:
+                  - paragraph [ref=e307]: Auto-booked tumor board slot · 2026-04-26 09:00
+                  - generic [ref=e308]:
+                    - generic [ref=e309]: 3 days ago
+                    - link "Tumor board · 2026-04-26" [ref=e310] [cursor=pointer]:
+                      - /url: /patients/thomas-b/meetings/mtg-tb-1
+  - button "Open Next.js Dev Tools" [ref=e316] [cursor=pointer]:
+    - img [ref=e317]
+  - alert [ref=e320]

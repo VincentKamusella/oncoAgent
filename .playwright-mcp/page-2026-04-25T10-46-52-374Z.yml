@@ -1,0 +1,259 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - complementary [ref=e3]:
+      - link "oncoAgent" [ref=e4] [cursor=pointer]:
+        - /url: /
+        - img [ref=e6]
+        - generic [ref=e9]: oncoAgent
+      - button "OV OncoUnit Vienna" [ref=e11]:
+        - generic [ref=e12]:
+          - generic [ref=e13]: OV
+          - generic [ref=e14]: OncoUnit Vienna
+        - img [ref=e15]
+      - generic [ref=e19]:
+        - img
+        - textbox "Search patients…" [ref=e20]
+      - generic [ref=e21]:
+        - generic [ref=e22]:
+          - generic [ref=e23]: Patients
+          - button [ref=e24]:
+            - img [ref=e25]
+        - generic [ref=e26]:
+          - generic [ref=e27]: Active · 2
+          - generic [ref=e28]:
+            - link "MK Maria Kowalski HER2+ breast cancer 1" [ref=e29] [cursor=pointer]:
+              - /url: /patients/maria-k
+              - generic [ref=e30]: MK
+              - generic [ref=e31]:
+                - generic [ref=e32]: Maria Kowalski
+                - generic [ref=e33]: HER2+ breast cancer
+              - generic [ref=e34]: "1"
+            - link "TB Thomas Berger Rectal adenocarcinoma 1" [ref=e36] [cursor=pointer]:
+              - /url: /patients/thomas-b
+              - generic [ref=e37]: TB
+              - generic [ref=e38]:
+                - generic [ref=e39]: Thomas Berger
+                - generic [ref=e40]: Rectal adenocarcinoma
+              - generic [ref=e41]: "1"
+        - generic [ref=e43]:
+          - generic [ref=e44]: Surveillance · 1
+          - link "AL Anna Lindqvist ER+ breast cancer" [ref=e46] [cursor=pointer]:
+            - /url: /patients/anna-l
+            - generic [ref=e47]: AL
+            - generic [ref=e48]:
+              - generic [ref=e49]: Anna Lindqvist
+              - generic [ref=e50]: ER+ breast cancer
+      - generic [ref=e52]:
+        - generic [ref=e53]: JM
+        - generic [ref=e54]:
+          - generic [ref=e55]: Dr. Julia Müller
+          - generic [ref=e56]: Med-Onc
+    - generic [ref=e57]:
+      - banner [ref=e58]:
+        - generic [ref=e59]:
+          - link "Patient vaults" [ref=e60] [cursor=pointer]:
+            - /url: /
+          - img [ref=e61]
+          - generic [ref=e63]:
+            - generic [ref=e64]: MK
+            - generic [ref=e65]:
+              - generic [ref=e66]: Maria Kowalski
+              - generic [ref=e67]: MRN-204881 · 54F · case opened 2026-02-08
+          - generic [ref=e68]: Active treatment
+        - generic [ref=e70]:
+          - img
+          - textbox "Find anything…" [ref=e71]
+          - generic: ⌘K
+      - navigation [ref=e72]:
+        - link "Overview" [ref=e73] [cursor=pointer]:
+          - /url: /patients/maria-k
+          - img [ref=e75]
+          - text: Overview
+        - link "Treatment plan" [ref=e81] [cursor=pointer]:
+          - /url: /patients/maria-k/plan
+          - img [ref=e83]
+          - text: Treatment plan
+        - link "Guidelines" [ref=e85] [cursor=pointer]:
+          - /url: /patients/maria-k/guidelines
+          - img [ref=e87]
+          - text: Guidelines
+        - link "Pull requests 1" [ref=e92] [cursor=pointer]:
+          - /url: /patients/maria-k/prs
+          - img [ref=e94]
+          - text: Pull requests
+          - generic [ref=e98]: "1"
+        - link "Followup" [ref=e99] [cursor=pointer]:
+          - /url: /patients/maria-k/followup
+          - img [ref=e101]
+          - text: Followup
+        - link "Meetings 1" [ref=e103] [cursor=pointer]:
+          - /url: /patients/maria-k/meetings
+          - img [ref=e105]
+          - text: Meetings
+          - generic [ref=e108]: "1"
+      - main [ref=e109]:
+        - generic [ref=e111]:
+          - generic [ref=e112]:
+            - generic [ref=e113]:
+              - generic [ref=e114]: MK
+              - generic [ref=e115]:
+                - heading "Maria Kowalski" [level=2] [ref=e116]
+                - paragraph [ref=e117]: Invasive ductal carcinoma, ER+/PR+/HER2 3+
+                - generic [ref=e118]:
+                  - generic [ref=e119]: MRN-204881
+                  - generic [ref=e120]: ·
+                  - generic [ref=e121]: 54F · DOB 1971-09-14
+                  - generic [ref=e122]: ·
+                  - generic [ref=e123]: Dr. J. Müller, Med-Onc
+            - generic [ref=e124]:
+              - generic [ref=e125]: Clinical stage
+              - generic [ref=e126]: cT2 cN1 cM0
+          - generic [ref=e127]:
+            - generic [ref=e128]:
+              - generic [ref=e129]:
+                - generic [ref=e130]:
+                  - img [ref=e132]
+                  - heading "Demographics" [level=3] [ref=e135]
+                - generic [ref=e136]: 3 facts
+              - generic [ref=e137]:
+                - generic [ref=e138]:
+                  - term [ref=e139]: Name
+                  - definition [ref=e140]: Maria Kowalski
+                  - button "Show provenance" [ref=e142]:
+                    - img [ref=e143]
+                - generic [ref=e145]:
+                  - term [ref=e146]: Date of birth
+                  - definition [ref=e147]: 1971-09-14
+                  - button "Show provenance" [ref=e149]:
+                    - img [ref=e150]
+                - generic [ref=e152]:
+                  - term [ref=e153]: MRN
+                  - definition [ref=e154]: MRN-204881
+                  - button "Show provenance" [ref=e156]:
+                    - img [ref=e157]
+            - generic [ref=e159]:
+              - generic [ref=e160]:
+                - generic [ref=e161]:
+                  - img [ref=e163]
+                  - heading "Diagnosis" [level=3] [ref=e167]
+                - generic [ref=e168]: 2 facts
+              - generic [ref=e169]:
+                - generic [ref=e170]:
+                  - term [ref=e171]: Primary diagnosis
+                  - definition [ref=e172]: Invasive ductal carcinoma, left breast
+                  - button "Show provenance" [ref=e174]:
+                    - img [ref=e175]
+                - generic [ref=e177]:
+                  - term [ref=e178]: Receptor status
+                  - definition [ref=e179]: ER+ (95%) · PR+ (60%) · HER2 3+ (IHC) confirmed by FISH
+                  - button "Show provenance" [ref=e181]:
+                    - img [ref=e182]
+            - generic [ref=e184]:
+              - generic [ref=e185]:
+                - generic [ref=e186]:
+                  - img [ref=e188]
+                  - heading "Staging" [level=3] [ref=e192]
+                - generic [ref=e193]: 1 fact
+              - generic [ref=e195]:
+                - term [ref=e196]: Clinical stage
+                - definition [ref=e197]: cT2 cN1 cM0 — Stage IIB
+                - button "Show provenance" [ref=e199]:
+                  - img [ref=e200]
+            - generic [ref=e202]:
+              - generic [ref=e203]:
+                - generic [ref=e204]:
+                  - img [ref=e206]
+                  - heading "Medications" [level=3] [ref=e209]
+                - generic [ref=e210]: 2 facts
+              - generic [ref=e211]:
+                - generic [ref=e212]:
+                  - term [ref=e213]: Neoadjuvant regimen
+                  - definition [ref=e214]: TCHP — docetaxel + carboplatin + trastuzumab + pertuzumab, q3w × 6
+                  - button "Show provenance" [ref=e216]:
+                    - img [ref=e217]
+                - generic [ref=e219]:
+                  - term [ref=e220]: Current cycle
+                  - definition [ref=e221]: TCHP cycle 4 of 6 — last infusion 2026-04-15
+                  - button "Show provenance" [ref=e223]:
+                    - img [ref=e224]
+            - generic [ref=e226]:
+              - generic [ref=e227]:
+                - generic [ref=e228]:
+                  - img [ref=e230]
+                  - heading "Labs" [level=3] [ref=e232]
+                - generic [ref=e233]: 2 facts
+              - generic [ref=e234]:
+                - generic [ref=e235]:
+                  - term [ref=e236]: LVEF (echo)
+                  - definition [ref=e237]: 62% — within normal limits
+                  - button "Show provenance" [ref=e239]:
+                    - img [ref=e240]
+                - generic [ref=e242]:
+                  - term [ref=e243]: ANC (latest)
+                  - definition [ref=e244]: 2.1 ×10⁹/L
+                  - button "Show provenance" [ref=e246]:
+                    - img [ref=e247]
+            - generic [ref=e249]:
+              - generic [ref=e250]:
+                - generic [ref=e251]:
+                  - img [ref=e253]
+                  - heading "History" [level=3] [ref=e257]
+                - generic [ref=e258]: 1 fact
+              - generic [ref=e260]:
+                - term [ref=e261]: First presentation
+                - definition [ref=e262]: Self-detected 2 cm lump, left breast — 2026-02-04
+                - button "Show provenance" [ref=e264]:
+                  - img [ref=e265]
+        - complementary [ref=e267]:
+          - generic [ref=e268]:
+            - generic [ref=e269]:
+              - img [ref=e271]
+              - generic [ref=e274]:
+                - generic [ref=e275]: Agent
+                - generic [ref=e276]: Watching Maria's vault
+            - generic [ref=e277]: Online
+          - generic [ref=e279]:
+            - generic [ref=e280]:
+              - generic [ref=e282]:
+                - img [ref=e283]
+                - generic [ref=e286]: Now
+              - paragraph [ref=e288]: Reviewing 2026-04-22 echocardiogram for trastuzumab cardiac monitoring
+            - generic [ref=e289]:
+              - generic [ref=e290]:
+                - generic [ref=e291]:
+                  - img [ref=e292]
+                  - generic [ref=e294]: Needs you
+                - generic [ref=e295]: "1"
+              - generic [ref=e297]:
+                - paragraph [ref=e298]: Confirm continued TCHP after Cycle 4 — ANC 2.1, no DLT
+                - paragraph [ref=e299]: Neutrophils marginal but acceptable per protocol. Endorse continuation of cycle 5 on schedule?
+                - generic [ref=e300]:
+                  - button "Continue on schedule" [ref=e301]
+                  - button "Delay 1 week" [ref=e302]
+                  - button "Reduce dose" [ref=e303]
+                - link "ANC 2.1 ×10⁹/L" [ref=e304] [cursor=pointer]:
+                  - /url: "#"
+                  - text: ANC 2.1 ×10⁹/L
+                  - img [ref=e305]
+            - generic [ref=e307]:
+              - generic [ref=e309]:
+                - img [ref=e310]
+                - generic [ref=e313]: Recent
+              - list [ref=e314]:
+                - listitem [ref=e315]:
+                  - paragraph [ref=e317]: Merged echocardiogram report · LVEF 62%
+                  - generic [ref=e318]:
+                    - generic [ref=e319]: 3 days ago
+                    - link "Echo 2026-04-22" [ref=e320] [cursor=pointer]:
+                      - /url: /patients/maria-k/prs/pr-mk-2
+                - listitem [ref=e321]:
+                  - paragraph [ref=e323]: Linked CBC 2026-04-21 to cycle 4 progress
+                  - generic [ref=e325]: 4 days ago
+                - listitem [ref=e326]:
+                  - paragraph [ref=e328]: Auto-scheduled mid-treatment MRI for 2026-05-13
+                  - generic [ref=e330]: 6 days ago
+  - generic [ref=e331]:
+    - heading "Command palette" [level=2] [ref=e332]
+    - paragraph [ref=e333]: Jump to a patient, section, or pull request.
+  - button "Open Next.js Dev Tools" [ref=e339] [cursor=pointer]:
+    - img [ref=e340]

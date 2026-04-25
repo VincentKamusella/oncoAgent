@@ -1,0 +1,219 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - complementary [ref=e3]:
+      - link "oncoAgent" [ref=e4] [cursor=pointer]:
+        - /url: /
+        - img [ref=e6]
+        - generic [ref=e9]: oncoAgent
+      - button "OV OncoUnit Vienna" [ref=e11]:
+        - generic [ref=e12]:
+          - generic [ref=e13]: OV
+          - generic [ref=e14]: OncoUnit Vienna
+        - img [ref=e15]
+      - generic [ref=e19]:
+        - img
+        - textbox "Search patients…" [ref=e20]
+      - generic [ref=e21]:
+        - generic [ref=e22]:
+          - generic [ref=e23]: Patients
+          - button [ref=e24]:
+            - img [ref=e25]
+        - generic [ref=e26]:
+          - generic [ref=e27]: Active · 2
+          - generic [ref=e28]:
+            - link "MK Maria Kowalski HER2+ breast cancer 1" [ref=e29] [cursor=pointer]:
+              - /url: /patients/maria-k
+              - generic [ref=e30]: MK
+              - generic [ref=e31]:
+                - generic [ref=e32]: Maria Kowalski
+                - generic [ref=e33]: HER2+ breast cancer
+              - generic [ref=e34]: "1"
+            - link "TB Thomas Berger Rectal adenocarcinoma 1" [ref=e36] [cursor=pointer]:
+              - /url: /patients/thomas-b
+              - generic [ref=e37]: TB
+              - generic [ref=e38]:
+                - generic [ref=e39]: Thomas Berger
+                - generic [ref=e40]: Rectal adenocarcinoma
+              - generic [ref=e41]: "1"
+        - generic [ref=e43]:
+          - generic [ref=e44]: Surveillance · 1
+          - link "AL Anna Lindqvist ER+ breast cancer" [ref=e46] [cursor=pointer]:
+            - /url: /patients/anna-l
+            - generic [ref=e47]: AL
+            - generic [ref=e48]:
+              - generic [ref=e49]: Anna Lindqvist
+              - generic [ref=e50]: ER+ breast cancer
+      - generic [ref=e52]:
+        - generic [ref=e53]: JM
+        - generic [ref=e54]:
+          - generic [ref=e55]: Dr. Julia Müller
+          - generic [ref=e56]: Med-Onc
+    - generic [ref=e57]:
+      - banner [ref=e58]:
+        - generic [ref=e59]:
+          - link "Patient vaults" [ref=e60] [cursor=pointer]:
+            - /url: /
+          - img [ref=e61]
+          - generic [ref=e63]:
+            - generic [ref=e64]: AL
+            - generic [ref=e65]:
+              - generic [ref=e66]: Anna Lindqvist
+              - generic [ref=e67]: MRN-176104 · 48F · case opened 2024-02-19
+          - generic [ref=e68]: Surveillance
+        - generic [ref=e70]:
+          - img
+          - textbox "Find anything…" [ref=e71]
+          - generic: ⌘K
+      - navigation [ref=e72]:
+        - link "Overview" [ref=e73] [cursor=pointer]:
+          - /url: /patients/anna-l
+          - img [ref=e75]
+          - text: Overview
+        - link "Treatment plan" [ref=e80] [cursor=pointer]:
+          - /url: /patients/anna-l/plan
+          - img [ref=e82]
+          - text: Treatment plan
+        - link "Guidelines" [ref=e84] [cursor=pointer]:
+          - /url: /patients/anna-l/guidelines
+          - img [ref=e86]
+          - text: Guidelines
+        - link "Pull requests" [ref=e91] [cursor=pointer]:
+          - /url: /patients/anna-l/prs
+          - img [ref=e93]
+          - text: Pull requests
+        - link "Followup" [ref=e97] [cursor=pointer]:
+          - /url: /patients/anna-l/followup
+          - img [ref=e99]
+          - text: Followup
+        - link "Meetings" [ref=e102] [cursor=pointer]:
+          - /url: /patients/anna-l/meetings
+          - img [ref=e104]
+          - text: Meetings
+      - main [ref=e107]:
+        - generic [ref=e109]:
+          - generic [ref=e110]:
+            - generic [ref=e111]:
+              - generic [ref=e112]:
+                - img [ref=e113]
+                - generic [ref=e115]: Followup
+              - heading "Surveillance schedule" [level=2] [ref=e116]
+              - paragraph [ref=e117]: Imaging, labs, visits, and tumor board discussions auto-scheduled by the agent. Status flips to overdue automatically and triggers a nudge to the care team.
+            - button "Schedule" [ref=e118]:
+              - img
+              - text: Schedule
+          - generic [ref=e119]:
+            - generic [ref=e120]:
+              - generic [ref=e121]:
+                - text: Upcoming
+                - generic [ref=e122]: "3"
+              - generic [ref=e123]: Live
+            - generic [ref=e125]:
+              - generic [ref=e126]:
+                - text: Completed
+                - generic [ref=e127]: "2"
+              - generic [ref=e128]: Done
+            - generic [ref=e130]:
+              - generic [ref=e131]:
+                - text: Months in surveillance
+                - generic [ref=e132]: "27"
+              - generic [ref=e133]: —
+          - generic [ref=e135]:
+            - heading "Upcoming" [level=3] [ref=e136]
+            - list [ref=e137]:
+              - listitem [ref=e138]:
+                - generic [ref=e141]:
+                  - img [ref=e143]
+                  - generic [ref=e148]:
+                    - generic [ref=e149]:
+                      - generic [ref=e150]: Bilateral mammogram (18-mo)
+                      - generic [ref=e151]: Imaging
+                      - generic [ref=e154]:
+                        - img [ref=e155]
+                        - text: Scheduled
+                    - text: Fri · 2026-05-08 · 11:00
+                    - paragraph [ref=e158]: No deodorant on day of exam.
+              - listitem [ref=e159]:
+                - generic [ref=e162]:
+                  - img [ref=e164]
+                  - generic [ref=e168]:
+                    - generic [ref=e169]:
+                      - generic [ref=e170]: Med-Onc surveillance visit
+                      - generic [ref=e171]: Visit
+                      - generic [ref=e174]:
+                        - img [ref=e175]
+                        - text: Scheduled
+                    - text: Fri · 2026-05-15 · 13:00
+              - listitem [ref=e178]:
+                - generic [ref=e181]:
+                  - img [ref=e183]
+                  - generic [ref=e185]:
+                    - generic [ref=e186]:
+                      - generic [ref=e187]: CMP + CA 15-3
+                      - generic [ref=e188]: Lab
+                      - generic [ref=e191]:
+                        - img [ref=e192]
+                        - text: Scheduled
+                    - text: Sat · 2026-07-04 · 10:00
+          - generic [ref=e195]:
+            - heading "History" [level=3] [ref=e196]
+            - list [ref=e197]:
+              - listitem [ref=e198]:
+                - generic [ref=e201]:
+                  - img [ref=e203]
+                  - generic [ref=e205]:
+                    - generic [ref=e206]:
+                      - generic [ref=e207]: CA 15-3 (completed)
+                      - generic [ref=e208]: Lab
+                      - generic [ref=e211]:
+                        - img [ref=e212]
+                        - text: Completed
+                    - text: Sat · 2026-04-04 · 10:00
+              - listitem [ref=e214]:
+                - generic [ref=e217]:
+                  - img [ref=e219]
+                  - generic [ref=e224]:
+                    - generic [ref=e225]:
+                      - generic [ref=e226]: Mammogram (12-mo)
+                      - generic [ref=e227]: Imaging
+                      - generic [ref=e230]:
+                        - img [ref=e231]
+                        - text: Completed
+                    - text: Tue · 2025-10-14 · 11:00
+        - complementary [ref=e233]:
+          - generic [ref=e234]:
+            - generic [ref=e235]:
+              - img [ref=e237]
+              - generic [ref=e240]:
+                - generic [ref=e241]: Agent
+                - generic [ref=e242]: Watching Anna's vault
+            - generic [ref=e243]: Online
+          - generic [ref=e245]:
+            - generic [ref=e246]:
+              - generic [ref=e248]:
+                - img [ref=e249]
+                - generic [ref=e252]: Now
+              - paragraph [ref=e254]: Drafting 18-month surveillance summary
+            - generic [ref=e255]:
+              - generic [ref=e257]:
+                - img [ref=e258]
+                - generic [ref=e260]: Needs you
+              - paragraph [ref=e261]: All clear.
+            - generic [ref=e262]:
+              - generic [ref=e264]:
+                - img [ref=e265]
+                - generic [ref=e268]: Recent
+              - list [ref=e269]:
+                - listitem [ref=e270]:
+                  - paragraph [ref=e272]: Auto-booked mammogram for 2026-05-08
+                  - generic [ref=e273]:
+                    - generic [ref=e274]: 5 days ago
+                    - link "Mammography schedule" [ref=e275] [cursor=pointer]:
+                      - /url: "#"
+                - listitem [ref=e276]:
+                  - paragraph [ref=e278]: Merged CA 15-3 result · 21 U/mL
+                  - generic [ref=e280]: 21 days ago
+                - listitem [ref=e281]:
+                  - paragraph [ref=e283]: Refilled tamoxifen · 90-day supply
+                  - generic [ref=e285]: 1 month ago
+  - button "Open Next.js Dev Tools" [ref=e291] [cursor=pointer]:
+    - img [ref=e292]

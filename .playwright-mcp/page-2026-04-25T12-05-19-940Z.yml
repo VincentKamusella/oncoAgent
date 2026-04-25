@@ -1,0 +1,247 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - complementary [ref=e3]:
+      - link "oncoAgent" [ref=e4] [cursor=pointer]:
+        - /url: /
+        - img [ref=e6]
+        - generic [ref=e9]: oncoAgent
+      - button "OV OncoUnit Vienna" [ref=e11]:
+        - generic [ref=e12]:
+          - generic [ref=e13]: OV
+          - generic [ref=e14]: OncoUnit Vienna
+        - img [ref=e15]
+      - generic [ref=e19]:
+        - img
+        - textbox "Search patients…" [ref=e20]
+      - generic [ref=e21]:
+        - generic [ref=e22]:
+          - generic [ref=e23]: Patients
+          - button [ref=e24]:
+            - img [ref=e25]
+        - generic [ref=e26]:
+          - generic [ref=e27]: Active · 2
+          - generic [ref=e28]:
+            - link "MK Maria Kowalski HER2+ breast cancer 1" [ref=e29] [cursor=pointer]:
+              - /url: /patients/maria-k
+              - generic [ref=e30]: MK
+              - generic [ref=e31]:
+                - generic [ref=e32]: Maria Kowalski
+                - generic [ref=e33]: HER2+ breast cancer
+              - generic [ref=e34]: "1"
+            - link "TB Thomas Berger Rectal adenocarcinoma 1" [ref=e36] [cursor=pointer]:
+              - /url: /patients/thomas-b
+              - generic [ref=e37]: TB
+              - generic [ref=e38]:
+                - generic [ref=e39]: Thomas Berger
+                - generic [ref=e40]: Rectal adenocarcinoma
+              - generic [ref=e41]: "1"
+        - generic [ref=e43]:
+          - generic [ref=e44]: Surveillance · 1
+          - link "AL Anna Lindqvist ER+ breast cancer" [ref=e46] [cursor=pointer]:
+            - /url: /patients/anna-l
+            - generic [ref=e47]: AL
+            - generic [ref=e48]:
+              - generic [ref=e49]: Anna Lindqvist
+              - generic [ref=e50]: ER+ breast cancer
+      - generic [ref=e52]:
+        - generic [ref=e53]: JM
+        - generic [ref=e54]:
+          - generic [ref=e55]: Dr. Julia Müller
+          - generic [ref=e56]: Med-Onc
+    - generic [ref=e57]:
+      - banner [ref=e58]:
+        - generic [ref=e59]:
+          - link "Patient vaults" [ref=e60] [cursor=pointer]:
+            - /url: /
+          - img [ref=e61]
+          - generic [ref=e63]:
+            - generic [ref=e64]: TB
+            - generic [ref=e65]:
+              - generic [ref=e66]: Thomas Berger
+              - generic [ref=e67]: MRN-198342 · 67M · case opened 2026-03-01
+          - generic [ref=e68]: Active treatment
+        - generic [ref=e70]:
+          - img
+          - textbox "Find anything…" [ref=e71]
+          - generic: ⌘K
+      - navigation [ref=e72]:
+        - link "Overview" [ref=e73] [cursor=pointer]:
+          - /url: /patients/thomas-b
+          - img [ref=e75]
+          - text: Overview
+        - link "Treatment plan" [ref=e80] [cursor=pointer]:
+          - /url: /patients/thomas-b/plan
+          - img [ref=e82]
+          - text: Treatment plan
+        - link "Guidelines" [ref=e84] [cursor=pointer]:
+          - /url: /patients/thomas-b/guidelines
+          - img [ref=e86]
+          - text: Guidelines
+        - link "Pull requests 1" [ref=e91] [cursor=pointer]:
+          - /url: /patients/thomas-b/prs
+          - img [ref=e93]
+          - text: Pull requests
+          - generic [ref=e97]: "1"
+        - link "Followup" [ref=e99] [cursor=pointer]:
+          - /url: /patients/thomas-b/followup
+          - img [ref=e101]
+          - text: Followup
+        - link "Meetings 2" [ref=e103] [cursor=pointer]:
+          - /url: /patients/thomas-b/meetings
+          - img [ref=e105]
+          - text: Meetings
+          - generic [ref=e108]: "2"
+      - main [ref=e109]:
+        - generic [ref=e112]:
+          - link "All pull requests" [ref=e113] [cursor=pointer]:
+            - /url: /patients/thomas-b/prs
+            - img [ref=e114]
+            - text: All pull requests
+          - generic [ref=e117]:
+            - img [ref=e119]
+            - generic [ref=e121]:
+              - generic [ref=e122]:
+                - generic [ref=e123]: pr-tb-1
+                - generic [ref=e124]: Conflict
+              - heading "Restaging MRI 2026-04-22 — staging change cT3 → cT4a" [level=2] [ref=e126]
+              - paragraph [ref=e127]: New pelvic MRI shows anterior tumor extension contacting visceral peritoneum. Conflicts with baseline cT3 staging.
+              - generic [ref=e128]:
+                - generic [ref=e129]: opened 2026-04-22 19:14
+                - generic [ref=e130]: ·
+                - generic [ref=e131]: by Dr. K. Lee
+                - generic [ref=e132]: ·
+                - generic [ref=e133]: Radiology
+          - generic [ref=e135]:
+            - img [ref=e137]
+            - generic [ref=e140]:
+              - paragraph [ref=e141]: Agent verdict
+              - paragraph [ref=e142]: "Conflict on staging.clinical. Auto-merge blocked. Recommended action: tumor board review on 2026-04-26."
+          - generic [ref=e143]:
+            - generic [ref=e144]:
+              - generic [ref=e145]: Source
+              - generic [ref=e146]: imaging
+            - paragraph [ref=e147]: Pelvic MRI · 2026-04-22
+            - paragraph [ref=e148]: Dr. K. Lee, Radiology
+            - blockquote [ref=e149]: "Compared to 2026-03-08: tumor enhancement reduced ~30% but anterior extension now contacts visceral peritoneum (suggestive of cT4a). One persistent 7 mm mesorectal node."
+          - generic [ref=e150]:
+            - generic [ref=e151]:
+              - heading "Proposed changes" [level=3] [ref=e152]
+              - generic [ref=e153]:
+                - text: 3 changes ·
+                - generic [ref=e154]: 1 conflict
+            - generic [ref=e155]:
+              - generic [ref=e156]:
+                - generic [ref=e157]: Fact
+                - generic [ref=e158]:
+                  - img [ref=e159]
+                  - text: Before
+                - generic [ref=e160]:
+                  - img [ref=e161]
+                  - text: After
+              - list [ref=e162]:
+                - listitem [ref=e163]:
+                  - generic [ref=e164]:
+                    - text: staging.clinical
+                    - generic [ref=e165]: Clinical stage
+                    - generic [ref=e166]: high conflict
+                  - generic [ref=e168]: cT3 cN1 cM0 — Stage IIIB
+                  - generic [ref=e170]:
+                    - img [ref=e171]
+                    - generic [ref=e173]:
+                      - text: cT4a cN1 cM0 — Stage IIIB (upstaged T)
+                      - paragraph [ref=e174]: Treatment intensification likely indicated.
+                      - paragraph [ref=e175]: Visceral peritoneum involvement (cT4a) materially changes prognosis and surgical plan. Cannot be auto-merged — requires multidisciplinary review.
+                - listitem [ref=e176]:
+                  - generic [ref=e177]:
+                    - text: imaging.restage
+                    - generic [ref=e178]: Restaging MRI
+                  - generic [ref=e179]: (new)
+                  - generic [ref=e181]:
+                    - img [ref=e182]
+                    - generic [ref=e184]: Pelvic MRI · 2026-04-22 (post-induction)
+                - listitem [ref=e185]:
+                  - generic [ref=e186]:
+                    - text: plan.escalation
+                    - generic [ref=e187]: Plan escalation candidate
+                  - generic [ref=e188]: (new)
+                  - generic [ref=e190]:
+                    - img [ref=e191]
+                    - generic [ref=e193]:
+                      - text: Discuss adding short-course RT boost or earlier surgery
+                      - paragraph [ref=e194]: Tumor board decision required.
+          - generic [ref=e195]:
+            - generic [ref=e197]:
+              - img [ref=e198]
+              - text: Auto-merge blocked — clinician decision required
+            - generic [ref=e200]:
+              - button "Comment" [ref=e201]:
+                - img
+                - generic [ref=e202]: Comment
+              - button "Request changes" [ref=e203]:
+                - img
+                - generic [ref=e204]: Request changes
+              - button "Merge blocked" [disabled]:
+                - img
+                - generic: Merge blocked
+        - complementary [ref=e205]:
+          - generic [ref=e206]:
+            - generic [ref=e207]:
+              - img [ref=e209]
+              - generic [ref=e212]:
+                - generic [ref=e213]: Agent
+                - generic [ref=e214]: Watching Thomas's vault
+            - generic [ref=e215]: Online
+          - generic [ref=e217]:
+            - generic [ref=e218]:
+              - generic [ref=e220]:
+                - img [ref=e221]
+                - generic [ref=e224]: Now
+              - generic [ref=e225]:
+                - paragraph [ref=e226]: Reconciling restaging MRI vs. baseline staging
+                - 'link "PR #3 — MRI 2026-04-22" [ref=e227] [cursor=pointer]':
+                  - /url: /patients/thomas-b/prs/pr-tb-1
+                  - text: "PR #3 — MRI 2026-04-22"
+                  - img [ref=e228]
+            - generic [ref=e230]:
+              - generic [ref=e231]:
+                - generic [ref=e232]:
+                  - img [ref=e233]
+                  - generic [ref=e235]: Needs you
+                - generic [ref=e236]: "1"
+              - generic [ref=e238]:
+                - paragraph [ref=e239]: MRI 2026-04-22 suggests cT4a — change of staging vs. cT3
+                - paragraph [ref=e240]: "Anterior extension contacts visceral peritoneum. This conflicts with the prior cT3 from 2026-03-08. Possible explanations: progression on induction, MRI re-read, or interval inflammation. Plan implications: TNT may need to escalate, consider surgical re-staging."
+                - generic [ref=e241]:
+                  - button "Accept cT4a — escalate plan" [ref=e242]:
+                    - generic [ref=e243]: Accept cT4a — escalate plan
+                  - button "Request second MRI read" [ref=e244]:
+                    - generic [ref=e245]: Request second MRI read
+                  - button "Discuss at tumor board" [ref=e246]:
+                    - generic [ref=e247]: Discuss at tumor board
+                - 'link "PR #3 — MRI 2026-04-22" [ref=e248] [cursor=pointer]':
+                  - /url: /patients/thomas-b/prs/pr-tb-1
+                  - text: "PR #3 — MRI 2026-04-22"
+                  - img [ref=e249]
+            - generic [ref=e251]:
+              - generic [ref=e253]:
+                - img [ref=e254]
+                - generic [ref=e257]: Recent
+              - list [ref=e258]:
+                - listitem [ref=e259]:
+                  - paragraph [ref=e261]: Flagged staging conflict on MRI 2026-04-22
+                  - generic [ref=e262]:
+                    - generic [ref=e263]: 3 days ago
+                    - 'link "PR #3" [ref=e264] [cursor=pointer]':
+                      - /url: /patients/thomas-b/prs/pr-tb-1
+                - listitem [ref=e265]:
+                  - paragraph [ref=e267]: Merged FOLFOX cycle 4 infusion note
+                  - generic [ref=e269]: 7 days ago
+                - listitem [ref=e270]:
+                  - paragraph [ref=e272]: Auto-booked tumor board slot · 2026-04-26 09:00
+                  - generic [ref=e273]:
+                    - generic [ref=e274]: 3 days ago
+                    - link "Tumor board · 2026-04-26" [ref=e275] [cursor=pointer]:
+                      - /url: /patients/thomas-b/meetings/mtg-tb-1
+  - button "Open Next.js Dev Tools" [ref=e281] [cursor=pointer]:
+    - img [ref=e282]
+  - alert [ref=e285]

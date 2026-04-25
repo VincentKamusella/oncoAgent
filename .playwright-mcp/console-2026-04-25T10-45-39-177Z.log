@@ -1,0 +1,18 @@
+[     260ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/05w9_next_dist_04sc5oc._.js:2431
+[     297ms] [LOG] [Fast Refresh] done in 140ms @ http://localhost:3000/_next/static/chunks/05w9_next_dist_04sc5oc._.js:2431
+[     427ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/05w9_next_dist_04sc5oc._.js:2431
+[    4092ms] [LOG] [Fast Refresh] done in 3767ms @ http://localhost:3000/_next/static/chunks/05w9_next_dist_04sc5oc._.js:2431
+[    6216ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/05w9_next_dist_04sc5oc._.js:2431
+[    6274ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/05w9_next_dist_04sc5oc._.js:2431
+[   59980ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/05w9_next_dist_04sc5oc._.js:2431
+[   60075ms] [LOG] [Fast Refresh] done in 134ms @ http://localhost:3000/_next/static/chunks/05w9_next_dist_04sc5oc._.js:2431
+[   65844ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/05w9_next_dist_04sc5oc._.js:2431
+[   65925ms] [LOG] [Fast Refresh] done in 56ms @ http://localhost:3000/_next/static/chunks/05w9_next_dist_04sc5oc._.js:2431
+[   69664ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/05w9_next_dist_04sc5oc._.js:2431
+[   71011ms] [LOG] [Fast Refresh] done in 1187ms @ http://localhost:3000/_next/static/chunks/05w9_next_dist_04sc5oc._.js:2431
+[   71312ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/05w9_next_dist_04sc5oc._.js:2431
+[   71313ms] [LOG] [Fast Refresh] done in 101ms @ http://localhost:3000/_next/static/chunks/05w9_next_dist_04sc5oc._.js:2431
+[   71721ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/05w9_next_dist_04sc5oc._.js:2431
+[   71763ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/05w9_next_dist_04sc5oc._.js:2431
+[   71913ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/05w9_next_dist_04sc5oc._.js:2431
+[   71951ms] [LOG] [Fast Refresh] done in 144ms @ http://localhost:3000/_next/static/chunks/05w9_next_dist_04sc5oc._.js:2431

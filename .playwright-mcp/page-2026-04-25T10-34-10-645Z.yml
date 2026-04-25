@@ -1,0 +1,218 @@
+- generic [ref=e2]:
+  - complementary [ref=e3]:
+    - generic [ref=e4]:
+      - img [ref=e6]
+      - generic [ref=e9]: oncoAgent
+    - button "OV OncoUnit Vienna" [ref=e11]:
+      - generic [ref=e12]:
+        - generic [ref=e13]: OV
+        - generic [ref=e14]: OncoUnit Vienna
+      - img [ref=e15]
+    - navigation [ref=e18]:
+      - link "Overview" [ref=e19] [cursor=pointer]:
+        - /url: /
+        - img [ref=e21]
+        - text: Overview
+      - link "Patient vaults" [ref=e26] [cursor=pointer]:
+        - /url: /
+        - img [ref=e28]
+        - text: Patient vaults
+      - link "Data sources" [ref=e30] [cursor=pointer]:
+        - /url: /sources
+        - img [ref=e32]
+        - text: Data sources
+    - generic [ref=e36]:
+      - link "Workspace settings" [ref=e37] [cursor=pointer]:
+        - /url: "#"
+        - img [ref=e38]
+        - text: Workspace settings
+      - link "Help" [ref=e41] [cursor=pointer]:
+        - /url: "#"
+        - img [ref=e42]
+        - text: Help
+      - generic [ref=e45]:
+        - generic [ref=e46]: JM
+        - generic [ref=e47]:
+          - generic [ref=e48]: Dr. Julia Müller
+          - generic [ref=e49]: j.mueller@oncounit.at
+  - main [ref=e50]:
+    - generic [ref=e51]:
+      - generic [ref=e52]:
+        - img
+        - textbox "Search patients, facts, PRs…" [ref=e53]
+        - generic: ⌘K
+      - generic [ref=e55]: Sat, Apr 25
+    - generic [ref=e56]:
+      - generic:
+        - generic [ref=e58]:
+          - generic [ref=e59]:
+            - generic [ref=e60]: Active agents
+            - generic [ref=e61]: 4 running
+          - table [ref=e62]:
+            - rowgroup [ref=e63]:
+              - row "Agent Patient Status" [ref=e64]:
+                - columnheader "Agent" [ref=e65]
+                - columnheader "Patient" [ref=e66]
+                - columnheader "Status" [ref=e67]
+            - rowgroup [ref=e68]:
+              - row "Staging reviewer Reconciling MRI cT3 → cT4a Thomas Berger Needs review" [ref=e69]:
+                - cell "Staging reviewer Reconciling MRI cT3 → cT4a" [ref=e70]:
+                  - generic [ref=e71]:
+                    - img [ref=e73]
+                    - generic [ref=e76]:
+                      - generic [ref=e77]: Staging reviewer
+                      - generic [ref=e78]: Reconciling MRI cT3 → cT4a
+                - cell "Thomas Berger" [ref=e79]
+                - cell "Needs review" [ref=e80]:
+                  - generic [ref=e81]: Needs review
+              - row "Cardio-onc monitor LVEF surveillance Maria Kowalski Active" [ref=e83]:
+                - cell "Cardio-onc monitor LVEF surveillance" [ref=e84]:
+                  - generic [ref=e85]:
+                    - img [ref=e87]
+                    - generic [ref=e90]:
+                      - generic [ref=e91]: Cardio-onc monitor
+                      - generic [ref=e92]: LVEF surveillance
+                - cell "Maria Kowalski" [ref=e93]
+                - cell "Active" [ref=e94]:
+                  - generic [ref=e95]: Active
+              - row "Claude triage Drafting tumor board summary Thomas Berger Active" [ref=e97]:
+                - cell "Claude triage Drafting tumor board summary" [ref=e98]:
+                  - generic [ref=e99]:
+                    - img [ref=e101]
+                    - generic [ref=e104]:
+                      - generic [ref=e105]: Claude triage
+                      - generic [ref=e106]: Drafting tumor board summary
+                - cell "Thomas Berger" [ref=e107]
+                - cell "Active" [ref=e108]:
+                  - generic [ref=e109]: Active
+              - row "Surveillance scheduler Booking 18-mo mammogram Anna Lindqvist Idle" [ref=e111]:
+                - cell "Surveillance scheduler Booking 18-mo mammogram" [ref=e112]:
+                  - generic [ref=e113]:
+                    - img [ref=e115]
+                    - generic [ref=e118]:
+                      - generic [ref=e119]: Surveillance scheduler
+                      - generic [ref=e120]: Booking 18-mo mammogram
+                - cell "Anna Lindqvist" [ref=e121]
+                - cell "Idle" [ref=e122]:
+                  - generic [ref=e123]: Idle
+        - generic [ref=e126]:
+          - generic [ref=e127]:
+            - generic [ref=e128]: Data sources
+            - generic [ref=e129]: 6 connected
+          - table [ref=e130]:
+            - rowgroup [ref=e131]:
+              - row "Source Status Last sync Frequency" [ref=e132]:
+                - columnheader "Source" [ref=e133]
+                - columnheader "Status" [ref=e134]
+                - columnheader "Last sync" [ref=e135]
+                - columnheader "Frequency" [ref=e136]
+            - rowgroup [ref=e137]:
+              - row "PACS imaging archive Active 13 minutes ago Real-time" [ref=e138]:
+                - cell "PACS imaging archive" [ref=e139]:
+                  - generic [ref=e140]:
+                    - img [ref=e142]
+                    - generic [ref=e147]: PACS imaging archive
+                - cell "Active" [ref=e148]:
+                  - generic [ref=e149]: Active
+                - cell "13 minutes ago" [ref=e151]
+                - cell "Real-time" [ref=e152]
+              - row "Epic EHR connection Active 27 minutes ago Hourly" [ref=e153]:
+                - cell "Epic EHR connection" [ref=e154]:
+                  - generic [ref=e155]:
+                    - img [ref=e157]
+                    - generic [ref=e161]: Epic EHR connection
+                - cell "Active" [ref=e162]:
+                  - generic [ref=e163]: Active
+                - cell "27 minutes ago" [ref=e165]
+                - cell "Hourly" [ref=e166]
+              - row "Laboratory results (LIS) Active 2 hours ago Hourly" [ref=e167]:
+                - cell "Laboratory results (LIS)" [ref=e168]:
+                  - generic [ref=e169]:
+                    - img [ref=e171]
+                    - generic [ref=e173]: Laboratory results (LIS)
+                - cell "Active" [ref=e174]:
+                  - generic [ref=e175]: Active
+                - cell "2 hours ago" [ref=e177]
+                - cell "Hourly" [ref=e178]
+              - row "Pathology dictation system Stale 11 hours ago Daily" [ref=e179]:
+                - cell "Pathology dictation system" [ref=e180]:
+                  - generic [ref=e181]:
+                    - img [ref=e183]
+                    - generic [ref=e187]: Pathology dictation system
+                - cell "Stale" [ref=e188]:
+                  - generic [ref=e189]: Stale
+                - cell "11 hours ago" [ref=e191]
+                - cell "Daily" [ref=e192]
+              - row "Tumor board mailbox Active 9 minutes ago Real-time" [ref=e193]:
+                - cell "Tumor board mailbox" [ref=e194]:
+                  - generic [ref=e195]:
+                    - img [ref=e197]
+                    - generic [ref=e200]: Tumor board mailbox
+                - cell "Active" [ref=e201]:
+                  - generic [ref=e202]: Active
+                - cell "9 minutes ago" [ref=e204]
+                - cell "Real-time" [ref=e205]
+              - row "Clinician dictation notes Idle Yesterday Daily" [ref=e206]:
+                - cell "Clinician dictation notes" [ref=e207]:
+                  - generic [ref=e208]:
+                    - img [ref=e210]
+                    - generic [ref=e213]: Clinician dictation notes
+                - cell "Idle" [ref=e214]:
+                  - generic [ref=e215]: Idle
+                - cell "Yesterday" [ref=e217]
+                - cell "Daily" [ref=e218]
+      - generic [ref=e219]:
+        - generic [ref=e220]:
+          - generic [ref=e221]:
+            - text: Workspace
+            - heading "Patient vaults" [level=1] [ref=e222]
+            - paragraph [ref=e223]: Each vault holds a patient's structured context base — facts, treatment plan, imaging, and the history of every change. Agents work inside; you stay in the loop.
+          - button "New patient" [ref=e224]:
+            - img
+            - text: New patient
+        - generic [ref=e225]:
+          - link "JM RP AS KL Maria Kowalski HER2+ breast cancer · Stage IIB Active 11 facts · 1 open" [ref=e226] [cursor=pointer]:
+            - /url: /patients/maria-k
+            - generic [ref=e227]:
+              - img [ref=e228]
+              - generic [ref=e235]:
+                - generic [ref=e236]: JM
+                - generic [ref=e237]: RP
+                - generic [ref=e238]: AS
+                - generic [ref=e239]: KL
+            - generic [ref=e240]:
+              - heading "Maria Kowalski" [level=3] [ref=e241]
+              - paragraph [ref=e242]: HER2+ breast cancer · Stage IIB
+            - generic [ref=e243]:
+              - generic [ref=e244]: Active
+              - generic [ref=e246]: 11 facts · 1 open
+          - link "CR MS KL FP Thomas Berger Rectal adenocarcinoma · TNT in progress Active 9 facts · 0 open · 1 conflict" [ref=e247] [cursor=pointer]:
+            - /url: /patients/thomas-b
+            - generic [ref=e248]:
+              - img [ref=e249]
+              - generic [ref=e256]:
+                - generic [ref=e257]: CR
+                - generic [ref=e258]: MS
+                - generic [ref=e259]: KL
+                - generic [ref=e260]: FP
+            - generic [ref=e261]:
+              - heading "Thomas Berger" [level=3] [ref=e262]
+              - paragraph [ref=e263]: Rectal adenocarcinoma · TNT in progress
+            - generic [ref=e264]:
+              - generic [ref=e265]: Active
+              - generic [ref=e267]: 9 facts · 0 open · 1 conflict
+          - link "JM RP KL Anna Lindqvist ER+ breast cancer · Surveillance · 23 mo Surveillance 9 facts · 0 open" [ref=e268] [cursor=pointer]:
+            - /url: /patients/anna-l
+            - generic [ref=e269]:
+              - img [ref=e270]
+              - generic [ref=e277]:
+                - generic [ref=e278]: JM
+                - generic [ref=e279]: RP
+                - generic [ref=e280]: KL
+            - generic [ref=e281]:
+              - heading "Anna Lindqvist" [level=3] [ref=e282]
+              - paragraph [ref=e283]: ER+ breast cancer · Surveillance · 23 mo
+            - generic [ref=e284]:
+              - generic [ref=e285]: Surveillance
+              - generic [ref=e287]: 9 facts · 0 open
+        - paragraph [ref=e288]: Showing 3 active vaults · 4 of 6 data sources connected
