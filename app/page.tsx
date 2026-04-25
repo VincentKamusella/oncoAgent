@@ -3,10 +3,21 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { WorkspaceSidebar } from "@/components/home/workspace-sidebar";
 import { VaultCard } from "@/components/home/vault-card";
-import { patients } from "@/lib/mock-data/patients";
-import { prsForPatient } from "@/lib/mock-data/prs";
+import { getAllPatients, prsForPatient } from "@/lib/data";
 
-export default function HomePage() {
+export default async function HomePage() {
+  const patients = await getAllPatients();
+  const patientCards = await Promise.all(
+    patients.map(async (p) => {
+      const prs = await prsForPatient(p.id);
+      const open = prs.filter(
+        (pr) => pr.status === "open" || pr.status === "needs-review"
+      ).length;
+      const conflict = prs.filter((pr) => pr.status === "conflict").length;
+      return { patient: p, factsCount: p.facts.length, openPRs: open, conflictPRs: conflict };
+    })
+  );
+
   return (
     <div className="bg-aurora-strong flex h-full w-full gap-2.5 overflow-hidden p-2.5">
       <WorkspaceSidebar active="vaults" />
@@ -54,22 +65,15 @@ export default function HomePage() {
           </div>
 
           <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3">
-            {patients.map((p) => {
-              const prs = prsForPatient(p.id);
-              const open = prs.filter(
-                (pr) => pr.status === "open" || pr.status === "needs-review"
-              ).length;
-              const conflict = prs.filter((pr) => pr.status === "conflict").length;
-              return (
-                <VaultCard
-                  key={p.id}
-                  patient={p}
-                  factsCount={p.facts.length}
-                  openPRs={open}
-                  conflictPRs={conflict}
-                />
-              );
-            })}
+            {patientCards.map((c) => (
+              <VaultCard
+                key={c.patient.id}
+                patient={c.patient}
+                factsCount={c.factsCount}
+                openPRs={c.openPRs}
+                conflictPRs={c.conflictPRs}
+              />
+            ))}
           </div>
         </section>
       </main>

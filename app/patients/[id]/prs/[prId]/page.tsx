@@ -9,8 +9,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import { format } from "date-fns";
-import { getPatient } from "@/lib/mock-data/patients";
-import { prById } from "@/lib/mock-data/prs";
+import { getPatient, prById } from "@/lib/data";
 import { StatusPill } from "@/components/ui/status-pill";
 import { FactMono } from "@/components/ui/fact-mono";
 import { PRDiff } from "@/components/prs/pr-diff";
@@ -30,8 +29,8 @@ export default async function PRDetailPage({
   params: Promise<{ id: string; prId: string }>;
 }) {
   const { id, prId } = await params;
-  const patient = getPatient(id);
-  const pr = prById(prId);
+  const patient = await getPatient(id);
+  const pr = await prById(prId);
   if (!patient || !pr || pr.patientId !== id) notFound();
 
   return (

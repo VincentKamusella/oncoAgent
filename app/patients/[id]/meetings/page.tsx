@@ -1,7 +1,6 @@
 import { notFound } from "next/navigation";
 import { Video, Plus } from "lucide-react";
-import { getPatient } from "@/lib/mock-data/patients";
-import { meetingsForPatient } from "@/lib/mock-data/meetings";
+import { getPatient, meetingsForPatient } from "@/lib/data";
 import { MeetingsList } from "@/components/meetings/meetings-list";
 import { Button } from "@/components/ui/button";
 
@@ -11,10 +10,10 @@ export default async function MeetingsPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const patient = getPatient(id);
+  const patient = await getPatient(id);
   if (!patient) notFound();
 
-  const meetings = meetingsForPatient(id).sort(
+  const meetings = (await meetingsForPatient(id)).sort(
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
   );
 

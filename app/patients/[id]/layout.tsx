@@ -1,7 +1,5 @@
 import { notFound } from "next/navigation";
-import { getPatient } from "@/lib/mock-data/patients";
-import { prsForPatient } from "@/lib/mock-data/prs";
-import { meetingsForPatient } from "@/lib/mock-data/meetings";
+import { getPatient, prsForPatient, meetingsForPatient } from "@/lib/data";
 import { PatientSidebar } from "@/components/shell/patient-sidebar";
 import { PatientHeader } from "@/components/shell/patient-header";
 import { SectionTabs } from "@/components/shell/section-tabs";
@@ -16,13 +14,13 @@ export default async function PatientLayout({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const patient = getPatient(id);
+  const patient = await getPatient(id);
   if (!patient) notFound();
 
-  const prs = prsForPatient(id);
+  const prs = await prsForPatient(id);
   const conflicts = prs.filter((p) => p.status === "conflict").length;
   const open = prs.filter((p) => p.status === "open" || p.status === "needs-review").length;
-  const meetings = meetingsForPatient(id);
+  const meetings = await meetingsForPatient(id);
 
   return (
     <div className="bg-aurora-strong flex h-full w-full gap-2.5 overflow-hidden p-2.5">

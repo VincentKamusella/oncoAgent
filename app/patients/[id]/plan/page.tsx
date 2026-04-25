@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { getPatient } from "@/lib/mock-data/patients";
+import { getPatient } from "@/lib/data";
 import { TreatmentTimeline } from "@/components/plan/treatment-timeline";
 import { Sparkles } from "lucide-react";
 
@@ -9,7 +9,7 @@ export default async function PlanPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const patient = getPatient(id);
+  const patient = await getPatient(id);
   if (!patient) notFound();
 
   return (

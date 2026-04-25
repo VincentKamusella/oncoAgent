@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, useCallback } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import {
   Send,
   Sparkles,
@@ -26,25 +26,19 @@ type PatientSession = {
   sessionId: string;
 };
 
-function deriveView(pathname: string, patientId: string): string {
+function deriveView(pathname: string, patientId: string, specialty?: string | null): string {
   const base = `/patients/${patientId}`;
-  const rest = pathname.slice(base.length);
+  const rest = pathname.slice(base.length).replace(/\/$/, "");
 
-  if (!rest || rest === "/") return "overview";
+  if (!rest) return specialty ? `vault:${specialty}` : "vault";
 
-  const prDetailMatch = rest.match(/^\/prs\/(.+)/);
-  if (prDetailMatch) return `pr:${prDetailMatch[1]}`;
+  const prDetail = rest.match(/^\/prs\/(.+)/);
+  if (prDetail) return `pr:${prDetail[1]}`;
 
-  const meetingDetailMatch = rest.match(/^\/meetings\/(.+)/);
-  if (meetingDetailMatch) return `meeting:${meetingDetailMatch[1]}`;
+  const meetingDetail = rest.match(/^\/meetings\/(.+)/);
+  if (meetingDetail) return `meeting:${meetingDetail[1]}`;
 
-  if (rest === "/prs") return "prs";
-  if (rest === "/meetings") return "meetings";
-  if (rest === "/plan") return "plan";
-  if (rest === "/guidelines") return "guidelines";
-  if (rest === "/followup") return "followup";
-
-  return "overview";
+  return rest.slice(1);
 }
 
 function seedMessages(patient: Patient): Message[] {
@@ -74,6 +68,7 @@ function newSessionId(): string {
 export function AgentChat({ patient }: { patient: Patient }) {
   const { collapsed, toggle } = useCollapsible("right");
   const pathname = usePathname();
+  const searchParams = useSearchParams();
   const [messages, setMessages] = useState<Message[]>(() => seedMessages(patient));
   const [input, setInput] = useState("");
   const [streaming, setStreaming] = useState(false);
@@ -135,7 +130,7 @@ export function AgentChat({ patient }: { patient: Patient }) {
       content: m.content,
     }));
 
-    const view = deriveView(pathname, patient.id);
+    const view = deriveView(pathname, patient.id, searchParams.get("specialty"));
 
     const abort = new AbortController();
     abortRef.current = abort;
@@ -220,7 +215,7 @@ export function AgentChat({ patient }: { patient: Patient }) {
       setStreaming(false);
       abortRef.current = null;
     }
-  }, [input, streaming, messages, pathname, patient.id]);
+  }, [input, streaming, messages, pathname, patient.id, searchParams]);
 
   const onKey = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === "Enter" && !e.shiftKey) {

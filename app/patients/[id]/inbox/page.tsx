@@ -7,9 +7,7 @@ import {
   AlertCircle,
   CalendarDays,
 } from "lucide-react";
-import { getPatient } from "@/lib/mock-data/patients";
-import { prsForPatient } from "@/lib/mock-data/prs";
-import { followupForPatient } from "@/lib/mock-data/followup";
+import { getPatient, prsForPatient, followupForPatient } from "@/lib/data";
 import { PRList } from "@/components/prs/pr-list";
 import { FollowupTimeline } from "@/components/followup/followup-timeline";
 
@@ -21,10 +19,10 @@ export default async function InboxPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const patient = getPatient(id);
+  const patient = await getPatient(id);
   if (!patient) notFound();
 
-  const prs = prsForPatient(id).sort(
+  const prs = (await prsForPatient(id)).sort(
     (a, b) => new Date(b.openedAt).getTime() - new Date(a.openedAt).getTime()
   );
   const conflictPRs = prs.filter((p) => p.status === "conflict");
@@ -40,7 +38,7 @@ export default async function InboxPage({
     issues: patient.agent.needsYou.length,
   };
 
-  const followups = followupForPatient(id);
+  const followups = await followupForPatient(id);
   const upcoming = followups
     .filter((i) => i.status === "scheduled" && new Date(i.date) >= TODAY)
     .slice(0, 4);

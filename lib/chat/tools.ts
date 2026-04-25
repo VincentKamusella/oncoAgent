@@ -1,8 +1,12 @@
-import { getPatient } from "@/lib/mock-data/patients";
-import { prsForPatient, prById } from "@/lib/mock-data/prs";
-import { meetingsForPatient, meetingById } from "@/lib/mock-data/meetings";
-import { followupForPatient } from "@/lib/mock-data/followup";
-import { guidelinesFor } from "@/lib/mock-data/guidelines";
+import {
+  getPatient,
+  prsForPatient,
+  prById,
+  meetingsForPatient,
+  meetingById,
+  followupForPatient,
+  guidelinesFor,
+} from "@/lib/data";
 
 export const toolDefinitions = [
   {
@@ -15,7 +19,7 @@ export const toolDefinitions = [
       properties: {
         group: {
           type: "string",
-          enum: ["demographics", "diagnosis", "staging", "medication", "imaging", "lab", "history"],
+          enum: ["demographics", "diagnosis", "staging", "medication", "imaging", "lab", "history", "genomics"],
           description: "Filter facts to a specific category. Omit to get all facts.",
         },
       },
@@ -91,16 +95,30 @@ export const toolDefinitions = [
       "Get the clinical guideline decision pathway for this patient's cancer type, showing which nodes are on the patient's path.",
     parameters: { type: "object", properties: {} },
   },
+  {
+    type: "function" as const,
+    name: "get_board_case",
+    description:
+      "Get the active tumor board case for this patient, including the clinical question, attendees, status, and any decision made.",
+    parameters: { type: "object", properties: {} },
+  },
+  {
+    type: "function" as const,
+    name: "get_treatment_options",
+    description:
+      "Get treatment options under review for this patient. Each option includes intent, regimen phases, rationale, expected outcomes, toxicities, evidence citations, and clinician rankings.",
+    parameters: { type: "object", properties: {} },
+  },
 ];
 
-export function executeTool(
+export async function executeTool(
   name: string,
   args: Record<string, unknown>,
   patientId: string
-): unknown {
+): Promise<unknown> {
   switch (name) {
     case "get_patient_facts": {
-      const patient = getPatient(patientId);
+      const patient = await getPatient(patientId);
       if (!patient) return { error: "Patient not found" };
       const group = args.group as string | undefined;
       const facts = group
@@ -110,14 +128,16 @@ export function executeTool(
         key: f.key,
         label: f.label,
         value: f.value,
+        group: f.group,
         confidence: f.confidence,
         source: f.source.label,
         updatedAt: f.updatedAt,
+        ...(f.specialty && { specialty: f.specialty }),
       }));
     }
 
     case "get_pull_requests": {
-      const prs = prsForPatient(patientId);
+      const prs = await prsForPatient(patientId);
       const status = args.status as string | undefined;
       const filtered = status ? prs.filter((p) => p.status === status) : prs;
       return filtered.map((p) => ({
@@ -133,7 +153,7 @@ export function executeTool(
     }
 
     case "get_pr_details": {
-      const pr = prById(args.pr_id as string);
+      const pr = await prById(args.pr_id as string);
       if (!pr) return { error: "PR not found" };
       return {
         id: pr.id,
@@ -150,7 +170,7 @@ export function executeTool(
     }
 
     case "get_treatment_plan": {
-      const patient = getPatient(patientId);
+      const patient = await getPatient(patientId);
       if (!patient) return { error: "Patient not found" };
       return patient.plan.map((p) => ({
         name: p.name,
@@ -165,7 +185,7 @@ export function executeTool(
     }
 
     case "get_meetings": {
-      return meetingsForPatient(patientId).map((m) => ({
+      return (await meetingsForPatient(patientId)).map((m) => ({
         id: m.id,
         title: m.title,
         date: m.date,
@@ -176,7 +196,7 @@ export function executeTool(
     }
 
     case "get_meeting_transcript": {
-      const meeting = meetingById(args.meeting_id as string);
+      const meeting = await meetingById(args.meeting_id as string);
       if (!meeting) return { error: "Meeting not found" };
       return {
         title: meeting.title,
@@ -188,7 +208,7 @@ export function executeTool(
     }
 
     case "get_followup_schedule": {
-      return followupForPatient(patientId).map((f) => ({
+      return (await followupForPatient(patientId)).map((f) => ({
         date: f.date,
         type: f.type,
         label: f.label,
@@ -198,7 +218,7 @@ export function executeTool(
     }
 
     case "get_guidelines": {
-      const g = guidelinesFor(patientId);
+      const g = await guidelinesFor(patientId);
       if (!g) return { error: "No guidelines available for this cancer type" };
       return {
         cancerType: g.cancerType,
@@ -207,6 +227,57 @@ export function executeTool(
         patientPath: g.nodes
           .filter((n) => n.patientPath)
           .map((n) => ({ label: n.label.replace(/\n/g, " "), kind: n.kind })),
+      };
+    }
+
+    case "get_board_case": {
+      const patient = await getPatient(patientId);
+      if (!patient) return { error: "Patient not found" };
+      if (!patient.boardCase) return { info: "No active board case for this patient" };
+      const bc = patient.boardCase;
+      return {
+        id: bc.id,
+        question: bc.question,
+        status: bc.status,
+        openedAt: bc.openedAt,
+        attendees: bc.attendees.map((a) => `${a.name} (${a.role})`),
+        decidedOptionId: bc.decidedOptionId ?? null,
+        decidedAt: bc.decidedAt ?? null,
+        decidedBy: bc.decidedBy ?? null,
+      };
+    }
+
+    case "get_treatment_options": {
+      const patient = await getPatient(patientId);
+      if (!patient) return { error: "Patient not found" };
+      if (!patient.options || patient.options.length === 0)
+        return { info: "No treatment options under review for this patient" };
+      return {
+        chosenOptionId: patient.chosenOptionId ?? null,
+        options: patient.options.map((opt) => ({
+          id: opt.id,
+          name: opt.name,
+          shortLabel: opt.shortLabel,
+          intent: opt.intent,
+          rationale: opt.rationale,
+          outcomes: opt.outcomes,
+          toxicities: opt.toxicities,
+          evidence: opt.evidence,
+          burden: opt.burden ?? null,
+          rankings: opt.rankings.map((r) => ({
+            specialist: r.specialist,
+            specialty: r.specialty,
+            rank: r.rank,
+            confidence: r.confidence,
+            note: r.note ?? null,
+          })),
+          phases: opt.phases.map((p) => ({
+            name: p.name,
+            type: p.type,
+            regimen: p.regimen,
+            status: p.status,
+          })),
+        })),
       };
     }
 
