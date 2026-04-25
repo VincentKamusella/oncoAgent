@@ -84,17 +84,7 @@ export function PatientSidebar({
 
       <div className="flex h-12 flex-shrink-0 items-center px-2">
         <DropdownMenu>
-          <DropdownMenuTrigger className="flex w-full items-center gap-2.5 rounded-lg border border-border bg-card px-2.5 py-1 text-left hover:bg-secondary">
-            <span
-              className={cn(
-                "grid h-7 w-7 flex-shrink-0 place-items-center rounded-full mono text-[11px] font-semibold",
-                active
-                  ? "bg-violet-500 text-white"
-                  : "bg-violet-100 text-violet-700"
-              )}
-            >
-              {active?.initials ?? "—"}
-            </span>
+          <DropdownMenuTrigger className="flex w-full items-center gap-2.5 rounded-lg border border-border bg-card px-3 py-1.5 text-left hover:bg-secondary">
             <div className="flex min-w-0 flex-1 flex-col leading-tight">
               <span className="truncate text-[13px] font-medium">
                 {active?.name ?? "Select patient"}
