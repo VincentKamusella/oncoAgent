@@ -56,6 +56,9 @@ const STATUS_ICON: Record<PhaseStatus, React.ReactNode> = {
 
 const TODAY = new Date("2026-04-25T12:00:00Z");
 
+const MIN_TIMELINE_WIDTH = 900;
+const PHASE_BUTTON_WIDTH = 200;
+
 export function TreatmentTimeline({ phases }: { phases: TreatmentPhase[] }) {
   const [active, setActive] = useState<TreatmentPhase | null>(
     phases.find((p) => p.status === "in-progress") ?? phases[0] ?? null
@@ -98,12 +101,21 @@ export function TreatmentTimeline({ phases }: { phases: TreatmentPhase[] }) {
         </div>
       </div>
 
-      <div className="surface relative overflow-hidden px-6 py-8">
-        <div className="relative h-[180px]">
-          <div
-            className="absolute top-0 bottom-0 z-10 flex flex-col items-center"
-            style={{ left: `${todayPct}%` }}
-          >
+      <div className="surface relative overflow-x-auto">
+        <div
+          className="relative px-6 py-8"
+          style={{
+            minWidth: Math.max(
+              MIN_TIMELINE_WIDTH,
+              phases.length * PHASE_BUTTON_WIDTH
+            ),
+          }}
+        >
+          <div className="relative h-[180px]">
+            <div
+              className="absolute top-0 bottom-0 z-10 flex flex-col items-center"
+              style={{ left: `${todayPct}%` }}
+            >
             <div className="mb-1 rounded-md bg-violet-500 px-1.5 py-0.5 mono text-[9.5px] font-semibold uppercase tracking-wider text-white shadow-[0_4px_12px_rgba(15,31,77,0.20)]">
               today
             </div>
@@ -190,6 +202,7 @@ export function TreatmentTimeline({ phases }: { phases: TreatmentPhase[] }) {
               </div>
             );
           })}
+          </div>
         </div>
       </div>
 
