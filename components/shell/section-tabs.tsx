@@ -11,7 +11,7 @@ type Section = {
   icon: React.ReactNode;
   matches?: (path: string, base: string) => boolean;
   count?: number;
-  countTone?: "active" | "warn" | "conflict";
+  countTone?: "active" | "conflict";
 };
 
 export function SectionTabs({
@@ -56,7 +56,7 @@ export function SectionTabs({
   ];
 
   return (
-    <nav className="flex h-12 flex-shrink-0 items-center gap-0.5 border-b border-border bg-background/60 px-4 backdrop-blur">
+    <nav className="flex h-12 flex-shrink-0 items-center gap-1.5 border-b border-border bg-background/60 px-3 backdrop-blur">
       {sections.map((s) => {
         const isActive = s.matches
           ? s.matches(pathname, base)
@@ -66,32 +66,34 @@ export function SectionTabs({
             key={s.href}
             href={s.href}
             className={cn(
-              "relative flex h-full items-center gap-1.5 px-3 text-[13px] font-medium transition-colors",
+              "flex h-8 items-center gap-1.5 rounded-lg px-3 text-[12.5px] font-medium tracking-tight transition-colors",
               isActive
-                ? "text-foreground"
-                : "text-muted-foreground hover:text-foreground"
+                ? "bg-card text-foreground shadow-[0_1px_2px_rgba(15,23,42,0.06),0_0_0_1px_rgba(15,23,42,0.04)]"
+                : "bg-muted/40 text-muted-foreground hover:bg-muted/70 hover:text-foreground"
             )}
           >
             <span
-              className={isActive ? "text-violet-600" : "text-muted-foreground"}
+              className={cn(
+                "flex-shrink-0",
+                isActive ? "text-foreground/80" : "text-muted-foreground/70"
+              )}
             >
               {s.icon}
             </span>
-            {s.label}
+            <span>{s.label}</span>
             {typeof s.count === "number" && s.count > 0 && (
               <span
                 className={cn(
-                  "ml-1 inline-flex h-4 min-w-[16px] items-center justify-center rounded-full px-1 mono text-[10px] font-semibold",
+                  "ml-0.5 tabular-nums text-[11px] font-normal",
                   s.countTone === "conflict"
-                    ? "bg-rose-100 text-rose-700"
-                    : "bg-violet-100 text-violet-700"
+                    ? "text-rose-500"
+                    : isActive
+                      ? "text-muted-foreground"
+                      : "text-muted-foreground/60"
                 )}
               >
                 {s.count}
               </span>
-            )}
-            {isActive && (
-              <span className="absolute bottom-[-1px] left-2 right-2 h-[2px] rounded-full bg-violet-500" />
             )}
           </Link>
         );
