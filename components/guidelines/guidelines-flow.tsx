@@ -76,7 +76,7 @@ function GuidelineNodeView({ data }: NodeProps<Node<FlowNodeData>>) {
           {data.label}
         </div>
         {data.patientPath && data.kind === "decision" && (
-          <div className="mt-1 inline-flex items-center gap-1 rounded-full bg-violet-50 px-1.5 py-0.5 mono text-[9.5px] font-semibold uppercase tracking-wider text-violet-700">
+          <div className="mt-1 inline-flex items-center gap-1 rounded-full bg-[#eef1f8] px-1.5 py-0.5 mono text-[9.5px] font-semibold uppercase tracking-wider text-[#0f1f4d]">
             patient path
           </div>
         )}

@@ -41,19 +41,10 @@ const GROUP_LABELS: Record<GroupKey, string> = {
   genomics: "Genomics",
 };
 
-const GROUP_COLORS: Record<GroupKey, string> = {
-  demographics: "#0f1f4d",
-  diagnosis: "#F43F5E",
-  staging: "#F59E0B",
-  medication: "#0EA5E9",
-  imaging: "#A855F7",
-  lab: "#10B981",
-  history: "#64748B",
-  genomics: "#EC4899",
-};
-
+const GROUP_COLOR = "#475569";
+const FACT_COLOR = "#94A3B8";
 const PATIENT_COLOR = "#0f1f4d";
-const SOURCE_COLOR = "#94A3B8";
+const SOURCE_COLOR = "#CBD5E1";
 
 function buildGraph(
   patient: Patient,
@@ -79,7 +70,7 @@ function buildGraph(
       id: groupId,
       caption: GROUP_LABELS[group],
       size: 40,
-      color: GROUP_COLORS[group],
+      color: GROUP_COLOR,
       captionAlign: "center",
       captionSize: 1.1,
     });
@@ -98,7 +89,7 @@ function buildGraph(
       id: factId,
       caption: fact.label,
       size: 18 + Math.round((fact.confidence ?? 0) * 18),
-      color: GROUP_COLORS[fact.group],
+      color: FACT_COLOR,
       captionAlign: "bottom",
     });
     rels.push({
