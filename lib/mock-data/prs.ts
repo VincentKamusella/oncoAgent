@@ -47,6 +47,9 @@ export const pullRequests: PullRequest[] = [
           "Visceral peritoneum involvement (cT4a) materially changes prognosis and surgical plan. Cannot be auto-merged — requires multidisciplinary review.",
       },
     ],
+    gaps: [
+      "No nodal short-axis measurements documented for the persistent 7 mm node.",
+    ],
     status: "conflict",
     agentVerdict:
       "Conflict on staging.clinical. Auto-merge blocked. Recommended action: tumor board review on 2026-04-26.",
@@ -156,6 +159,7 @@ export const pullRequests: PullRequest[] = [
       },
     ],
     conflicts: [],
+    gaps: ["Onset date not pinned — patient said 'around cycle 4' without a specific day."],
     status: "needs-review",
     agentVerdict:
       "Light review needed — confirm grade and symptom mapping with the treating oncologist.",
