@@ -1,0 +1,148 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - complementary [ref=e3]:
+      - link "oncoAgent" [ref=e4] [cursor=pointer]:
+        - /url: /
+        - img [ref=e6]
+        - generic [ref=e9]: oncoAgent
+      - button "OV OncoUnit Vienna" [ref=e11]:
+        - generic [ref=e12]:
+          - generic [ref=e13]: OV
+          - generic [ref=e14]: OncoUnit Vienna
+        - img [ref=e15]
+      - generic [ref=e19]:
+        - img
+        - textbox "Search patients…" [ref=e20]
+      - generic [ref=e21]:
+        - generic [ref=e22]:
+          - generic [ref=e23]: Patients
+          - button [ref=e24]:
+            - img [ref=e25]
+        - generic [ref=e26]:
+          - generic [ref=e27]: Active · 2
+          - generic [ref=e28]:
+            - link "MK Maria Kowalski HER2+ breast cancer 1" [ref=e29] [cursor=pointer]:
+              - /url: /patients/maria-k
+              - generic [ref=e30]: MK
+              - generic [ref=e31]:
+                - generic [ref=e32]: Maria Kowalski
+                - generic [ref=e33]: HER2+ breast cancer
+              - generic [ref=e34]: "1"
+            - link "TB Thomas Berger Rectal adenocarcinoma 1" [ref=e36] [cursor=pointer]:
+              - /url: /patients/thomas-b
+              - generic [ref=e37]: TB
+              - generic [ref=e38]:
+                - generic [ref=e39]: Thomas Berger
+                - generic [ref=e40]: Rectal adenocarcinoma
+              - generic [ref=e41]: "1"
+        - generic [ref=e43]:
+          - generic [ref=e44]: Surveillance · 1
+          - link "AL Anna Lindqvist ER+ breast cancer" [ref=e46] [cursor=pointer]:
+            - /url: /patients/anna-l
+            - generic [ref=e47]: AL
+            - generic [ref=e48]:
+              - generic [ref=e49]: Anna Lindqvist
+              - generic [ref=e50]: ER+ breast cancer
+      - generic [ref=e52]:
+        - generic [ref=e53]: JM
+        - generic [ref=e54]:
+          - generic [ref=e55]: Dr. Julia Müller
+          - generic [ref=e56]: Med-Onc
+    - generic [ref=e57]:
+      - banner [ref=e58]:
+        - generic [ref=e59]:
+          - link "Patient vaults" [ref=e60] [cursor=pointer]:
+            - /url: /
+          - img [ref=e61]
+          - generic [ref=e63]:
+            - generic [ref=e64]: MK
+            - generic [ref=e65]:
+              - generic [ref=e66]: Maria Kowalski
+              - generic [ref=e67]: MRN-204881 · 54F · case opened 2026-02-08
+          - generic [ref=e68]: Active treatment
+        - generic [ref=e70]:
+          - img
+          - textbox "Find anything…" [ref=e71]
+          - generic: ⌘K
+      - navigation [ref=e72]:
+        - link "Vault" [ref=e73] [cursor=pointer]:
+          - /url: /patients/maria-k
+          - img [ref=e75]
+          - text: Vault
+        - link "Inbox 1" [ref=e77] [cursor=pointer]:
+          - /url: /patients/maria-k/inbox
+          - img [ref=e79]
+          - text: Inbox
+          - generic [ref=e82]: "1"
+        - link "Board" [ref=e83] [cursor=pointer]:
+          - /url: /patients/maria-k/board
+          - img [ref=e85]
+          - text: Board
+      - main [ref=e90]:
+        - generic [ref=e575]:
+          - generic [ref=e577]:
+            - button "Back to team view" [ref=e578]:
+              - img [ref=e579]
+              - text: Back to team view
+            - generic [ref=e581]: Patient view · Maria
+          - generic [ref=e582]:
+            - generic [ref=e583]:
+              - text: Your treatment options
+              - heading "Three paths your team agrees on, Maria." [level=2] [ref=e584]
+              - paragraph [ref=e585]: We've summarized each one in plain language. You don't need to decide today — talk it through with whoever you trust, then come back when you're ready. Whatever you choose, your team will support it.
+            - list [ref=e586]:
+              - listitem [ref=e587]:
+                - generic [ref=e588]:
+                  - img [ref=e589]
+                  - text: team's recommendation
+                - generic [ref=e591]:
+                  - generic [ref=e592]: A
+                  - heading "The standard treatment" [level=3] [ref=e594]
+                - paragraph [ref=e595]: Six rounds of chemotherapy with two HER2-targeted antibodies, then surgery to remove the tumor (keeping the breast), then radiation and a year of antibody-only treatment, plus a daily pill to block estrogen for at least five years.
+                - generic [ref=e596]:
+                  - paragraph [ref=e597]: What life looks like
+                  - text: Most intense for the first 4–5 months. Hair loss is expected during chemo. Surgery is one day. Radiation is short daily visits for three weeks. The antibody year and the estrogen pill are well tolerated. Highest chance of cure.
+                - button "I'd like this option" [ref=e598]:
+                  - img [ref=e599]
+                  - text: I'd like this option
+              - listitem [ref=e602]:
+                - generic [ref=e603]:
+                  - generic [ref=e604]: B
+                  - heading "A gentler path" [level=3] [ref=e606]
+                - paragraph [ref=e607]: A milder weekly chemotherapy with one HER2 antibody for three months, then surgery, then up to a year of an antibody-only treatment that's adjusted to how well the chemo worked.
+                - generic [ref=e608]:
+                  - paragraph [ref=e609]: What life looks like
+                  - text: Less intense weekly visits, much less likely to cause numb fingers/toes long-term. Slightly lower chance of complete tumor disappearance before surgery, but the year of antibody-only treatment afterwards catches up much of that gap.
+                - button "I'd like this option" [ref=e610]:
+                  - img [ref=e611]
+                  - text: I'd like this option
+              - listitem [ref=e614]:
+                - generic [ref=e615]:
+                  - generic [ref=e616]: C
+                  - heading "A clinical trial" [level=3] [ref=e618]
+                - paragraph [ref=e619]: The standard treatment plus an additional daily pill that targets a specific change in your tumor (PIK3CA), to see if it improves the chance of complete tumor disappearance.
+                - generic [ref=e620]:
+                  - paragraph [ref=e621]: What life looks like
+                  - text: "Same as the standard path, with extra blood-sugar monitoring and more frequent check-ins. Side effects we know about: high blood sugar, rash, diarrhea."
+                - button "I'd like this option" [ref=e622]:
+                  - img [ref=e623]
+                  - text: I'd like this option
+            - paragraph [ref=e626]: Demo note · pressing a button here records the choice as a new commit on the patient's vault. In production this would be a separate patient app.
+        - complementary [ref=e547]:
+          - generic [ref=e548]:
+            - generic [ref=e549]:
+              - img [ref=e551]
+              - generic [ref=e554]: Agent
+            - generic [ref=e555]: online
+          - list [ref=e558]:
+            - listitem [ref=e559]:
+              - generic [ref=e560]: "Hi — I'm watching Maria's vault. One decision needs your call: Confirm continued TCHP after Cycle 4 — ANC 2.1, no DLT. Ask me anything about the case."
+          - generic [ref=e561]:
+            - generic [ref=e562]:
+              - textbox "Ask about this patient…" [ref=e563]
+              - button "Send" [disabled]:
+                - img
+            - paragraph [ref=e564]: Mock agent · responses are canned for the demo.
+  - button "Open Next.js Dev Tools" [ref=e570] [cursor=pointer]:
+    - img [ref=e571]
+  - alert [ref=e574]

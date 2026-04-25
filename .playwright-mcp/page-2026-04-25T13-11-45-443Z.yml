@@ -1,0 +1,489 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - complementary [ref=e3]:
+      - link "oncoAgent" [ref=e4] [cursor=pointer]:
+        - /url: /
+        - img [ref=e6]
+        - generic [ref=e9]: oncoAgent
+      - button "OV OncoUnit Vienna" [ref=e11]:
+        - generic [ref=e12]:
+          - generic [ref=e13]: OV
+          - generic [ref=e14]: OncoUnit Vienna
+        - img [ref=e15]
+      - generic [ref=e19]:
+        - img
+        - textbox "Search patients…" [ref=e20]
+      - generic [ref=e21]:
+        - generic [ref=e22]:
+          - generic [ref=e23]: Patients
+          - button [ref=e24]:
+            - img [ref=e25]
+        - generic [ref=e26]:
+          - generic [ref=e27]: Active · 2
+          - generic [ref=e28]:
+            - link "MK Maria Kowalski HER2+ breast cancer 1" [ref=e29] [cursor=pointer]:
+              - /url: /patients/maria-k
+              - generic [ref=e30]: MK
+              - generic [ref=e31]:
+                - generic [ref=e32]: Maria Kowalski
+                - generic [ref=e33]: HER2+ breast cancer
+              - generic [ref=e34]: "1"
+            - link "TB Thomas Berger Rectal adenocarcinoma 1" [ref=e36] [cursor=pointer]:
+              - /url: /patients/thomas-b
+              - generic [ref=e37]: TB
+              - generic [ref=e38]:
+                - generic [ref=e39]: Thomas Berger
+                - generic [ref=e40]: Rectal adenocarcinoma
+              - generic [ref=e41]: "1"
+        - generic [ref=e43]:
+          - generic [ref=e44]: Surveillance · 1
+          - link "AL Anna Lindqvist ER+ breast cancer" [ref=e46] [cursor=pointer]:
+            - /url: /patients/anna-l
+            - generic [ref=e47]: AL
+            - generic [ref=e48]:
+              - generic [ref=e49]: Anna Lindqvist
+              - generic [ref=e50]: ER+ breast cancer
+      - generic [ref=e52]:
+        - generic [ref=e53]: JM
+        - generic [ref=e54]:
+          - generic [ref=e55]: Dr. Julia Müller
+          - generic [ref=e56]: Med-Onc
+    - generic [ref=e57]:
+      - banner [ref=e58]:
+        - generic [ref=e59]:
+          - link "Patient vaults" [ref=e60] [cursor=pointer]:
+            - /url: /
+          - img [ref=e61]
+          - generic [ref=e63]:
+            - generic [ref=e64]: MK
+            - generic [ref=e65]:
+              - generic [ref=e66]: Maria Kowalski
+              - generic [ref=e67]: MRN-204881 · 54F · case opened 2026-02-08
+          - generic [ref=e68]: Active treatment
+        - generic [ref=e70]:
+          - img
+          - textbox "Find anything…" [ref=e71]
+          - generic: ⌘K
+      - navigation [ref=e72]:
+        - link "Vault" [ref=e73] [cursor=pointer]:
+          - /url: /patients/maria-k
+          - img [ref=e75]
+          - text: Vault
+        - link "Inbox 1" [ref=e77] [cursor=pointer]:
+          - /url: /patients/maria-k/inbox
+          - img [ref=e79]
+          - text: Inbox
+          - generic [ref=e82]: "1"
+        - link "Board" [ref=e83] [cursor=pointer]:
+          - /url: /patients/maria-k/board
+          - img [ref=e85]
+          - text: Board
+      - main [ref=e90]:
+        - generic [ref=e93]:
+          - generic [ref=e96]:
+            - generic [ref=e97]:
+              - text: Tumor board
+              - heading "HER2+ Stage IIB · ERBB2 amp · PIK3CA H1047R — neoadjuvant strategy and adjuvant sequencing." [level=2] [ref=e98]
+              - paragraph [ref=e99]:
+                - img [ref=e100]
+                - generic [ref=e104]:
+                  - text: Dr. J. Müller
+                  - generic [ref=e105]: (Med-Onc)
+                  - text: ·
+                - generic [ref=e106]:
+                  - text: Dr. R. Patel
+                  - generic [ref=e107]: (Pathology)
+                  - text: ·
+                - generic [ref=e108]:
+                  - text: Dr. S. Chen
+                  - generic [ref=e109]: (Surgical Onc)
+                  - text: ·
+                - generic [ref=e110]:
+                  - text: Dr. K. Lee
+                  - generic [ref=e111]: (Rad-Onc + Radiology)
+                  - text: ·
+                - generic [ref=e112]:
+                  - text: PharmD A. Riesgo
+                  - generic [ref=e113]: (Pharmacy)
+            - generic [ref=e115]:
+              - img [ref=e116]
+              - text: Decided
+          - generic [ref=e119]:
+            - article [ref=e120]:
+              - generic [ref=e121]:
+                - img [ref=e122]
+                - text: chosen
+              - generic [ref=e125]:
+                - generic [ref=e126]:
+                  - generic [ref=e127]: A
+                  - generic [ref=e128]:
+                    - generic [ref=e129]:
+                      - heading "Option A · Standard of care" [level=3] [ref=e130]
+                      - generic [ref=e131]: Curative
+                    - paragraph [ref=e132]: Neoadjuvant TCHP × 6 → lumpectomy + SLNB → adjuvant HP + endocrine
+                - generic [ref=e133]:
+                  - generic [ref=e134]: Team score
+                  - generic [ref=e135]: ★ 4.0
+                  - generic [ref=e136]: confidence 90%
+              - generic [ref=e137]:
+                - generic [ref=e138]:
+                  - img [ref=e139]
+                  - generic [ref=e142]: Why
+                - list [ref=e143]:
+                  - listitem [ref=e144]:
+                    - generic [ref=e146]: HER2+ Stage IIB → matches NCCN BINV pathway for neoadjuvant systemic.
+                  - listitem [ref=e147]:
+                    - generic [ref=e149]: ER+ → endocrine therapy after HER2 blockade.
+                  - listitem [ref=e150]:
+                    - generic [ref=e152]: LVEF 62% → safe for trastuzumab + pertuzumab.
+                  - listitem [ref=e153]:
+                    - generic [ref=e155]: ERBB2 amp confirmed (OncoKB Level 1) → HER2 blockade backbone.
+                - button "Show reasoning" [ref=e156]:
+                  - text: Show reasoning
+                  - img [ref=e157]
+              - generic [ref=e159]:
+                - generic [ref=e160]:
+                  - generic [ref=e161]:
+                    - img [ref=e162]
+                    - generic [ref=e165]: Expected outcomes
+                  - list [ref=e166]:
+                    - listitem [ref=e167]:
+                      - generic [ref=e168]: pCR (breast + axilla)
+                      - generic [ref=e169]:
+                        - generic [ref=e170]: 50–65%
+                        - generic [ref=e171]: "[NeoSphere 2012]"
+                    - listitem [ref=e172]:
+                      - generic [ref=e173]: 5-year iDFS
+                      - generic [ref=e174]:
+                        - generic [ref=e175]: ~84%
+                        - generic [ref=e176]: "[APHINITY 2017]"
+                    - listitem [ref=e177]:
+                      - generic [ref=e178]: 5-year OS
+                      - generic [ref=e179]:
+                        - generic [ref=e180]: ~94%
+                        - generic [ref=e181]: "[APHINITY 2017]"
+                - generic [ref=e182]:
+                  - generic [ref=e183]:
+                    - img [ref=e184]
+                    - generic [ref=e186]: Toxicity / burden
+                  - list [ref=e187]:
+                    - listitem [ref=e188]:
+                      - generic [ref=e189]: Cardiotoxicity
+                      - generic [ref=e190]: Monitor LVEF q3 mo · ~2% gr3+
+                    - listitem [ref=e191]:
+                      - generic [ref=e192]: Neuropathy (docetaxel)
+                      - generic [ref=e193]: ~30% gr2+
+                    - listitem [ref=e194]:
+                      - generic [ref=e195]: Neutropenia
+                      - generic [ref=e196]: G-CSF support; ~10% febrile
+                    - listitem [ref=e197]:
+                      - generic [ref=e198]: Alopecia
+                      - generic [ref=e199]: Expected, reversible
+                  - paragraph [ref=e200]: ≈ 14 mo total · 18 infusions · 1 surgery · 15 RT fractions · 5+ yrs endocrine
+              - generic [ref=e201]:
+                - generic [ref=e202]:
+                  - img [ref=e203]
+                  - generic [ref=e206]: Evidence
+                - generic [ref=e207]:
+                  - generic [ref=e208]: NeoSphere 2012
+                  - generic [ref=e209]: APHINITY 2017
+                  - generic [ref=e210]: KATHERINE 2019
+                  - generic [ref=e211]: NCCN BINV
+              - generic [ref=e212]:
+                - generic [ref=e213]:
+                  - generic [ref=e214]: Clinician ranking
+                  - generic [ref=e215]: 1 = preferred
+                - list [ref=e216]:
+                  - listitem [ref=e217]:
+                    - generic [ref=e218]:
+                      - generic [ref=e219]: Dr. J. Müller
+                      - generic [ref=e220]: med-onc
+                    - generic [ref=e221]: rank 1
+                    - generic [ref=e225]: 95%
+                  - listitem [ref=e226]:
+                    - generic [ref=e227]:
+                      - generic [ref=e228]: Dr. R. Patel
+                      - generic [ref=e229]: pathology
+                    - generic [ref=e230]: rank 1
+                    - generic [ref=e234]: 90%
+                  - listitem [ref=e235]:
+                    - generic [ref=e236]:
+                      - generic [ref=e237]: Dr. S. Chen
+                      - generic [ref=e238]: surg-onc
+                    - generic [ref=e239]: rank 1
+                    - generic [ref=e243]: 85%
+                  - listitem [ref=e244]:
+                    - generic [ref=e245]:
+                      - generic [ref=e246]: Dr. K. Lee
+                      - generic [ref=e247]: rad-onc
+                    - generic [ref=e248]: rank 1
+                    - generic [ref=e252]: 92%
+                  - listitem [ref=e253]:
+                    - generic [ref=e254]:
+                      - generic [ref=e255]: PharmD A. Riesgo
+                      - generic [ref=e256]: pharmacy
+                    - generic [ref=e257]: rank 1
+                    - generic [ref=e261]: 88%
+              - generic [ref=e262]:
+                - button "Show plan timeline" [ref=e263]:
+                  - img [ref=e264]
+                  - text: Show plan timeline
+                - button "Send to patient" [ref=e267]:
+                  - img [ref=e268]
+                  - text: Send to patient
+            - article [ref=e271]:
+              - generic [ref=e272]:
+                - generic [ref=e273]:
+                  - generic [ref=e274]: B
+                  - generic [ref=e275]:
+                    - generic [ref=e276]:
+                      - heading "Option B · De-escalated" [level=3] [ref=e277]
+                      - generic [ref=e278]: Curative
+                    - paragraph [ref=e279]: Neoadjuvant TH × 4 → lumpectomy → adjuvant T-DM1 if residual disease
+                - generic [ref=e280]:
+                  - generic [ref=e281]: Team score
+                  - generic [ref=e282]: ★ 3.0
+                  - generic [ref=e283]: confidence 70%
+              - generic [ref=e284]:
+                - generic [ref=e285]:
+                  - img [ref=e286]
+                  - generic [ref=e289]: Why
+                - list [ref=e290]:
+                  - listitem [ref=e291]:
+                    - generic [ref=e293]: Stage IIB but cT2 (smaller end) — APT/ATEMPT-style de-escalation candidate.
+                  - listitem [ref=e294]:
+                    - generic [ref=e296]: Patient prioritizes lower toxicity, especially neuropathy.
+                  - listitem [ref=e297]:
+                    - generic [ref=e299]: Response-adapted adjuvant via KATHERINE — switch to T-DM1 if non-pCR.
+                - button "Show reasoning" [ref=e300]:
+                  - text: Show reasoning
+                  - img [ref=e301]
+              - generic [ref=e303]:
+                - generic [ref=e304]:
+                  - generic [ref=e305]:
+                    - img [ref=e306]
+                    - generic [ref=e309]: Expected outcomes
+                  - list [ref=e310]:
+                    - listitem [ref=e311]:
+                      - generic [ref=e312]: pCR (breast + axilla)
+                      - generic [ref=e313]:
+                        - generic [ref=e314]: 35–45%
+                        - generic [ref=e315]: "[ATEMPT 2021]"
+                    - listitem [ref=e316]:
+                      - generic [ref=e317]: 5-year iDFS
+                      - generic [ref=e318]:
+                        - generic [ref=e319]: ~80%
+                        - generic [ref=e320]: "[KATHERINE 2019]"
+                    - listitem [ref=e321]:
+                      - generic [ref=e322]: Severe neuropathy
+                      - generic [ref=e323]:
+                        - generic [ref=e324]: ~10% (vs ~30% TCHP)
+                        - generic [ref=e325]: "[ATEMPT 2021]"
+                - generic [ref=e326]:
+                  - generic [ref=e327]:
+                    - img [ref=e328]
+                    - generic [ref=e330]: Toxicity / burden
+                  - list [ref=e331]:
+                    - listitem [ref=e332]:
+                      - generic [ref=e333]: Neuropathy
+                      - generic [ref=e334]: ~10% gr2+
+                    - listitem [ref=e335]:
+                      - generic [ref=e336]: Cardiotoxicity
+                      - generic [ref=e337]: Single-antibody risk lower
+                    - listitem [ref=e338]:
+                      - generic [ref=e339]: Neutropenia
+                      - generic [ref=e340]: Mild
+                  - paragraph [ref=e341]: ≈ 14 mo total · 12 weekly infusions · 1 surgery · 5+ yrs endocrine
+              - generic [ref=e342]:
+                - generic [ref=e343]:
+                  - img [ref=e344]
+                  - generic [ref=e347]: Evidence
+                - generic [ref=e348]:
+                  - generic [ref=e349]: ATEMPT 2021
+                  - generic [ref=e350]: KATHERINE 2019
+                  - generic [ref=e351]: NCCN BINV
+              - generic [ref=e352]:
+                - generic [ref=e353]:
+                  - generic [ref=e354]: Clinician ranking
+                  - generic [ref=e355]: 1 = preferred
+                - list [ref=e356]:
+                  - listitem [ref=e357]:
+                    - generic [ref=e358]:
+                      - generic [ref=e359]: Dr. J. Müller
+                      - generic [ref=e360]: med-onc
+                    - generic [ref=e361]: rank 2
+                    - generic [ref=e365]: 70%
+                  - listitem [ref=e366]:
+                    - generic [ref=e367]:
+                      - generic [ref=e368]: Dr. R. Patel
+                      - generic [ref=e369]: pathology
+                    - generic [ref=e370]: rank 2
+                    - generic [ref=e374]: 65%
+                  - listitem [ref=e375]:
+                    - generic [ref=e376]:
+                      - generic [ref=e377]: Dr. S. Chen
+                      - generic [ref=e378]: surg-onc
+                    - generic [ref=e379]: rank 2
+                    - generic [ref=e383]: 70%
+                  - listitem [ref=e384]:
+                    - generic [ref=e385]:
+                      - generic [ref=e386]: Dr. K. Lee
+                      - generic [ref=e387]: rad-onc
+                    - generic [ref=e388]: rank 2
+                    - generic [ref=e392]: 70%
+                  - listitem [ref=e393]:
+                    - generic [ref=e394]:
+                      - generic [ref=e395]: PharmD A. Riesgo
+                      - generic [ref=e396]: pharmacy
+                    - generic [ref=e397]: rank 2
+                    - generic [ref=e401]: 75%
+              - generic [ref=e402]:
+                - button "Show plan timeline" [ref=e403]:
+                  - img [ref=e404]
+                  - text: Show plan timeline
+                - generic [ref=e406]:
+                  - button "Mark preferred" [ref=e407]
+                  - button "Send to patient" [ref=e408]:
+                    - img [ref=e409]
+                    - text: Send to patient
+                  - button "Patient chose this" [ref=e412]:
+                    - img [ref=e413]
+                    - text: Patient chose this
+            - article [ref=e416]:
+              - generic [ref=e417]:
+                - generic [ref=e418]:
+                  - generic [ref=e419]: C
+                  - generic [ref=e420]:
+                    - generic [ref=e421]:
+                      - heading "Option C · Trial — alpelisib add-on" [level=3] [ref=e422]
+                      - generic [ref=e423]: Trial
+                    - paragraph [ref=e424]: TCHP × 6 + alpelisib (PIK3CA H1047R) → surgery → adjuvant per response
+                - generic [ref=e425]:
+                  - generic [ref=e426]: Team score
+                  - generic [ref=e427]: ★ 2.2
+                  - generic [ref=e428]: confidence 57%
+              - generic [ref=e429]:
+                - generic [ref=e430]:
+                  - img [ref=e431]
+                  - generic [ref=e434]: Why
+                - list [ref=e435]:
+                  - listitem [ref=e436]:
+                    - generic [ref=e438]: PIK3CA H1047R activating mutation present (OncoKB Level 1 in HR+/HER2−; investigational here).
+                  - listitem [ref=e439]:
+                    - generic [ref=e441]: Open trial slot at NCT##### for HER2+ + PIK3CA-mut.
+                  - listitem [ref=e442]:
+                    - generic [ref=e444]: Patient is interested in trial participation.
+                - button "Show reasoning" [ref=e445]:
+                  - text: Show reasoning
+                  - img [ref=e446]
+              - generic [ref=e448]:
+                - generic [ref=e449]:
+                  - generic [ref=e450]:
+                    - img [ref=e451]
+                    - generic [ref=e454]: Expected outcomes
+                  - list [ref=e455]:
+                    - listitem [ref=e456]:
+                      - generic [ref=e457]: pCR (estimated)
+                      - generic [ref=e458]:
+                        - generic [ref=e459]: 55–70%
+                        - generic [ref=e460]: "[NeoPHOEBE-style estimate]"
+                    - listitem [ref=e461]:
+                      - generic [ref=e462]: Hyperglycemia gr3+
+                      - generic [ref=e463]:
+                        - generic [ref=e464]: ~10%
+                        - generic [ref=e465]: "[SOLAR-1 2019]"
+                - generic [ref=e466]:
+                  - generic [ref=e467]:
+                    - img [ref=e468]
+                    - generic [ref=e470]: Toxicity / burden
+                  - list [ref=e471]:
+                    - listitem [ref=e472]:
+                      - generic [ref=e473]: Hyperglycemia
+                      - generic [ref=e474]: Common — SMBG required
+                    - listitem [ref=e475]:
+                      - generic [ref=e476]: Rash
+                      - generic [ref=e477]: ~10% gr2+
+                    - listitem [ref=e478]:
+                      - generic [ref=e479]: Diarrhea
+                      - generic [ref=e480]: Common
+                  - paragraph [ref=e481]: Same as Standard of care + daily oral pill + extra labs/visits for trial monitoring
+              - generic [ref=e482]:
+                - generic [ref=e483]:
+                  - img [ref=e484]
+                  - generic [ref=e487]: Evidence
+                - generic [ref=e488]:
+                  - generic [ref=e489]: SOLAR-1 2019
+                  - generic [ref=e490]: trial protocol NCT-PLACEHOLDER
+              - generic [ref=e491]:
+                - generic [ref=e492]:
+                  - generic [ref=e493]: Clinician ranking
+                  - generic [ref=e494]: 1 = preferred
+                - list [ref=e495]:
+                  - listitem [ref=e496]:
+                    - generic [ref=e497]:
+                      - generic [ref=e498]: Dr. J. Müller
+                      - generic [ref=e499]: med-onc
+                    - generic [ref=e500]: rank 3
+                    - generic [ref=e504]: 55%
+                  - listitem [ref=e505]:
+                    - generic [ref=e506]:
+                      - generic [ref=e507]: Dr. R. Patel
+                      - generic [ref=e508]: pathology
+                    - generic [ref=e509]: rank 2
+                    - generic [ref=e513]: 70%
+                  - listitem [ref=e514]:
+                    - generic [ref=e515]:
+                      - generic [ref=e516]: Dr. S. Chen
+                      - generic [ref=e517]: surg-onc
+                    - generic [ref=e518]: rank 3
+                    - generic [ref=e522]: 50%
+                  - listitem [ref=e523]:
+                    - generic [ref=e524]:
+                      - generic [ref=e525]: Dr. K. Lee
+                      - generic [ref=e526]: rad-onc
+                    - generic [ref=e527]: rank 3
+                    - generic [ref=e531]: 50%
+                  - listitem [ref=e532]:
+                    - generic [ref=e533]:
+                      - generic [ref=e534]: PharmD A. Riesgo
+                      - generic [ref=e535]: pharmacy
+                    - generic [ref=e536]: rank 3
+                    - generic [ref=e540]: 60%
+              - generic [ref=e541]:
+                - button "Show plan timeline" [ref=e542]:
+                  - img [ref=e543]
+                  - text: Show plan timeline
+                - generic [ref=e545]:
+                  - button "Mark preferred" [ref=e546]
+                  - button "Send to patient" [ref=e547]:
+                    - img [ref=e548]
+                    - text: Send to patient
+                  - button "Patient chose this" [ref=e551]:
+                    - img [ref=e552]
+                    - text: Patient chose this
+          - generic [ref=e555]:
+            - generic [ref=e556]: Archived (not chosen)
+            - list [ref=e557]:
+              - listitem [ref=e558]:
+                - generic [ref=e559]: De-escalated
+                - generic [ref=e560]: archived · patient preferred a different path
+              - listitem [ref=e561]:
+                - generic [ref=e562]: Trial — alpelisib add-on
+                - generic [ref=e563]: archived · patient preferred a different path
+        - complementary [ref=e564]:
+          - generic [ref=e565]:
+            - generic [ref=e566]:
+              - img [ref=e568]
+              - generic [ref=e571]: Agent
+            - generic [ref=e572]: online
+          - list [ref=e575]:
+            - listitem [ref=e576]:
+              - generic [ref=e577]: "Hi — I'm watching Maria's vault. One decision needs your call: Confirm continued TCHP after Cycle 4 — ANC 2.1, no DLT. Ask me anything about the case."
+          - generic [ref=e578]:
+            - generic [ref=e579]:
+              - textbox "Ask about this patient…" [ref=e580]
+              - button "Send" [disabled]:
+                - img
+            - paragraph [ref=e581]: Mock agent · responses are canned for the demo.
+  - button "Open Next.js Dev Tools" [ref=e587] [cursor=pointer]:
+    - img [ref=e588]

@@ -1,4 +1,4 @@
-import type { Fact, Patient } from "../types";
+import type { Fact, Patient, TreatmentOption, BoardCase } from "../types";
 
 const factsMaria: Fact[] = [
   {
@@ -8,6 +8,7 @@ const factsMaria: Fact[] = [
     value: "Maria Kowalski",
     confidence: 1,
     group: "demographics",
+    specialty: "nursing",
     source: {
       kind: "report",
       id: "doc-mk-intake",
@@ -25,6 +26,7 @@ const factsMaria: Fact[] = [
     value: "1971-09-14",
     confidence: 1,
     group: "demographics",
+    specialty: "nursing",
     source: {
       kind: "report",
       id: "doc-mk-intake",
@@ -40,6 +42,7 @@ const factsMaria: Fact[] = [
     value: "MRN-204881",
     confidence: 1,
     group: "demographics",
+    specialty: "nursing",
     source: {
       kind: "report",
       id: "doc-mk-intake",
@@ -55,6 +58,7 @@ const factsMaria: Fact[] = [
     value: "Invasive ductal carcinoma, left breast",
     confidence: 0.99,
     group: "diagnosis",
+    specialty: "pathology",
     source: {
       kind: "pathology",
       id: "path-mk-001",
@@ -73,6 +77,7 @@ const factsMaria: Fact[] = [
     value: "ER+ (95%) · PR+ (60%) · HER2 3+ (IHC) confirmed by FISH",
     confidence: 0.98,
     group: "diagnosis",
+    specialty: "pathology",
     source: {
       kind: "pathology",
       id: "path-mk-002",
@@ -91,6 +96,7 @@ const factsMaria: Fact[] = [
     value: "cT2 cN1 cM0 — Stage IIB",
     confidence: 0.95,
     group: "staging",
+    specialty: "radiology",
     source: {
       kind: "imaging",
       id: "img-mk-mri-001",
@@ -109,6 +115,7 @@ const factsMaria: Fact[] = [
     value: "TCHP — docetaxel + carboplatin + trastuzumab + pertuzumab, q3w × 6",
     confidence: 0.97,
     group: "medication",
+    specialty: "med-onc",
     source: {
       kind: "note",
       id: "note-mk-tb-1",
@@ -127,6 +134,7 @@ const factsMaria: Fact[] = [
     value: "TCHP cycle 4 of 6 — last infusion 2026-04-15",
     confidence: 1,
     group: "medication",
+    specialty: "nursing",
     source: {
       kind: "note",
       id: "note-mk-infusion-4",
@@ -143,6 +151,7 @@ const factsMaria: Fact[] = [
     value: "62% — within normal limits",
     confidence: 0.99,
     group: "lab",
+    specialty: "med-onc",
     source: {
       kind: "report",
       id: "echo-mk-002",
@@ -161,6 +170,7 @@ const factsMaria: Fact[] = [
     value: "2.1 ×10⁹/L",
     confidence: 1,
     group: "lab",
+    specialty: "med-onc",
     source: {
       kind: "lab",
       id: "lab-mk-cbc-3",
@@ -177,6 +187,7 @@ const factsMaria: Fact[] = [
     value: "Self-detected 2 cm lump, left breast — 2026-02-04",
     confidence: 0.95,
     group: "history",
+    specialty: "patient",
     source: {
       kind: "note",
       id: "note-mk-pcp",
@@ -185,7 +196,357 @@ const factsMaria: Fact[] = [
     },
     updatedAt: "2026-02-06T10:00:00Z",
   },
+  {
+    id: "f-mk-ngs",
+    key: "genomics.panel",
+    label: "NGS panel (FoundationOne CDx)",
+    value: "PIK3CA p.H1047R · ERBB2 amp · TP53 wild-type · TMB 4 mut/Mb · MSS",
+    confidence: 0.95,
+    group: "genomics",
+    specialty: "molecular",
+    source: {
+      kind: "genomics",
+      id: "ngs-mk-001",
+      label: "FoundationOne CDx report · 2026-02-26",
+      excerpt:
+        "Reportable: ERBB2 amplification (cn=14), PIK3CA c.3140A>G p.H1047R (VAF 32%). VUS: ARID1A. TMB 4. MSS.",
+      author: "Foundation Medicine",
+      at: "2026-02-26T12:00:00Z",
+      specialty: "molecular",
+    },
+    updatedAt: "2026-02-26T12:00:00Z",
+  },
+  {
+    id: "f-mk-oncokb",
+    key: "genomics.oncokb",
+    label: "OncoKB therapeutic level",
+    value:
+      "ERBB2 amp · Level 1 (trastuzumab + pertuzumab) · PIK3CA H1047R · Level 1 (alpelisib in HR+/HER2−)",
+    confidence: 0.92,
+    group: "genomics",
+    specialty: "molecular",
+    source: {
+      kind: "genomics",
+      id: "oncokb-mk-001",
+      label: "OncoKB lookup · 2026-02-27",
+      author: "OncoKB v4.20",
+      at: "2026-02-27T08:30:00Z",
+      specialty: "molecular",
+    },
+    updatedAt: "2026-02-27T08:30:00Z",
+  },
+  {
+    id: "f-mk-surg-consult",
+    key: "history.surg-consult",
+    label: "Surgical consult",
+    value:
+      "Lumpectomy + SLNB feasible if good response to neoadjuvant; reassess at MRI mid-cycle 4",
+    confidence: 0.85,
+    group: "history",
+    specialty: "surg-onc",
+    source: {
+      kind: "note",
+      id: "note-mk-surg-1",
+      label: "Surgical oncology note · 2026-02-21",
+      excerpt:
+        "After examination and review of MRI: candidate for breast-conserving surgery if neoadjuvant achieves >50% volumetric response. Plan SLNB at the time of surgery.",
+      author: "Dr. S. Chen, Surgical Onc",
+      at: "2026-02-21T10:30:00Z",
+      specialty: "surg-onc",
+    },
+    updatedAt: "2026-02-21T10:30:00Z",
+  },
+  {
+    id: "f-mk-rt-consult",
+    key: "history.rt-consult",
+    label: "Radiation oncology consult",
+    value:
+      "Whole-breast RT post-lumpectomy planned (40.05 Gy / 15 fx); boost to tumor bed if margins narrow",
+    confidence: 0.85,
+    group: "history",
+    specialty: "rad-onc",
+    source: {
+      kind: "note",
+      id: "note-mk-rt-1",
+      label: "Rad-onc consult · 2026-02-23",
+      author: "Dr. K. Lee, Rad-Onc",
+      at: "2026-02-23T15:00:00Z",
+      specialty: "rad-onc",
+    },
+    updatedAt: "2026-02-23T15:00:00Z",
+  },
+  {
+    id: "f-mk-pharm",
+    key: "medication.pharmacy-review",
+    label: "Pharmacy review",
+    value:
+      "TCHP doses verified vs BSA 1.74; no QTc / renal flags; pre-meds dexa+ondansetron+aprepitant",
+    confidence: 0.98,
+    group: "medication",
+    specialty: "pharmacy",
+    source: {
+      kind: "note",
+      id: "note-mk-pharm-1",
+      label: "Clinical pharmacy review · 2026-02-24",
+      excerpt:
+        "Docetaxel 75 mg/m² → 130 mg. Carboplatin AUC 6 (Calvert, GFR 88) → 540 mg. Trastuzumab 8 mg/kg loading, 6 mg/kg q3w. Pertuzumab 840 mg loading, 420 mg q3w. No interactions w/ home meds.",
+      author: "PharmD A. Riesgo",
+      at: "2026-02-24T16:00:00Z",
+      specialty: "pharmacy",
+    },
+    updatedAt: "2026-02-24T16:00:00Z",
+  },
 ];
+
+const optionsMaria: TreatmentOption[] = [
+  {
+    id: "opt-mk-A",
+    name: "Standard of care",
+    shortLabel:
+      "Neoadjuvant TCHP × 6 → lumpectomy + SLNB → adjuvant HP + endocrine",
+    intent: "curative",
+    phases: [
+      {
+        id: "ph-mk-A-1",
+        name: "Neoadjuvant TCHP",
+        type: "chemo",
+        regimen: "Docetaxel · carboplatin · trastuzumab · pertuzumab, q3w × 6",
+        status: "in-progress",
+        startDate: "2026-02-25",
+        endDate: "2026-06-10",
+        cycles: { total: 6, completed: 4 },
+      },
+      {
+        id: "ph-mk-A-2",
+        name: "Lumpectomy + SLNB",
+        type: "surgery",
+        regimen: "Breast-conserving surgery + sentinel-node biopsy",
+        status: "planned",
+        startDate: "2026-07-08",
+      },
+      {
+        id: "ph-mk-A-3",
+        name: "Whole-breast RT",
+        type: "radiation",
+        regimen: "40.05 Gy in 15 fractions",
+        status: "planned",
+        startDate: "2026-08-19",
+        endDate: "2026-09-09",
+      },
+      {
+        id: "ph-mk-A-4",
+        name: "Adjuvant HP",
+        type: "targeted",
+        regimen: "Trastuzumab + pertuzumab to complete 1 year HER2 blockade",
+        status: "planned",
+        startDate: "2026-09-23",
+        endDate: "2027-02-25",
+      },
+      {
+        id: "ph-mk-A-5",
+        name: "Adjuvant endocrine",
+        type: "hormonal",
+        regimen: "Aromatase inhibitor ≥ 5 years",
+        status: "planned",
+        startDate: "2026-09-23",
+      },
+    ],
+    rationale: [
+      "HER2+ Stage IIB → matches NCCN BINV pathway for neoadjuvant systemic.",
+      "ER+ → endocrine therapy after HER2 blockade.",
+      "LVEF 62% → safe for trastuzumab + pertuzumab.",
+      "ERBB2 amp confirmed (OncoKB Level 1) → HER2 blockade backbone.",
+    ],
+    rationaleFactIds: [
+      "f-mk-receptors",
+      "f-mk-stage",
+      "f-mk-lvef",
+      "f-mk-ngs",
+      "f-mk-oncokb",
+    ],
+    outcomes: [
+      { label: "pCR (breast + axilla)", value: "50–65%", citation: "NeoSphere 2012" },
+      { label: "5-year iDFS", value: "~84%", citation: "APHINITY 2017" },
+      { label: "5-year OS", value: "~94%", citation: "APHINITY 2017" },
+    ],
+    toxicities: [
+      { category: "Cardiotoxicity", severity: "Monitor LVEF q3 mo · ~2% gr3+" },
+      { category: "Neuropathy (docetaxel)", severity: "~30% gr2+" },
+      { category: "Neutropenia", severity: "G-CSF support; ~10% febrile" },
+      { category: "Alopecia", severity: "Expected, reversible" },
+    ],
+    evidence: ["NeoSphere 2012", "APHINITY 2017", "KATHERINE 2019", "NCCN BINV"],
+    burden: "≈ 14 mo total · 18 infusions · 1 surgery · 15 RT fractions · 5+ yrs endocrine",
+    rankings: [
+      { specialist: "Dr. J. Müller", specialty: "med-onc", rank: 1, confidence: 0.95 },
+      { specialist: "Dr. R. Patel", specialty: "pathology", rank: 1, confidence: 0.9 },
+      { specialist: "Dr. S. Chen", specialty: "surg-onc", rank: 1, confidence: 0.85 },
+      { specialist: "Dr. K. Lee", specialty: "rad-onc", rank: 1, confidence: 0.92 },
+      { specialist: "PharmD A. Riesgo", specialty: "pharmacy", rank: 1, confidence: 0.88 },
+    ],
+    patientFacing: {
+      name: "The standard treatment",
+      summary:
+        "Six rounds of chemotherapy with two HER2-targeted antibodies, then surgery to remove the tumor (keeping the breast), then radiation and a year of antibody-only treatment, plus a daily pill to block estrogen for at least five years.",
+      livesLikeThis:
+        "Most intense for the first 4–5 months. Hair loss is expected during chemo. Surgery is one day. Radiation is short daily visits for three weeks. The antibody year and the estrogen pill are well tolerated. Highest chance of cure.",
+    },
+  },
+  {
+    id: "opt-mk-B",
+    name: "De-escalated",
+    shortLabel: "Neoadjuvant TH × 4 → lumpectomy → adjuvant T-DM1 if residual disease",
+    intent: "curative",
+    phases: [
+      {
+        id: "ph-mk-B-1",
+        name: "Neoadjuvant TH",
+        type: "chemo",
+        regimen: "Paclitaxel + trastuzumab, q1w × 12",
+        status: "planned",
+        startDate: "2026-02-25",
+        endDate: "2026-05-19",
+      },
+      {
+        id: "ph-mk-B-2",
+        name: "Lumpectomy + SLNB",
+        type: "surgery",
+        status: "planned",
+        startDate: "2026-06-16",
+      },
+      {
+        id: "ph-mk-B-3",
+        name: "Adjuvant (response-adapted)",
+        type: "targeted",
+        regimen: "T-DM1 × 14 if residual disease, else trastuzumab to 1 yr",
+        status: "planned",
+        startDate: "2026-08-04",
+      },
+      {
+        id: "ph-mk-B-4",
+        name: "Adjuvant endocrine",
+        type: "hormonal",
+        regimen: "Aromatase inhibitor ≥ 5 yrs",
+        status: "planned",
+        startDate: "2026-08-04",
+      },
+    ],
+    rationale: [
+      "Stage IIB but cT2 (smaller end) — APT/ATEMPT-style de-escalation candidate.",
+      "Patient prioritizes lower toxicity, especially neuropathy.",
+      "Response-adapted adjuvant via KATHERINE — switch to T-DM1 if non-pCR.",
+    ],
+    rationaleFactIds: ["f-mk-stage", "f-mk-receptors", "f-mk-oncokb"],
+    outcomes: [
+      { label: "pCR (breast + axilla)", value: "35–45%", citation: "ATEMPT 2021" },
+      { label: "5-year iDFS", value: "~80%", citation: "KATHERINE 2019" },
+      { label: "Severe neuropathy", value: "~10% (vs ~30% TCHP)", citation: "ATEMPT 2021" },
+    ],
+    toxicities: [
+      { category: "Neuropathy", severity: "~10% gr2+" },
+      { category: "Cardiotoxicity", severity: "Single-antibody risk lower" },
+      { category: "Neutropenia", severity: "Mild" },
+    ],
+    evidence: ["ATEMPT 2021", "KATHERINE 2019", "NCCN BINV"],
+    burden: "≈ 14 mo total · 12 weekly infusions · 1 surgery · 5+ yrs endocrine",
+    rankings: [
+      { specialist: "Dr. J. Müller", specialty: "med-onc", rank: 2, confidence: 0.7 },
+      { specialist: "Dr. R. Patel", specialty: "pathology", rank: 2, confidence: 0.65 },
+      { specialist: "Dr. S. Chen", specialty: "surg-onc", rank: 2, confidence: 0.7 },
+      { specialist: "Dr. K. Lee", specialty: "rad-onc", rank: 2, confidence: 0.7 },
+      { specialist: "PharmD A. Riesgo", specialty: "pharmacy", rank: 2, confidence: 0.75 },
+    ],
+    patientFacing: {
+      name: "A gentler path",
+      summary:
+        "A milder weekly chemotherapy with one HER2 antibody for three months, then surgery, then up to a year of an antibody-only treatment that's adjusted to how well the chemo worked.",
+      livesLikeThis:
+        "Less intense weekly visits, much less likely to cause numb fingers/toes long-term. Slightly lower chance of complete tumor disappearance before surgery, but the year of antibody-only treatment afterwards catches up much of that gap.",
+    },
+  },
+  {
+    id: "opt-mk-C",
+    name: "Trial — alpelisib add-on",
+    shortLabel:
+      "TCHP × 6 + alpelisib (PIK3CA H1047R) → surgery → adjuvant per response",
+    intent: "trial",
+    phases: [
+      {
+        id: "ph-mk-C-1",
+        name: "TCHP + alpelisib (trial arm)",
+        type: "chemo",
+        regimen: "TCHP q3w × 6 + alpelisib 250 mg PO daily",
+        status: "planned",
+        startDate: "2026-02-25",
+        endDate: "2026-06-10",
+      },
+      {
+        id: "ph-mk-C-2",
+        name: "Lumpectomy + SLNB",
+        type: "surgery",
+        status: "planned",
+        startDate: "2026-07-08",
+      },
+      {
+        id: "ph-mk-C-3",
+        name: "Adjuvant (per response)",
+        type: "targeted",
+        regimen: "T-DM1 if non-pCR, else continue HP",
+        status: "planned",
+        startDate: "2026-08-04",
+      },
+    ],
+    rationale: [
+      "PIK3CA H1047R activating mutation present (OncoKB Level 1 in HR+/HER2−; investigational here).",
+      "Open trial slot at NCT##### for HER2+ + PIK3CA-mut.",
+      "Patient is interested in trial participation.",
+    ],
+    rationaleFactIds: ["f-mk-ngs", "f-mk-oncokb"],
+    outcomes: [
+      { label: "pCR (estimated)", value: "55–70%", citation: "NeoPHOEBE-style estimate" },
+      { label: "Hyperglycemia gr3+", value: "~10%", citation: "SOLAR-1 2019" },
+    ],
+    toxicities: [
+      { category: "Hyperglycemia", severity: "Common — SMBG required" },
+      { category: "Rash", severity: "~10% gr2+" },
+      { category: "Diarrhea", severity: "Common" },
+    ],
+    evidence: ["SOLAR-1 2019", "trial protocol NCT-PLACEHOLDER"],
+    burden:
+      "Same as Standard of care + daily oral pill + extra labs/visits for trial monitoring",
+    rankings: [
+      { specialist: "Dr. J. Müller", specialty: "med-onc", rank: 3, confidence: 0.55 },
+      { specialist: "Dr. R. Patel", specialty: "pathology", rank: 2, confidence: 0.7 },
+      { specialist: "Dr. S. Chen", specialty: "surg-onc", rank: 3, confidence: 0.5 },
+      { specialist: "Dr. K. Lee", specialty: "rad-onc", rank: 3, confidence: 0.5 },
+      { specialist: "PharmD A. Riesgo", specialty: "pharmacy", rank: 3, confidence: 0.6 },
+    ],
+    patientFacing: {
+      name: "A clinical trial",
+      summary:
+        "The standard treatment plus an additional daily pill that targets a specific change in your tumor (PIK3CA), to see if it improves the chance of complete tumor disappearance.",
+      livesLikeThis:
+        "Same as the standard path, with extra blood-sugar monitoring and more frequent check-ins. Side effects we know about: high blood sugar, rash, diarrhea.",
+    },
+  },
+];
+
+const boardCaseMaria: BoardCase = {
+  id: "case-mk-tx-decision",
+  patientId: "maria-k",
+  question:
+    "HER2+ Stage IIB · ERBB2 amp · PIK3CA H1047R — neoadjuvant strategy and adjuvant sequencing.",
+  openedAt: "2026-04-22T17:30:00Z",
+  attendees: [
+    { name: "Dr. J. Müller", role: "Med-Onc", tone: "violet" },
+    { name: "Dr. R. Patel", role: "Pathology", tone: "rose" },
+    { name: "Dr. S. Chen", role: "Surgical Onc", tone: "emerald" },
+    { name: "Dr. K. Lee", role: "Rad-Onc + Radiology", tone: "amber" },
+    { name: "PharmD A. Riesgo", role: "Pharmacy", tone: "sky" },
+  ],
+  status: "draft",
+  decidedOptionId: null,
+};
 
 const factsThomas: Fact[] = [
   {
@@ -195,6 +556,7 @@ const factsThomas: Fact[] = [
     value: "Thomas Berger",
     confidence: 1,
     group: "demographics",
+    specialty: "nursing",
     source: { kind: "report", id: "doc-tb-intake", label: "Intake form · 2026-03-01", at: "2026-03-01T08:30:00Z" },
     updatedAt: "2026-03-01T08:30:00Z",
   },
@@ -205,6 +567,7 @@ const factsThomas: Fact[] = [
     value: "1958-06-21",
     confidence: 1,
     group: "demographics",
+    specialty: "nursing",
     source: { kind: "report", id: "doc-tb-intake", label: "Intake form", at: "2026-03-01T08:30:00Z" },
     updatedAt: "2026-03-01T08:30:00Z",
   },
@@ -215,6 +578,7 @@ const factsThomas: Fact[] = [
     value: "MRN-198342",
     confidence: 1,
     group: "demographics",
+    specialty: "nursing",
     source: { kind: "report", id: "doc-tb-intake", label: "EHR registration", at: "2026-03-01T08:30:00Z" },
     updatedAt: "2026-03-01T08:30:00Z",
   },
@@ -225,6 +589,7 @@ const factsThomas: Fact[] = [
     value: "Adenocarcinoma of the rectum, mid-rectum (8 cm from anal verge)",
     confidence: 0.99,
     group: "diagnosis",
+    specialty: "pathology",
     source: {
       kind: "pathology",
       id: "path-tb-001",
@@ -243,6 +608,7 @@ const factsThomas: Fact[] = [
     value: "cT3 cN1 cM0 — Stage IIIB",
     confidence: 0.7,
     group: "staging",
+    specialty: "radiology",
     source: {
       kind: "imaging",
       id: "img-tb-mri-001",
@@ -261,6 +627,7 @@ const factsThomas: Fact[] = [
     value: "8.4 ng/mL (elevated)",
     confidence: 1,
     group: "lab",
+    specialty: "med-onc",
     source: { kind: "lab", id: "lab-tb-cea-1", label: "CEA · 2026-03-05", at: "2026-03-05T07:50:00Z" },
     updatedAt: "2026-03-05T07:50:00Z",
   },
@@ -271,6 +638,7 @@ const factsThomas: Fact[] = [
     value: "FOLFOX × 4 cycles (TNT — induction phase)",
     confidence: 0.96,
     group: "medication",
+    specialty: "med-onc",
     source: {
       kind: "note",
       id: "note-tb-tb-1",
@@ -289,6 +657,7 @@ const factsThomas: Fact[] = [
     value: "FOLFOX cycle 4 of 4 — completed 2026-04-18",
     confidence: 1,
     group: "medication",
+    specialty: "nursing",
     source: {
       kind: "note",
       id: "note-tb-infusion-4",
@@ -304,6 +673,7 @@ const factsThomas: Fact[] = [
     value: "Pelvic MRI · 2026-04-22 (incoming PR)",
     confidence: 0.85,
     group: "imaging",
+    specialty: "radiology",
     source: {
       kind: "imaging",
       id: "img-tb-mri-002",
@@ -325,6 +695,7 @@ const factsAnna: Fact[] = [
     value: "Anna Lindqvist",
     confidence: 1,
     group: "demographics",
+    specialty: "nursing",
     source: { kind: "report", id: "doc-al-intake", label: "Intake form · 2024-02-19", at: "2024-02-19T10:00:00Z" },
     updatedAt: "2024-02-19T10:00:00Z",
   },
@@ -335,6 +706,7 @@ const factsAnna: Fact[] = [
     value: "1977-11-02",
     confidence: 1,
     group: "demographics",
+    specialty: "nursing",
     source: { kind: "report", id: "doc-al-intake", label: "Intake form", at: "2024-02-19T10:00:00Z" },
     updatedAt: "2024-02-19T10:00:00Z",
   },
@@ -345,6 +717,7 @@ const factsAnna: Fact[] = [
     value: "MRN-176104",
     confidence: 1,
     group: "demographics",
+    specialty: "nursing",
     source: { kind: "report", id: "doc-al-intake", label: "EHR registration", at: "2024-02-19T10:00:00Z" },
     updatedAt: "2024-02-19T10:00:00Z",
   },
@@ -355,6 +728,7 @@ const factsAnna: Fact[] = [
     value: "Invasive lobular carcinoma, right breast",
     confidence: 0.98,
     group: "diagnosis",
+    specialty: "pathology",
     source: {
       kind: "pathology",
       id: "path-al-001",
@@ -373,6 +747,7 @@ const factsAnna: Fact[] = [
     value: "pT1c pN0 — Stage IA",
     confidence: 0.99,
     group: "staging",
+    specialty: "pathology",
     source: {
       kind: "pathology",
       id: "path-al-001",
@@ -388,6 +763,7 @@ const factsAnna: Fact[] = [
     value: "ER+ (98%) · PR+ (75%) · HER2 0 (negative)",
     confidence: 0.98,
     group: "diagnosis",
+    specialty: "pathology",
     source: { kind: "pathology", id: "path-al-001", label: "IHC panel", at: "2024-04-12T11:00:00Z" },
     updatedAt: "2024-04-12T11:00:00Z",
   },
@@ -398,6 +774,7 @@ const factsAnna: Fact[] = [
     value: "Tamoxifen 20 mg daily — start 2024-08-12, planned ≥ 5 yrs",
     confidence: 1,
     group: "medication",
+    specialty: "med-onc",
     source: {
       kind: "note",
       id: "note-al-tam",
@@ -414,6 +791,7 @@ const factsAnna: Fact[] = [
     value: "Bilateral mammogram · 2025-10-14 — BI-RADS 2 (benign)",
     confidence: 0.99,
     group: "imaging",
+    specialty: "radiology",
     source: {
       kind: "imaging",
       id: "img-al-mam-3",
@@ -430,6 +808,7 @@ const factsAnna: Fact[] = [
     value: "21 U/mL (within normal)",
     confidence: 1,
     group: "lab",
+    specialty: "med-onc",
     source: { kind: "lab", id: "lab-al-ca153-2", label: "CA 15-3 · 2026-04-04", at: "2026-04-04T08:00:00Z" },
     updatedAt: "2026-04-04T08:00:00Z",
   },
@@ -459,6 +838,9 @@ export const patients: Patient[] = [
       { initials: "KL", tone: "amber" },
     ],
     facts: factsMaria,
+    options: optionsMaria,
+    chosenOptionId: null,
+    boardCase: boardCaseMaria,
     plan: [
       {
         id: "ph-mk-1",
