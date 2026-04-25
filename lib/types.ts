@@ -173,6 +173,7 @@ export type PullRequest = {
   source: SourceRef;
   proposed: FactDelta[];
   conflicts: Conflict[];
+  gaps?: string[];
   status: PRStatus;
   agentVerdict: string;
   openedAt: string;

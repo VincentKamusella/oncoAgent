@@ -48,11 +48,7 @@ export function VaultView({ patient }: { patient: Patient }) {
 
   if (active === "all") {
     return (
-      <AllRecordsDashboard
-        patient={patient}
-        facts={facts}
-        attachments={attachments}
-      />
+      <AllRecordsDashboard patient={patient} facts={facts} />
     );
   }
 
