@@ -5,11 +5,13 @@ export const PR_STATUS_TONE: Record<PRStatus, "active" | "warn" | "conflict" | "
   open: "info",
   "needs-review": "warn",
   conflict: "conflict",
+  declined: "info",
 };
 
 export const PR_STATUS_LABEL: Record<PRStatus, string> = {
-  merged: "Merged",
+  merged: "Signed off",
   open: "Open",
   "needs-review": "Needs review",
   conflict: "Conflict",
+  declined: "Declined",
 };

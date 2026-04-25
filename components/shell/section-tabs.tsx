@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Folder, Inbox, Users2 } from "lucide-react";
+import { Folder, GitPullRequest, Users2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 type Section = {
@@ -39,8 +39,8 @@ export function SectionTabs({
     },
     {
       href: `${base}/inbox`,
-      label: "Inbox",
-      icon: <Inbox className="h-3.5 w-3.5" />,
+      label: "Review",
+      icon: <GitPullRequest className="h-3.5 w-3.5" />,
       count: prCount,
       countTone: conflictCount > 0 ? "conflict" : "active",
       matches: (p, b) =>

@@ -9,9 +9,7 @@ import {
   Plus,
 } from "lucide-react";
 import { format, formatDistanceToNowStrict } from "date-fns";
-import { getPatient } from "@/lib/mock-data/patients";
-import { meetingById } from "@/lib/mock-data/meetings";
-import { prById } from "@/lib/mock-data/prs";
+import { getPatient, meetingById, prById } from "@/lib/data";
 import { Transcript } from "@/components/meetings/transcript";
 import { MeetingSummary } from "@/components/meetings/meeting-summary";
 import { StatusPill } from "@/components/ui/status-pill";
@@ -36,12 +34,14 @@ export default async function MeetingDetailPage({
   params: Promise<{ id: string; mId: string }>;
 }) {
   const { id, mId } = await params;
-  const patient = getPatient(id);
-  const meeting = meetingById(mId);
+  const patient = await getPatient(id);
+  const meeting = await meetingById(mId);
   if (!patient || !meeting || meeting.patientId !== id) notFound();
 
-  const prTitles = (meeting.proposedPRIds ?? [])
-    .map((pid) => prById(pid))
+  const prResults = await Promise.all(
+    (meeting.proposedPRIds ?? []).map((pid) => prById(pid))
+  );
+  const prTitles = prResults
     .filter((pr): pr is NonNullable<typeof pr> => !!pr)
     .map((pr) => ({ id: pr.id, title: pr.title }));
 

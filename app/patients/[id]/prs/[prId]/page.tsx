@@ -7,21 +7,22 @@ import {
   AlertOctagon,
   Eye,
   Sparkles,
+  XCircle,
 } from "lucide-react";
 import { format } from "date-fns";
-import { getPatient } from "@/lib/mock-data/patients";
-import { prById } from "@/lib/mock-data/prs";
+import { getPatient, prById } from "@/lib/data";
 import { StatusPill } from "@/components/ui/status-pill";
 import { FactMono } from "@/components/ui/fact-mono";
 import { PRDiff } from "@/components/prs/pr-diff";
 import { PRActions } from "@/components/prs/pr-actions";
 import { PR_STATUS_LABEL, PR_STATUS_TONE } from "@/components/prs/pr-status";
 
-const ICON = {
+const ICON: Record<string, React.ReactNode> = {
   open: <GitPullRequest className="h-4 w-4 text-violet-600" />,
   merged: <GitMerge className="h-4 w-4 text-emerald-600" />,
   conflict: <AlertOctagon className="h-4 w-4 text-rose-600" />,
   "needs-review": <Eye className="h-4 w-4 text-amber-600" />,
+  declined: <XCircle className="h-4 w-4 text-muted-foreground" />,
 };
 
 export default async function PRDetailPage({
@@ -30,8 +31,8 @@ export default async function PRDetailPage({
   params: Promise<{ id: string; prId: string }>;
 }) {
   const { id, prId } = await params;
-  const patient = getPatient(id);
-  const pr = prById(prId);
+  const patient = await getPatient(id);
+  const pr = await prById(prId);
   if (!patient || !pr || pr.patientId !== id) notFound();
 
   return (
@@ -40,7 +41,7 @@ export default async function PRDetailPage({
         href={`/patients/${id}/inbox`}
         className="inline-flex w-max items-center gap-1.5 text-[12.5px] text-muted-foreground hover:text-foreground"
       >
-        <ChevronLeft className="h-3.5 w-3.5" /> Back to inbox
+        <ChevronLeft className="h-3.5 w-3.5" /> Back to review
       </Link>
 
       {/* hero */}

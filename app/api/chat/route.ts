@@ -1,4 +1,4 @@
-import { getPatient } from "@/lib/mock-data/patients";
+import { getPatient } from "@/lib/data";
 import { buildSystemPrompt } from "@/lib/chat/context";
 import { toolDefinitions, executeTool } from "@/lib/chat/tools";
 import {
@@ -91,7 +91,7 @@ export async function POST(request: Request) {
     sessionId?: string;
   };
 
-  const patient = getPatient(patientId);
+  const patient = await getPatient(patientId);
   if (!patient) {
     return Response.json({ error: "Patient not found" }, { status: 404 });
   }
@@ -100,7 +100,7 @@ export async function POST(request: Request) {
     return Response.json({ error: "Azure OpenAI not configured" }, { status: 500 });
   }
 
-  const instructions = buildSystemPrompt(patient, view);
+  const instructions = await buildSystemPrompt(patient, view);
   const userMessage = messages[messages.length - 1]?.content ?? "";
   const trace = createTrace(
     sessionId ?? "anonymous",
@@ -139,7 +139,7 @@ export async function POST(request: Request) {
         /* empty args */
       }
 
-      const result = executeTool(call.name, args, patientId);
+      const result = await executeTool(call.name, args, patientId);
       callLogs.push({
         name: call.name,
         arguments: args,

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { GitPullRequest, GitMerge, AlertOctagon, Eye, ChevronRight } from "lucide-react";
+import { GitPullRequest, GitMerge, AlertOctagon, Eye, XCircle, ChevronRight } from "lucide-react";
 import { StatusPill } from "@/components/ui/status-pill";
 import { FactMono } from "@/components/ui/fact-mono";
 import { PR_STATUS_LABEL, PR_STATUS_TONE } from "./pr-status";
@@ -11,6 +11,7 @@ const ICON: Record<PullRequest["status"], React.ReactNode> = {
   merged: <GitMerge className="h-4 w-4 text-emerald-500" />,
   conflict: <AlertOctagon className="h-4 w-4 text-rose-500" />,
   "needs-review": <Eye className="h-4 w-4 text-amber-500" />,
+  declined: <XCircle className="h-4 w-4 text-muted-foreground" />,
 };
 
 export function PRList({

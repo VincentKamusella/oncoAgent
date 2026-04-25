@@ -7,9 +7,7 @@ import {
   AlertCircle,
   CalendarDays,
 } from "lucide-react";
-import { getPatient } from "@/lib/mock-data/patients";
-import { prsForPatient } from "@/lib/mock-data/prs";
-import { followupForPatient } from "@/lib/mock-data/followup";
+import { getPatient, prsForPatient, followupForPatient } from "@/lib/data";
 import { PRList } from "@/components/prs/pr-list";
 import { FollowupTimeline } from "@/components/followup/followup-timeline";
 
@@ -21,10 +19,10 @@ export default async function InboxPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const patient = getPatient(id);
+  const patient = await getPatient(id);
   if (!patient) notFound();
 
-  const prs = prsForPatient(id).sort(
+  const prs = (await prsForPatient(id)).sort(
     (a, b) => new Date(b.openedAt).getTime() - new Date(a.openedAt).getTime()
   );
   const conflictPRs = prs.filter((p) => p.status === "conflict");
@@ -40,7 +38,7 @@ export default async function InboxPage({
     issues: patient.agent.needsYou.length,
   };
 
-  const followups = followupForPatient(id);
+  const followups = await followupForPatient(id);
   const upcoming = followups
     .filter((i) => i.status === "scheduled" && new Date(i.date) >= TODAY)
     .slice(0, 4);
@@ -49,16 +47,15 @@ export default async function InboxPage({
     <div className="mx-auto flex w-full max-w-[1100px] flex-col gap-6 overflow-y-auto px-6 py-6">
       <header>
         <span className="mono text-[11px] uppercase tracking-[0.16em] text-violet-600">
-          Inbox
+          Review
         </span>
         <h2 className="mt-1 text-[22px] font-semibold tracking-tight">
           Incoming changes & open questions
         </h2>
         <p className="mt-1.5 max-w-2xl text-[13px] leading-relaxed text-muted-foreground">
-          New records arrive as pull requests. Agents auto-merge what&apos;s
-          unambiguous, block on conflicts, and raise issues when they need a
-          human. Forward-scheduled items live here too — they become PRs as
-          soon as the data lands.
+          Specialists propose changes as review items. The agent runs conflict
+          checks, then you sign off or decline. Forward-scheduled items appear
+          here too — they become review items when the data lands.
         </p>
       </header>
 
@@ -81,7 +78,7 @@ export default async function InboxPage({
         />
         <Stat
           icon={<GitMerge className="h-3.5 w-3.5 text-emerald-500" />}
-          label="Recently merged"
+          label="Signed off"
           value={counts.merged}
         />
       </div>

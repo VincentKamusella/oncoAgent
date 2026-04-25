@@ -163,7 +163,7 @@ export type Conflict = {
   rationale: string;
 };
 
-export type PRStatus = "open" | "merged" | "conflict" | "needs-review";
+export type PRStatus = "open" | "merged" | "conflict" | "needs-review" | "declined";
 
 export type PullRequest = {
   id: string;

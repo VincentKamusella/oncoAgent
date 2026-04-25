@@ -1,7 +1,6 @@
 import { notFound } from "next/navigation";
 import { CalendarDays, Plus } from "lucide-react";
-import { getPatient } from "@/lib/mock-data/patients";
-import { followupForPatient } from "@/lib/mock-data/followup";
+import { getPatient, followupForPatient } from "@/lib/data";
 import { FollowupTimeline } from "@/components/followup/followup-timeline";
 import { Button } from "@/components/ui/button";
 
@@ -13,10 +12,10 @@ export default async function FollowupPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const patient = getPatient(id);
+  const patient = await getPatient(id);
   if (!patient) notFound();
 
-  const items = followupForPatient(id);
+  const items = await followupForPatient(id);
   const upcoming = items.filter(
     (i) => i.status === "scheduled" && new Date(i.date) >= TODAY
   );
