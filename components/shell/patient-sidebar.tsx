@@ -42,7 +42,7 @@ export function PatientSidebar({
         <Link
           href="/"
           aria-label="oncoAgent home"
-          className="grid h-7 w-7 place-items-center rounded-md bg-violet-500 shadow-[0_4px_12px_rgba(124,91,247,0.45)]"
+          className="grid h-7 w-7 place-items-center rounded-md bg-violet-500 shadow-[0_4px_12px_rgba(15,31,77,0.22)]"
         >
           <Logo />
         </Link>
@@ -65,7 +65,7 @@ export function PatientSidebar({
           href="/"
           className="flex items-center gap-2.5 rounded-lg border border-transparent px-2.5 py-1"
         >
-          <div className="grid h-7 w-7 flex-shrink-0 place-items-center rounded-md bg-violet-500 shadow-[0_4px_12px_rgba(124,91,247,0.45)]">
+          <div className="grid h-7 w-7 flex-shrink-0 place-items-center rounded-md bg-violet-500 shadow-[0_4px_12px_rgba(15,31,77,0.22)]">
             <Logo />
           </div>
           <span className="text-[15px] font-semibold tracking-tight">

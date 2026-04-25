@@ -42,7 +42,7 @@ const GROUP_LABELS: Record<GroupKey, string> = {
 };
 
 const GROUP_COLORS: Record<GroupKey, string> = {
-  demographics: "#7C5BF7",
+  demographics: "#0f1f4d",
   diagnosis: "#F43F5E",
   staging: "#F59E0B",
   medication: "#0EA5E9",
@@ -52,7 +52,7 @@ const GROUP_COLORS: Record<GroupKey, string> = {
   genomics: "#EC4899",
 };
 
-const PATIENT_COLOR = "#5A39C9";
+const PATIENT_COLOR = "#0f1f4d";
 const SOURCE_COLOR = "#94A3B8";
 
 function buildGraph(

@@ -1,15 +1,8 @@
 "use client";
 
 import { useMemo } from "react";
-import { format, formatDistanceToNowStrict } from "date-fns";
-import {
-  Image as ImageIcon,
-  FileText,
-  ScrollText,
-  Table as TableIcon,
-  Sparkles,
-  Network,
-} from "lucide-react";
+import { formatDistanceToNowStrict } from "date-fns";
+import { Network } from "lucide-react";
 import type {
   Attachment,
   AttachmentKind,
@@ -28,20 +21,6 @@ type ActivityItem =
       kind: AttachmentKind;
       source?: string;
     };
-
-const KIND_ICON: Record<AttachmentKind, React.ReactNode> = {
-  image: <ImageIcon className="h-3.5 w-3.5" />,
-  pdf: <FileText className="h-3.5 w-3.5" />,
-  table: <TableIcon className="h-3.5 w-3.5" />,
-  report: <ScrollText className="h-3.5 w-3.5" />,
-};
-
-const KIND_TONE: Record<AttachmentKind, string> = {
-  image: "bg-violet-100 text-violet-700",
-  pdf: "bg-rose-100 text-rose-700",
-  table: "bg-sky-100 text-sky-700",
-  report: "bg-amber-100 text-amber-800",
-};
 
 export function AllRecordsDashboard({
   patient,
@@ -103,54 +82,6 @@ export function AllRecordsDashboard({
         </div>
       </div>
 
-      <div className="mt-8">
-        <div className="flex items-center gap-1.5">
-          <Sparkles className="h-3 w-3 text-violet-500" />
-          <span className="mono text-[10.5px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
-            Recent activity
-          </span>
-        </div>
-        <ol className="mt-3 flex flex-col">
-          {activity.slice(0, 8).map((item) => (
-            <li
-              key={item.id}
-              className="flex items-start gap-3 border-b border-border/60 py-2.5 last:border-b-0"
-            >
-              {item.type === "attachment" ? (
-                <span
-                  className={`grid h-6 w-6 flex-shrink-0 place-items-center rounded-md ${KIND_TONE[item.kind]}`}
-                >
-                  {KIND_ICON[item.kind]}
-                </span>
-              ) : (
-                <span className="grid h-6 w-6 flex-shrink-0 place-items-center rounded-md bg-emerald-100 text-emerald-700">
-                  <Sparkles className="h-3 w-3" />
-                </span>
-              )}
-              <div className="flex min-w-0 flex-1 flex-col leading-tight">
-                <span className="truncate text-[13px] font-medium text-foreground">
-                  {item.label}
-                </span>
-                <span className="truncate text-[11.5px] text-muted-foreground">
-                  {item.type === "attachment"
-                    ? item.source
-                      ? `${item.kind} · ${item.source}`
-                      : item.kind
-                    : item.value}
-                </span>
-              </div>
-              <span className="mono text-[10.5px] text-muted-foreground/80 whitespace-nowrap">
-                {format(new Date(item.date), "MMM d")}
-              </span>
-            </li>
-          ))}
-        </ol>
-        {activity.length === 0 && (
-          <p className="mt-3 text-[12.5px] italic text-muted-foreground">
-            No activity yet.
-          </p>
-        )}
-      </div>
     </section>
   );
 }

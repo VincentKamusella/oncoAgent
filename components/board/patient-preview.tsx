@@ -63,7 +63,7 @@ export function PatientPreview({
                 )}
               >
                 {recommended && (
-                  <span className="absolute -top-2.5 left-6 inline-flex items-center gap-1 rounded-full bg-violet-500 px-2.5 py-0.5 mono text-[10px] font-semibold uppercase tracking-wider text-white shadow-[0_4px_12px_rgba(124,91,247,0.35)]">
+                  <span className="absolute -top-2.5 left-6 inline-flex items-center gap-1 rounded-full bg-violet-500 px-2.5 py-0.5 mono text-[10px] font-semibold uppercase tracking-wider text-white shadow-[0_4px_12px_rgba(15,31,77,0.18)]">
                     <Heart className="h-3 w-3" /> team&apos;s recommendation
                   </span>
                 )}
