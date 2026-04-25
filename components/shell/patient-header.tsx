@@ -1,5 +1,4 @@
-import Link from "next/link";
-import { ChevronRight, Search } from "lucide-react";
+import { Search } from "lucide-react";
 import { StatusPill } from "@/components/ui/status-pill";
 import { Input } from "@/components/ui/input";
 import { FactMono } from "@/components/ui/fact-mono";
@@ -19,35 +18,24 @@ const STATUS_LABEL: Record<Patient["status"], string> = {
 
 export function PatientHeader({ patient }: { patient: Patient }) {
   return (
-    <header className="flex items-center justify-between gap-4 border-b border-border bg-background/70 px-6 py-3.5 backdrop-blur">
-      <div className="flex min-w-0 items-center gap-2.5">
-        <Link
-          href="/"
-          className="text-[12px] font-medium text-muted-foreground hover:text-foreground"
-        >
-          Patient vaults
-        </Link>
-        <ChevronRight className="h-3 w-3 text-muted-foreground/60" />
-        <div className="flex items-center gap-2.5">
-          <div className="grid h-7 w-7 place-items-center rounded-md bg-violet-50 mono text-[11px] font-semibold text-violet-700">
-            {patient.initials}
-          </div>
-          <div className="flex flex-col leading-tight">
-            <span className="text-[14px] font-semibold tracking-tight">
-              {patient.name}
-            </span>
-            <FactMono className="whitespace-nowrap text-[11px] text-muted-foreground">
-              {patient.mrn} · {patient.age}
-              {patient.sex} · {patient.caseOpenedAt}
-            </FactMono>
-          </div>
+    <header className="flex h-14 flex-shrink-0 items-center justify-between gap-4 border-b border-border bg-background/70 px-6 backdrop-blur">
+      <div className="flex min-w-0 items-center gap-3">
+        <div className="grid h-6 w-6 flex-shrink-0 place-items-center rounded-md bg-violet-50 mono text-[10.5px] font-semibold text-violet-700">
+          {patient.initials}
         </div>
-        <StatusPill tone={STATUS_TONE[patient.status]} className="ml-2">
+        <span className="truncate text-[14px] font-semibold tracking-tight">
+          {patient.name}
+        </span>
+        <FactMono className="hidden whitespace-nowrap text-[11px] text-muted-foreground md:inline">
+          {patient.mrn} · {patient.age}
+          {patient.sex} · {patient.caseOpenedAt}
+        </FactMono>
+        <StatusPill tone={STATUS_TONE[patient.status]}>
           {STATUS_LABEL[patient.status]}
         </StatusPill>
       </div>
 
-      <div className="relative hidden w-72 lg:block">
+      <div className="relative hidden w-64 flex-shrink-0 lg:block">
         <Search className="pointer-events-none absolute left-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
         <Input
           placeholder="Find anything…"

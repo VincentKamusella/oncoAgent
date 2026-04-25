@@ -56,12 +56,12 @@ function cannedResponse(input: string, patient: Patient): string {
     return "I can't auto-merge that change — it materially shifts prognosis and surgical plan. Multidisciplinary review is required. I've drafted talking points for the tumor board.";
   }
   if (q.includes("source") || q.includes("provenance") || q.includes("where")) {
-    return "Every fact in the vault traces to a source — pathology report, imaging, lab feed, or a clinician note. Click any 📎 in the overview to see the underlying excerpt.";
+    return "Every record in the vault traces to a source — pathology report, imaging, lab feed, or a clinician note. Click any 📎 in the overview to see the underlying excerpt.";
   }
   if (q.includes("schedule") || q.includes("book") || q.includes("appointment")) {
     return "I can auto-book imaging, labs, or visits. Want me to add something to the followup schedule?";
   }
-  return `Looking through ${patient.name.split(" ")[0]}'s vault for context on that. Each fact is structured and provenance-linked — I'll cite sources when I respond.`;
+  return `Looking through ${patient.name.split(" ")[0]}'s vault for context on that. Each record is structured and provenance-linked — I'll cite sources when I respond.`;
 }
 
 export function AgentChat({ patient }: { patient: Patient }) {
@@ -137,7 +137,7 @@ export function AgentChat({ patient }: { patient: Patient }) {
 
   return (
     <aside className="hidden w-[340px] flex-shrink-0 flex-col border-l border-border bg-card/40 xl:flex">
-      <header className="flex items-center justify-between border-b border-border px-5 py-3.5">
+      <header className="flex h-14 flex-shrink-0 items-center justify-between border-b border-border px-5">
         <div className="flex items-center gap-2">
           <div className="grid h-6 w-6 place-items-center rounded-md bg-violet-100">
             <Sparkles className="h-3.5 w-3.5 text-violet-600" />

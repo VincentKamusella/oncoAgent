@@ -25,7 +25,7 @@ export function RulePanel({
           Inspector
         </span>
         <p className="mt-2 text-[13px] leading-snug text-muted-foreground">
-          Click any node in the flow to see the rule it represents and the patient facts that satisfy it.
+          Click any node in the flow to see the rule it represents and the patient records that satisfy it.
         </p>
       </div>
     );
@@ -57,7 +57,7 @@ export function RulePanel({
       {node.factKey && (
         <div>
           <p className="mono text-[10.5px] font-semibold uppercase tracking-wider text-muted-foreground">
-            Bound fact
+            Bound record
           </p>
           <FactMono className="mt-1 inline-flex rounded-md bg-muted px-1.5 py-0.5 text-foreground/90">
             {node.factKey}
@@ -67,11 +67,11 @@ export function RulePanel({
 
       <div>
         <p className="mono text-[10.5px] font-semibold uppercase tracking-wider text-muted-foreground">
-          Patient facts that satisfied this rule
+          Patient records that satisfied this rule
         </p>
         {matchingFacts.length === 0 ? (
           <p className="mt-1.5 text-[12.5px] italic text-muted-foreground">
-            No bound facts. The agent will populate this when the relevant data arrives.
+            No bound records. The agent will populate this when the relevant data arrives.
           </p>
         ) : (
           <ul className="mt-2 flex flex-col gap-1.5">

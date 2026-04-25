@@ -56,7 +56,7 @@ export function SectionTabs({
   ];
 
   return (
-    <nav className="flex items-center gap-0.5 border-b border-border bg-background/60 px-4 backdrop-blur">
+    <nav className="flex h-12 flex-shrink-0 items-center gap-0.5 border-b border-border bg-background/60 px-4 backdrop-blur">
       {sections.map((s) => {
         const isActive = s.matches
           ? s.matches(pathname, base)
@@ -66,7 +66,7 @@ export function SectionTabs({
             key={s.href}
             href={s.href}
             className={cn(
-              "relative flex items-center gap-1.5 px-3 py-2.5 text-[13px] font-medium transition-colors",
+              "relative flex h-full items-center gap-1.5 px-3 text-[13px] font-medium transition-colors",
               isActive
                 ? "text-foreground"
                 : "text-muted-foreground hover:text-foreground"

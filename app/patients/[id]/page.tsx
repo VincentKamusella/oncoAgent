@@ -11,5 +11,5 @@ export default async function VaultPage({
   const patient = getPatient(id);
   if (!patient) notFound();
 
-  return <VaultView facts={patient.facts} />;
+  return <VaultView patient={patient} />;
 }

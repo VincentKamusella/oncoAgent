@@ -16,7 +16,7 @@ export default function HomePage() {
           <div className="relative w-full max-w-md">
             <Search className="pointer-events-none absolute left-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
             <Input
-              placeholder="Search patients, facts, PRs…"
+              placeholder="Search patients, records, PRs…"
               className="h-9 rounded-lg border-border bg-card pl-8 text-[13px] shadow-none placeholder:text-muted-foreground/70 focus-visible:ring-violet-200"
             />
             <kbd className="pointer-events-none absolute right-2.5 top-1/2 hidden -translate-y-1/2 rounded border border-border bg-muted px-1.5 py-0.5 mono text-[10px] text-muted-foreground sm:inline">
@@ -42,7 +42,7 @@ export default function HomePage() {
                 Patient vaults
               </h1>
               <p className="mt-2 max-w-xl text-[14px] leading-relaxed text-muted-foreground">
-                Each vault holds a patient&apos;s structured context base — facts,
+                Each vault holds a patient&apos;s structured context base — records,
                 treatment plan, imaging, and the history of every change. Agents work
                 inside; you stay in the loop.
               </p>

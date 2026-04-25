@@ -17,14 +17,14 @@ export function PRDiff({
 
   if (deltas.length === 0) {
     return (
-      <p className="text-[13px] italic text-muted-foreground">No fact changes proposed.</p>
+      <p className="text-[13px] italic text-muted-foreground">No record changes proposed.</p>
     );
   }
 
   return (
     <div className="overflow-hidden rounded-xl border border-border bg-card">
       <div className="grid grid-cols-[160px_1fr_1fr] border-b border-border bg-muted/40 px-4 py-2 text-[11px] uppercase tracking-wider text-muted-foreground">
-        <span>Fact</span>
+        <span>Record</span>
         <span className="flex items-center gap-1.5">
           <Minus className="h-3 w-3 text-rose-500" />
           Before
