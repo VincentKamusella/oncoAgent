@@ -11,6 +11,9 @@
   "dependencies": {
     "@base-ui/react": "^1.4.1",
     "@dagrejs/dagre": "^3.0.0",
+    "@neo4j-nvl/base": "^1.1.0",
+    "@neo4j-nvl/interaction-handlers": "^1.1.0",
+    "@neo4j-nvl/react": "^1.1.0",
     "@xyflow/react": "^12.10.2",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",

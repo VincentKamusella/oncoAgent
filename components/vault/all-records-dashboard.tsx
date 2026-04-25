@@ -8,6 +8,7 @@ import {
   ScrollText,
   Table as TableIcon,
   Sparkles,
+  Network,
 } from "lucide-react";
 import type {
   Attachment,
@@ -15,6 +16,7 @@ import type {
   Fact,
   Patient,
 } from "@/lib/types";
+import { FactsGraph } from "./facts-graph";
 
 type ActivityItem =
   | { id: string; type: "fact"; date: string; label: string; value: string }
@@ -84,6 +86,21 @@ export function AllRecordsDashboard({
               : "—"
           }
         />
+      </div>
+
+      <div className="mt-8">
+        <div className="flex items-center gap-1.5">
+          <Network className="h-3 w-3 text-violet-500" />
+          <span className="mono text-[10.5px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+            Context graph
+          </span>
+        </div>
+        <p className="mt-1 text-[11.5px] text-muted-foreground/80">
+          Patient · groups · facts · sources. Drag to rearrange, scroll to zoom.
+        </p>
+        <div className="mt-3">
+          <FactsGraph patient={patient} facts={facts} />
+        </div>
       </div>
 
       <div className="mt-8">
