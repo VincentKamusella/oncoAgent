@@ -1,146 +1,234 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { ChevronsUpDown, Plus, Search } from "lucide-react";
-import { StatusPill } from "@/components/ui/status-pill";
-import { Input } from "@/components/ui/input";
+import { useRouter } from "next/navigation";
+import {
+  ChevronsUpDown,
+  Check,
+  PanelLeftClose,
+  PanelLeftOpen,
+} from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+} from "@/components/ui/dropdown-menu";
 import { patients } from "@/lib/mock-data/patients";
+import { SpecialistTreeNav } from "@/components/vault/specialist-tree";
+import { useCollapsible } from "@/lib/use-collapsible";
+import type { Patient } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
-const STATUS_GROUPS: { label: string; status: "active" | "surveillance" | "archived" }[] = [
-  { label: "Active", status: "active" },
-  { label: "Surveillance", status: "surveillance" },
-];
+export function PatientSidebar({
+  activePatientId,
+}: {
+  activePatientId?: string;
+}) {
+  const router = useRouter();
+  const { collapsed, toggle } = useCollapsible("left");
+  const active = patients.find((p) => p.id === activePatientId);
+  const facts = active?.facts ?? [];
 
-export function PatientSidebar({ activePatientId }: { activePatientId?: string }) {
-  const pathname = usePathname();
+  const grouped = {
+    active: patients.filter((p) => p.status === "active"),
+    surveillance: patients.filter((p) => p.status === "surveillance"),
+  };
+
+  if (collapsed) {
+    return (
+      <aside className="hidden w-10 flex-shrink-0 flex-col items-center gap-2 border-r border-border bg-sidebar py-3 md:flex">
+        <Link
+          href="/"
+          aria-label="oncoAgent home"
+          className="grid h-7 w-7 place-items-center rounded-md bg-violet-500 shadow-[0_4px_12px_rgba(124,91,247,0.45)]"
+        >
+          <Logo />
+        </Link>
+        <button
+          type="button"
+          onClick={toggle}
+          aria-label="Expand sidebar"
+          className="grid h-7 w-7 place-items-center rounded-md text-muted-foreground hover:bg-secondary hover:text-foreground"
+        >
+          <PanelLeftOpen className="h-4 w-4" />
+        </button>
+      </aside>
+    );
+  }
 
   return (
     <aside className="hidden w-[260px] flex-shrink-0 flex-col border-r border-border bg-sidebar md:flex">
-      <Link href="/" className="flex items-center gap-2.5 px-5 py-4">
-        <div className="grid h-7 w-7 place-items-center rounded-md bg-violet-500 shadow-[0_4px_12px_rgba(124,91,247,0.45)]">
-          <svg viewBox="0 0 24 24" fill="none" className="h-4 w-4 text-white">
-            <path
-              d="M12 3l8.5 4.9v8.2L12 21l-8.5-4.9V7.9L12 3z"
-              stroke="currentColor"
-              strokeWidth="1.6"
-              strokeLinejoin="round"
-            />
-            <path
-              d="M12 7.5l4.5 2.6v4.4L12 17.1l-4.5-2.6v-4.4L12 7.5z"
-              fill="currentColor"
-              fillOpacity="0.4"
-            />
-          </svg>
-        </div>
-        <span className="text-[15px] font-semibold tracking-tight">oncoAgent</span>
-      </Link>
-
-      <div className="px-3">
+      <div className="flex items-center justify-between px-5 py-4">
+        <Link href="/" className="flex items-center gap-2.5">
+          <div className="grid h-7 w-7 place-items-center rounded-md bg-violet-500 shadow-[0_4px_12px_rgba(124,91,247,0.45)]">
+            <Logo />
+          </div>
+          <span className="text-[15px] font-semibold tracking-tight">
+            oncoAgent
+          </span>
+        </Link>
         <button
           type="button"
-          className="flex w-full items-center justify-between rounded-lg border border-border bg-card px-3 py-2 text-left text-[13px] font-medium hover:bg-secondary"
+          onClick={toggle}
+          aria-label="Collapse sidebar"
+          className="grid h-6 w-6 place-items-center rounded-md text-muted-foreground hover:bg-secondary hover:text-foreground"
         >
-          <div className="flex items-center gap-2">
-            <div className="grid h-5 w-5 place-items-center rounded bg-violet-100 mono text-[10px] font-bold text-violet-700">
-              OV
-            </div>
-            <span>OncoUnit Vienna</span>
-          </div>
-          <ChevronsUpDown className="h-3.5 w-3.5 text-muted-foreground" />
+          <PanelLeftClose className="h-3.5 w-3.5" />
         </button>
       </div>
 
-      <div className="mt-3 px-3">
-        <div className="relative">
-          <Search className="pointer-events-none absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
-          <Input
-            placeholder="Search patients…"
-            className="h-8 rounded-md border-border bg-background pl-7 text-[12.5px] shadow-none placeholder:text-muted-foreground/70 focus-visible:ring-violet-200"
-          />
-        </div>
-      </div>
-
-      <div className="mt-4 flex-1 overflow-y-auto px-3">
-        <div className="flex items-center justify-between px-2 py-1.5">
-          <span className="mono text-[10.5px] font-semibold uppercase tracking-wider text-muted-foreground">
-            Patients
-          </span>
-          <button
-            type="button"
-            className="grid h-5 w-5 place-items-center rounded text-muted-foreground hover:bg-secondary hover:text-foreground"
-          >
-            <Plus className="h-3 w-3" />
-          </button>
-        </div>
-
-        {STATUS_GROUPS.map((g) => {
-          const groupPatients = patients.filter((p) => p.status === g.status);
-          if (!groupPatients.length) return null;
-          return (
-            <div key={g.status} className="mt-2">
-              <div className="px-2 pb-1 text-[10.5px] uppercase tracking-wider text-muted-foreground/80">
-                {g.label} · {groupPatients.length}
-              </div>
-              <div className="flex flex-col gap-0.5">
-                {groupPatients.map((p) => {
-                  const isActive = activePatientId === p.id;
-                  const href = `/patients/${p.id}`;
-                  return (
-                    <Link
-                      key={p.id}
-                      href={href}
-                      className={cn(
-                        "group flex items-center gap-2.5 rounded-lg px-2 py-1.5 text-[13px] transition-colors",
-                        isActive
-                          ? "bg-secondary text-secondary-foreground"
-                          : "text-muted-foreground hover:bg-secondary/60 hover:text-foreground"
-                      )}
-                    >
-                      <span
-                        className={cn(
-                          "grid h-6 w-6 place-items-center rounded-md mono text-[10.5px] font-semibold",
-                          isActive
-                            ? "bg-violet-500 text-white"
-                            : "bg-violet-50 text-violet-700"
-                        )}
-                      >
-                        {p.initials}
-                      </span>
-                      <div className="flex min-w-0 flex-1 flex-col leading-tight">
-                        <span className="truncate font-medium">{p.name}</span>
-                        <span className="truncate text-[11px] text-muted-foreground">
-                          {p.cancerLabel.split(" · ")[0]}
-                        </span>
-                      </div>
-                      {p.agent.needsYou.length > 0 && (
-                        <StatusPill tone="warn" className="!px-1.5 !py-0.5 !text-[10px]">
-                          {p.agent.needsYou.length}
-                        </StatusPill>
-                      )}
-                    </Link>
-                  );
-                })}
+      <div className="px-3">
+        <DropdownMenu>
+          <DropdownMenuTrigger className="flex w-full items-center justify-between rounded-lg border border-border bg-card px-3 py-2 text-left text-[13px] font-medium hover:bg-secondary">
+            <div className="flex items-center gap-2">
+              <span
+                className={cn(
+                  "grid h-6 w-6 flex-shrink-0 place-items-center rounded-md mono text-[10.5px] font-semibold",
+                  active
+                    ? "bg-violet-500 text-white"
+                    : "bg-violet-100 text-violet-700"
+                )}
+              >
+                {active?.initials ?? "—"}
+              </span>
+              <div className="flex min-w-0 flex-col leading-tight">
+                <span className="truncate text-[13px] font-medium">
+                  {active?.name ?? "Select patient"}
+                </span>
+                <span className="truncate text-[11px] text-muted-foreground">
+                  {active
+                    ? active.cancerLabel.split(" · ")[0]
+                    : "OncoUnit Vienna"}
+                </span>
               </div>
             </div>
-          );
-        })}
+            <ChevronsUpDown className="ml-2 h-3.5 w-3.5 flex-shrink-0 text-muted-foreground" />
+          </DropdownMenuTrigger>
+          <DropdownMenuContent
+            align="start"
+            sideOffset={6}
+            className="w-[244px] py-1.5"
+          >
+            <div className="px-2 py-1 mono text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
+              Active · {grouped.active.length}
+            </div>
+            {grouped.active.map((p) => (
+              <PatientMenuRow
+                key={p.id}
+                patient={p}
+                isActive={p.id === activePatientId}
+                onPick={() => router.push(`/patients/${p.id}`)}
+              />
+            ))}
+            {grouped.surveillance.length > 0 && (
+              <>
+                <DropdownMenuSeparator className="my-1" />
+                <div className="px-2 py-1 mono text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
+                  Surveillance · {grouped.surveillance.length}
+                </div>
+                {grouped.surveillance.map((p) => (
+                  <PatientMenuRow
+                    key={p.id}
+                    patient={p}
+                    isActive={p.id === activePatientId}
+                    onPick={() => router.push(`/patients/${p.id}`)}
+                  />
+                ))}
+              </>
+            )}
+            <DropdownMenuSeparator className="my-1" />
+            <DropdownMenuItem
+              onClick={() => router.push("/")}
+              className="px-2 py-1.5 text-[12.5px] text-muted-foreground"
+            >
+              All patient vaults
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
 
-      <div className="mt-auto p-3">
+      {active && (
+        <div className="mt-4 flex-1 overflow-y-auto pb-3">
+          <SpecialistTreeNav facts={facts} patientId={active.id} />
+        </div>
+      )}
+      {!active && <div className="flex-1" />}
+
+      <div className="p-3">
         <div className="flex items-center gap-2.5 rounded-lg border border-border bg-card px-3 py-2">
           <div className="grid h-7 w-7 place-items-center rounded-full bg-rose-100 mono text-[11px] font-semibold text-rose-700">
             JM
           </div>
           <div className="flex min-w-0 flex-col leading-tight">
-            <span className="truncate text-[13px] font-medium">Dr. Julia Müller</span>
-            <span className="truncate text-[11px] text-muted-foreground">Med-Onc</span>
+            <span className="truncate text-[13px] font-medium">
+              Dr. Julia Müller
+            </span>
+            <span className="truncate text-[11px] text-muted-foreground">
+              Med-Onc · OncoUnit Vienna
+            </span>
           </div>
         </div>
       </div>
-
-      <span className="hidden">{pathname}</span>
     </aside>
+  );
+}
+
+function PatientMenuRow({
+  patient,
+  isActive,
+  onPick,
+}: {
+  patient: Patient;
+  isActive: boolean;
+  onPick: () => void;
+}) {
+  return (
+    <DropdownMenuItem
+      onClick={onPick}
+      className={cn(
+        "flex items-center gap-2 px-2 py-1.5 text-[12.5px]",
+        isActive && "bg-violet-50/70"
+      )}
+    >
+      <span
+        className={cn(
+          "grid h-6 w-6 flex-shrink-0 place-items-center rounded-md mono text-[10.5px] font-semibold",
+          isActive
+            ? "bg-violet-500 text-white"
+            : "bg-violet-100 text-violet-700"
+        )}
+      >
+        {patient.initials}
+      </span>
+      <div className="flex min-w-0 flex-1 flex-col leading-tight">
+        <span className="truncate font-medium">{patient.name}</span>
+        <span className="truncate text-[10.5px] text-muted-foreground">
+          {patient.cancerLabel.split(" · ")[0]}
+        </span>
+      </div>
+      {isActive && (
+        <Check className="h-3.5 w-3.5 flex-shrink-0 text-violet-600" />
+      )}
+    </DropdownMenuItem>
+  );
+}
+
+function Logo() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className="h-4 w-4 text-white">
+      <path
+        d="M12 3l8.5 4.9v8.2L12 21l-8.5-4.9V7.9L12 3z"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M12 7.5l4.5 2.6v4.4L12 17.1l-4.5-2.6v-4.4L12 7.5z"
+        fill="currentColor"
+        fillOpacity="0.4"
+      />
+    </svg>
   );
 }

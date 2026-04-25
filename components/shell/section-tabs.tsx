@@ -2,20 +2,14 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import {
-  LayoutGrid,
-  GitPullRequest,
-  Activity,
-  Network,
-  CalendarDays,
-  Video,
-} from "lucide-react";
+import { Folder, Inbox, Users2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 type Section = {
   href: string;
   label: string;
   icon: React.ReactNode;
+  matches?: (path: string, base: string) => boolean;
   count?: number;
   countTone?: "active" | "warn" | "conflict";
 };
@@ -34,32 +28,39 @@ export function SectionTabs({
   const pathname = usePathname();
   const base = `/patients/${patientId}`;
 
+  void meetingCount;
+
   const sections: Section[] = [
-    { href: base, label: "Overview", icon: <LayoutGrid className="h-3.5 w-3.5" /> },
-    { href: `${base}/plan`, label: "Treatment plan", icon: <Activity className="h-3.5 w-3.5" /> },
-    { href: `${base}/guidelines`, label: "Guidelines", icon: <Network className="h-3.5 w-3.5" /> },
     {
-      href: `${base}/prs`,
-      label: "Pull requests",
-      icon: <GitPullRequest className="h-3.5 w-3.5" />,
+      href: base,
+      label: "Vault",
+      icon: <Folder className="h-3.5 w-3.5" />,
+      matches: (p, b) => p === b,
+    },
+    {
+      href: `${base}/inbox`,
+      label: "Inbox",
+      icon: <Inbox className="h-3.5 w-3.5" />,
       count: prCount,
       countTone: conflictCount > 0 ? "conflict" : "active",
+      matches: (p, b) =>
+        p.startsWith(`${b}/inbox`) || p.startsWith(`${b}/prs`),
     },
-    { href: `${base}/followup`, label: "Followup", icon: <CalendarDays className="h-3.5 w-3.5" /> },
     {
-      href: `${base}/meetings`,
-      label: "Meetings",
-      icon: <Video className="h-3.5 w-3.5" />,
-      count: meetingCount,
-      countTone: "active",
+      href: `${base}/board`,
+      label: "Board",
+      icon: <Users2 className="h-3.5 w-3.5" />,
+      matches: (p, b) =>
+        p.startsWith(`${b}/board`) || p.startsWith(`${b}/meetings`),
     },
   ];
 
   return (
     <nav className="flex items-center gap-0.5 border-b border-border bg-background/60 px-4 backdrop-blur">
       {sections.map((s) => {
-        const isActive =
-          s.href === base ? pathname === base : pathname.startsWith(s.href);
+        const isActive = s.matches
+          ? s.matches(pathname, base)
+          : pathname.startsWith(s.href);
         return (
           <Link
             key={s.href}
@@ -71,7 +72,9 @@ export function SectionTabs({
                 : "text-muted-foreground hover:text-foreground"
             )}
           >
-            <span className={isActive ? "text-violet-600" : "text-muted-foreground"}>
+            <span
+              className={isActive ? "text-violet-600" : "text-muted-foreground"}
+            >
               {s.icon}
             </span>
             {s.label}

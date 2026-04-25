@@ -1,0 +1,133 @@
+- generic [ref=e1]:
+  - generic [ref=e2]:
+    - complementary [ref=e3]:
+      - link "oncoAgent" [ref=e4] [cursor=pointer]:
+        - /url: /
+        - img [ref=e6]
+        - generic [ref=e9]: oncoAgent
+      - button "MK Maria Kowalski HER2+ breast cancer" [ref=e11]:
+        - generic [ref=e12]:
+          - generic [ref=e13]: MK
+          - generic [ref=e14]:
+            - generic [ref=e15]: Maria Kowalski
+            - generic [ref=e16]: HER2+ breast cancer
+        - img [ref=e17]
+      - navigation [ref=e21]:
+        - generic [ref=e22]: Facts
+        - button "All facts 16" [ref=e23]:
+          - generic [ref=e24]: All facts
+          - generic [ref=e25]: "16"
+        - list [ref=e26]:
+          - listitem [ref=e27]:
+            - button "Pathology 2" [active] [ref=e28]:
+              - img [ref=e30]
+              - generic [ref=e34]: Pathology
+              - generic [ref=e35]: "2"
+          - listitem [ref=e36]:
+            - button "Radiology 1" [ref=e37]:
+              - img [ref=e39]
+              - generic [ref=e44]: Radiology
+              - generic [ref=e45]: "1"
+          - listitem [ref=e46]:
+            - button "Medical oncology 3" [ref=e47]:
+              - img [ref=e49]
+              - generic [ref=e53]: Medical oncology
+              - generic [ref=e54]: "3"
+          - listitem [ref=e55]:
+            - button "Surgical oncology 1" [ref=e56]:
+              - img [ref=e58]
+              - generic [ref=e64]: Surgical oncology
+              - generic [ref=e65]: "1"
+          - listitem [ref=e66]:
+            - button "Radiation oncology 1" [ref=e67]:
+              - img [ref=e69]
+              - generic [ref=e71]: Radiation oncology
+              - generic [ref=e72]: "1"
+          - listitem [ref=e73]:
+            - button "Molecular pathology 2" [ref=e74]:
+              - img [ref=e76]
+              - generic [ref=e88]: Molecular pathology
+              - generic [ref=e89]: "2"
+          - listitem [ref=e90]:
+            - button "Pharmacy 1" [ref=e91]:
+              - img [ref=e93]
+              - generic [ref=e96]: Pharmacy
+              - generic [ref=e97]: "1"
+          - listitem [ref=e98]:
+            - button "Nursing & intake 4" [ref=e99]:
+              - img [ref=e101]
+              - generic [ref=e104]: Nursing & intake
+              - generic [ref=e105]: "4"
+          - listitem [ref=e106]:
+            - button "Patient-reported 1" [ref=e107]:
+              - img [ref=e109]
+              - generic [ref=e113]: Patient-reported
+              - generic [ref=e114]: "1"
+      - generic [ref=e116]:
+        - generic [ref=e117]: JM
+        - generic [ref=e118]:
+          - generic [ref=e119]: Dr. Julia Müller
+          - generic [ref=e120]: Med-Onc · OncoUnit Vienna
+    - generic [ref=e121]:
+      - banner [ref=e122]:
+        - generic [ref=e123]:
+          - link "Patient vaults" [ref=e124] [cursor=pointer]:
+            - /url: /
+          - img [ref=e125]
+          - generic [ref=e127]:
+            - generic [ref=e128]: MK
+            - generic [ref=e129]:
+              - generic [ref=e130]: Maria Kowalski
+              - generic [ref=e131]: MRN-204881 · 54F · case opened 2026-02-08
+          - generic [ref=e132]: Active treatment
+        - generic [ref=e134]:
+          - img
+          - textbox "Find anything…" [ref=e135]
+          - generic: ⌘K
+      - navigation [ref=e136]:
+        - link "Vault" [ref=e137] [cursor=pointer]:
+          - /url: /patients/maria-k
+          - img [ref=e139]
+          - text: Vault
+        - link "Inbox 1" [ref=e142] [cursor=pointer]:
+          - /url: /patients/maria-k/inbox
+          - img [ref=e144]
+          - text: Inbox
+          - generic [ref=e147]: "1"
+        - link "Board" [ref=e148] [cursor=pointer]:
+          - /url: /patients/maria-k/board
+          - img [ref=e150]
+          - text: Board
+      - main [ref=e154]:
+        - generic [ref=e157]:
+          - generic [ref=e158]:
+            - generic [ref=e159]:
+              - text: Specialist folder
+              - heading "Pathology" [level=2] [ref=e345]
+              - paragraph [ref=e161]: Histology, IHC/FISH, margins.
+            - button "Upload" [ref=e162]:
+              - img [ref=e163]
+              - text: Upload
+          - generic [ref=e196]:
+            - generic [ref=e197]:
+              - generic [ref=e198]: Diagnosis
+              - generic [ref=e199]: 2 facts
+            - list [ref=e200]:
+              - listitem [ref=e201]:
+                - generic [ref=e202]: Primary diagnosis
+                - generic [ref=e203]: Invasive ductal carcinoma, left breast
+                - generic "Confidence 99%" [ref=e204]: 99%
+                - button "Show provenance" [ref=e205]:
+                  - img [ref=e206]
+              - listitem [ref=e208]:
+                - generic [ref=e209]: Receptor status
+                - generic [ref=e210]: ER+ (95%) · PR+ (60%) · HER2 3+ (IHC) confirmed by FISH
+                - generic "Confidence 98%" [ref=e211]: 98%
+                - button "Show provenance" [ref=e212]:
+                  - img [ref=e213]
+            - generic [ref=e215]:
+              - generic [ref=e216]: last update 2026-02-15
+              - button "open all sources" [ref=e217]
+  - button "Open Next.js Dev Tools" [ref=e340] [cursor=pointer]:
+    - img [ref=e341]
+  - alert [ref=e344]

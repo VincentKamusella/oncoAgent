@@ -1,0 +1,258 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - complementary [ref=e3]:
+      - link "oncoAgent" [ref=e4] [cursor=pointer]:
+        - /url: /
+        - img [ref=e6]
+        - generic [ref=e9]: oncoAgent
+      - button "OV OncoUnit Vienna" [ref=e11]:
+        - generic [ref=e12]:
+          - generic [ref=e13]: OV
+          - generic [ref=e14]: OncoUnit Vienna
+        - img [ref=e15]
+      - generic [ref=e19]:
+        - img
+        - textbox "Search patients…" [ref=e20]
+      - generic [ref=e21]:
+        - generic [ref=e22]:
+          - generic [ref=e23]: Patients
+          - button [ref=e24]:
+            - img [ref=e25]
+        - generic [ref=e26]:
+          - generic [ref=e27]: Active · 2
+          - generic [ref=e28]:
+            - link "MK Maria Kowalski HER2+ breast cancer 1" [ref=e29] [cursor=pointer]:
+              - /url: /patients/maria-k
+              - generic [ref=e30]: MK
+              - generic [ref=e31]:
+                - generic [ref=e32]: Maria Kowalski
+                - generic [ref=e33]: HER2+ breast cancer
+              - generic [ref=e34]: "1"
+            - link "TB Thomas Berger Rectal adenocarcinoma 1" [ref=e36] [cursor=pointer]:
+              - /url: /patients/thomas-b
+              - generic [ref=e37]: TB
+              - generic [ref=e38]:
+                - generic [ref=e39]: Thomas Berger
+                - generic [ref=e40]: Rectal adenocarcinoma
+              - generic [ref=e41]: "1"
+        - generic [ref=e43]:
+          - generic [ref=e44]: Surveillance · 1
+          - link "AL Anna Lindqvist ER+ breast cancer" [ref=e46] [cursor=pointer]:
+            - /url: /patients/anna-l
+            - generic [ref=e47]: AL
+            - generic [ref=e48]:
+              - generic [ref=e49]: Anna Lindqvist
+              - generic [ref=e50]: ER+ breast cancer
+      - generic [ref=e52]:
+        - generic [ref=e53]: JM
+        - generic [ref=e54]:
+          - generic [ref=e55]: Dr. Julia Müller
+          - generic [ref=e56]: Med-Onc
+    - generic [ref=e57]:
+      - banner [ref=e58]:
+        - generic [ref=e59]:
+          - link "Patient vaults" [ref=e60] [cursor=pointer]:
+            - /url: /
+          - img [ref=e61]
+          - generic [ref=e63]:
+            - generic [ref=e64]: MK
+            - generic [ref=e65]:
+              - generic [ref=e66]: Maria Kowalski
+              - generic [ref=e67]: MRN-204881 · 54F · case opened 2026-02-08
+          - generic [ref=e68]: Active treatment
+        - generic [ref=e70]:
+          - img
+          - textbox "Find anything…" [ref=e71]
+          - generic: ⌘K
+      - navigation [ref=e72]:
+        - link "Vault" [ref=e73] [cursor=pointer]:
+          - /url: /patients/maria-k
+          - img [ref=e75]
+          - text: Vault
+        - link "Inbox 1" [ref=e77] [cursor=pointer]:
+          - /url: /patients/maria-k/inbox
+          - img [ref=e79]
+          - text: Inbox
+          - generic [ref=e82]: "1"
+        - link "Board" [ref=e84] [cursor=pointer]:
+          - /url: /patients/maria-k/board
+          - img [ref=e86]
+          - text: Board
+      - main [ref=e90]:
+        - generic [ref=e93]:
+          - generic [ref=e94]:
+            - text: Inbox
+            - heading "Incoming changes & open questions" [level=2] [ref=e95]
+            - paragraph [ref=e96]: New facts arrive as pull requests. Agents auto-merge what's unambiguous, block on conflicts, and raise issues when they need a human. Forward-scheduled items live here too — they become PRs as soon as the data lands.
+          - generic [ref=e97]:
+            - generic [ref=e98]:
+              - generic [ref=e99]:
+                - img [ref=e100]
+                - text: Conflicts
+              - generic [ref=e102]: "0"
+            - generic [ref=e103]:
+              - generic [ref=e104]:
+                - img [ref=e105]
+                - text: Needs review
+              - generic [ref=e108]: "1"
+            - generic [ref=e109]:
+              - generic [ref=e110]:
+                - img [ref=e111]
+                - text: Agent issues
+              - generic [ref=e113]: "1"
+            - generic [ref=e114]:
+              - generic [ref=e115]:
+                - img [ref=e116]
+                - text: Recently merged
+              - generic [ref=e120]: "2"
+          - generic [ref=e121]:
+            - generic [ref=e122]:
+              - generic [ref=e123]:
+                - img [ref=e124]
+                - text: Agent issues — needs you
+              - generic [ref=e126]: "1"
+            - list [ref=e127]:
+              - listitem [ref=e128]:
+                - paragraph [ref=e129]: Confirm continued TCHP after Cycle 4 — ANC 2.1, no DLT
+                - paragraph [ref=e130]: Neutrophils marginal but acceptable per protocol. Endorse continuation of cycle 5 on schedule?
+                - generic [ref=e131]:
+                  - button "Continue on schedule" [ref=e132]
+                  - button "Delay 1 week" [ref=e133]
+                  - button "Reduce dose" [ref=e134]
+          - generic [ref=e135]:
+            - generic [ref=e136]:
+              - generic [ref=e137]:
+                - img [ref=e138]
+                - text: Pull requests
+              - generic [ref=e142]: "3"
+            - list [ref=e144]:
+              - listitem [ref=e145]:
+                - link "#3 Patient-reported neuropathy onset Needs review Patient mentioned grade 1 numbness in fingertips during cycle 4 follow-up call. from Onc nursing · Care team · 2 days ago · 1 change" [ref=e146] [cursor=pointer]:
+                  - /url: /patients/maria-k/prs/pr-mk-3
+                  - img [ref=e148]
+                  - generic [ref=e151]:
+                    - generic [ref=e152]:
+                      - generic [ref=e153]: "#3"
+                      - generic [ref=e154]: Patient-reported neuropathy onset
+                      - generic [ref=e155]: Needs review
+                    - paragraph [ref=e157]: Patient mentioned grade 1 numbness in fingertips during cycle 4 follow-up call.
+                    - generic [ref=e158]:
+                      - generic [ref=e159]: from Onc nursing
+                      - generic [ref=e160]: ·
+                      - generic [ref=e161]: Care team
+                      - generic [ref=e162]: ·
+                      - generic [ref=e163]: 2 days ago
+                      - generic [ref=e164]: ·
+                      - generic [ref=e165]: 1 change
+                  - img [ref=e166]
+              - listitem [ref=e168]:
+                - link "#2 Echocardiogram 2026-04-22 — LVEF 62% Merged Routine cardiac surveillance during trastuzumab. Normal function. from Dr. A. Singh · Cardiology · 3 days ago · 1 change" [ref=e169] [cursor=pointer]:
+                  - /url: /patients/maria-k/prs/pr-mk-2
+                  - img [ref=e171]
+                  - generic [ref=e175]:
+                    - generic [ref=e176]:
+                      - generic [ref=e177]: "#2"
+                      - generic [ref=e178]: Echocardiogram 2026-04-22 — LVEF 62%
+                      - generic [ref=e179]: Merged
+                    - paragraph [ref=e181]: Routine cardiac surveillance during trastuzumab. Normal function.
+                    - generic [ref=e182]:
+                      - generic [ref=e183]: from Dr. A. Singh
+                      - generic [ref=e184]: ·
+                      - generic [ref=e185]: Cardiology
+                      - generic [ref=e186]: ·
+                      - generic [ref=e187]: 3 days ago
+                      - generic [ref=e188]: ·
+                      - generic [ref=e189]: 1 change
+                  - img [ref=e190]
+              - listitem [ref=e192]:
+                - link "#1 CBC 2026-04-21 — neutrophils 2.1 Merged Routine pre-cycle 5 CBC. ANC marginal but acceptable. from Hematology lab · Auto-feed · 4 days ago · 1 change" [ref=e193] [cursor=pointer]:
+                  - /url: /patients/maria-k/prs/pr-mk-1
+                  - img [ref=e195]
+                  - generic [ref=e199]:
+                    - generic [ref=e200]:
+                      - generic [ref=e201]: "#1"
+                      - generic [ref=e202]: CBC 2026-04-21 — neutrophils 2.1
+                      - generic [ref=e203]: Merged
+                    - paragraph [ref=e205]: Routine pre-cycle 5 CBC. ANC marginal but acceptable.
+                    - generic [ref=e206]:
+                      - generic [ref=e207]: from Hematology lab
+                      - generic [ref=e208]: ·
+                      - generic [ref=e209]: Auto-feed
+                      - generic [ref=e210]: ·
+                      - generic [ref=e211]: 4 days ago
+                      - generic [ref=e212]: ·
+                      - generic [ref=e213]: 1 change
+                  - img [ref=e214]
+          - generic [ref=e216]:
+            - generic [ref=e217]:
+              - generic [ref=e218]:
+                - img [ref=e219]
+                - text: Watching · scheduled uploads
+              - generic [ref=e221]: "4"
+            - list [ref=e222]:
+              - listitem [ref=e223]:
+                - generic [ref=e226]:
+                  - img [ref=e228]
+                  - generic [ref=e230]:
+                    - generic [ref=e231]:
+                      - generic [ref=e232]: Pre-cycle 5 CBC + CMP
+                      - generic [ref=e233]: Lab
+                      - generic [ref=e236]:
+                        - img [ref=e237]
+                        - text: Scheduled
+                    - text: Wed · 2026-05-06 · 12:00
+                    - paragraph [ref=e240]: Fasting not required.
+              - listitem [ref=e241]:
+                - generic [ref=e244]:
+                  - img [ref=e246]
+                  - generic [ref=e250]:
+                    - generic [ref=e251]:
+                      - generic [ref=e252]: Cycle 5 TCHP infusion
+                      - generic [ref=e253]: Visit
+                      - generic [ref=e256]:
+                        - img [ref=e257]
+                        - text: Scheduled
+                    - text: Wed · 2026-05-06 · 15:30
+                    - paragraph [ref=e260]: Premedication 30 min prior.
+              - listitem [ref=e261]:
+                - generic [ref=e264]:
+                  - img [ref=e266]
+                  - generic [ref=e271]:
+                    - generic [ref=e272]:
+                      - generic [ref=e273]: Mid-treatment breast MRI
+                      - generic [ref=e274]: Imaging
+                      - generic [ref=e277]:
+                        - img [ref=e278]
+                        - text: Scheduled
+                    - text: Wed · 2026-05-13 · 11:00
+                    - paragraph [ref=e281]: Fast 4 h, IV contrast, remove implants if any.
+              - listitem [ref=e282]:
+                - generic [ref=e285]:
+                  - img [ref=e287]
+                  - generic [ref=e291]:
+                    - generic [ref=e292]:
+                      - generic [ref=e293]: Cycle 6 TCHP infusion
+                      - generic [ref=e294]: Visit
+                      - generic [ref=e297]:
+                        - img [ref=e298]
+                        - text: Scheduled
+                    - text: Wed · 2026-05-27 · 16:00
+            - paragraph [ref=e301]: These become PRs automatically as soon as the data lands. Until then, the agent watches for them.
+        - complementary [ref=e302]:
+          - generic [ref=e303]:
+            - generic [ref=e304]:
+              - img [ref=e306]
+              - generic [ref=e309]: Agent
+            - generic [ref=e310]: online
+          - list [ref=e313]:
+            - listitem [ref=e314]:
+              - generic [ref=e315]: "Hi — I'm watching Maria's vault. One decision needs your call: Confirm continued TCHP after Cycle 4 — ANC 2.1, no DLT. Ask me anything about the case."
+          - generic [ref=e316]:
+            - generic [ref=e317]:
+              - textbox "Ask about this patient…" [ref=e318]
+              - button "Send" [disabled]:
+                - img
+            - paragraph [ref=e319]: Mock agent · responses are canned for the demo.
+  - button "Open Next.js Dev Tools" [ref=e325] [cursor=pointer]:
+    - img [ref=e326]
+  - alert [ref=e329]

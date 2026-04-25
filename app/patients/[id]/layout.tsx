@@ -37,7 +37,7 @@ export default async function PatientLayout({
           meetingCount={meetings.length}
         />
         <main className="flex min-h-0 min-w-0 flex-1 overflow-hidden">
-          <div className="flex-1 overflow-y-auto px-6 py-6">
+          <div className="flex min-h-0 min-w-0 flex-1 overflow-hidden">
             <PageTransition>{children}</PageTransition>
           </div>
           <AgentChat patient={patient} />

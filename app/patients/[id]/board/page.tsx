@@ -1,8 +1,8 @@
 import { notFound } from "next/navigation";
 import { getPatient } from "@/lib/mock-data/patients";
-import { VaultView } from "@/components/vault/vault-view";
+import { BoardView } from "@/components/board/board-view";
 
-export default async function VaultPage({
+export default async function BoardPage({
   params,
 }: {
   params: Promise<{ id: string }>;
@@ -11,5 +11,5 @@ export default async function VaultPage({
   const patient = getPatient(id);
   if (!patient) notFound();
 
-  return <VaultView facts={patient.facts} />;
+  return <BoardView patient={patient} />;
 }

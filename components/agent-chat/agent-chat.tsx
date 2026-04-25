@@ -1,9 +1,15 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Send, Sparkles } from "lucide-react";
+import {
+  Send,
+  Sparkles,
+  PanelRightClose,
+  PanelRightOpen,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import { useCollapsible } from "@/lib/use-collapsible";
 import type { Patient } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
@@ -59,6 +65,7 @@ function cannedResponse(input: string, patient: Patient): string {
 }
 
 export function AgentChat({ patient }: { patient: Patient }) {
+  const { collapsed, toggle } = useCollapsible("right");
   const [messages, setMessages] = useState<Message[]>(() => seed(patient));
   const [input, setInput] = useState("");
   const [pending, setPending] = useState(false);
@@ -106,6 +113,28 @@ export function AgentChat({ patient }: { patient: Patient }) {
     }
   };
 
+  if (collapsed) {
+    return (
+      <aside className="hidden w-10 flex-shrink-0 flex-col items-center gap-2 border-l border-border bg-card/50 py-3 xl:flex">
+        <button
+          type="button"
+          onClick={toggle}
+          aria-label="Expand agent panel"
+          className="grid h-7 w-7 place-items-center rounded-md text-muted-foreground hover:bg-secondary hover:text-foreground"
+        >
+          <PanelRightOpen className="h-4 w-4" />
+        </button>
+        <div className="grid h-7 w-7 place-items-center rounded-md bg-violet-100">
+          <Sparkles className="h-3.5 w-3.5 text-violet-600" />
+        </div>
+        <span
+          aria-hidden
+          className="mt-1 inline-block h-1.5 w-1.5 rounded-full bg-emerald-500"
+        />
+      </aside>
+    );
+  }
+
   return (
     <aside className="hidden w-[340px] flex-shrink-0 flex-col border-l border-border bg-card/50 xl:flex">
       <header className="flex items-center justify-between border-b border-border px-5 py-3.5">
@@ -115,10 +144,20 @@ export function AgentChat({ patient }: { patient: Patient }) {
           </div>
           <span className="text-[13px] font-semibold tracking-tight">Agent</span>
         </div>
-        <span className="mono text-[10px] text-muted-foreground">
-          <span className="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-emerald-500 align-middle" />
-          online
-        </span>
+        <div className="flex items-center gap-2">
+          <span className="mono text-[10px] text-muted-foreground">
+            <span className="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-emerald-500 align-middle" />
+            online
+          </span>
+          <button
+            type="button"
+            onClick={toggle}
+            aria-label="Collapse agent panel"
+            className="grid h-6 w-6 place-items-center rounded-md text-muted-foreground hover:bg-secondary hover:text-foreground"
+          >
+            <PanelRightClose className="h-3.5 w-3.5" />
+          </button>
+        </div>
       </header>
 
       <div ref={scrollRef} className="flex-1 overflow-y-auto px-4 py-4">
