@@ -31,9 +31,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${jetbrainsMono.variable} h-full antialiased`}
+      className={`${inter.variable} ${jetbrainsMono.variable} h-full overflow-hidden antialiased`}
     >
-      <body className="bg-canvas min-h-full font-sans text-foreground">
+      <body className="bg-canvas h-full overflow-hidden font-sans text-foreground">
         <TooltipProvider delay={120}>
           {children}
           <CommandPalette />

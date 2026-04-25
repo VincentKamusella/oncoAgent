@@ -5,7 +5,7 @@ import { meetingsForPatient } from "@/lib/mock-data/meetings";
 import { PatientSidebar } from "@/components/shell/patient-sidebar";
 import { PatientHeader } from "@/components/shell/patient-header";
 import { SectionTabs } from "@/components/shell/section-tabs";
-import { AgentPanel } from "@/components/shell/agent-panel";
+import { AgentChat } from "@/components/agent-chat/agent-chat";
 import { PageTransition } from "@/components/shell/page-transition";
 
 export default async function PatientLayout({
@@ -25,10 +25,10 @@ export default async function PatientLayout({
   const meetings = meetingsForPatient(id);
 
   return (
-    <div className="bg-aurora flex min-h-screen w-full">
+    <div className="bg-aurora flex h-full w-full overflow-hidden">
       <PatientSidebar activePatientId={id} />
 
-      <div className="flex min-w-0 flex-1 flex-col">
+      <div className="flex min-h-0 min-w-0 flex-1 flex-col">
         <PatientHeader patient={patient} />
         <SectionTabs
           patientId={id}
@@ -36,11 +36,11 @@ export default async function PatientLayout({
           conflictCount={conflicts}
           meetingCount={meetings.length}
         />
-        <main className="flex min-w-0 flex-1 overflow-hidden">
+        <main className="flex min-h-0 min-w-0 flex-1 overflow-hidden">
           <div className="flex-1 overflow-y-auto px-6 py-6">
             <PageTransition>{children}</PageTransition>
           </div>
-          <AgentPanel patient={patient} />
+          <AgentChat patient={patient} />
         </main>
       </div>
     </div>

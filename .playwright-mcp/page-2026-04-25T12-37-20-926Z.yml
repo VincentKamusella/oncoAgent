@@ -1,0 +1,205 @@
+- generic [ref=e1]:
+  - generic [ref=e2]:
+    - complementary [ref=e3]:
+      - link "oncoAgent" [ref=e4] [cursor=pointer]:
+        - /url: /
+        - img [ref=e6]
+        - generic [ref=e9]: oncoAgent
+      - button "OV OncoUnit Vienna" [ref=e11]:
+        - generic [ref=e12]:
+          - generic [ref=e13]: OV
+          - generic [ref=e14]: OncoUnit Vienna
+        - img [ref=e15]
+      - generic [ref=e19]:
+        - img
+        - textbox "Search patients…" [ref=e20]
+      - generic [ref=e21]:
+        - generic [ref=e22]:
+          - generic [ref=e23]: Patients
+          - button [ref=e24]:
+            - img [ref=e25]
+        - generic [ref=e26]:
+          - generic [ref=e27]: Active · 2
+          - generic [ref=e28]:
+            - link "MK Maria Kowalski HER2+ breast cancer 1" [ref=e29] [cursor=pointer]:
+              - /url: /patients/maria-k
+              - generic [ref=e30]: MK
+              - generic [ref=e31]:
+                - generic [ref=e32]: Maria Kowalski
+                - generic [ref=e33]: HER2+ breast cancer
+              - generic [ref=e34]: "1"
+            - link "TB Thomas Berger Rectal adenocarcinoma 1" [ref=e36] [cursor=pointer]:
+              - /url: /patients/thomas-b
+              - generic [ref=e37]: TB
+              - generic [ref=e38]:
+                - generic [ref=e39]: Thomas Berger
+                - generic [ref=e40]: Rectal adenocarcinoma
+              - generic [ref=e41]: "1"
+        - generic [ref=e43]:
+          - generic [ref=e44]: Surveillance · 1
+          - link "AL Anna Lindqvist ER+ breast cancer" [ref=e46] [cursor=pointer]:
+            - /url: /patients/anna-l
+            - generic [ref=e47]: AL
+            - generic [ref=e48]:
+              - generic [ref=e49]: Anna Lindqvist
+              - generic [ref=e50]: ER+ breast cancer
+      - generic [ref=e52]:
+        - generic [ref=e53]: JM
+        - generic [ref=e54]:
+          - generic [ref=e55]: Dr. Julia Müller
+          - generic [ref=e56]: Med-Onc
+    - generic [ref=e57]:
+      - banner [ref=e58]:
+        - generic [ref=e59]:
+          - link "Patient vaults" [ref=e60] [cursor=pointer]:
+            - /url: /
+          - img [ref=e61]
+          - generic [ref=e63]:
+            - generic [ref=e64]: TB
+            - generic [ref=e65]:
+              - generic [ref=e66]: Thomas Berger
+              - generic [ref=e67]: MRN-198342 · 67M · case opened 2026-03-01
+          - generic [ref=e68]: Active treatment
+        - generic [ref=e70]:
+          - img
+          - textbox "Find anything…" [ref=e71]
+          - generic: ⌘K
+      - navigation [ref=e72]:
+        - link "Overview" [ref=e73] [cursor=pointer]:
+          - /url: /patients/thomas-b
+          - img [ref=e75]
+          - text: Overview
+        - link "Treatment plan" [ref=e81] [cursor=pointer]:
+          - /url: /patients/thomas-b/plan
+          - img [ref=e83]
+          - text: Treatment plan
+        - link "Guidelines" [ref=e85] [cursor=pointer]:
+          - /url: /patients/thomas-b/guidelines
+          - img [ref=e87]
+          - text: Guidelines
+        - link "Pull requests 1" [ref=e92] [cursor=pointer]:
+          - /url: /patients/thomas-b/prs
+          - img [ref=e94]
+          - text: Pull requests
+          - generic [ref=e98]: "1"
+        - link "Followup" [ref=e99] [cursor=pointer]:
+          - /url: /patients/thomas-b/followup
+          - img [ref=e101]
+          - text: Followup
+        - link "Meetings 2" [ref=e103] [cursor=pointer]:
+          - /url: /patients/thomas-b/meetings
+          - img [ref=e105]
+          - text: Meetings
+          - generic [ref=e108]: "2"
+      - main [ref=e109]:
+        - generic [ref=e112]:
+          - generic [ref=e113]:
+            - generic [ref=e114]:
+              - generic [ref=e115]: TB
+              - generic [ref=e116]:
+                - heading "Thomas Berger" [level=1] [ref=e117]
+                - paragraph [ref=e118]: Adenocarcinoma of the rectum, mid-rectum
+                - generic [ref=e119]:
+                  - generic [ref=e120]: MRN-198342
+                  - generic [ref=e121]: ·
+                  - generic [ref=e122]: 67M · DOB 1958-06-21
+                  - generic [ref=e123]: ·
+                  - generic [ref=e124]: Dr. C. Romano, Med-Onc
+            - generic [ref=e125]:
+              - generic [ref=e126]: Clinical stage
+              - generic [ref=e127]: cT3 cN1 cM0 (provisional → cT4a pending)
+          - generic [ref=e128]:
+            - generic [ref=e129]:
+              - generic [ref=e130]:
+                - img [ref=e132]
+                - heading "Diagnosis & Staging" [level=3] [ref=e136]
+              - generic [ref=e137]: 2 facts
+            - generic [ref=e138]:
+              - generic [ref=e139]:
+                - term [ref=e140]: Primary diagnosis
+                - definition [ref=e141]: Adenocarcinoma of the rectum, mid-rectum (8 cm from anal verge)
+                - button "Show provenance" [ref=e142]:
+                  - img [ref=e143]
+              - generic [ref=e145]:
+                - term [ref=e146]: Clinical stage
+                - definition [ref=e147]: cT3 cN1 cM0 — Stage IIIB
+                - button "Show provenance" [ref=e148]:
+                  - img [ref=e149]
+          - generic [ref=e151]:
+            - generic [ref=e152]:
+              - generic [ref=e153]:
+                - img [ref=e155]
+                - heading "Medications" [level=3] [ref=e158]
+              - generic [ref=e159]: 2 facts
+            - generic [ref=e160]:
+              - generic [ref=e161]:
+                - term [ref=e162]: Induction chemotherapy
+                - definition [ref=e163]: FOLFOX × 4 cycles (TNT — induction phase)
+                - button "Show provenance" [ref=e164]:
+                  - img [ref=e165]
+              - generic [ref=e167]:
+                - term [ref=e168]: Current cycle
+                - definition [ref=e169]: FOLFOX cycle 4 of 4 — completed 2026-04-18
+                - button "Show provenance" [ref=e170]:
+                  - img [ref=e171]
+          - generic [ref=e173]:
+            - generic [ref=e174]:
+              - generic [ref=e175]:
+                - img [ref=e177]
+                - heading "Imaging & Labs" [level=3] [ref=e182]
+              - generic [ref=e183]: 2 facts
+            - generic [ref=e184]:
+              - generic [ref=e185]:
+                - term [ref=e186]: CEA
+                - definition [ref=e187]: 8.4 ng/mL (elevated)
+                - button "Show provenance" [ref=e188]:
+                  - img [ref=e189]
+              - generic [ref=e191]:
+                - term [ref=e192]: Restaging MRI
+                - definition [ref=e193]: Pelvic MRI · 2026-04-22 (incoming PR)
+                - button "Show provenance" [ref=e194]:
+                  - img [ref=e195]
+          - generic [ref=e197]:
+            - generic [ref=e198]:
+              - generic [ref=e199]:
+                - img [ref=e201]
+                - heading "History & Demographics" [level=3] [ref=e205]
+              - generic [ref=e206]: 3 facts
+            - generic [ref=e207]:
+              - generic [ref=e208]:
+                - term [ref=e209]: Name
+                - definition [ref=e210]: Thomas Berger
+                - button "Show provenance" [ref=e211]:
+                  - img [ref=e212]
+              - generic [ref=e214]:
+                - term [ref=e215]: Date of birth
+                - definition [ref=e216]: 1958-06-21
+                - button "Show provenance" [ref=e217]:
+                  - img [ref=e218]
+              - generic [ref=e220]:
+                - term [ref=e221]: MRN
+                - definition [ref=e222]: MRN-198342
+                - button "Show provenance" [ref=e223]:
+                  - img [ref=e224]
+        - complementary [ref=e226]:
+          - generic [ref=e227]:
+            - generic [ref=e228]:
+              - img [ref=e230]
+              - generic [ref=e233]: Agent
+            - generic [ref=e234]: online
+          - list [ref=e237]:
+            - listitem [ref=e238]:
+              - generic [ref=e239]: "Hi — I'm watching Thomas's vault. One decision needs your call: MRI 2026-04-22 suggests cT4a — change of staging vs. cT3. Ask me anything about the case."
+            - listitem [ref=e254]:
+              - generic [ref=e255]: Why is the MRI a conflict?
+            - listitem [ref=e256]:
+              - generic [ref=e257]: "The restaging MRI (2026-04-22) contradicts the baseline cT3 from 2026-03-08. I've blocked auto-merge on PR #3. Recommended action: tumor board on 2026-04-26 — already on the calendar."
+          - generic [ref=e240]:
+            - generic [ref=e241]:
+              - textbox "Ask about this patient…" [active] [ref=e242]
+              - button "Send" [disabled]:
+                - img
+            - paragraph [ref=e243]: Mock agent · responses are canned for the demo.
+  - button "Open Next.js Dev Tools" [ref=e249] [cursor=pointer]:
+    - img [ref=e250]
+  - alert [ref=e253]
