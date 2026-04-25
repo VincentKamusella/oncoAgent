@@ -8,10 +8,10 @@ import { prsForPatient } from "@/lib/mock-data/prs";
 
 export default function HomePage() {
   return (
-    <div className="bg-aurora-strong flex h-full w-full overflow-hidden">
+    <div className="bg-aurora-strong flex h-full w-full gap-2.5 overflow-hidden p-2.5">
       <WorkspaceSidebar active="vaults" />
 
-      <main className="relative flex flex-1 flex-col overflow-hidden">
+      <main className="relative flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden rounded-2xl border border-border bg-background shadow-[var(--shadow-soft)]">
         <header className="relative z-20 flex items-center justify-between gap-4 border-b border-border bg-background/60 px-8 py-4 backdrop-blur">
           <div className="relative w-full max-w-md">
             <Search className="pointer-events-none absolute left-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />

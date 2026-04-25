@@ -42,3 +42,6 @@ next-env.d.ts
 
 /*.png
 .claude/settings.local.json
+
+# playwright / browser-mcp testing artifacts
+.playwright-mcp/

@@ -38,7 +38,7 @@ export function PatientSidebar({
 
   if (collapsed) {
     return (
-      <aside className="hidden w-10 flex-shrink-0 flex-col items-center gap-2 border-r border-border bg-sidebar py-3 md:flex">
+      <aside className="hidden w-12 flex-shrink-0 flex-col items-center gap-2 rounded-2xl border border-border bg-sidebar py-3 shadow-[var(--shadow-soft)] md:flex">
         <Link
           href="/"
           aria-label="oncoAgent home"
@@ -59,7 +59,7 @@ export function PatientSidebar({
   }
 
   return (
-    <aside className="hidden w-[260px] flex-shrink-0 flex-col border-r border-border bg-sidebar md:flex">
+    <aside className="hidden w-[260px] flex-shrink-0 flex-col rounded-2xl border border-border bg-sidebar shadow-[var(--shadow-soft)] md:flex">
       <div className="flex items-center justify-between px-5 py-4">
         <Link href="/" className="flex items-center gap-2.5">
           <div className="grid h-7 w-7 place-items-center rounded-md bg-violet-500 shadow-[0_4px_12px_rgba(124,91,247,0.45)]">

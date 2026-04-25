@@ -42,7 +42,7 @@ export function WorkspaceSidebar({ active = "vaults" }: Props) {
   ];
 
   return (
-    <aside className="hidden w-[252px] flex-shrink-0 flex-col border-r border-border bg-sidebar md:flex">
+    <aside className="hidden w-[252px] flex-shrink-0 flex-col rounded-2xl border border-border bg-sidebar shadow-[var(--shadow-soft)] md:flex">
       <div className="flex items-center gap-2.5 px-5 py-5">
         <div className="grid h-7 w-7 place-items-center rounded-md bg-violet-500 shadow-[0_4px_12px_rgba(124,91,247,0.45)]">
           <svg viewBox="0 0 24 24" fill="none" className="h-4 w-4 text-white">

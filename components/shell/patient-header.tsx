@@ -36,9 +36,9 @@ export function PatientHeader({ patient }: { patient: Patient }) {
             <span className="text-[14px] font-semibold tracking-tight">
               {patient.name}
             </span>
-            <FactMono className="text-[11px] text-muted-foreground">
+            <FactMono className="whitespace-nowrap text-[11px] text-muted-foreground">
               {patient.mrn} · {patient.age}
-              {patient.sex} · case opened {patient.caseOpenedAt}
+              {patient.sex} · {patient.caseOpenedAt}
             </FactMono>
           </div>
         </div>
