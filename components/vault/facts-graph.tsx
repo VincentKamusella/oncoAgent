@@ -1,7 +1,8 @@
 "use client";
 
-import { useMemo } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import dynamic from "next/dynamic";
+import type NVL from "@neo4j-nvl/base";
 import type { Fact, Patient, SourceRef } from "@/lib/types";
 
 const InteractiveNvlWrapper = dynamic(
@@ -137,6 +138,13 @@ export function FactsGraph({
     [patient, facts]
   );
 
+  const nvlRef = useRef<NVL | null>(null);
+  const didFitRef = useRef(false);
+
+  useEffect(() => {
+    didFitRef.current = false;
+  }, [nodes, rels]);
+
   if (facts.length === 0) {
     return (
       <div className="grid h-[460px] w-full place-items-center text-[12.5px] italic text-muted-foreground">
@@ -148,12 +156,21 @@ export function FactsGraph({
   return (
     <div className="h-[460px] w-full">
       <InteractiveNvlWrapper
+        ref={nvlRef}
         nodes={nodes}
         rels={rels}
         nvlOptions={{
-          initialZoom: 0.6,
           allowDynamicMinZoom: true,
           disableTelemetry: true,
+        }}
+        nvlCallbacks={{
+          onLayoutDone: () => {
+            if (didFitRef.current) return;
+            const nvl = nvlRef.current;
+            if (!nvl) return;
+            nvl.fit(nodes.map((n) => n.id));
+            didFitRef.current = true;
+          },
         }}
         mouseEventCallbacks={{
           onPan: true,
