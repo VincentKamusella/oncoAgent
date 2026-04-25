@@ -37,10 +37,10 @@ function GuidelineNodeView({ data }: NodeProps<Node<FlowNodeData>>) {
   const palette = data.patientPath
     ? {
         bg: "#FFFFFF",
-        ring: "#7C5BF7",
+        ring: "#0f1f4d",
         ringWidth: 2,
-        chipBg: "#F5F3FF",
-        chipFg: "#5A39C9",
+        chipBg: "#eef1f8",
+        chipFg: "#0f1f4d",
       }
     : {
         bg: "#FFFFFF",
@@ -147,14 +147,14 @@ export function GuidelinesFlow({
         type: "smoothstep",
         animated: !!e.patientPath,
         style: e.patientPath
-          ? { stroke: "#7C5BF7", strokeWidth: 2 }
+          ? { stroke: "#0f1f4d", strokeWidth: 2 }
           : { stroke: "#D1D5DB", strokeWidth: 1.25 },
         labelStyle: {
           fontFamily: "var(--font-mono)",
           fontSize: 10.5,
-          fill: e.patientPath ? "#5A39C9" : "#5A5F6A",
+          fill: e.patientPath ? "#0f1f4d" : "#5A5F6A",
         },
-        labelBgStyle: { fill: e.patientPath ? "#F5F3FF" : "#FFFFFF" },
+        labelBgStyle: { fill: e.patientPath ? "#eef1f8" : "#FFFFFF" },
         labelBgPadding: [4, 6] as [number, number],
         labelBgBorderRadius: 6,
         markerEnd: undefined,

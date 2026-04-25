@@ -31,13 +31,13 @@ const TYPE_COLOR: Record<
   PhaseType,
   { bg: string; ring: string; fg: string; track: string }
 > = {
-  chemo: { bg: "#EDE7FF", ring: "#B9AAFF", fg: "#5A39C9", track: "#7C5BF7" },
-  radiation: { bg: "#FFE4E6", ring: "#FBA9B0", fg: "#9F1239", track: "#E11D48" },
-  surgery: { bg: "#DBEAFE", ring: "#93C5FD", fg: "#1E40AF", track: "#3B82F6" },
-  immunotherapy: { bg: "#D1FAE5", ring: "#6EE7B7", fg: "#065F46", track: "#10B981" },
-  targeted: { bg: "#FCE7F3", ring: "#F9A8D4", fg: "#9D174D", track: "#DB2777" },
-  hormonal: { bg: "#FEF3C7", ring: "#FCD34D", fg: "#92400E", track: "#F59E0B" },
-  observation: { bg: "#E5E7EB", ring: "#D1D5DB", fg: "#374151", track: "#6B7280" },
+  chemo: { bg: "#f1f3f7", ring: "#cfd5df", fg: "#3a4252", track: "#0f1f4d" },
+  radiation: { bg: "#f1f3f7", ring: "#cfd5df", fg: "#3a4252", track: "#0f1f4d" },
+  surgery: { bg: "#f1f3f7", ring: "#cfd5df", fg: "#3a4252", track: "#0f1f4d" },
+  immunotherapy: { bg: "#f1f3f7", ring: "#cfd5df", fg: "#3a4252", track: "#0f1f4d" },
+  targeted: { bg: "#f1f3f7", ring: "#cfd5df", fg: "#3a4252", track: "#0f1f4d" },
+  hormonal: { bg: "#f1f3f7", ring: "#cfd5df", fg: "#3a4252", track: "#0f1f4d" },
+  observation: { bg: "#f1f3f7", ring: "#cfd5df", fg: "#3a4252", track: "#0f1f4d" },
 };
 
 const STATUS_TONE: Record<PhaseStatus, "active" | "info" | "muted" | "warn"> = {
@@ -104,7 +104,7 @@ export function TreatmentTimeline({ phases }: { phases: TreatmentPhase[] }) {
             className="absolute top-0 bottom-0 z-10 flex flex-col items-center"
             style={{ left: `${todayPct}%` }}
           >
-            <div className="mb-1 rounded-md bg-violet-500 px-1.5 py-0.5 mono text-[9.5px] font-semibold uppercase tracking-wider text-white shadow-[0_4px_12px_rgba(124,91,247,0.4)]">
+            <div className="mb-1 rounded-md bg-violet-500 px-1.5 py-0.5 mono text-[9.5px] font-semibold uppercase tracking-wider text-white shadow-[0_4px_12px_rgba(15,31,77,0.20)]">
               today
             </div>
             <div className="h-full w-px border-l border-dashed border-violet-400" />
@@ -136,7 +136,7 @@ export function TreatmentTimeline({ phases }: { phases: TreatmentPhase[] }) {
                 onClick={() => setActive(p)}
                 className={`group absolute flex items-center gap-2 rounded-full border px-3 py-1.5 text-[11.5px] font-medium transition-all ${
                   isActive
-                    ? "ring-2 ring-violet-300 z-20 shadow-[0_8px_24px_rgba(124,91,247,0.18)]"
+                    ? "ring-2 ring-violet-300 z-20 shadow-[0_8px_24px_rgba(15,31,77,0.14)]"
                     : "z-0 hover:ring-1 hover:ring-violet-200"
                 }`}
                 style={{

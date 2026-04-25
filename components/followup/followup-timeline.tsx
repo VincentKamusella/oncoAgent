@@ -77,10 +77,10 @@ export function FollowupTimeline({ items }: { items: FollowupItem[] }) {
           it.status === "completed"
             ? "#10B981"
             : isToday
-            ? "#7C5BF7"
+            ? "#0f1f4d"
             : isPast
             ? "#EF4444"
-            : "#B9AAFF";
+            : "#7587b0";
 
         return (
           <li key={it.id} className="relative">
