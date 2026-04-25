@@ -2,9 +2,16 @@
 
 import { useEffect, useRef, useState, useCallback } from "react";
 import { usePathname } from "next/navigation";
-import { Send, Sparkles, Trash2 } from "lucide-react";
+import {
+  Send,
+  Sparkles,
+  Trash2,
+  PanelRightClose,
+  PanelRightOpen,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import { useCollapsible } from "@/lib/use-collapsible";
 import type { Patient } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
@@ -65,6 +72,7 @@ function newSessionId(): string {
 }
 
 export function AgentChat({ patient }: { patient: Patient }) {
+  const { collapsed, toggle } = useCollapsible("right");
   const pathname = usePathname();
   const [messages, setMessages] = useState<Message[]>(() => seedMessages(patient));
   const [input, setInput] = useState("");
@@ -79,13 +87,11 @@ export function AgentChat({ patient }: { patient: Patient }) {
     const prev = prevPatientRef.current;
     if (prev === patient.id) return;
 
-    // save current patient's chat
     sessionsRef.current.set(prev, {
       messages,
       sessionId: sessionIdRef.current,
     });
 
-    // restore or seed the new patient's chat
     const existing = sessionsRef.current.get(patient.id);
     if (existing) {
       setMessages(existing.messages);
@@ -225,8 +231,30 @@ export function AgentChat({ patient }: { patient: Patient }) {
 
   const hasHistory = messages.length > 1 || messages[0]?.id !== "m0";
 
+  if (collapsed) {
+    return (
+      <aside className="hidden w-12 flex-shrink-0 flex-col items-center gap-2 border-l border-border bg-card/40 py-3 xl:flex">
+        <button
+          type="button"
+          onClick={toggle}
+          aria-label="Expand agent panel"
+          className="grid h-7 w-7 place-items-center rounded-md text-muted-foreground hover:bg-secondary hover:text-foreground"
+        >
+          <PanelRightOpen className="h-4 w-4" />
+        </button>
+        <div className="grid h-7 w-7 place-items-center rounded-md bg-violet-100">
+          <Sparkles className="h-3.5 w-3.5 text-violet-600" />
+        </div>
+        <span
+          aria-hidden
+          className="mt-1 inline-block h-1.5 w-1.5 rounded-full bg-emerald-500"
+        />
+      </aside>
+    );
+  }
+
   return (
-    <aside className="hidden w-[340px] flex-shrink-0 flex-col border-l border-border bg-card/50 xl:flex">
+    <aside className="hidden w-[340px] flex-shrink-0 flex-col border-l border-border bg-card/40 xl:flex">
       <header className="flex items-center justify-between border-b border-border px-5 py-3.5">
         <div className="flex items-center gap-2">
           <div className="grid h-6 w-6 place-items-center rounded-md bg-violet-100">
@@ -249,6 +277,14 @@ export function AgentChat({ patient }: { patient: Patient }) {
             <span className="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-emerald-500 align-middle" />
             online
           </span>
+          <button
+            type="button"
+            onClick={toggle}
+            aria-label="Collapse agent panel"
+            className="grid h-6 w-6 place-items-center rounded-md text-muted-foreground hover:bg-secondary hover:text-foreground"
+          >
+            <PanelRightClose className="h-3.5 w-3.5" />
+          </button>
         </div>
       </header>
 

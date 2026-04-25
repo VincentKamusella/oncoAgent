@@ -1,0 +1,94 @@
+- generic [ref=e1]:
+  - generic [active]:
+    - generic [ref=e348]:
+      - generic [ref=e349]:
+        - generic [ref=e350]:
+          - navigation [ref=e351]:
+            - button "previous" [disabled] [ref=e352]:
+              - img "previous" [ref=e353]
+            - generic [ref=e355]:
+              - generic [ref=e356]: 1/
+              - text: "1"
+            - button "next" [disabled] [ref=e357]:
+              - img "next" [ref=e358]
+          - img
+        - generic [ref=e360]:
+          - generic [ref=e361]:
+            - img [ref=e362]
+            - generic "Latest available version is detected (16.2.4)." [ref=e364]: Next.js 16.2.4
+            - generic [ref=e365]: Turbopack
+          - img
+      - dialog "Runtime Error" [ref=e367]:
+        - generic [ref=e370]:
+          - generic [ref=e371]:
+            - generic [ref=e372]:
+              - generic [ref=e374]: Runtime Error
+              - generic [ref=e375]:
+                - button "Copy Error Info" [ref=e376] [cursor=pointer]:
+                  - img [ref=e377]
+                - button "No related documentation found" [disabled] [ref=e379]:
+                  - img [ref=e380]
+                - button "Attach Node.js inspector" [ref=e382] [cursor=pointer]:
+                  - img [ref=e383]
+            - generic [ref=e392]: "Base UI: MenuGroupRootContext is missing. Menu group parts must be used within <Menu.Group>."
+          - generic [ref=e393]:
+            - generic [ref=e394]:
+              - paragraph [ref=e396]:
+                - img [ref=e398]
+                - generic [ref=e401]: components/ui/dropdown-menu.tsx (64:5) @ DropdownMenuLabel
+                - button "Open in editor" [ref=e402] [cursor=pointer]:
+                  - img [ref=e404]
+              - generic [ref=e407]:
+                - generic [ref=e408]: "62 | }) {"
+                - generic [ref=e409]: 63 | return (
+                - generic [ref=e410]: "> 64 | <MenuPrimitive.GroupL..."
+                - generic [ref=e411]: "| ^"
+                - generic [ref=e412]: 65 | data-slot="dropdown...
+                - generic [ref=e413]: "66 | data-inset={inset}"
+                - generic [ref=e414]: "67 | className={cn("
+            - generic [ref=e415]:
+              - generic [ref=e416]:
+                - paragraph [ref=e417]:
+                  - text: Call Stack
+                  - generic [ref=e418]: "18"
+                - button "Show 15 ignore-listed frame(s)" [ref=e419] [cursor=pointer]:
+                  - text: Show 15 ignore-listed frame(s)
+                  - img [ref=e420]
+              - generic [ref=e422]:
+                - generic [ref=e423]:
+                  - text: DropdownMenuLabel
+                  - button "Open DropdownMenuLabel in editor" [ref=e424] [cursor=pointer]:
+                    - img [ref=e425]
+                - text: components/ui/dropdown-menu.tsx (64:5)
+              - generic [ref=e427]:
+                - generic [ref=e428]:
+                  - text: PatientSidebar
+                  - button "Open PatientSidebar in editor" [ref=e429] [cursor=pointer]:
+                    - img [ref=e430]
+                - text: components/shell/patient-sidebar.tsx (76:13)
+              - generic [ref=e432]:
+                - generic [ref=e433]:
+                  - text: PatientLayout
+                  - button "Open PatientLayout in editor" [ref=e434] [cursor=pointer]:
+                    - img [ref=e435]
+                - text: app/patients/[id]/layout.tsx (29:7)
+        - generic [ref=e437]: "1"
+        - generic [ref=e438]: "2"
+    - generic [ref=e339] [cursor=pointer]:
+      - button "Open Next.js Dev Tools" [ref=e340]:
+        - img [ref=e341]
+      - generic [ref=e439]:
+        - button "Open issues overlay" [ref=e440]:
+          - generic [ref=e441]:
+            - generic [ref=e442]: "0"
+            - generic [ref=e443]: "1"
+          - generic [ref=e444]: Issue
+        - button "Collapse issues badge" [ref=e445]:
+          - img [ref=e446]
+  - generic [ref=e449]:
+    - img [ref=e450]
+    - heading "This page couldn’t load" [level=1] [ref=e452]
+    - paragraph [ref=e453]: Reload to try again, or go back.
+    - generic [ref=e454]:
+      - button "Reload" [ref=e456] [cursor=pointer]
+      - button "Back" [ref=e457] [cursor=pointer]

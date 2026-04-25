@@ -1,0 +1,191 @@
+- generic [ref=e1]:
+  - button "Open Next.js Dev Tools" [ref=e340] [cursor=pointer]:
+    - img [ref=e341]
+  - alert [ref=e371]
+  - generic [ref=e372]:
+    - complementary [ref=e373]:
+      - link "oncoAgent" [ref=e374] [cursor=pointer]:
+        - /url: /
+        - img [ref=e376]
+        - generic [ref=e379]: oncoAgent
+      - button "TB Thomas Berger Rectal adenocarcinoma" [ref=e381]:
+        - generic [ref=e382]:
+          - generic [ref=e383]: TB
+          - generic [ref=e384]:
+            - generic [ref=e385]: Thomas Berger
+            - generic [ref=e386]: Rectal adenocarcinoma
+        - img [ref=e387]
+      - navigation [ref=e391]:
+        - generic [ref=e392]: Facts
+        - button "All facts 9" [ref=e393]:
+          - generic [ref=e394]: All facts
+          - generic [ref=e395]: "9"
+        - list [ref=e396]:
+          - listitem [ref=e397]:
+            - button "Pathology 1" [ref=e398]:
+              - img [ref=e400]
+              - generic [ref=e404]: Pathology
+              - generic [ref=e405]: "1"
+          - listitem [ref=e406]:
+            - button "Radiology 2" [ref=e407]:
+              - img [ref=e409]
+              - generic [ref=e414]: Radiology
+              - generic [ref=e415]: "2"
+          - listitem [ref=e416]:
+            - button "Medical oncology 2" [ref=e417]:
+              - img [ref=e419]
+              - generic [ref=e423]: Medical oncology
+              - generic [ref=e424]: "2"
+          - listitem [ref=e425]:
+            - button "Nursing & intake 4" [ref=e426]:
+              - img [ref=e428]
+              - generic [ref=e431]: Nursing & intake
+              - generic [ref=e432]: "4"
+      - generic [ref=e434]:
+        - generic [ref=e435]: JM
+        - generic [ref=e436]:
+          - generic [ref=e437]: Dr. Julia Müller
+          - generic [ref=e438]: Med-Onc · OncoUnit Vienna
+    - generic [ref=e439]:
+      - banner [ref=e440]:
+        - generic [ref=e441]:
+          - link "Patient vaults" [ref=e442] [cursor=pointer]:
+            - /url: /
+          - img [ref=e443]
+          - generic [ref=e445]:
+            - generic [ref=e446]: TB
+            - generic [ref=e447]:
+              - generic [ref=e448]: Thomas Berger
+              - generic [ref=e449]: MRN-198342 · 67M · case opened 2026-03-01
+          - generic [ref=e450]: Active treatment
+        - generic [ref=e452]:
+          - img
+          - textbox "Find anything…" [ref=e453]
+          - generic: ⌘K
+      - navigation [ref=e454]:
+        - link "Vault" [ref=e455] [cursor=pointer]:
+          - /url: /patients/thomas-b
+          - img [ref=e457]
+          - text: Vault
+        - link "Inbox 1" [ref=e460] [cursor=pointer]:
+          - /url: /patients/thomas-b/inbox
+          - img [ref=e462]
+          - text: Inbox
+          - generic [ref=e465]: "1"
+        - link "Board" [ref=e466] [cursor=pointer]:
+          - /url: /patients/thomas-b/board
+          - img [ref=e468]
+          - text: Board
+      - main [ref=e472]:
+        - generic [active] [ref=e475]:
+          - generic [ref=e476]:
+            - generic [ref=e477]:
+              - text: Vault
+              - heading "All facts" [level=2] [ref=e478]
+              - paragraph [ref=e479]: Every fact in this patient's context base, with the source it came from.
+            - button "Upload" [ref=e480]:
+              - img [ref=e481]
+              - text: Upload
+          - generic [ref=e484]:
+            - generic [ref=e485]:
+              - generic [ref=e486]:
+                - generic [ref=e487]: Demographics
+                - generic [ref=e488]: 3 facts
+              - list [ref=e489]:
+                - listitem [ref=e490]:
+                  - generic [ref=e491]: Name
+                  - generic [ref=e492]: Thomas Berger
+                  - generic "Confidence 100%" [ref=e493]: 100%
+                  - button "Show provenance" [ref=e494]:
+                    - img [ref=e495]
+                - listitem [ref=e497]:
+                  - generic [ref=e498]: Date of birth
+                  - generic [ref=e499]: 1958-06-21
+                  - generic "Confidence 100%" [ref=e500]: 100%
+                  - button "Show provenance" [ref=e501]:
+                    - img [ref=e502]
+                - listitem [ref=e504]:
+                  - generic [ref=e505]: MRN
+                  - generic [ref=e506]: MRN-198342
+                  - generic "Confidence 100%" [ref=e507]: 100%
+                  - button "Show provenance" [ref=e508]:
+                    - img [ref=e509]
+              - generic [ref=e511]:
+                - generic [ref=e512]: last update 2026-03-01
+                - button "open all sources" [ref=e513]
+            - generic [ref=e514]:
+              - generic [ref=e515]:
+                - generic [ref=e516]: Diagnosis
+                - generic [ref=e517]: 1 fact
+              - list [ref=e518]:
+                - listitem [ref=e519]:
+                  - generic [ref=e520]: Primary diagnosis
+                  - generic [ref=e521]: Adenocarcinoma of the rectum, mid-rectum (8 cm from anal verge)
+                  - generic "Confidence 99%" [ref=e522]: 99%
+                  - button "Show provenance" [ref=e523]:
+                    - img [ref=e524]
+              - generic [ref=e526]:
+                - generic [ref=e527]: last update 2026-03-04
+                - button "open all sources" [ref=e528]
+            - generic [ref=e529]:
+              - generic [ref=e530]:
+                - generic [ref=e531]: Imaging
+                - generic [ref=e532]: 1 fact
+              - list [ref=e533]:
+                - listitem [ref=e534]:
+                  - generic [ref=e535]: Restaging MRI
+                  - generic [ref=e536]: Pelvic MRI · 2026-04-22 (incoming PR)
+                  - generic "Confidence 85%" [ref=e537]: 85%
+                  - button "Show provenance" [ref=e538]:
+                    - img [ref=e539]
+              - generic [ref=e541]:
+                - generic [ref=e542]: last update 2026-04-22
+                - button "open all sources" [ref=e543]
+            - generic [ref=e544]:
+              - generic [ref=e545]:
+                - generic [ref=e546]: Lab
+                - generic [ref=e547]: 1 fact
+              - list [ref=e548]:
+                - listitem [ref=e549]:
+                  - generic [ref=e550]: CEA
+                  - generic [ref=e551]: 8.4 ng/mL (elevated)
+                  - generic "Confidence 100%" [ref=e552]: 100%
+                  - button "Show provenance" [ref=e553]:
+                    - img [ref=e554]
+              - generic [ref=e556]:
+                - generic [ref=e557]: last update 2026-03-05
+                - button "open all sources" [ref=e558]
+            - generic [ref=e559]:
+              - generic [ref=e560]:
+                - generic [ref=e561]: Medication
+                - generic [ref=e562]: 2 facts
+              - list [ref=e563]:
+                - listitem [ref=e564]:
+                  - generic [ref=e565]: Induction chemotherapy
+                  - generic [ref=e566]: FOLFOX × 4 cycles (TNT — induction phase)
+                  - generic "Confidence 96%" [ref=e567]: 96%
+                  - button "Show provenance" [ref=e568]:
+                    - img [ref=e569]
+                - listitem [ref=e571]:
+                  - generic [ref=e572]: Current cycle
+                  - generic [ref=e573]: FOLFOX cycle 4 of 4 — completed 2026-04-18
+                  - generic "Confidence 100%" [ref=e574]: 100%
+                  - button "Show provenance" [ref=e575]:
+                    - img [ref=e576]
+              - generic [ref=e578]:
+                - generic [ref=e579]: last update 2026-04-18
+                - button "open all sources" [ref=e580]
+            - generic [ref=e581]:
+              - generic [ref=e582]:
+                - generic [ref=e583]: Staging
+                - generic [ref=e584]: 1 fact
+              - list [ref=e585]:
+                - listitem [ref=e586]:
+                  - generic [ref=e587]: Clinical stage
+                  - generic [ref=e588]: cT3 cN1 cM0 — Stage IIIB
+                  - generic "Confidence 70%" [ref=e589]: 70%
+                  - button "Show provenance" [ref=e590]:
+                    - img [ref=e591]
+              - generic [ref=e593]:
+                - generic [ref=e594]: last update 2026-03-08
+                - button "open all sources" [ref=e595]

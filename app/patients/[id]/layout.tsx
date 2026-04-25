@@ -25,23 +25,24 @@ export default async function PatientLayout({
   const meetings = meetingsForPatient(id);
 
   return (
-    <div className="bg-aurora flex h-full w-full overflow-hidden">
+    <div className="bg-aurora-strong flex h-full w-full gap-2.5 overflow-hidden p-2.5">
       <PatientSidebar activePatientId={id} />
 
-      <div className="flex min-h-0 min-w-0 flex-1 flex-col">
-        <PatientHeader patient={patient} />
-        <SectionTabs
-          patientId={id}
-          prCount={open + conflicts}
-          conflictCount={conflicts}
-          meetingCount={meetings.length}
-        />
-        <main className="flex min-h-0 min-w-0 flex-1 overflow-hidden">
-          <div className="flex-1 overflow-y-auto px-6 py-6">
+      <div className="flex min-h-0 min-w-0 flex-1 overflow-hidden rounded-2xl border border-border bg-background shadow-[var(--shadow-soft)]">
+        <div className="flex min-h-0 min-w-0 flex-1 flex-col">
+          <PatientHeader patient={patient} />
+          <SectionTabs
+            patientId={id}
+            prCount={open + conflicts}
+            conflictCount={conflicts}
+            meetingCount={meetings.length}
+          />
+          <main className="flex min-h-0 min-w-0 flex-1 overflow-hidden">
             <PageTransition>{children}</PageTransition>
-          </div>
-          <AgentChat patient={patient} />
-        </main>
+          </main>
+        </div>
+
+        <AgentChat patient={patient} />
       </div>
     </div>
   );

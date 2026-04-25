@@ -35,12 +35,12 @@ export default async function PRDetailPage({
   if (!patient || !pr || pr.patientId !== id) notFound();
 
   return (
-    <div className="mx-auto flex w-full max-w-[1100px] flex-col gap-5">
+    <div className="mx-auto flex w-full max-w-[1100px] flex-col gap-5 overflow-y-auto px-6 py-6">
       <Link
-        href={`/patients/${id}/prs`}
+        href={`/patients/${id}/inbox`}
         className="inline-flex w-max items-center gap-1.5 text-[12.5px] text-muted-foreground hover:text-foreground"
       >
-        <ChevronLeft className="h-3.5 w-3.5" /> All pull requests
+        <ChevronLeft className="h-3.5 w-3.5" /> Back to inbox
       </Link>
 
       {/* hero */}

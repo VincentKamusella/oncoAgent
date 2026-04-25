@@ -6,7 +6,22 @@ export type SourceKind =
   | "lab"
   | "imaging"
   | "pathology"
-  | "meeting";
+  | "meeting"
+  | "genomics";
+
+export type Specialty =
+  | "pathology"
+  | "radiology"
+  | "med-onc"
+  | "surg-onc"
+  | "rad-onc"
+  | "molecular"
+  | "nuc-med"
+  | "ir"
+  | "pharmacy"
+  | "nursing"
+  | "genetics"
+  | "patient";
 
 export type SourceRef = {
   kind: SourceKind;
@@ -15,6 +30,7 @@ export type SourceRef = {
   excerpt?: string;
   at: string;
   author?: string;
+  specialty?: Specialty;
 };
 
 export type Fact = {
@@ -25,6 +41,7 @@ export type Fact = {
   confidence: number;
   source: SourceRef;
   updatedAt: string;
+  specialty?: Specialty;
   group:
     | "demographics"
     | "diagnosis"
@@ -32,7 +49,8 @@ export type Fact = {
     | "medication"
     | "imaging"
     | "lab"
-    | "history";
+    | "history"
+    | "genomics";
 };
 
 export type PhaseStatus = "done" | "in-progress" | "planned" | "skipped";
@@ -96,6 +114,9 @@ export type Patient = {
   vaultAvatars: { initials: string; tone: AvatarTone }[];
   facts: Fact[];
   plan: TreatmentPhase[];
+  options?: TreatmentOption[];
+  chosenOptionId?: string | null;
+  boardCase?: BoardCase;
   agent: {
     now?: { action: string; ref?: { kind: "pr" | "fact" | "meeting"; id: string; label: string } };
     needsYou: AgentQuestion[];
@@ -221,4 +242,65 @@ export type ActiveAgent = {
   task: string;
   type: "Claude" | "Specialist" | "Compliance" | "Triage";
   status: "active" | "warn" | "muted";
+};
+
+export type ClinicianRanking = {
+  specialist: string;
+  specialty: Specialty;
+  rank: number;
+  confidence: number;
+  note?: string;
+};
+
+export type OutcomeMetric = {
+  label: string;
+  value: string;
+  citation?: string;
+};
+
+export type ToxicityNote = {
+  category: string;
+  severity: string;
+};
+
+export type OptionIntent = "curative" | "palliative" | "trial" | "watch";
+
+export type TreatmentOption = {
+  id: string;
+  name: string;
+  shortLabel: string;
+  intent: OptionIntent;
+  phases: TreatmentPhase[];
+  rationale: string[];
+  rationaleFactIds?: string[];
+  outcomes: OutcomeMetric[];
+  toxicities: ToxicityNote[];
+  evidence: string[];
+  burden?: string;
+  rankings: ClinicianRanking[];
+  patientFacing?: {
+    name: string;
+    summary: string;
+    livesLikeThis: string;
+  };
+};
+
+export type BoardCaseStatus =
+  | "draft"
+  | "live"
+  | "sent-to-patient"
+  | "decided"
+  | "archived";
+
+export type BoardCase = {
+  id: string;
+  patientId: string;
+  question: string;
+  openedAt: string;
+  openedFromIssue?: string;
+  attendees: Attendee[];
+  status: BoardCaseStatus;
+  decidedOptionId?: string | null;
+  decidedAt?: string;
+  decidedBy?: "patient" | "team";
 };

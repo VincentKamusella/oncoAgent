@@ -1,0 +1,57 @@
+[     265ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[     281ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[     417ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[     422ms] [ERROR] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <RedirectBoundary>
+      <RedirectErrorBoundary router={{...}}>
+        <InnerLayoutRouter url="/patients/..." tree={[...]} params={{id:"maria-k"}} cacheNode={{rsc:{...}, ...}} ...>
+          <SegmentViewNode type="layout" pagePath="patients/[...">
+            <SegmentTrieNode>
+            <script>
+            <script>
+            <script>
+            <script>
+            <script>
+            <script>
+            <PatientLayout>
+              <div className="bg-aurora ...">
+                <PatientSidebar>
+                <div className="flex min-h...">
+                  <header>
+                  <SectionTabs>
+                  <main className="flex min-h...">
+                    <div>
+                    <AgentChat patient={{id:"maria-k", ...}}>
+                      <aside className="hidden w-[...">
+                        <header>
+                        <div>
+                        <footer className="border-t b...">
+                          <div className="relative f...">
+                            <Textarea value="" onChange={function onChange} onKeyDown={function onKey} ...>
+                              <textarea
+                                data-slot="textarea"
+                                className="flex field-sizing-content w-full rounded-lg border-input transition-colors ..."
+                                value=""
+                                onChange={function onChange}
+                                onKeyDown={function onKey}
+                                placeholder="Ask about this patient…"
+                                rows={1}
+-                               style={{caret-color:"transparent"}}
+                              >
+                            ...
+                          ...
+        ...
+ @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_115brz8._.js:3272
+[     424ms] [LOG] [Fast Refresh] done in 117ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
