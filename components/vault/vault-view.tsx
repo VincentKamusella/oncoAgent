@@ -2,7 +2,12 @@
 
 import { useMemo } from "react";
 import { useSearchParams } from "next/navigation";
-import type { Attachment, Patient, Specialty } from "@/lib/types";
+import type {
+  Attachment,
+  GuidelinesGraph,
+  Patient,
+  Specialty,
+} from "@/lib/types";
 import { AllRecordsDashboard } from "./all-records-dashboard";
 import { SpecialistFolder } from "./specialist-folder";
 
@@ -21,7 +26,13 @@ const VALID_SPECIALTIES: Specialty[] = [
   "patient",
 ];
 
-export function VaultView({ patient }: { patient: Patient }) {
+export function VaultView({
+  patient,
+  guidelines,
+}: {
+  patient: Patient;
+  guidelines: GuidelinesGraph | null;
+}) {
   const params = useSearchParams();
   const raw = params.get("specialty");
   const active: Specialty | "all" =
@@ -48,7 +59,11 @@ export function VaultView({ patient }: { patient: Patient }) {
 
   if (active === "all") {
     return (
-      <AllRecordsDashboard patient={patient} facts={facts} />
+      <AllRecordsDashboard
+        patient={patient}
+        facts={facts}
+        guidelines={guidelines}
+      />
     );
   }
 

@@ -3,7 +3,7 @@ import type { GuidelinesGraph } from "../types";
 export const guidelinesByPatient: Record<string, GuidelinesGraph> = {
   "maria-k": {
     cancerType: "breast-her2",
-    title: "HER2+ early breast cancer · simplified pathway",
+    title: "HER2+ early breast cancer",
     source: "NCCN BINV-J (adapted)",
     nodes: [
       { id: "g1", label: "Confirmed invasive\nbreast cancer", kind: "decision", patientPath: true, factKey: "diagnosis.primary" },
@@ -33,7 +33,7 @@ export const guidelinesByPatient: Record<string, GuidelinesGraph> = {
   },
   "thomas-b": {
     cancerType: "rectal",
-    title: "Locally advanced rectal cancer · simplified pathway",
+    title: "Locally advanced rectal cancer",
     source: "NCCN RECT-3 (adapted)",
     nodes: [
       { id: "g1", label: "Rectal\nadenocarcinoma", kind: "decision", patientPath: true, factKey: "diagnosis.primary" },
