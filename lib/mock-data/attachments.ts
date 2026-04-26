@@ -81,7 +81,7 @@ export const attachmentsMaria: Attachment[] = [
   {
     id: "att-mk-008",
     patientId: "maria-k",
-    specialty: "molecular",
+    specialty: "pathology",
     kind: "pdf",
     name: "NGS panel — 523 genes",
     date: "2026-02-18T16:20:00Z",
@@ -92,7 +92,7 @@ export const attachmentsMaria: Attachment[] = [
   {
     id: "att-mk-009",
     patientId: "maria-k",
-    specialty: "surg-onc",
+    specialty: "med-onc",
     kind: "report",
     name: "Pre-op surgical consult",
     date: "2026-04-20T11:00:00Z",

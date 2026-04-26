@@ -109,6 +109,37 @@ export const toolDefinitions = [
       "Get treatment options under review for this patient. Each option includes intent, regimen phases, rationale, expected outcomes, toxicities, evidence citations, and clinician rankings.",
     parameters: { type: "object", properties: {} },
   },
+  {
+    type: "function" as const,
+    name: "traverse_graph",
+    description:
+      "Traverse the patient knowledge graph to find related entities. Start from a fact, review item, meeting, clinician, or treatment option and explore connections — what supersedes it, what contradicts it, what depends on it, who authored it, what meeting discussed it. Use this when asked about relationships between clinical data points.",
+    parameters: {
+      type: "object",
+      properties: {
+        start_node: {
+          type: "string",
+          description:
+            "The key or identifier of the starting node. For facts use the fact key (e.g., 'staging.clinical'). For clinicians use their name. For meetings or options use their title.",
+        },
+        node_type: {
+          type: "string",
+          enum: ["fact", "review_item", "meeting", "clinician", "treatment_option", "drug"],
+          description: "The type of the starting node.",
+        },
+        direction: {
+          type: "string",
+          enum: ["outgoing", "incoming", "both"],
+          description: "Which direction to traverse relationships. Default: both.",
+        },
+        max_depth: {
+          type: "integer",
+          description: "How many relationship hops to traverse. Default: 2, max: 4.",
+        },
+      },
+      required: ["start_node", "node_type"],
+    },
+  },
 ];
 
 export async function executeTool(
@@ -279,6 +310,22 @@ export async function executeTool(
           })),
         })),
       };
+    }
+
+    case "traverse_graph": {
+      const { traverseGraph } = await import("@/lib/neo4j/traverse");
+      try {
+        const result = await traverseGraph({
+          patientSlug: patientId,
+          startNode: args.start_node as string,
+          nodeType: args.node_type as "fact" | "review_item" | "meeting" | "clinician" | "treatment_option" | "drug",
+          direction: (args.direction as "outgoing" | "incoming" | "both") ?? "both",
+          maxDepth: Math.min((args.max_depth as number) ?? 2, 4),
+        });
+        return result;
+      } catch (err) {
+        return { error: `Graph traversal failed: ${err instanceof Error ? err.message : "unknown error"}` };
+      }
     }
 
     default:

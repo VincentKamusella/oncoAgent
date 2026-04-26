@@ -108,7 +108,13 @@ function buildGraph(data: AuraGraphData): {
   return { nodes, rels };
 }
 
-export function AuraGraph({ data }: { data: AuraGraphData }) {
+export function AuraGraph({
+  data,
+  onNodeClick,
+}: {
+  data: AuraGraphData;
+  onNodeClick?: (node: { labels: string[]; properties: Record<string, unknown> }) => void;
+}) {
   const { nodes, rels } = useMemo(() => buildGraph(data), [data]);
 
   const nvlRef = useRef<NVL | null>(null);
@@ -152,6 +158,12 @@ export function AuraGraph({ data }: { data: AuraGraphData }) {
           onHover: true,
           onNodeClick: (node) => {
             console.log("[AuraGraph] node click", node);
+            if (onNodeClick && node?.id) {
+              const original = data.nodes.find((n) => n.id === node.id);
+              if (original) {
+                onNodeClick({ labels: original.labels, properties: original.properties });
+              }
+            }
           },
           onRelationshipClick: (rel) => {
             console.log("[AuraGraph] relationship click", rel);
