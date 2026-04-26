@@ -1,19 +1,42 @@
 "use client";
 
+import { useMemo, useState } from "react";
 import { formatDistanceToNowStrict } from "date-fns";
-import type { Fact, Patient } from "@/lib/types";
+import { Network } from "lucide-react";
+import type {
+  Fact,
+  GuidelinesGraph,
+  GuidelinesNode,
+  Patient,
+} from "@/lib/types";
 import { FactsGraph } from "./facts-graph";
+import { GuidelinesFlow } from "@/components/guidelines/guidelines-flow";
+import { RulePanel } from "@/components/guidelines/rule-panel";
 
 export function AllRecordsDashboard({
   patient,
   facts,
+  guidelines,
 }: {
   patient: Patient;
   facts: Fact[];
+  guidelines: GuidelinesGraph | null;
 }) {
   const stage = deriveStage(patient);
   const treatment = deriveTreatment(patient);
   const latest = deriveLatest(facts);
+
+  const [selected, setSelected] = useState<GuidelinesNode | null>(
+    () =>
+      guidelines?.nodes.find((n) => n.factKey === "staging.clinical") ?? null
+  );
+  const matchingFacts = useMemo(
+    () =>
+      selected?.factKey
+        ? patient.facts.filter((f) => f.key === selected.factKey)
+        : [],
+    [selected, patient.facts]
+  );
 
   return (
     <section className="flex min-h-0 min-w-0 flex-1 flex-col overflow-y-auto px-6 py-6">
@@ -45,6 +68,32 @@ export function AllRecordsDashboard({
           sub={latest.sub}
         />
       </div>
+
+      {guidelines && (
+        <div className="mt-10">
+          <div className="flex items-center gap-2">
+            <Network className="h-3.5 w-3.5 text-violet-600" />
+            <span className="mono text-[10.5px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+              Guideline pathway
+            </span>
+          </div>
+          <h3 className="mt-1 text-[15px] font-semibold tracking-tight text-foreground">
+            {guidelines.title}
+          </h3>
+          <div className="mono mt-1 text-[11px] text-muted-foreground">
+            source · {guidelines.source}
+          </div>
+
+          <div className="mt-3 grid gap-4 lg:grid-cols-[1fr_360px]">
+            <GuidelinesFlow
+              graph={guidelines}
+              selectedId={selected?.id}
+              onSelect={setSelected}
+            />
+            <RulePanel node={selected} matchingFacts={matchingFacts} />
+          </div>
+        </div>
+      )}
 
       <div className="mt-10">
         <span className="mono text-[10.5px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">

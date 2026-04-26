@@ -21,7 +21,6 @@ import {
 import {
   LayoutGrid,
   Activity,
-  Network,
   GitPullRequest,
   CalendarDays,
   Video,
@@ -35,7 +34,6 @@ import { pullRequests } from "@/lib/mock-data/prs";
 const SECTIONS = [
   { key: "", label: "Overview", icon: <LayoutGrid /> },
   { key: "/plan", label: "Treatment plan", icon: <Activity /> },
-  { key: "/guidelines", label: "Guidelines", icon: <Network /> },
   { key: "/prs", label: "Pull requests", icon: <GitPullRequest /> },
   { key: "/followup", label: "Followup", icon: <CalendarDays /> },
   { key: "/meetings", label: "Meetings", icon: <Video /> },

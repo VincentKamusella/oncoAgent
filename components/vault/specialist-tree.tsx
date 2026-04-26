@@ -180,7 +180,7 @@ export function SpecialistTree({
         >
           <Layers className="h-3.5 w-3.5" />
         </span>
-        <span className="flex-1 truncate">All records</span>
+        <span className="flex-1 truncate">Overview</span>
         <span className="mono text-[10.5px]">{facts.length}</span>
       </button>
 
