@@ -154,7 +154,13 @@ export async function persistTrace(trace: ChatTrace) {
     await mkdir(LOG_DIR, { recursive: true });
     const filename = `${trace.timestamp.slice(0, 10)}_${trace.sessionId}.json`;
     const line = JSON.stringify(trace, null, 2) + "\n\n";
-    await writeFile(join(LOG_DIR, filename), line, { flag: "a" });
+    const base = path.resolve(LOG_DIR);
+    const target = path.resolve(base, filename);
+    const relative = path.relative(base, target);
+    if (relative.startsWith('..') || path.isAbsolute(relative)) {
+      throw new Error('Invalid file path');
+    }
+    await writeFile(target, line, { flag: "a" });
   } catch {
     console.warn(`${prefix} failed to write log file`);
   }
