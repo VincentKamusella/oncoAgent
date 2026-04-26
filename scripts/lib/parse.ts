@@ -43,6 +43,7 @@ function parseOne(s: string): { name: string; email: string }[] {
 }
 
 export function parseEml(path: string): Email {
+  if (path.includes("..") || require("path").isAbsolute(path)) throw new Error("Invalid path");
   const raw = readFileSync(path, "utf-8");
   const split = raw.indexOf("\n\n");
   const headerBlock = split === -1 ? raw : raw.slice(0, split);
@@ -78,6 +79,9 @@ export function parseEml(path: string): Email {
 }
 
 export function parseJsonl<T = unknown>(path: string): T[] {
+  if (path.includes('..') || require('path').isAbsolute(path)) {
+    throw new Error('Invalid path');
+  }
   return readFileSync(path, "utf-8")
     .split("\n")
     .filter((l) => l.trim().length > 0)
@@ -85,6 +89,9 @@ export function parseJsonl<T = unknown>(path: string): T[] {
 }
 
 export function parseCsvFile<T = Record<string, string>>(path: string): T[] {
+  if (path.includes('..') || require('path').isAbsolute(path)) {
+    throw new Error('Invalid file path');
+  }
   return parseCsv(readFileSync(path, "utf-8"), {
     columns: true,
     skip_empty_lines: true,
@@ -96,6 +103,9 @@ export function parseMarkdownDoc(path: string): {
   data: Record<string, unknown>;
   content: string;
 } {
+  if (path.includes('..') || require('path').isAbsolute(path)) {
+    throw new Error('Invalid path');
+  }
   const f = matter(readFileSync(path, "utf-8"));
   return { data: f.data as Record<string, unknown>, content: f.content };
 }
