@@ -207,6 +207,23 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
+def _safe_write_target(path: Path) -> Path:
+    """Reject paths outside the current working directory and any path that
+    points at an existing symlink — defense-in-depth against ``--patients-json``
+    being pointed at sensitive locations on a developer's machine."""
+    resolved = path.expanduser().resolve()
+    cwd = Path.cwd().resolve()
+    try:
+        resolved.relative_to(cwd)
+    except ValueError as e:
+        raise ValueError(
+            f"Refusing to write outside cwd: {resolved} (cwd={cwd})"
+        ) from e
+    if resolved.is_symlink():
+        raise ValueError(f"Refusing to follow symlink: {resolved}")
+    return resolved
+
+
 def write_sample_patients(path: Path) -> None:
     sample = [
         {
@@ -220,7 +237,8 @@ def write_sample_patients(path: Path) -> None:
             "comorbidities": [],
         }
     ]
-    path.write_text(json.dumps(sample, indent=2), encoding="utf-8")
+    target = _safe_write_target(path)
+    target.write_text(json.dumps(sample, indent=2), encoding="utf-8")
 
 
 def main() -> None:
