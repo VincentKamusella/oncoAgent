@@ -17,18 +17,21 @@ This spec documents the current implementation and how to extend it when the UI 
                                           └──────────┬───────────┘
                                                      │
                                           ┌──────────▼───────────┐
-                                          │  Azure OpenAI        │
-                                          │  Responses API       │
-                                          │  (gpt-5-mini)        │
-                                          └──────────────────────┘
+                                          │  Provider Layer      │
+                                          │  (CHAT_PROVIDER env) │
+                                          ├──────────┬───────────┤
+                                          │ Pioneer  │  Azure    │
+                                          │ Chat     │  OpenAI   │
+                                          │ Complet. │  Resp.API │
+                                          └──────────┴───────────┘
 ```
 
 **Two-phase API pattern:**
 
-- **Phase 1** — Non-streaming calls with tools enabled. The model can make up to 5 rounds of tool calls to gather data. Non-streaming is used here because Azure's Responses API returns reliable `call_id` values in JSON (streaming SSE made `call_id` parsing fragile).
+- **Phase 1** — Non-streaming calls with tools enabled. The model can make up to 5 rounds of tool calls to gather data. Non-streaming is used here for reliable tool call parsing.
 - **Phase 2** — Streaming call without tools. Takes the full conversation (including tool results) and streams the final text response. This gives the typewriter effect in the UI.
 
-**Why not single-phase streaming with tools?** Azure's SSE events for `function_call` items didn't reliably expose `call_id` in early chunks, causing 400 errors on follow-up calls. The two-phase split is a pragmatic fix that also simplifies logging.
+**Provider toggle:** Set `CHAT_PROVIDER=pioneer` or `CHAT_PROVIDER=azure` in `.env.local`. See `PIONEER-SPEC.md` for full integration details.
 
 ---
 
@@ -115,7 +118,7 @@ If you skip step 2, the unknown-view fallback kicks in — the chat still works,
 
 ## 4. Tools (Tier 3)
 
-10 tools available to the model. All are patient-scoped — `patientId` is injected server-side, never exposed to the model.
+13 tools available to the model. All are patient-scoped — `patientId` is injected server-side, never exposed to the model.
 
 | Tool | Args | Returns |
 |------|------|---------|
@@ -129,6 +132,9 @@ If you skip step 2, the unknown-view fallback kicks in — the chat still works,
 | `get_guidelines` | — | Guideline pathway with patient's path through decision nodes |
 | `get_board_case` | — | Active board case: question, status, attendees, decision info |
 | `get_treatment_options` | — | Treatment options: intent, phases, rationale, outcomes, toxicities, evidence, clinician rankings |
+| `traverse_graph` | `start_node`, `node_type`, `direction?`, `max_depth?` | Graph traversal results — relationships, connected entities |
+| `extract_entities` | `text`, `schema?` | NER extraction via Pioneer fine-tuned model — entities with types and confidence |
+| `search_literature` | `query`, `max_results?` | Tavily search — answer summary + ranked results from medical literature |
 
 ### Adding a new tool
 
@@ -209,18 +215,37 @@ When the UI changes, walk through:
 | File | Purpose |
 |------|---------|
 | `components/agent-chat/agent-chat.tsx` | Chat UI component — streaming, session management, view derivation |
-| `app/api/chat/route.ts` | API route — two-phase Azure OpenAI integration, SSE streaming |
+| `app/api/chat/route.ts` | API route — two-phase provider-agnostic integration, SSE streaming |
 | `lib/chat/context.ts` | System prompt builder — patient summary, view context, persona |
-| `lib/chat/tools.ts` | Tool definitions and executors — 10 patient-scoped tools |
-| `lib/chat/logger.ts` | Structured tracing — console + JSONL file output |
-| `.env.local` | Azure OpenAI credentials (gitignored) |
+| `lib/chat/tools.ts` | Tool definitions and executors — 13 patient-scoped tools |
+| `lib/chat/logger.ts` | Structured tracing — console + JSON file output |
+| `lib/chat/providers/types.ts` | ChatProvider interface and shared types |
+| `lib/chat/providers/azure.ts` | Azure OpenAI Responses API provider |
+| `lib/chat/providers/pioneer.ts` | Pioneer (Fastino) OpenAI-compatible Chat Completions provider |
+| `lib/chat/providers/index.ts` | Provider factory — reads `CHAT_PROVIDER` env var |
+| `.env.local` | API keys and provider toggle (gitignored) |
+| `PIONEER-SPEC.md` | Full Pioneer & Tavily integration spec |
 
 ---
 
 ## 9. Environment
 
-```
-AZURE_OPENAI_ENDPOINT=https://botmodels5836744871.cognitiveservices.azure.com/openai/responses?api-version=2025-04-01-preview
+```bash
+# Provider toggle
+CHAT_PROVIDER=pioneer          # "pioneer" | "azure"
+
+# Pioneer (Fastino Labs)
+PIONEER_API_KEY=pio_sk_...
+PIONEER_BASE_URL=https://api.pioneer.ai/v1
+PIONEER_CHAT_MODEL=Qwen/Qwen3-235B-A22B
+PIONEER_NER_MODEL=<job-id>     # colleague's fine-tuned NER model
+PIONEER_NER_THRESHOLD=0.3
+
+# Tavily
+TAVILY_API_KEY=tvly-...
+
+# Azure OpenAI (fallback)
+AZURE_OPENAI_ENDPOINT=<endpoint>
 AZURE_OPENAI_API_KEY=<key>
 AZURE_OPENAI_MODEL=gpt-5-mini
 ```
@@ -231,6 +256,6 @@ AZURE_OPENAI_MODEL=gpt-5-mini
 
 - **In-memory sessions** — sessions are lost on page refresh or server restart. Acceptable for hackathon. Production would use a session store.
 - **No write tools** — the agent can read all patient data but cannot merge PRs, close issues, or modify the record. This is intentional for the demo (clinician always in control).
-- **Single model** — gpt-5-mini for all interactions. Could tier to a larger model for complex reasoning (board case analysis) vs. a smaller one for simple lookups.
+- **Provider toggle** — switching between Pioneer and Azure requires a server restart (env vars read at startup). A future improvement could make this a runtime toggle.
 - **No conversation history on the API side** — full message history is sent with each request. Long conversations will hit token limits. Production would implement sliding-window truncation.
 - **Mock data only** — all tools hit `lib/mock-data/` modules. No real EHR/PACS/LIS integration.
