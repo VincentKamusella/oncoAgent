@@ -1,6 +1,7 @@
 import { getPatient } from "@/lib/data";
 import { buildSystemPrompt } from "@/lib/chat/context";
 import { toolDefinitions, executeTool } from "@/lib/chat/tools";
+import { getChatProvider, type ChatMessage } from "@/lib/chat/providers";
 import {
   createTrace,
   logToolRound,
@@ -9,78 +10,9 @@ import {
   type ToolCallLog,
 } from "@/lib/chat/logger";
 
-
 type InputMessage = { role: "user" | "assistant"; content: string };
 
-type FunctionCallInput = {
-  type: "function_call";
-  name: string;
-  call_id: string;
-  arguments: string;
-};
-
-type FunctionCallOutputInput = {
-  type: "function_call_output";
-  call_id: string;
-  output: string;
-};
-
-type ResponseInput = InputMessage | FunctionCallInput | FunctionCallOutputInput;
-
-const ENDPOINT = process.env.AZURE_OPENAI_ENDPOINT!;
-const API_KEY = process.env.AZURE_OPENAI_API_KEY!;
-const MODEL = process.env.AZURE_OPENAI_MODEL ?? "gpt-5-mini";
 const MAX_TOOL_ROUNDS = 5;
-
-async function callAzure(
-  instructions: string,
-  input: ResponseInput[],
-  stream: boolean,
-  includeTools: boolean
-) {
-  const body: Record<string, unknown> = {
-    model: MODEL,
-    instructions,
-    input,
-    stream,
-  };
-  if (includeTools) body.tools = toolDefinitions;
-
-  return fetch(ENDPOINT, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "api-key": API_KEY,
-    },
-    body: JSON.stringify(body),
-  });
-}
-
-type ToolCall = { name: string; call_id: string; arguments: string };
-
-async function parseNonStreaming(
-  res: Response
-): Promise<{ text: string; toolCalls: ToolCall[] }> {
-  const json = await res.json();
-  let text = "";
-  const toolCalls: ToolCall[] = [];
-
-  for (const item of json.output ?? []) {
-    if (item.type === "message") {
-      for (const part of item.content ?? []) {
-        if (part.type === "output_text") text += part.text;
-      }
-    } else if (item.type === "function_call") {
-      toolCalls.push({
-        name: item.name,
-        call_id: item.call_id,
-        arguments: item.arguments,
-      });
-    }
-  }
-
-  return { text, toolCalls };
-}
 
 export async function POST(request: Request) {
   const t0 = performance.now();
@@ -97,9 +29,7 @@ export async function POST(request: Request) {
     return Response.json({ error: "Patient not found" }, { status: 404 });
   }
 
-  if (!API_KEY || !ENDPOINT) {
-    return Response.json({ error: "Azure OpenAI not configured" }, { status: 500 });
-  }
+  const provider = getChatProvider();
 
   const instructions = await buildSystemPrompt(patient, view);
   const userMessage = messages[messages.length - 1]?.content ?? "";
@@ -111,25 +41,44 @@ export async function POST(request: Request) {
     instructions
   );
 
-  let input: ResponseInput[] = [...messages];
+  console.log(`[chat] Using provider: ${provider.name}`);
+
+  const conversation: ChatMessage[] = messages.map((m) => ({
+    role: m.role,
+    content: m.content,
+  }));
 
   // ── Phase 1: resolve tool calls (non-streaming for reliable parsing) ──
   for (let round = 0; round < MAX_TOOL_ROUNDS; round++) {
     const roundStart = performance.now();
-    const res = await callAzure(instructions, input, false, true);
 
-    if (!res.ok) {
-      const errText = await res.text();
-      return Response.json(
-        { error: `Azure API error ${res.status}: ${errText}` },
-        { status: 502 }
+    let result: { reasoning: string; toolCalls: { name: string; call_id: string; arguments: string }[] };
+    try {
+      result = await provider.callForToolResolution(
+        instructions,
+        conversation,
+        toolDefinitions
       );
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : String(err);
+      return Response.json({ error: msg }, { status: 502 });
     }
 
-    const { text: roundReasoning, toolCalls } = await parseNonStreaming(res);
+    const { reasoning: roundReasoning, toolCalls } = result;
     if (toolCalls.length === 0) break;
 
     const callLogs: ToolCallLog[] = [];
+
+    const assistantMsg: ChatMessage = {
+      role: "assistant",
+      content: roundReasoning || null,
+      tool_calls: toolCalls.map((tc) => ({
+        id: tc.call_id,
+        type: "function" as const,
+        function: { name: tc.name, arguments: tc.arguments },
+      })),
+    };
+    conversation.push(assistantMsg);
 
     for (const call of toolCalls) {
       const callStart = performance.now();
@@ -140,84 +89,42 @@ export async function POST(request: Request) {
         /* empty args */
       }
 
-      const result = await executeTool(call.name, args, patientId);
+      const toolResult = await executeTool(call.name, args, patientId);
+      const resultStr = JSON.stringify(toolResult);
+
       callLogs.push({
         name: call.name,
         arguments: args,
-        result,
+        result: toolResult,
         durationMs: Math.round(performance.now() - callStart),
       });
 
-      input.push(
-        {
-          type: "function_call",
-          name: call.name,
-          call_id: call.call_id,
-          arguments: call.arguments,
-        },
-        {
-          type: "function_call_output",
-          call_id: call.call_id,
-          output: JSON.stringify(result),
-        }
-      );
+      conversation.push({
+        role: "tool",
+        tool_call_id: call.call_id,
+        content: resultStr,
+      });
     }
 
     logToolRound(trace, round + 1, roundReasoning, callLogs, Math.round(performance.now() - roundStart));
   }
 
-  // ── Phase 2: stream final text response (no tools — text only) ──
+  // ── Phase 2: stream final text response ──
   const streamStart = performance.now();
-  const streamRes = await callAzure(instructions, input, true, false);
-
-  if (!streamRes.ok) {
-    const errText = await streamRes.text();
-    return Response.json(
-      { error: `Azure API error ${streamRes.status}: ${errText}` },
-      { status: 502 }
-    );
-  }
-
   const encoder = new TextEncoder();
 
   const outputStream = new ReadableStream({
     async start(controller) {
-      const reader = streamRes.body!.getReader();
-      const decoder = new TextDecoder();
-      let buffer = "";
       let fullResponse = "";
 
       try {
-        while (true) {
-          const { done, value } = await reader.read();
-          if (done) break;
-
-          buffer += decoder.decode(value, { stream: true });
-          const lines = buffer.split("\n");
-          buffer = lines.pop() ?? "";
-
-          for (const line of lines) {
-            if (!line.startsWith("data: ")) continue;
-            const payload = line.slice(6).trim();
-            if (payload === "[DONE]") continue;
-
-            let event: Record<string, unknown>;
-            try {
-              event = JSON.parse(payload);
-            } catch {
-              continue;
-            }
-
-            if (event.type === "response.output_text.delta") {
-              const delta = event.delta as string;
-              fullResponse += delta;
-              controller.enqueue(
-                encoder.encode(
-                  `data: ${JSON.stringify({ type: "delta", content: delta })}\n\n`
-                )
-              );
-            }
-          }
+        for await (const delta of provider.streamFinalResponse(instructions, conversation)) {
+          fullResponse += delta;
+          controller.enqueue(
+            encoder.encode(
+              `data: ${JSON.stringify({ type: "delta", content: delta })}\n\n`
+            )
+          );
         }
       } catch (err) {
         const msg = err instanceof Error ? err.message : String(err);

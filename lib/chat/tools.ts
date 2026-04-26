@@ -140,6 +140,49 @@ export const toolDefinitions = [
       required: ["start_node", "node_type"],
     },
   },
+  {
+    type: "function" as const,
+    name: "extract_entities",
+    description:
+      "Extract clinical entities from unstructured text using the fine-tuned NER model. Identifies patients, hospitals, diagnoses, medications, biomarkers, procedures, lab results, and medical record numbers. Use when you need to parse clinical narrative text into structured entities.",
+    parameters: {
+      type: "object",
+      properties: {
+        text: {
+          type: "string",
+          description: "The clinical text to extract entities from.",
+        },
+        schema: {
+          type: "array",
+          items: { type: "string" },
+          description:
+            "Entity types to extract. Options: patient, hospital, medical_record, diagnosis, medication, biomarker, procedure, lab_result. Omit to use all types.",
+        },
+      },
+      required: ["text"],
+    },
+  },
+  {
+    type: "function" as const,
+    name: "search_literature",
+    description:
+      "Search recent medical literature, clinical trials, and meta-analyses. Returns ranked results with titles, URLs, and content excerpts. Use when the clinician asks about recent evidence, treatment guidelines, drug efficacy, or clinical trial results for a specific cancer type or therapy.",
+    parameters: {
+      type: "object",
+      properties: {
+        query: {
+          type: "string",
+          description:
+            "The search query. Be specific — include cancer type, stage, biomarkers, treatment names.",
+        },
+        max_results: {
+          type: "integer",
+          description: "Maximum results to return. Default: 5.",
+        },
+      },
+      required: ["query"],
+    },
+  },
 ];
 
 export async function executeTool(
@@ -325,6 +368,92 @@ export async function executeTool(
         return result;
       } catch (err) {
         return { error: `Graph traversal failed: ${err instanceof Error ? err.message : "unknown error"}` };
+      }
+    }
+
+    case "extract_entities": {
+      const nerModel = process.env.PIONEER_NER_MODEL;
+      const nerKey = process.env.PIONEER_API_KEY;
+      const baseUrl = process.env.PIONEER_BASE_URL ?? "https://api.pioneer.ai/v1";
+      if (!nerModel || !nerKey) {
+        return { error: "Pioneer NER model not configured (PIONEER_API_KEY / PIONEER_NER_MODEL)" };
+      }
+      const schema = (args.schema as string[] | undefined) ?? [
+        "patient", "hospital", "medical_record", "diagnosis",
+        "medication", "biomarker", "procedure", "lab_result",
+      ];
+      const threshold = parseFloat(process.env.PIONEER_NER_THRESHOLD ?? "0.3");
+      try {
+        const res = await fetch(`${baseUrl}/chat/completions`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${nerKey}`,
+          },
+          body: JSON.stringify({
+            model: nerModel,
+            task: "extract_entities",
+            text: args.text as string,
+            schema,
+            threshold,
+          }),
+        });
+        if (!res.ok) {
+          const errText = await res.text();
+          return { error: `NER API error ${res.status}: ${errText}` };
+        }
+        return await res.json();
+      } catch (err) {
+        return { error: `NER extraction failed: ${err instanceof Error ? err.message : "unknown error"}` };
+      }
+    }
+
+    case "search_literature": {
+      const tavilyKey = process.env.TAVILY_API_KEY;
+      if (!tavilyKey) {
+        return { error: "Tavily not configured (TAVILY_API_KEY)" };
+      }
+      const maxResults = Math.min((args.max_results as number) ?? 5, 10);
+      try {
+        const res = await fetch("https://api.tavily.com/search", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            api_key: tavilyKey,
+            query: args.query as string,
+            search_depth: "advanced",
+            include_answer: true,
+            max_results: maxResults,
+            include_domains: [
+              "pubmed.ncbi.nlm.nih.gov",
+              "clinicaltrials.gov",
+              "nccn.org",
+              "asco.org",
+              "nejm.org",
+              "thelancet.com",
+              "nature.com",
+              "bmj.com",
+            ],
+          }),
+        });
+        if (!res.ok) {
+          const errText = await res.text();
+          return { error: `Tavily API error ${res.status}: ${errText}` };
+        }
+        const data = await res.json();
+        return {
+          answer: data.answer ?? "",
+          results: (data.results ?? []).map(
+            (r: { title: string; url: string; content: string; score: number }) => ({
+              title: r.title,
+              url: r.url,
+              excerpt: r.content?.slice(0, 500),
+              relevance: r.score,
+            })
+          ),
+        };
+      } catch (err) {
+        return { error: `Literature search failed: ${err instanceof Error ? err.message : "unknown error"}` };
       }
     }
 
