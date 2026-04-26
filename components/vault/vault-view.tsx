@@ -15,15 +15,7 @@ const VALID_SPECIALTIES: Specialty[] = [
   "pathology",
   "radiology",
   "med-onc",
-  "surg-onc",
-  "rad-onc",
-  "molecular",
-  "nuc-med",
-  "ir",
-  "pharmacy",
   "nursing",
-  "genetics",
-  "patient",
 ];
 
 export function VaultView({

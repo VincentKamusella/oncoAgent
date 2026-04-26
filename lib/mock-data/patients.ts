@@ -1,5 +1,5 @@
 import type { Fact, Patient, TreatmentOption, BoardCase } from "../types";
-import { attachmentsMaria } from "./attachments";
+import { attachmentsMaria, attachmentsThomas, attachmentsAnna } from "./attachments";
 
 const factsMaria: Fact[] = [
   {
@@ -188,7 +188,7 @@ const factsMaria: Fact[] = [
     value: "Self-detected 2 cm lump, left breast — 2026-02-04",
     confidence: 0.95,
     group: "history",
-    specialty: "patient",
+    specialty: "nursing",
     source: {
       kind: "note",
       id: "note-mk-pcp",
@@ -204,7 +204,7 @@ const factsMaria: Fact[] = [
     value: "PIK3CA p.H1047R · ERBB2 amp · TP53 wild-type · TMB 4 mut/Mb · MSS",
     confidence: 0.95,
     group: "genomics",
-    specialty: "molecular",
+    specialty: "pathology",
     source: {
       kind: "genomics",
       id: "ngs-mk-001",
@@ -213,7 +213,7 @@ const factsMaria: Fact[] = [
         "Reportable: ERBB2 amplification (cn=14), PIK3CA c.3140A>G p.H1047R (VAF 32%). VUS: ARID1A. TMB 4. MSS.",
       author: "Foundation Medicine",
       at: "2026-02-26T12:00:00Z",
-      specialty: "molecular",
+      specialty: "pathology",
     },
     updatedAt: "2026-02-26T12:00:00Z",
   },
@@ -225,14 +225,14 @@ const factsMaria: Fact[] = [
       "ERBB2 amp · Level 1 (trastuzumab + pertuzumab) · PIK3CA H1047R · Level 1 (alpelisib in HR+/HER2−)",
     confidence: 0.92,
     group: "genomics",
-    specialty: "molecular",
+    specialty: "pathology",
     source: {
       kind: "genomics",
       id: "oncokb-mk-001",
       label: "OncoKB lookup · 2026-02-27",
       author: "OncoKB v4.20",
       at: "2026-02-27T08:30:00Z",
-      specialty: "molecular",
+      specialty: "pathology",
     },
     updatedAt: "2026-02-27T08:30:00Z",
   },
@@ -244,7 +244,7 @@ const factsMaria: Fact[] = [
       "Lumpectomy + SLNB feasible if good response to neoadjuvant; reassess at MRI mid-cycle 4",
     confidence: 0.85,
     group: "history",
-    specialty: "surg-onc",
+    specialty: "med-onc",
     source: {
       kind: "note",
       id: "note-mk-surg-1",
@@ -253,7 +253,7 @@ const factsMaria: Fact[] = [
         "After examination and review of MRI: candidate for breast-conserving surgery if neoadjuvant achieves >50% volumetric response. Plan SLNB at the time of surgery.",
       author: "Dr. S. Chen, Surgical Onc",
       at: "2026-02-21T10:30:00Z",
-      specialty: "surg-onc",
+      specialty: "med-onc",
     },
     updatedAt: "2026-02-21T10:30:00Z",
   },
@@ -265,14 +265,14 @@ const factsMaria: Fact[] = [
       "Whole-breast RT post-lumpectomy planned (40.05 Gy / 15 fx); boost to tumor bed if margins narrow",
     confidence: 0.85,
     group: "history",
-    specialty: "rad-onc",
+    specialty: "med-onc",
     source: {
       kind: "note",
       id: "note-mk-rt-1",
       label: "Rad-onc consult · 2026-02-23",
       author: "Dr. K. Lee, Rad-Onc",
       at: "2026-02-23T15:00:00Z",
-      specialty: "rad-onc",
+      specialty: "med-onc",
     },
     updatedAt: "2026-02-23T15:00:00Z",
   },
@@ -284,7 +284,7 @@ const factsMaria: Fact[] = [
       "TCHP doses verified vs BSA 1.74; no QTc / renal flags; pre-meds dexa+ondansetron+aprepitant",
     confidence: 0.98,
     group: "medication",
-    specialty: "pharmacy",
+    specialty: "med-onc",
     source: {
       kind: "note",
       id: "note-mk-pharm-1",
@@ -293,7 +293,7 @@ const factsMaria: Fact[] = [
         "Docetaxel 75 mg/m² → 130 mg. Carboplatin AUC 6 (Calvert, GFR 88) → 540 mg. Trastuzumab 8 mg/kg loading, 6 mg/kg q3w. Pertuzumab 840 mg loading, 420 mg q3w. No interactions w/ home meds.",
       author: "PharmD A. Riesgo",
       at: "2026-02-24T16:00:00Z",
-      specialty: "pharmacy",
+      specialty: "med-onc",
     },
     updatedAt: "2026-02-24T16:00:00Z",
   },
@@ -381,9 +381,9 @@ const optionsMaria: TreatmentOption[] = [
     rankings: [
       { specialist: "Dr. J. Müller", specialty: "med-onc", rank: 1, confidence: 0.95 },
       { specialist: "Dr. R. Patel", specialty: "pathology", rank: 1, confidence: 0.9 },
-      { specialist: "Dr. S. Chen", specialty: "surg-onc", rank: 1, confidence: 0.85 },
-      { specialist: "Dr. K. Lee", specialty: "rad-onc", rank: 1, confidence: 0.92 },
-      { specialist: "PharmD A. Riesgo", specialty: "pharmacy", rank: 1, confidence: 0.88 },
+      { specialist: "Dr. S. Chen", specialty: "med-onc", rank: 1, confidence: 0.85 },
+      { specialist: "Dr. K. Lee", specialty: "med-onc", rank: 1, confidence: 0.92 },
+      { specialist: "PharmD A. Riesgo", specialty: "med-onc", rank: 1, confidence: 0.88 },
     ],
     patientFacing: {
       name: "The standard treatment",
@@ -453,9 +453,9 @@ const optionsMaria: TreatmentOption[] = [
     rankings: [
       { specialist: "Dr. J. Müller", specialty: "med-onc", rank: 2, confidence: 0.7 },
       { specialist: "Dr. R. Patel", specialty: "pathology", rank: 2, confidence: 0.65 },
-      { specialist: "Dr. S. Chen", specialty: "surg-onc", rank: 2, confidence: 0.7 },
-      { specialist: "Dr. K. Lee", specialty: "rad-onc", rank: 2, confidence: 0.7 },
-      { specialist: "PharmD A. Riesgo", specialty: "pharmacy", rank: 2, confidence: 0.75 },
+      { specialist: "Dr. S. Chen", specialty: "med-onc", rank: 2, confidence: 0.7 },
+      { specialist: "Dr. K. Lee", specialty: "med-onc", rank: 2, confidence: 0.7 },
+      { specialist: "PharmD A. Riesgo", specialty: "med-onc", rank: 2, confidence: 0.75 },
     ],
     patientFacing: {
       name: "A gentler path",
@@ -518,9 +518,9 @@ const optionsMaria: TreatmentOption[] = [
     rankings: [
       { specialist: "Dr. J. Müller", specialty: "med-onc", rank: 3, confidence: 0.55 },
       { specialist: "Dr. R. Patel", specialty: "pathology", rank: 2, confidence: 0.7 },
-      { specialist: "Dr. S. Chen", specialty: "surg-onc", rank: 3, confidence: 0.5 },
-      { specialist: "Dr. K. Lee", specialty: "rad-onc", rank: 3, confidence: 0.5 },
-      { specialist: "PharmD A. Riesgo", specialty: "pharmacy", rank: 3, confidence: 0.6 },
+      { specialist: "Dr. S. Chen", specialty: "med-onc", rank: 3, confidence: 0.5 },
+      { specialist: "Dr. K. Lee", specialty: "med-onc", rank: 3, confidence: 0.5 },
+      { specialist: "PharmD A. Riesgo", specialty: "med-onc", rank: 3, confidence: 0.6 },
     ],
     patientFacing: {
       name: "A clinical trial",
@@ -941,6 +941,7 @@ export const patients: Patient[] = [
       { initials: "FP", tone: "sky" },
     ],
     facts: factsThomas,
+    attachments: attachmentsThomas,
     plan: [
       {
         id: "ph-tb-1",
@@ -1045,6 +1046,7 @@ export const patients: Patient[] = [
       { initials: "KL", tone: "amber" },
     ],
     facts: factsAnna,
+    attachments: attachmentsAnna,
     plan: [
       {
         id: "ph-al-1",

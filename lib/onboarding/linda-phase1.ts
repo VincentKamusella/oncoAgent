@@ -219,7 +219,7 @@ const factsLinda: Fact[] = [
     value: "PA-26-AT-9921 (AC-T regimen) — approved 2026-04-21",
     confidence: 0.97,
     group: "medication",
-    specialty: "pharmacy",
+    specialty: "med-onc",
     source: {
       kind: "report",
       id: "pa-lh-act-001",
@@ -306,7 +306,7 @@ const factsLinda: Fact[] = [
     value: "Self-detected painless lump, right breast — 2026-03-10",
     confidence: 0.95,
     group: "history",
-    specialty: "patient",
+    specialty: "nursing",
     source: {
       kind: "email",
       id: "eml-lh-referral",
@@ -323,7 +323,7 @@ const factsLinda: Fact[] = [
     value: "Maternal aunt — breast cancer at age 58",
     confidence: 0.9,
     group: "history",
-    specialty: "patient",
+    specialty: "nursing",
     source: {
       kind: "report",
       id: "doc-lh-intake-form",
@@ -341,7 +341,7 @@ const factsLinda: Fact[] = [
       "PIK3CA p.H1047R (VAF 28%, Level 1 actionable) · TP53/BRCA1/BRCA2/ESR1 wild-type · TMB 4 mut/Mb · MSS · HRD negative",
     confidence: 0.95,
     group: "genomics",
-    specialty: "molecular",
+    specialty: "pathology",
     source: {
       kind: "genomics",
       id: "ngs-lh-001",
@@ -350,7 +350,7 @@ const factsLinda: Fact[] = [
         "Reportable: PIK3CA c.3140A>G p.H1047R (VAF 28%) — activating missense, Level 1 (alpelisib + fulvestrant in HR+/HER2- MBC). TMB 4. MSS. HRD negative.",
       author: "Dr. A. Tanaka, Foundation Medicine",
       at: "2026-04-08T12:00:00Z",
-      specialty: "molecular",
+      specialty: "pathology",
     },
     updatedAt: "2026-04-08T12:00:00Z",
   },
@@ -361,14 +361,14 @@ const factsLinda: Fact[] = [
     value: "PIK3CA H1047R · Level 1 (alpelisib + fulvestrant in HR+/HER2-)",
     confidence: 0.92,
     group: "genomics",
-    specialty: "molecular",
+    specialty: "pathology",
     source: {
       kind: "genomics",
       id: "oncokb-lh-001",
       label: "OncoKB lookup · 2026-04-09",
       author: "OncoKB v4.20",
       at: "2026-04-09T08:30:00Z",
-      specialty: "molecular",
+      specialty: "pathology",
     },
     updatedAt: "2026-04-09T08:30:00Z",
   },
@@ -464,8 +464,8 @@ export const LINDA_PHASE1_OPTIONS: TreatmentOption[] = [
     rankings: [
       { specialist: "Dr. J. Schroeder", specialty: "med-onc", rank: 1, confidence: 0.94 },
       { specialist: "Dr. R. Patel", specialty: "pathology", rank: 1, confidence: 0.9 },
-      { specialist: "Dr. S. Chen", specialty: "surg-onc", rank: 1, confidence: 0.86 },
-      { specialist: "Dr. K. Lee", specialty: "rad-onc", rank: 1, confidence: 0.9 },
+      { specialist: "Dr. S. Chen", specialty: "med-onc", rank: 1, confidence: 0.86 },
+      { specialist: "Dr. K. Lee", specialty: "radiology", rank: 1, confidence: 0.9 },
       { specialist: "K. Schwarz", specialty: "nursing", rank: 1, confidence: 0.85 },
     ],
     patientFacing: {
@@ -539,7 +539,7 @@ export const LINDA_PHASE1_OPTIONS: TreatmentOption[] = [
     rankings: [
       { specialist: "Dr. J. Schroeder", specialty: "med-onc", rank: 2, confidence: 0.78 },
       { specialist: "Dr. R. Patel", specialty: "pathology", rank: 1, confidence: 0.85 },
-      { specialist: "Dr. S. Chen", specialty: "surg-onc", rank: 1, confidence: 0.83 },
+      { specialist: "Dr. S. Chen", specialty: "med-onc", rank: 1, confidence: 0.83 },
     ],
   },
   {
@@ -603,7 +603,7 @@ export const LINDA_PHASE1_OPTIONS: TreatmentOption[] = [
       "≈ 14 mo · 1 surgery · 4 infusions · 15 RT fractions · 5+ y endocrine + 2 y CDK4/6",
     rankings: [
       { specialist: "Dr. J. Schroeder", specialty: "med-onc", rank: 3, confidence: 0.62 },
-      { specialist: "Dr. S. Chen", specialty: "surg-onc", rank: 2, confidence: 0.7 },
+      { specialist: "Dr. S. Chen", specialty: "med-onc", rank: 2, confidence: 0.7 },
     ],
   },
 ];
@@ -720,7 +720,7 @@ export const LINDA_PHASE2_OPTIONS: TreatmentOption[] = [
     burden: "Indefinite · oral · close metabolic monitoring",
     rankings: [
       { specialist: "Dr. J. Schroeder", specialty: "med-onc", rank: 3, confidence: 0.65 },
-      { specialist: "Dr. A. Tanaka", specialty: "molecular", rank: 1, confidence: 0.88 },
+      { specialist: "Dr. A. Tanaka", specialty: "pathology", rank: 1, confidence: 0.88 },
     ],
   },
 ];

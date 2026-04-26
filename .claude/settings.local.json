@@ -1,4 +1,27 @@
 {
+  "permissions": {
+    "allow": [
+      "Bash(git -C /Users/korrupt/Developer/GitHub/oncoAgent log --all --oneline)",
+      "Bash(git -C /Users/korrupt/Developer/GitHub/oncoAgent show 74dba8e:SPEC.md)",
+      "Bash(git -C /Users/korrupt/Developer/GitHub/oncoAgent log --all -p -- \"*.md\" \"*.css\" \"*.tsx\")",
+      "Bash(npx next *)",
+      "Bash(git -C /Users/korrupt/Developer/GitHub/oncoAgent status)",
+      "Bash(git -C /Users/korrupt/Developer/GitHub/oncoAgent log --oneline -5)",
+      "Bash(git -C /Users/korrupt/Developer/GitHub/oncoAgent remote -v)",
+      "Bash(git -C /Users/korrupt/Developer/GitHub/oncoAgent fetch origin)",
+      "Bash(git -C /Users/korrupt/Developer/GitHub/oncoAgent log --oneline origin/main...HEAD)",
+      "Bash(git -C /Users/korrupt/Developer/GitHub/oncoAgent diff --stat origin/main...HEAD)",
+      "Bash(git -C /Users/korrupt/Developer/GitHub/oncoAgent diff --name-only origin/main HEAD)",
+      "Bash(git *)",
+      "Bash(gh pr *)",
+      "Read(//Users/korrupt/.supabase/**)",
+      "Read(//Users/korrupt/.config/**)",
+      "Read(//Users/korrupt/Developer/**)",
+      "Bash(supabase projects *)",
+      "Bash(curl -sv -X POST http://localhost:3000/api/neo4j/sync)",
+      "Bash(curl *)"
+    ]
+  },
   "hooks": {
     "Notification": [
       {

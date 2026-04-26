@@ -78,12 +78,34 @@ export function SpecialistFolder({
     const arr = Array.from(files);
     if (arr.length === 0) return;
     const next = arr.map((f) => fileToAttachment(f, specialty));
+    // Optimistically update local state.
     setAttachments((curr) => [...next, ...curr]);
 
-    // Only ping the route when a dropped file might trigger the cascade —
-    // saves a round-trip on every unrelated drop. Server enforces the same gate.
-    if (!arr.some((f) => STAGING_CT_RE.test(f.name))) return;
+    // Persist each file to Supabase in the background.
+    for (let i = 0; i < next.length; i++) {
+      const att = next[i];
+      const mimeType = arr[i].type || undefined;
+      fetch("/api/upload", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          patientId,
+          specialty: att.specialty,
+          name: att.name,
+          kind: att.kind,
+          sizeKb: att.sizeKb,
+          mimeType,
+        }),
+      }).catch(() => {
+        // Silent fail — file is already in local state.
+      });
+    }
 
+    // Linda-only staging-CT cascade: if a dropped file matches the staging
+    // CT pattern, the followup-upload route opens the Phase-2 PR, swaps in
+    // palliative options, and updates the boardCase. Server enforces the
+    // same gate; the client check just saves a round-trip for unrelated drops.
+    if (!arr.some((f) => STAGING_CT_RE.test(f.name))) return;
     fetch(`/api/patients/${encodeURIComponent(patientId)}/followup-upload`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },

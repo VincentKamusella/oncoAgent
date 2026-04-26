@@ -28,7 +28,7 @@ const TONE_BY_INDEX: AvatarTone[] = ["violet", "rose", "amber", "emerald", "sky"
 const SPECIALTY: Record<IngestCategory, Specialty | undefined> = {
   pathology: "pathology",
   radiology: "radiology",
-  genomics: "molecular",
+  genomics: "pathology",
   labs: "med-onc",
   notes: "med-onc",
   communications: "nursing",

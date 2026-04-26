@@ -1,0 +1,78 @@
+{
+  "patient_A": {
+    "patient": {
+      "id": "patient_A",
+      "cancer_type": "breast cancer",
+      "stage": "I",
+      "subtype": "HR+/HER2-",
+      "biomarkers": [
+        "ER+",
+        "PR+",
+        "HER2-"
+      ],
+      "line_of_therapy": "newly diagnosed",
+      "age": 46,
+      "comorbidities": []
+    },
+    "query": "\"breast cancer\" AND \"stage I\" AND latest studies OR clinical trials OR meta-analysis AND 2023..2026 AND \"HR+/HER2-\" AND \"ER+\" OR \"PR+\" OR \"HER2-\" AND \"newly diagnosed\" AND \"age 46\"",
+    "answer": "Recent studies show promising results for HR+/HER2- breast cancer in newly diagnosed patients, with clinical trials focusing on new drug combinations and therapies. Meta-analyses highlight improved outcomes post-CDK4/6 inhibitors. Ongoing trials in 2026 explore novel treatment strategies.",
+    "results": [
+      {
+        "url": "https://www.cancertreatmentreviews.com/article/S0305-7372(25)00094-5/fulltext",
+        "title": "Expert insights on HR+/HER2-metastatic breast cancer post-CDK4/6 ...",
+        "content": "Systematic review and meta-analysis of post-progression outcomes in ER+/HER2- metastatic breast cancer after CDK4/6 inhibitors within randomized clinical trials.",
+        "score": 0.5634506,
+        "raw_content": null
+      },
+      {
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12868713/",
+        "title": "Basal-like HR + /HER2- breast cancers show higher tumor ... - PMC",
+        "content": "In this study, we aimed to assess, in early HR + HER2- BC, the interplay between tumor biology, as assessed by gene expression, and immune",
+        "score": 0.22645885,
+        "raw_content": null
+      },
+      {
+        "url": "https://www.sciencedirect.com/science/article/pii/S0960977626000421",
+        "title": "Real-world treatment patterns and sequencing in patients with ...",
+        "content": "This study provides insights into treatment sequencing in patients with HR+/HER2- ABC who progress to 2L in the post-CDK4/6i era. For patients without",
+        "score": 0.20948623,
+        "raw_content": null
+      },
+      {
+        "url": "https://ucla.clinicaltrials.researcherprofiles.org/breast-cancer",
+        "title": "UCLA Breast Cancer Clinical Trials for 2026 \u2014 Los Angeles",
+        "content": "This trial will look at a drug called sigvotatug vedotin (SGN-B6A) alone and with pembrolizumab, with or without chemotherapy, to find out",
+        "score": 0.43799233,
+        "raw_content": null
+      },
+      {
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12689027/",
+        "title": "Optimizing endocrine adjuvant therapy in HR+/HER2\u2212 breast cancer",
+        "content": "Recently, more ADCs have entered early-phase clinical trials, expanding potential treatment avenues for HR+/HER2\u2212 patients. However, it is",
+        "score": 0.39452806,
+        "raw_content": null
+      },
+      {
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12065450/",
+        "title": "Hormone Receptor Positive Breast Cancer in Young Women - PMC",
+        "content": "The global incidence of hormone\u2010positive breast cancer (HR+ BC) in young women is rising, though the underlying reasons remain unclear.",
+        "score": 0.21847796,
+        "raw_content": null
+      },
+      {
+        "url": "https://www.sciencedirect.com/science/article/pii/S2468294226001152",
+        "title": "Characterization of real-world clinical and pathological differences ...",
+        "content": "The aim of this study was to characterize the differences between HER2-negative and HER-low patients. Methods. This retrospective study included",
+        "score": 0.1002869,
+        "raw_content": null
+      },
+      {
+        "url": "https://clinicaltrials.gov/study/NCT06599216",
+        "title": "Study Details | NCT06599216 | ClinicalTrials.gov - ClinicalTrials.gov",
+        "content": "This single-center, open-label, single-arm clinical trial aims to evaluate the efficacy and safety of the neoadjuvant treatment with the PD-L1 inhibitor",
+        "score": 0.04985212,
+        "raw_content": null
+      }
+    ]
+  }
+}
