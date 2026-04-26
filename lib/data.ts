@@ -19,6 +19,10 @@ import {
   patientsByStatus as mockPatientsByStatus,
 } from "./mock-data/patients";
 import {
+  buildPatient as buildOnboardingPatient,
+  type CreatePatientInput,
+} from "./onboarding/build-patient";
+import {
   pullRequests as mockPullRequests,
   prsForPatient as mockPrsForPatient,
   prById as mockPrById,
@@ -198,6 +202,24 @@ export async function getPatient(id: string): Promise<Patient | undefined> {
 
   if (!row) return undefined;
   return buildPatient(row);
+}
+
+/**
+ * Create a new patient and append to the in-memory store.
+ * Mock-data only — does not write to Supabase. Returns the new patient's slug.
+ */
+export async function createPatient(input: CreatePatientInput): Promise<string> {
+  const patient = buildOnboardingPatient(input);
+  // Avoid id collisions by appending a counter if the slug already exists.
+  let id = patient.id;
+  let suffix = 1;
+  while (mockPatients.some((p) => p.id === id)) {
+    suffix += 1;
+    id = `${patient.id}-${suffix}`;
+  }
+  patient.id = id;
+  mockPatients.unshift(patient);
+  return id;
 }
 
 export async function patientsByStatus(

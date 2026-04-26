@@ -1,5 +1,5 @@
+import Link from "next/link";
 import { Plus, Search } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { WorkspaceSidebar } from "@/components/home/workspace-sidebar";
 import { VaultCard } from "@/components/home/vault-card";
@@ -58,10 +58,13 @@ export default async function HomePage() {
                 inside; you stay in the loop.
               </p>
             </div>
-            <Button className="h-9 gap-1.5 rounded-lg bg-violet-500 px-3.5 text-[13px] font-medium hover:bg-violet-600">
+            <Link
+              href="/patients/new"
+              className="inline-flex h-9 items-center gap-1.5 rounded-lg bg-violet-500 px-3.5 text-[13px] font-medium text-white shadow-[var(--shadow-soft)] transition-colors hover:bg-violet-600"
+            >
               <Plus className="h-3.5 w-3.5" />
               <span>New patient</span>
-            </Button>
+            </Link>
           </div>
 
           <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3">
