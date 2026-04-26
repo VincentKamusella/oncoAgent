@@ -1,6 +1,11 @@
 import type { Patient, Fact, AvatarTone, Specialty, SourceKind } from "../types";
 import type { IngestCategory } from "./classify";
-import { hash } from "./util";
+import { hash, slugSuffix } from "./util";
+import {
+  cloneLindaPhase1,
+  LINDA_DETECTION_RE,
+  LINDA_MRN,
+} from "./linda-phase1";
 
 export type ClassifiedFile = {
   fileName: string;
@@ -163,7 +168,23 @@ function cancerLabelFor(cancerType: string, files: ClassifiedFile[]): string {
 }
 
 export function buildPatient(input: CreatePatientInput): Patient {
-  const slug = `${slugify(input.name)}-${(hash(input.mrn).toString(36)).slice(0, 4)}`;
+  // Linda Hoffmann is the demo case-study patient — swap the generic
+  // templated profile for the hand-crafted Phase-1 record sourced from
+  // mama_ca/.build/case.json so her vault matches Maria's depth.
+  const normalizedMrn = input.mrn.replace(/[\s_]+/g, "-").toUpperCase();
+  const isLinda =
+    normalizedMrn === LINDA_MRN ||
+    LINDA_DETECTION_RE.test(input.name) ||
+    input.files.some((f) => LINDA_DETECTION_RE.test(f.fileName));
+  if (isLinda) {
+    return cloneLindaPhase1({
+      files: input.files,
+      tumorBoard: input.tumorBoard,
+      fallbackMrn: input.mrn,
+    });
+  }
+
+  const slug = `${slugify(input.name)}-${slugSuffix(input.mrn)}`;
   const initials = initialsOf(input.name);
   const age = ageFromMrn(input.mrn);
   const dob = dobFromAge(age);

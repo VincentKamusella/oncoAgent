@@ -1,8 +1,11 @@
 "use client";
 
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
-import { UploadCloud } from "lucide-react";
+import { GitPullRequest, UploadCloud } from "lucide-react";
 import type { Attachment, AttachmentKind, Fact, Specialty } from "@/lib/types";
+import { STAGING_CT_RE } from "@/lib/onboarding/linda-phase1";
 import { specialtyMeta } from "./specialist-tree";
 import { FileRow } from "./file-card";
 import { cn } from "@/lib/utils";
@@ -53,25 +56,50 @@ function fileToAttachment(file: File, specialty: Specialty): Attachment {
 }
 
 export function SpecialistFolder({
+  patientId,
   specialty,
   attachments: initialAttachments,
   facts,
 }: {
+  patientId: string;
   specialty: Specialty;
   attachments: Attachment[];
   facts: Fact[];
 }) {
+  const router = useRouter();
   const meta = specialtyMeta(specialty);
   const inputRef = useRef<HTMLInputElement | null>(null);
   const dragCounter = useRef(0);
   const [attachments, setAttachments] = useState(initialAttachments);
   const [isDragOver, setIsDragOver] = useState(false);
+  const [conflictPrId, setConflictPrId] = useState<string | null>(null);
 
   const addFiles = (files: FileList | File[]) => {
     const arr = Array.from(files);
     if (arr.length === 0) return;
     const next = arr.map((f) => fileToAttachment(f, specialty));
     setAttachments((curr) => [...next, ...curr]);
+
+    // Only ping the route when a dropped file might trigger the cascade —
+    // saves a round-trip on every unrelated drop. Server enforces the same gate.
+    if (!arr.some((f) => STAGING_CT_RE.test(f.name))) return;
+
+    fetch(`/api/patients/${encodeURIComponent(patientId)}/followup-upload`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ fileNames: arr.map((f) => f.name) }),
+    })
+      .then(async (res) => {
+        if (res.status !== 200) return;
+        const body = (await res.json()) as { prId?: string };
+        if (body.prId) {
+          setConflictPrId(body.prId);
+          router.refresh();
+        }
+      })
+      .catch(() => {
+        /* file is already visible in the folder; route 204/4xx is harmless */
+      });
   };
 
   const onDragEnter = (e: React.DragEvent) => {
@@ -127,6 +155,19 @@ export function SpecialistFolder({
           {facts.length} {facts.length === 1 ? "record" : "records"}
         </div>
       </header>
+
+      {conflictPrId ? (
+        <Link
+          href={`/patients/${encodeURIComponent(patientId)}/prs/${conflictPrId}`}
+          className="mt-5 flex items-center gap-2 rounded-lg border border-amber-300 bg-amber-50/70 px-3 py-2 text-[12px] text-amber-900 transition-colors hover:bg-amber-100"
+        >
+          <GitPullRequest className="h-3.5 w-3.5" />
+          <span className="font-medium">Conflict detected — Review item opened.</span>
+          <span className="ml-auto text-amber-800/80 underline-offset-2 hover:underline">
+            Open PR →
+          </span>
+        </Link>
+      ) : null}
 
       <button
         type="button"

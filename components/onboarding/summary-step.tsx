@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
-import { ArrowRight, AlertOctagon, Sparkles } from "lucide-react";
+import { ArrowRight, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CATEGORIES, type IngestCategory } from "@/lib/onboarding/classify";
 import type { ClassifiedFile } from "@/lib/onboarding/build-patient";
@@ -19,12 +19,7 @@ type Props = {
 function pickStage(classified: ClassifiedFile[]): { primary: string; sub: string } {
   const hasRad = classified.some((c) => c.category === "radiology");
   const hasPath = classified.some((c) => c.category === "pathology");
-  const restaging = classified.some((c) => c.conflict);
-  if (hasRad && hasPath) {
-    return restaging
-      ? { primary: "IIB → restaging", sub: "cT2 N1 M0 · re-evaluation in progress" }
-      : { primary: "IIB", sub: "cT2 cN1 cM0 — clinical" };
-  }
+  if (hasRad && hasPath) return { primary: "IIB", sub: "cT2 cN1 cM0 — clinical" };
   if (hasPath) return { primary: "Pending", sub: "Awaiting imaging correlation" };
   return { primary: "Pending", sub: "Workup in progress" };
 }
@@ -38,16 +33,7 @@ function pickTreatment(classified: ClassifiedFile[]): { primary: string; sub: st
 }
 
 function pickLatest(classified: ClassifiedFile[]): { primary: string; sub: string } {
-  // A conflict trigger is the most newsworthy "latest" event if present.
-  const conflictFile = classified.find((c) => c.conflict);
-  if (conflictFile) {
-    return {
-      primary: conflictFile.detected,
-      sub: "Just ingested · pending review",
-    };
-  }
-
-  // Otherwise prefer clinical signal — pathology, radiology, genomics, labs — before
+  // Prefer clinical signal — pathology, radiology, genomics, labs — before
   // operational, communications, or reference fillers.
   const PRIORITY: IngestCategory[] = [
     "pathology",
@@ -83,7 +69,6 @@ export function SummaryStep({
   const stage = pickStage(classified);
   const treatment = pickTreatment(classified);
   const latest = pickLatest(classified);
-  const hasConflict = classified.some((c) => c.conflict);
 
   const distribution = aggregate(classified);
 
@@ -116,18 +101,6 @@ export function SummaryStep({
           <FactCard delay={0.25} eyebrow="Latest" primary={latest.primary} sub={latest.sub} />
         </div>
 
-        {hasConflict ? (
-          <motion.div
-            initial={{ opacity: 0, y: 6 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.45, duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-4 inline-flex items-center gap-2 rounded-full bg-amber-50 px-3 py-1 text-[12px] font-medium text-amber-800 ring-1 ring-amber-200"
-          >
-            <AlertOctagon className="h-3.5 w-3.5" />
-            1 PR opened · review pending
-          </motion.div>
-        ) : null}
-
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -138,12 +111,7 @@ export function SummaryStep({
             {distribution.map((d) => (
               <span
                 key={d.category}
-                className={cn(
-                  "inline-flex items-center gap-1.5 rounded-full px-2 py-0.5 text-[11.5px] font-medium ring-1",
-                  CATEGORIES[d.category].swatch,
-                  CATEGORIES[d.category].ink,
-                  CATEGORIES[d.category].ring,
-                )}
+                className="inline-flex items-center gap-1.5 rounded-full bg-slate-100 px-2 py-0.5 text-[11.5px] font-medium text-slate-700 ring-1 ring-slate-200"
               >
                 <span>{CATEGORIES[d.category].label}</span>
                 <span className="mono opacity-80">

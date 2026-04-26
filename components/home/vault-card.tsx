@@ -2,6 +2,7 @@ import Link from "next/link";
 import { FolderIcon } from "@/components/ui/folder-icon";
 import { StatusPill } from "@/components/ui/status-pill";
 import { FactMono } from "@/components/ui/fact-mono";
+import { DeletePatientButton } from "./delete-patient-button";
 import type { Patient } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
@@ -32,6 +33,7 @@ export function VaultCard({ patient, factsCount, openPRs, conflictPRs, className
         className
       )}
     >
+      <DeletePatientButton slug={patient.id} patientName={patient.name} />
       <FolderIcon avatars={patient.vaultAvatars} size={156} />
 
       <div className="mt-5 flex flex-col items-center text-center">

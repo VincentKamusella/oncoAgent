@@ -11,3 +11,7 @@ export function hash(s: string): number {
   }
   return h >>> 0;
 }
+
+export function slugSuffix(seed: string): string {
+  return hash(seed).toString(36).slice(0, 4);
+}

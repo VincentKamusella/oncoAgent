@@ -70,6 +70,7 @@ export function VaultView({
   return (
     <SpecialistFolder
       key={active}
+      patientId={patient.id}
       specialty={active}
       attachments={folderAttachments}
       facts={folderFacts}

@@ -69,9 +69,9 @@ export function WorkspaceSidebar({ active = "vaults" }: Props) {
         >
           <div className="flex items-center gap-2">
             <div className="grid h-5 w-5 place-items-center rounded bg-violet-100 mono text-[10px] font-bold text-violet-700">
-              OV
+              CH
             </div>
-            <span>OncoUnit Vienna</span>
+            <span>Charité</span>
           </div>
           <ChevronsUpDown className="h-3.5 w-3.5 text-muted-foreground" />
         </button>

@@ -222,6 +222,25 @@ export async function createPatient(input: CreatePatientInput): Promise<string> 
   return id;
 }
 
+/**
+ * Remove a patient and any associated PRs from the in-memory mock store.
+ * Mock-data only — Supabase-backed deletion would need its own implementation.
+ */
+export async function deletePatient(slug: string): Promise<boolean> {
+  const idx = mockPatients.findIndex((p) => p.id === slug);
+  if (idx === -1) return false;
+  mockPatients.splice(idx, 1);
+
+  // Drop any PRs that referenced this patient so the inbox doesn't surface
+  // orphaned conflicts after re-onboarding under the same slug.
+  for (let i = mockPullRequests.length - 1; i >= 0; i--) {
+    if (mockPullRequests[i].patientId === slug) {
+      mockPullRequests.splice(i, 1);
+    }
+  }
+  return true;
+}
+
 export async function patientsByStatus(
   status: Patient["status"],
 ): Promise<Patient[]> {

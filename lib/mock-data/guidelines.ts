@@ -63,6 +63,32 @@ export const guidelinesByPatient: Record<string, GuidelinesGraph> = {
       { id: "e11", source: "g10", target: "g12", patientPath: true },
     ],
   },
+  "linda-h": {
+    cancerType: "breast-hr",
+    title: "HR+/HER2-low locoregional breast cancer",
+    source: "KSZ-CP-BR-001 (NCCN BINV-J)",
+    nodes: [
+      { id: "g1", label: "Confirmed invasive\nbreast cancer", kind: "decision", patientPath: true, factKey: "diagnosis.primary" },
+      { id: "g2", label: "Receptor status", kind: "decision", patientPath: true, factKey: "diagnosis.receptors" },
+      { id: "g3", label: "ER+/PR+\nHER2-low", kind: "decision", patientPath: true },
+      { id: "g4", label: "Clinical stage", kind: "decision", patientPath: true, factKey: "staging.clinical" },
+      { id: "g5", label: "Stage IIB\n(cT2 cN1 cM0)", kind: "decision", patientPath: true },
+      { id: "g6", label: "Neoadjuvant AC-T", kind: "treatment", patientPath: true, factKey: "medication.neoadjuvant" },
+      { id: "g7", label: "BCS + SLNB", kind: "treatment", patientPath: true },
+      { id: "g8", label: "Whole-breast RT", kind: "treatment", patientPath: true },
+      { id: "g9", label: "Adjuvant letrozole\n+ abemaciclib", kind: "outcome", patientPath: true },
+    ],
+    edges: [
+      { id: "e1", source: "g1", target: "g2", patientPath: true },
+      { id: "e2", source: "g2", target: "g3", label: "ER+ / HER2-low", patientPath: true },
+      { id: "e3", source: "g3", target: "g4", patientPath: true },
+      { id: "e4", source: "g4", target: "g5", label: "≥ Stage IIA", patientPath: true },
+      { id: "e5", source: "g5", target: "g6", patientPath: true },
+      { id: "e6", source: "g6", target: "g7", patientPath: true },
+      { id: "e7", source: "g7", target: "g8", patientPath: true },
+      { id: "e8", source: "g8", target: "g9", patientPath: true },
+    ],
+  },
   "anna-l": {
     cancerType: "breast-er",
     title: "ER+ early breast cancer · surveillance pathway",
@@ -87,5 +113,6 @@ export const guidelinesByPatient: Record<string, GuidelinesGraph> = {
 };
 
 export function guidelinesFor(patientId: string): GuidelinesGraph | undefined {
+  if (patientId.startsWith("linda-h")) return guidelinesByPatient["linda-h"];
   return guidelinesByPatient[patientId];
 }

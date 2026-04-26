@@ -15,15 +15,16 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
-import { patients } from "@/lib/mock-data/patients";
 import { SpecialistTreeNav } from "@/components/vault/specialist-tree";
 import { useCollapsible } from "@/lib/use-collapsible";
 import type { Patient } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
 export function PatientSidebar({
+  patients,
   activePatientId,
 }: {
+  patients: Patient[];
   activePatientId?: string;
 }) {
   const router = useRouter();
@@ -92,7 +93,7 @@ export function PatientSidebar({
               <span className="truncate text-[11px] text-muted-foreground">
                 {active
                   ? active.cancerLabel.split(" · ")[0]
-                  : "OncoUnit Vienna"}
+                  : "Charité"}
               </span>
             </div>
             <ChevronsUpDown className="h-3.5 w-3.5 flex-shrink-0 text-muted-foreground" />
@@ -157,7 +158,7 @@ export function PatientSidebar({
               Dr. Julia Müller
             </span>
             <span className="truncate text-[11px] text-muted-foreground">
-              Med-Onc · OncoUnit Vienna
+              Med-Onc · Charité
             </span>
           </div>
         </div>
