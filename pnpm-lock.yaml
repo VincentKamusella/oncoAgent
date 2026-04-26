@@ -4,6 +4,9 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+overrides:
+  lodash: ^4.18.0
+
 importers:
 
   .:
@@ -2822,8 +2825,8 @@ packages:
   lodash.merge@4.6.2:
     resolution: {integrity: sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==}
 
-  lodash@4.17.23:
-    resolution: {integrity: sha512-LgVTMpQtIopCi79SJeDiP0TfWi5CNEc/L/aRdTh3yIvmZXTnheWpKjSZhnvMl8iXbC1tFg9gdHHDMLoV7CnG+w==}
+  lodash@4.18.1:
+    resolution: {integrity: sha512-dMInicTPVE8d1e5otfwmmjlxkZoUpiVLwyeTdUsi/Caj/gfzzblBcCE5sRHV/AsjuCmxWrte2TNGSYuCeCq+0Q==}
 
   log-symbols@6.0.0:
     resolution: {integrity: sha512-i24m8rpwhmPIS4zscNzK6MSEhk0DUWa/8iYQWxhffV8jkI4Phvs3F+quL5xvS0gdQR0FyTCMMH33Y78dDTzzIw==}
@@ -4494,7 +4497,7 @@ snapshots:
   '@neo4j-bloom/dagre@0.8.14':
     dependencies:
       graphlib: 2.1.8
-      lodash: 4.17.23
+      lodash: 4.18.1
 
   '@neo4j-nvl/base@1.1.0(neo4j-driver@6.0.1)':
     dependencies:
@@ -4504,7 +4507,7 @@ snapshots:
       d3-force: 3.0.0
       gl-matrix: 3.4.4
       glsl-inject-defines: 1.0.3
-      lodash: 4.17.23
+      lodash: 4.18.1
       loglevel: 1.9.2
       mobx: 3.6.2
       neo4j-driver: 6.0.1
@@ -4519,7 +4522,7 @@ snapshots:
     dependencies:
       '@neo4j-nvl/base': 1.1.0(neo4j-driver@6.0.1)
       concaveman: 1.2.1
-      lodash: 4.17.23
+      lodash: 4.18.1
     transitivePeerDependencies:
       - encoding
       - neo4j-driver
@@ -4536,7 +4539,7 @@ snapshots:
     dependencies:
       '@neo4j-nvl/base': 1.1.0(neo4j-driver@6.0.1)
       '@neo4j-nvl/interaction-handlers': 1.1.0(neo4j-driver@6.0.1)
-      lodash: 4.17.23
+      lodash: 4.18.1
       react: 19.2.4
       react-dom: 19.2.4(react@19.2.4)
     transitivePeerDependencies:
@@ -6291,7 +6294,7 @@ snapshots:
 
   graphlib@2.1.8:
     dependencies:
-      lodash: 4.17.23
+      lodash: 4.18.1
 
   graphql@16.13.2: {}
 
@@ -6686,7 +6689,7 @@ snapshots:
 
   lodash.merge@4.6.2: {}
 
-  lodash@4.17.23: {}
+  lodash@4.18.1: {}
 
   log-symbols@6.0.0:
     dependencies:

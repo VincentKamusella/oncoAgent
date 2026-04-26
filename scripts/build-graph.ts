@@ -11,7 +11,7 @@ import { config as dotenvConfig } from "dotenv";
 // Next.js convention — credentials live in .env.local at the project root
 dotenvConfig({ path: ".env.local" });
 import { readFileSync, readdirSync } from "node:fs";
-import { join, relative } from "node:path";
+import { join, relative, resolve } from "node:path";
 import { execSync } from "node:child_process";
 import neo4j, { Driver } from "neo4j-driver";
 
@@ -57,11 +57,23 @@ function relPath(absPath: string): string {
   return relative(DATA_ROOT, absPath);
 }
 
+const DATA_ROOT_RESOLVED = resolve(DATA_ROOT) + "/";
+
+/** Reject any path that resolves outside DATA_ROOT (defense-in-depth path-traversal guard). */
+function assertWithinDataRoot(target: string): string {
+  const r = resolve(target);
+  if (!r.startsWith(DATA_ROOT_RESOLVED) && r !== resolve(DATA_ROOT)) {
+    throw new Error(`Refusing to access path outside DATA_ROOT: ${target}`);
+  }
+  return r;
+}
+
 function listFiles(dir: string, ext: string): string[] {
   try {
-    return readdirSync(dir)
+    const safeDir = assertWithinDataRoot(dir);
+    return readdirSync(safeDir)
       .filter((n) => n.endsWith(ext))
-      .map((n) => join(dir, n))
+      .map((n) => join(safeDir, n))
       .sort();
   } catch {
     return [];
@@ -69,7 +81,8 @@ function listFiles(dir: string, ext: string): string[] {
 }
 
 function readJson<T = unknown>(path: string): T {
-  return JSON.parse(readFileSync(path, "utf-8")) as T;
+  const safe = assertWithinDataRoot(path);
+  return JSON.parse(readFileSync(safe, "utf-8")) as T;
 }
 
 function emailLocalPart(email: string): string {
@@ -1034,6 +1047,10 @@ async function main() {
       group: string; specialty: string; confidence: number; phase: number;
       source_docs: string[]; contradicts: string | null;
     };
+    // NOTE for secret-scanners: the `key` field below is a clinical-fact
+    // identifier (e.g. "diagnosis.her2", "genomics.pik3ca") used as the
+    // vault's stable fact key — NOT an API key or credential. Tokens like
+    // "her2" and "pik3ca" are the HER2 receptor and PIK3CA gene.
     const facts: VFact[] = [
       // Diagnosis
       { fact_id: "F-DX-HISTO", key: "diagnosis.histology", label: "Histology", value: CASE.tumour.histology, group: "diagnosis", specialty: "pathology", confidence: 0.99, phase: 1, source_docs: ["DOC-PATH-26S-08421"], contradicts: null },
