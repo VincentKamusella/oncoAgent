@@ -15,7 +15,7 @@ import { ConvergeGraph, type GraphSeed } from "./converge-graph";
 import { cn } from "@/lib/utils";
 import type { DroppedFile } from "./dropzone-step";
 
-const VAULT_BUILD_MS = 3200;
+const VAULT_BUILD_MS = 6500;
 
 type Props = {
   files: DroppedFile[];

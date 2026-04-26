@@ -93,7 +93,7 @@ function buildLindaPhase2PR(patientSlug: string): PullRequest {
     gaps: [
       "8 downstream operational records pending update per KSZ-SOP-101 §Downstream cascade — port placement, neoadjuvant chemo C1, surgery pencil all need cancellation; PA-26-AT-9921 to be withdrawn; new PA for letrozole+ribociclib to be filed; MDT agenda v2 + recategorisation; problem-list update (C78.00); patient + family communication + audit log.",
     ],
-    status: "conflict",
+    status: "needs-review",
     agentVerdict:
       "1 conflict on staging.cm auto-resolves; 1 conflict on first-line regimen requires MDT (3-way CDK4/6 choice). 8 downstream cascade items proposed.",
     openedAt: nowIso,
