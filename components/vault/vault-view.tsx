@@ -65,6 +65,7 @@ export function VaultView({
       specialty={active}
       attachments={folderAttachments}
       facts={folderFacts}
+      patientId={patient.id}
     />
   );
 }

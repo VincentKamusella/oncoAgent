@@ -18,7 +18,8 @@
       "Read(//Users/korrupt/.config/**)",
       "Read(//Users/korrupt/Developer/**)",
       "Bash(supabase projects *)",
-      "Bash(curl -sv -X POST http://localhost:3000/api/neo4j/sync)"
+      "Bash(curl -sv -X POST http://localhost:3000/api/neo4j/sync)",
+      "Bash(curl *)"
     ]
   },
   "hooks": {

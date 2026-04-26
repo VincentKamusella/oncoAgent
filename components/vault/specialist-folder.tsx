@@ -56,10 +56,12 @@ export function SpecialistFolder({
   specialty,
   attachments: initialAttachments,
   facts,
+  patientId,
 }: {
   specialty: Specialty;
   attachments: Attachment[];
   facts: Fact[];
+  patientId: string;
 }) {
   const meta = specialtyMeta(specialty);
   const inputRef = useRef<HTMLInputElement | null>(null);
@@ -71,7 +73,27 @@ export function SpecialistFolder({
     const arr = Array.from(files);
     if (arr.length === 0) return;
     const next = arr.map((f) => fileToAttachment(f, specialty));
+    // Optimistically update local state
     setAttachments((curr) => [...next, ...curr]);
+    // Persist each file to Supabase in the background
+    for (let i = 0; i < next.length; i++) {
+      const att = next[i];
+      const mimeType = arr[i].type || undefined;
+      fetch("/api/upload", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          patientId,
+          specialty: att.specialty,
+          name: att.name,
+          kind: att.kind,
+          sizeKb: att.sizeKb,
+          mimeType,
+        }),
+      }).catch(() => {
+        // Silent fail — file is already in local state
+      });
+    }
   };
 
   const onDragEnter = (e: React.DragEvent) => {

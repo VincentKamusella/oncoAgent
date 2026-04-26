@@ -1,5 +1,5 @@
 import type { Fact, Patient, TreatmentOption, BoardCase } from "../types";
-import { attachmentsMaria } from "./attachments";
+import { attachmentsMaria, attachmentsThomas, attachmentsAnna } from "./attachments";
 
 const factsMaria: Fact[] = [
   {
@@ -941,6 +941,7 @@ export const patients: Patient[] = [
       { initials: "FP", tone: "sky" },
     ],
     facts: factsThomas,
+    attachments: attachmentsThomas,
     plan: [
       {
         id: "ph-tb-1",
@@ -1045,6 +1046,7 @@ export const patients: Patient[] = [
       { initials: "KL", tone: "amber" },
     ],
     facts: factsAnna,
+    attachments: attachmentsAnna,
     plan: [
       {
         id: "ph-al-1",

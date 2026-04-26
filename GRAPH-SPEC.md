@@ -443,40 +443,62 @@ Streams A, B, C can all start simultaneously. D and E start as soon as B1 (Neo4j
 
 ---
 
-## 9. Document ingestion pipeline (future — notes for colleague)
+## 9. Document ingestion pipeline — handoff notes for colleague
 
 ### The flow
 
-A colleague wants to drop files (PDFs, images, lab tables, reports) into the app per record type, have them parsed, and have the extracted data land in Supabase → Neo4j automatically.
+Files (PDFs, images, lab tables, reports) are dropped into the app per specialty, parsed by an LLM, and the extracted data lands in Supabase → Neo4j automatically.
 
-This fits the existing architecture perfectly:
+The end-to-end pipeline:
 
 ```
-Upload file → Store in Supabase Storage → Parse/extract → Create review item → Sign-off → Facts in Supabase → Sync to Neo4j
+Upload file → Classify by specialty → Store attachment row → Parse/extract → Create review item → Sign-off → Facts in Supabase → POST /api/neo4j/sync → Graph updated
 ```
 
-The review system already handles steps 4-6. What's missing is steps 1-3.
+Steps 5-8 are **done**. Steps 1-4 are partially done (upload + classify work; parsing is what the colleague builds).
 
-### What already exists
+### What is already done
 
-- **`Attachment` type** in `lib/types.ts` — has `id`, `patientId`, `specialty`, `kind` (image/pdf/table/report), `name`, `date`, `source`, `sizeKb`, `excerpt`
-- **Mock attachments** in `lib/mock-data/attachments.ts` — 10 sample files for Maria (pathology PDFs, IHC images, MRI images, lab tables, clinical notes)
-- **`FileCard` component** in `components/vault/file-card.tsx` — renders attachment metadata in the vault
-- **`source_*` fields** on the `facts` table — `source_kind`, `source_id`, `source_label`, `source_excerpt`, `source_author` already track where a fact came from
-- **4 specialty folders** (after normalization) — each folder is a natural drop target for files of that type
+- **`attachments` table** — DONE, see migration 003. Schema includes `patient_id`, `specialty`, `kind`, `name`, `storage_path`, `size_kb`, `mime_type`, `parsed`, `review_item_id`, `uploaded_by`, `uploaded_at`.
+- **40 seed attachments** — DONE, see migration 006. All 3 patients (Maria, Thomas, Anna) have seed files across specialties.
+- **`lib/data.ts`** — `buildPatient()` now queries attachments from Supabase and includes them in the patient object.
+- **Specialist folder file display** — DONE. Each specialty folder shows files from the `attachments` table.
+- **`POST /api/upload`** — DONE. Persists attachment metadata to Supabase.
+- **Neo4j sync pipeline** — DONE. `lib/neo4j/sync.ts` populates the graph from Supabase. `POST /api/neo4j/sync` triggers a full sync (clears and rebuilds).
+- **Review sign-off** — DONE. Atomic sign-off via Postgres RPC (migration 005). `POST /api/review/sign-off` handles approval → fact persistence in a single transaction.
+- **Answer-question API** — DONE. `POST /api/review/answer-question` handles agent question responses.
+- **Chat agent graph traversal** — DONE. The chat agent has a `traverse_graph` tool for Neo4j queries.
+- **Trace logging** — Full trace logging writes to `.logs/` directory.
+- **`source_*` fields** on the `facts` table — `source_kind`, `source_id`, `source_label`, `source_excerpt`, `source_author` already track provenance.
+- **4 specialty folders** — each folder is a natural drop target for files of that type.
+- **`FileCard` component** — `components/vault/file-card.tsx` renders attachment metadata in the vault.
+- **Onboarding flow** — `/patients/new` creates patients with name, MRN, cancer type + file drop with automatic specialty classification.
 
-### What needs to be built
+### Getting started (for colleague)
 
-| Layer | What | Notes |
-|-------|------|-------|
-| **Storage** | `attachments` Supabase Storage bucket + `attachments` table in Postgres | Store the raw file in Storage, metadata row in Postgres. Link to patient + specialty. |
-| **Upload API** | `POST /api/upload` — accepts file + `patientId` + `specialty` | Stores file, creates `attachment` row, triggers parsing. |
-| **Upload UI** | Drag-and-drop zone per specialty folder in the vault sidebar | Or a global upload button that asks which specialty the file belongs to. |
-| **Parser** | LLM-based extraction: file → structured facts | Send the file (or OCR'd text) to an LLM with the patient context and ask it to extract structured facts matching our schema (key, label, value, group, confidence). Different prompts per `source_kind`. |
-| **Review item creation** | Parser output → `review_items` + `review_deltas` | Each parsed file creates one review item with proposed fact changes. If a fact already exists, the delta shows before/after. If it's new, before is null. |
-| **Conflict detection** | Compare proposed facts against existing vault facts | If a parsed value contradicts an existing high-confidence fact, create a `review_conflict`. This triggers the conflict blocking flow that already works. |
+#### 1. Creating a new patient
 
-### Parser strategy per file type
+Use the onboarding flow at `/patients/new`. Enter name, MRN, and cancer type. Drop files — the system classifies them by specialty automatically. This creates the patient in Supabase and attachment rows for any uploaded files.
+
+#### 2. Data management options
+
+| Goal | How |
+|------|-----|
+| **Fresh start** (wipe everything) | Run `TRUNCATE patients CASCADE;` in Supabase SQL Editor. This clears all patients, facts, attachments, review items, meetings, etc. Then re-run migrations 002 + 004 if you want seed data back. |
+| **Keep existing + add new** | Just create a new patient via onboarding. Existing Maria/Thomas/Anna stay untouched. |
+| **Remove a specific patient** | `DELETE FROM patients WHERE slug = 'patient-slug';` — CASCADE handles cleanup of facts, attachments, review items, etc. |
+
+#### 3. What you need to build
+
+The **parser** is the missing piece. Files can already be uploaded and stored as `attachments` rows. You need to build the extraction layer that turns file content into structured facts.
+
+| Component | Path | What it does |
+|-----------|------|--------------|
+| **Parser** | `lib/ingest/parser.ts` | LLM-based extraction: send file text + patient context → structured facts matching our schema (`key`, `label`, `value`, `group`, `confidence`). Different prompts per `source_kind`. |
+| **Ingest API** | `app/api/ingest/route.ts` | POST endpoint: accepts `attachmentId`, runs the parser, creates a `review_item` + `review_deltas` (proposed fact changes). If a fact already exists, the delta shows before/after. If it is new, before is null. |
+| **Storage bucket** (optional) | Supabase Storage setup | For raw file storage. You can start with just metadata in the `attachments` table and add blob storage later. |
+
+#### 4. Parser strategy per file type
 
 | File type | Parse approach | Output |
 |-----------|---------------|--------|
@@ -485,45 +507,28 @@ The review system already handles steps 4-6. What's missing is steps 1-3.
 | **Image** (IHC stain, mammogram, MRI) | Store as attachment only — no automatic fact extraction. Clinician annotates manually or LLM describes. | Attachment metadata only, unless vision model extracts findings |
 | **Clinical note** (text/dictation) | LLM extraction with patient context | Facts + potential PR for treatment changes |
 
-### How it connects to the graph
+#### 5. How parsing connects to the existing review + graph pipeline
 
-When a file is uploaded and parsed:
-1. A `:Document` node is created in Neo4j with the file metadata
-2. Parsed facts get `(Fact)-[:DERIVED_FROM]->(Document)` edges
-3. The review item gets `(ReviewItem)-[:SOURCED_FROM]->(Document)` edges
-4. After sign-off, facts flow through the normal Supabase → Neo4j sync
+After you build the parser, the data flows through infrastructure that already works:
 
-This means every fact in the graph is traceable back to the original uploaded file.
+1. **Parse** — `lib/ingest/parser.ts` extracts structured facts from the file
+2. **Create review item** — `app/api/ingest/route.ts` writes `review_items` + `review_deltas` to Supabase
+3. **Conflict detection** — if a parsed value contradicts an existing high-confidence fact, create a `review_conflict`. The conflict blocking flow already handles this.
+4. **Clinician reviews** — the review item appears in the patient inbox for sign-off or decline
+5. **Sign-off** — `POST /api/review/sign-off` atomically approves the deltas → facts are persisted in Supabase
+6. **Graph sync** — call `POST /api/neo4j/sync` to rebuild the Neo4j graph from Supabase
 
-### Schema addition needed
+Every fact in the graph traces back to its source document via `DERIVED_FROM` edges. When sync runs, `:Document` nodes are created from attachment metadata, and `(Fact)-[:DERIVED_FROM]->(Document)` edges link facts to the files they came from.
 
-```sql
-CREATE TABLE attachments (
-  id            UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  patient_id    UUID NOT NULL REFERENCES patients(id) ON DELETE CASCADE,
-  specialty     TEXT NOT NULL,
-  kind          TEXT NOT NULL CHECK (kind IN ('image', 'pdf', 'table', 'report')),
-  name          TEXT NOT NULL,
-  storage_path  TEXT NOT NULL,          -- path in Supabase Storage bucket
-  size_kb       INTEGER,
-  mime_type     TEXT,
-  parsed        BOOLEAN DEFAULT FALSE,  -- has the parser run?
-  review_item_id UUID REFERENCES review_items(id),  -- the PR created from this file
-  uploaded_by   UUID REFERENCES clinicians(id),
-  uploaded_at   TIMESTAMPTZ DEFAULT now()
-);
+#### 6. Available API endpoints
 
-CREATE INDEX idx_attachments_patient ON attachments(patient_id);
-```
-
-### Not in scope for current sprint
-
-The ingestion pipeline is a separate work stream. Current sprint focuses on:
-- Getting the graph populated with existing data
-- Fixing the review system
-- Expanding seed data
-
-The pipeline can be built on top of this foundation once the graph sync and review hardening are done. The key prerequisite is that the `attachments` table and Supabase Storage bucket get created during the schema work (Stream A) so they're ready when the colleague starts building the upload flow.
+| Endpoint | Method | What it does |
+|----------|--------|--------------|
+| `/api/neo4j/sync` | POST | Full Supabase → Neo4j sync (clears and rebuilds the graph) |
+| `/api/upload` | POST | Persist attachment metadata to Supabase |
+| `/api/review/sign-off` | POST | Atomic sign-off via Postgres RPC — approves deltas, persists facts |
+| `/api/review/answer-question` | POST | Answer agent questions on review items |
+| `/api/chat` | POST | Chat with the graph traversal agent |
 
 ---
 

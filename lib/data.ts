@@ -1,4 +1,5 @@
 import type {
+  Attachment,
   Patient,
   PullRequest,
   Meeting,
@@ -205,21 +206,118 @@ export async function getPatient(id: string): Promise<Patient | undefined> {
 }
 
 /**
- * Create a new patient and append to the in-memory store.
- * Mock-data only — does not write to Supabase. Returns the new patient's slug.
+ * Create a new patient. Returns the new patient's slug.
+ * When Supabase is enabled, persists to patients, facts, vault_avatars,
+ * and treatment_phases tables. Otherwise appends to mock data.
  */
 export async function createPatient(input: CreatePatientInput): Promise<string> {
   const patient = buildOnboardingPatient(input);
-  // Avoid id collisions by appending a counter if the slug already exists.
-  let id = patient.id;
-  let suffix = 1;
-  while (mockPatients.some((p) => p.id === id)) {
-    suffix += 1;
-    id = `${patient.id}-${suffix}`;
+
+  if (!USE_SUPABASE) {
+    // Avoid id collisions by appending a counter if the slug already exists.
+    let id = patient.id;
+    let suffix = 1;
+    while (mockPatients.some((p) => p.id === id)) {
+      suffix += 1;
+      id = `${patient.id}-${suffix}`;
+    }
+    patient.id = id;
+    mockPatients.unshift(patient);
+    return id;
   }
-  patient.id = id;
-  mockPatients.unshift(patient);
-  return id;
+
+  const db = await supabase();
+
+  // 1. Insert patient row
+  const { data: row, error: patientError } = await db
+    .from("patients")
+    .insert({
+      slug: patient.id,
+      name: patient.name,
+      initials: patient.initials,
+      mrn: patient.mrn,
+      dob: patient.dob,
+      age: patient.age,
+      sex: patient.sex,
+      cancer_type: patient.cancerType,
+      cancer_label: patient.cancerLabel,
+      diagnosis: patient.diagnosis,
+      staging: patient.staging,
+      primary_oncologist: patient.primaryOncologist,
+      status: patient.status,
+      case_opened_at: patient.caseOpenedAt,
+      avatar_tone: patient.avatarTone,
+    })
+    .select("id")
+    .single();
+
+  if (patientError || !row) {
+    throw new Error(`Failed to create patient: ${patientError?.message}`);
+  }
+
+  const patientUuid = row.id as string;
+
+  // 2. Insert facts
+  if (patient.facts.length > 0) {
+    const factRows = patient.facts.map((f) => ({
+      patient_id: patientUuid,
+      key: f.key,
+      label: f.label,
+      value: f.value,
+      confidence: f.confidence,
+      group: f.group,
+      specialty: f.specialty ?? null,
+      source_kind: f.source.kind,
+      source_id: f.source.id,
+      source_label: f.source.label,
+      source_excerpt: f.source.excerpt ?? null,
+      source_at: f.source.at,
+      source_author: f.source.author ?? null,
+      source_specialty: f.source.specialty ?? null,
+    }));
+    const { error: factsError } = await db.from("facts").insert(factRows);
+    if (factsError) {
+      throw new Error(`Failed to insert facts: ${factsError.message}`);
+    }
+  }
+
+  // 3. Insert vault avatars
+  if (patient.vaultAvatars.length > 0) {
+    const avatarRows = patient.vaultAvatars.map((a, i) => ({
+      patient_id: patientUuid,
+      initials: a.initials,
+      tone: a.tone,
+      sort_order: i,
+    }));
+    const { error: avatarsError } = await db.from("vault_avatars").insert(avatarRows);
+    if (avatarsError) {
+      throw new Error(`Failed to insert vault avatars: ${avatarsError.message}`);
+    }
+  }
+
+  // 4. Insert treatment phases (plan)
+  if (patient.plan.length > 0) {
+    const phaseRows = patient.plan.map((p, i) => ({
+      patient_id: patientUuid,
+      name: p.name,
+      type: p.type,
+      regimen: p.regimen ?? null,
+      status: p.status,
+      start_date: p.startDate ?? null,
+      end_date: p.endDate ?? null,
+      cycles_total: p.cycles?.total ?? null,
+      cycles_completed: p.cycles?.completed ?? null,
+      notes: p.notes ?? null,
+      rationale: p.rationale ?? null,
+      sort_order: i,
+    }));
+    const { error: phasesError } = await db.from("treatment_phases").insert(phaseRows);
+    if (phasesError) {
+      throw new Error(`Failed to insert treatment phases: ${phasesError.message}`);
+    }
+  }
+
+  return patient.id;
 }
 
 export async function patientsByStatus(
@@ -252,6 +350,7 @@ async function buildPatient(row: Record<string, unknown>): Promise<Patient> {
     { data: currentAction },
     { data: questions },
     { data: events },
+    { data: attachmentRows },
   ] = await Promise.all([
     db.from("facts").select("*").eq("patient_id", pid),
     db.from("treatment_phases").select("*").eq("patient_id", pid).order("sort_order"),
@@ -261,6 +360,7 @@ async function buildPatient(row: Record<string, unknown>): Promise<Patient> {
     db.from("agent_current_action").select("*").eq("patient_id", pid).maybeSingle(),
     db.from("agent_questions").select("*").eq("patient_id", pid).eq("answered", false),
     db.from("agent_events").select("*").eq("patient_id", pid).order("created_at", { ascending: false }).limit(5),
+    db.from("attachments").select("*").eq("patient_id", pid).order("uploaded_at", { ascending: false }),
   ]);
 
   let boardCase: BoardCase | undefined;
@@ -346,6 +446,16 @@ async function buildPatient(row: Record<string, unknown>): Promise<Patient> {
       tone: a.tone as Patient["avatarTone"],
     })),
     facts: (facts ?? []).map(toFact),
+    attachments: (attachmentRows ?? []).map((a: Record<string, unknown>) => ({
+      id: a.id as string,
+      patientId: slug,
+      specialty: a.specialty as Attachment["specialty"],
+      kind: a.kind as Attachment["kind"],
+      name: a.name as string,
+      date: (a.uploaded_at as string) ?? new Date().toISOString(),
+      source: undefined,
+      sizeKb: (a.size_kb as number) ?? undefined,
+    })),
     plan: (phases ?? []).filter((p: Record<string, unknown>) => !p.option_id).map(toPhase),
     options: builtOptions,
     chosenOptionId: chosenOpt ? (chosenOpt.id as string) : null,
