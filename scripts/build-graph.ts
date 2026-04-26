@@ -263,7 +263,7 @@ async function main() {
     );
 
     // ── 5. Home medications (Linda) ─────────────────────────────────────────
-    type Med = { med_id: string; mrn: string; medication: string; strength: string; frequency: string; indication: string; status: string };
+    type Med = { med_id: string; mrn: string; medication: string; strength: string; route: string; frequency: string; start_date: string; end_date: string; prescriber_id: string; indication: string; status: string; source_encounter: string };
     const meds = parseCsvFile<Med>(join(DATA_ROOT, "enterprise/crm/medications.csv"));
 
     // ── 6. Drugs (formulary) ────────────────────────────────────────────────
