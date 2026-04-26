@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { formatDistanceToNowStrict } from "date-fns";
 import { Network } from "lucide-react";
 import type {
@@ -9,7 +9,9 @@ import type {
   GuidelinesNode,
   Patient,
 } from "@/lib/types";
+import type { AuraGraph as AuraGraphData } from "@/lib/neo4j/client";
 import { FactsGraph } from "./facts-graph";
+import { AuraGraph } from "./aura-graph";
 import { GuidelinesFlow } from "@/components/guidelines/guidelines-flow";
 import { RulePanel } from "@/components/guidelines/rule-panel";
 
@@ -25,6 +27,30 @@ export function AllRecordsDashboard({
   const stage = deriveStage(patient);
   const treatment = deriveTreatment(patient);
   const latest = deriveLatest(facts);
+
+  const [aura, setAura] = useState<AuraGraphData | null | "loading">("loading");
+  useEffect(() => {
+    let cancelled = false;
+    setAura("loading");
+    fetch(`/api/patients/${encodeURIComponent(patient.id)}/graph`, {
+      cache: "no-store",
+    })
+      .then(async (res) => {
+        if (cancelled) return;
+        if (res.status === 200) {
+          const data = (await res.json()) as AuraGraphData;
+          setAura(data.nodes.length > 0 ? data : null);
+        } else {
+          setAura(null);
+        }
+      })
+      .catch(() => {
+        if (!cancelled) setAura(null);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [patient.id]);
 
   const [selected, setSelected] = useState<GuidelinesNode | null>(
     () =>
@@ -100,7 +126,13 @@ export function AllRecordsDashboard({
           Context graph
         </span>
         <div className="mt-3">
-          <FactsGraph patient={patient} facts={facts} />
+          {aura === "loading" ? (
+            <div className="h-[460px] w-full" />
+          ) : aura ? (
+            <AuraGraph data={aura} />
+          ) : (
+            <FactsGraph patient={patient} facts={facts} />
+          )}
         </div>
       </div>
     </section>

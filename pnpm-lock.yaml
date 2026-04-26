@@ -50,6 +50,9 @@ importers:
       motion:
         specifier: ^12.38.0
         version: 12.38.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      neo4j-driver:
+        specifier: ^6.0.1
+        version: 6.0.1
       next:
         specifier: ^16.2.4
         version: 16.2.4(@babel/core@7.29.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -96,9 +99,6 @@ importers:
       gray-matter:
         specifier: ^4.0.3
         version: 4.0.3
-      neo4j-driver:
-        specifier: ^6.0.1
-        version: 6.0.1
       tailwindcss:
         specifier: ^4
         version: 4.2.4
