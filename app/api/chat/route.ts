@@ -9,6 +9,7 @@ import {
   type ToolCallLog,
 } from "@/lib/chat/logger";
 
+
 type InputMessage = { role: "user" | "assistant"; content: string };
 
 type FunctionCallInput = {
@@ -125,7 +126,7 @@ export async function POST(request: Request) {
       );
     }
 
-    const { toolCalls } = await parseNonStreaming(res);
+    const { text: roundReasoning, toolCalls } = await parseNonStreaming(res);
     if (toolCalls.length === 0) break;
 
     const callLogs: ToolCallLog[] = [];
@@ -162,7 +163,7 @@ export async function POST(request: Request) {
       );
     }
 
-    logToolRound(trace, round + 1, callLogs, Math.round(performance.now() - roundStart));
+    logToolRound(trace, round + 1, roundReasoning, callLogs, Math.round(performance.now() - roundStart));
   }
 
   // ── Phase 2: stream final text response (no tools — text only) ──
@@ -184,6 +185,7 @@ export async function POST(request: Request) {
       const reader = streamRes.body!.getReader();
       const decoder = new TextDecoder();
       let buffer = "";
+      let fullResponse = "";
 
       try {
         while (true) {
@@ -207,9 +209,11 @@ export async function POST(request: Request) {
             }
 
             if (event.type === "response.output_text.delta") {
+              const delta = event.delta as string;
+              fullResponse += delta;
               controller.enqueue(
                 encoder.encode(
-                  `data: ${JSON.stringify({ type: "delta", content: event.delta })}\n\n`
+                  `data: ${JSON.stringify({ type: "delta", content: delta })}\n\n`
                 )
               );
             }
@@ -230,7 +234,8 @@ export async function POST(request: Request) {
       finalizeTrace(
         trace,
         Math.round(performance.now() - t0),
-        Math.round(performance.now() - streamStart)
+        Math.round(performance.now() - streamStart),
+        fullResponse
       );
       persistTrace(trace);
     },

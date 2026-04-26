@@ -13,15 +13,7 @@ export type Specialty =
   | "pathology"
   | "radiology"
   | "med-onc"
-  | "surg-onc"
-  | "rad-onc"
-  | "molecular"
-  | "nuc-med"
-  | "ir"
-  | "pharmacy"
-  | "nursing"
-  | "genetics"
-  | "patient";
+  | "nursing";
 
 export type SourceRef = {
   kind: SourceKind;

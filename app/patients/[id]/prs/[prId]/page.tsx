@@ -6,6 +6,7 @@ import { getPatient, prById } from "@/lib/data";
 import { PRActions } from "@/components/prs/pr-actions";
 import { IssueRow } from "@/components/prs/issue-row";
 import { CommentCard } from "@/components/prs/comment-card";
+import { ConflictCallout } from "@/components/prs/conflict-callout";
 import { StatusPill } from "@/components/prs/status-pill";
 import { PRTabs, type TabKey } from "@/components/prs/pr-tabs";
 import { deriveIssues } from "@/components/prs/derive-issues";
@@ -70,6 +71,10 @@ export default async function PRDetailPage({
         active={tab}
         counts={{ conversation: 1, issues: issues.length }}
       />
+
+      {tab === "conversation" && pr.conflicts.length > 0 && (
+        <ConflictCallout conflicts={pr.conflicts} />
+      )}
 
       {tab === "conversation" && (
         <CommentCard author="agent" at={pr.openedAt} role="auto-review">

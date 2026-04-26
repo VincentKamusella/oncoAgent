@@ -9,6 +9,7 @@ import {
   type IssueSummary,
 } from "@/components/prs/derive-issues";
 import { PR_STATUS_COLOR, PR_STATUS_ICON } from "@/components/prs/pr-status";
+import { QuestionActions } from "@/components/prs/question-actions";
 
 const PRIORITY: Record<PullRequest["status"], number> = {
   conflict: 0,
@@ -68,11 +69,6 @@ export default async function InboxPage({
 
       <div className="mt-3 overflow-hidden rounded-md border border-border bg-paper">
         <div className="flex items-center gap-4 border-b border-border bg-muted/40 px-4 py-2.5 text-[12.5px]">
-          <input
-            type="checkbox"
-            aria-label="Select all"
-            className="h-3.5 w-3.5 rounded border-border accent-[#0f1f4d]"
-          />
           <FilterChip
             href={`/patients/${id}/inbox`}
             active={state === "open"}
@@ -162,11 +158,6 @@ function PRRow({
   return (
     <li className="border-t border-border first:border-t-0">
       <div className="group relative flex items-start gap-3 px-4 py-3 transition-colors hover:bg-muted/30">
-        <input
-          type="checkbox"
-          aria-label={`Select ${pr.title}`}
-          className="mt-1 h-3.5 w-3.5 flex-shrink-0 rounded border-border accent-[#0f1f4d]"
-        />
         <span
           className="mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center"
           style={{ color: PR_STATUS_COLOR[pr.status] }}
@@ -211,11 +202,6 @@ function QuestionRow({ q }: { q: AgentQuestion }) {
   return (
     <li className="border-t border-border first:border-t-0">
       <div className="flex items-start gap-3 px-4 py-3 transition-colors hover:bg-muted/30">
-        <input
-          type="checkbox"
-          aria-label={`Select question`}
-          className="mt-1 h-3.5 w-3.5 flex-shrink-0 rounded border-border accent-[#0f1f4d]"
-        />
         <span
           className="mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center text-[#0969da]"
           aria-hidden
@@ -240,21 +226,7 @@ function QuestionRow({ q }: { q: AgentQuestion }) {
           )}
 
           {q.options && q.options.length > 0 && (
-            <div className="mt-2.5 flex flex-wrap gap-1.5">
-              {q.options.map((o, i) => (
-                <button
-                  key={i}
-                  type="button"
-                  className={
-                    i === 0
-                      ? "h-7 rounded-md bg-[#0f1f4d] px-2.5 text-[12px] font-medium text-white transition-colors hover:bg-[#0a1740]"
-                      : "h-7 rounded-md border border-border bg-paper px-2.5 text-[12px] font-medium text-foreground/75 transition-colors hover:bg-muted/60"
-                  }
-                >
-                  {o}
-                </button>
-              ))}
-            </div>
+            <QuestionActions questionId={q.id} options={q.options} />
           )}
         </div>
       </div>
