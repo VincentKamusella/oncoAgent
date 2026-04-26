@@ -2,7 +2,7 @@
 
 import { motion, useMotionValue, useSpring } from "motion/react";
 import { useCallback, useMemo, useRef, useState } from "react";
-import { ArrowLeft, ArrowRight, FileText, Sparkles, Upload, X } from "lucide-react";
+import { ArrowLeft, ArrowRight, FileText, FolderOpen, Sparkles, Upload, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -91,14 +91,22 @@ export function DropzoneStep({ files, onFilesChange, onBack, onIngest }: Props) 
     setDragOver(false);
     setReading(true);
     try {
+      // Prefer DataTransferItemList — the only way to traverse dropped folders.
+      // Snapshot entries synchronously before any await; the items list is
+      // released the moment this handler returns.
       const items = e.dataTransfer.items;
-      if (items && items.length && typeof (items[0] as DataTransferItem & { webkitGetAsEntry?: () => FileSystemEntry | null }).webkitGetAsEntry === "function") {
-        const entries: FileSystemEntry[] = [];
+      const entries: FileSystemEntry[] = [];
+      if (items && items.length) {
         for (let i = 0; i < items.length; i++) {
-          const it = items[i] as DataTransferItem & { webkitGetAsEntry?: () => FileSystemEntry | null };
+          const it = items[i] as DataTransferItem & {
+            webkitGetAsEntry?: () => FileSystemEntry | null;
+          };
+          if (it.kind !== "file") continue;
           const entry = it.webkitGetAsEntry?.();
           if (entry) entries.push(entry);
         }
+      }
+      if (entries.length) {
         const out: File[] = [];
         await Promise.all(entries.map((entry) => walkEntry(entry, out)));
         handleFiles(out);
@@ -174,20 +182,20 @@ export function DropzoneStep({ files, onFilesChange, onBack, onIngest }: Props) 
       <motion.div
         ref={dropRef}
         onPointerMove={onPointerMove}
+        onDragEnter={onDragOver}
         onDragOver={onDragOver}
         onDragLeave={onDragLeave}
         onDrop={onDrop}
         animate={{
           scale: dragOver ? 1.005 : 1,
-          rotate: dragOver ? -0.2 : 0,
         }}
         transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
         className={cn(
-          "relative flex min-h-[34vh] flex-1 items-center justify-center overflow-hidden rounded-3xl border border-dashed bg-card",
-          "transition-[border-color,box-shadow] duration-200",
+          "relative flex min-h-[34vh] flex-1 items-center justify-center overflow-hidden rounded-3xl bg-card",
+          "transition-shadow duration-200",
           dragOver
-            ? "border-violet-500 shadow-[0_24px_60px_-20px_rgba(15,31,77,0.35)]"
-            : "border-border-strong/70 shadow-[var(--shadow-soft)]",
+            ? "shadow-[0_28px_80px_-20px_rgba(15,31,77,0.35),inset_0_0_0_1px_rgba(15,31,77,0.4)]"
+            : "shadow-[var(--shadow-soft)]",
         )}
       >
         <motion.div
@@ -222,16 +230,29 @@ export function DropzoneStep({ files, onFilesChange, onBack, onIngest }: Props) 
             PDF · DICOM · PNG · CSV · JSON · EML · Markdown — we&apos;ll classify and route automatically.
           </p>
 
-          <label className="mt-5 inline-flex cursor-pointer items-center gap-1.5 rounded-lg border border-border bg-background px-3 py-1.5 text-[12.5px] font-medium text-foreground shadow-[var(--shadow-soft)] hover:bg-muted">
-            <FileText className="h-3.5 w-3.5" />
-            Or browse files
-            <input
-              type="file"
-              multiple
-              hidden
-              onChange={(e) => onPickFile(e.currentTarget)}
-            />
-          </label>
+          <div className="mt-5 inline-flex items-center gap-2">
+            <label className="inline-flex cursor-pointer items-center gap-1.5 rounded-lg border border-border bg-background px-3 py-1.5 text-[12.5px] font-medium text-foreground shadow-[var(--shadow-soft)] hover:bg-muted">
+              <FileText className="h-3.5 w-3.5" />
+              Browse files
+              <input
+                type="file"
+                multiple
+                hidden
+                onChange={(e) => onPickFile(e.currentTarget)}
+              />
+            </label>
+            <label className="inline-flex cursor-pointer items-center gap-1.5 rounded-lg border border-border bg-background px-3 py-1.5 text-[12.5px] font-medium text-foreground shadow-[var(--shadow-soft)] hover:bg-muted">
+              <FolderOpen className="h-3.5 w-3.5" />
+              Browse folder
+              <input
+                type="file"
+                hidden
+                // webkitdirectory enables folder selection in Chrome / Safari / Edge.
+                {...{ webkitdirectory: "", directory: "" }}
+                onChange={(e) => onPickFile(e.currentTarget)}
+              />
+            </label>
+          </div>
         </div>
 
         {reading ? (
