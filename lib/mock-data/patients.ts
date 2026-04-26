@@ -815,7 +815,12 @@ const factsAnna: Fact[] = [
   },
 ];
 
-export const patients: Patient[] = [
+// Cache the array on globalThis so every route handler / RSC context in
+// dev mode shares the same instance. Without this, Turbopack can re-evaluate
+// the module per route graph, splitting `createPatient` mutations from the
+// view that `getPatient` uses in API routes.
+type _G = typeof globalThis & { __mockPatients?: Patient[] };
+const _SEED_PATIENTS: Patient[] = [
   {
     id: "maria-k",
     name: "Maria Kowalski",
@@ -1108,6 +1113,9 @@ export const patients: Patient[] = [
     },
   },
 ];
+
+export const patients: Patient[] = ((globalThis as _G).__mockPatients ??=
+  _SEED_PATIENTS);
 
 export function getPatient(id: string): Patient | undefined {
   return patients.find((p) => p.id === id);

@@ -34,7 +34,7 @@ export default async function PRDetailPage({
   const basePath = `/patients/${id}/prs/${pr.id}`;
 
   return (
-    <div className="mx-auto flex w-full max-w-[820px] flex-col gap-6 overflow-y-auto px-8 py-8">
+    <div className="mx-auto flex w-full max-w-[820px] flex-col gap-6 overflow-y-auto px-8 pb-12 pt-8">
       <Link
         href={`/patients/${id}/inbox`}
         className="inline-flex w-max items-center gap-1.5 text-[12.5px] text-muted-foreground transition-colors hover:text-foreground"

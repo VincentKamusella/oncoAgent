@@ -25,7 +25,7 @@ function buildLindaPhase2PR(patientSlug: string): PullRequest {
       label: "Staging CT C/A/P · 2026-04-24",
       excerpt:
         "Three solid pulmonary nodules consistent with metastatic disease. No abdominal or osseous metastases.",
-      author: "Dr. M. Hartmann, Body Imaging",
+      author: "Dr. Julia Müller, Med-Onc",
       at: "2026-04-24T11:55:00Z",
     },
     proposed: [
@@ -97,7 +97,7 @@ function buildLindaPhase2PR(patientSlug: string): PullRequest {
     agentVerdict:
       "1 conflict on staging.cm auto-resolves; 1 conflict on first-line regimen requires MDT (3-way CDK4/6 choice). 8 downstream cascade items proposed.",
     openedAt: nowIso,
-    author: { name: "Dr. M. Hartmann", role: "Radiology · Body Imaging" },
+    author: { name: "Dr. Julia Müller", role: "Med-Onc · Charité" },
   };
 }
 

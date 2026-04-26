@@ -77,7 +77,7 @@ export function PRActions({ pr }: { pr: PullRequest }) {
   }
 
   return (
-    <div className="sticky bottom-0 -mx-8 mt-2 flex flex-col gap-3 border-t border-border bg-canvas/85 px-8 py-4 backdrop-blur">
+    <div className="-mx-8 mt-4 flex flex-col gap-3 border-t border-border bg-canvas px-8 py-4">
       {showDecline && (
         <div className="flex flex-col gap-3 border-b border-border pb-3">
           <label className="mono text-[10.5px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">

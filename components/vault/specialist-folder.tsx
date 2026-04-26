@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
-import { GitPullRequest, UploadCloud } from "lucide-react";
+import { GitPullRequest, Loader2, Sparkles, UploadCloud } from "lucide-react";
 import type { Attachment, AttachmentKind, Fact, Specialty } from "@/lib/types";
 import { STAGING_CT_RE } from "@/lib/onboarding/linda-phase1";
 import { specialtyMeta } from "./specialist-tree";
@@ -73,15 +73,14 @@ export function SpecialistFolder({
   const [attachments, setAttachments] = useState(initialAttachments);
   const [isDragOver, setIsDragOver] = useState(false);
   const [conflictPrId, setConflictPrId] = useState<string | null>(null);
+  const [analyzing, setAnalyzing] = useState(false);
 
   const addFiles = (files: FileList | File[]) => {
     const arr = Array.from(files);
     if (arr.length === 0) return;
     const next = arr.map((f) => fileToAttachment(f, specialty));
-    // Optimistically update local state.
     setAttachments((curr) => [...next, ...curr]);
 
-    // Persist each file to Supabase in the background.
     for (let i = 0; i < next.length; i++) {
       const att = next[i];
       const mimeType = arr[i].type || undefined;
@@ -97,30 +96,40 @@ export function SpecialistFolder({
           mimeType,
         }),
       }).catch(() => {
-        // Silent fail — file is already in local state.
+        /* mock mode: route 200 no-ops; nothing to surface */
       });
     }
 
-    // Linda-only staging-CT cascade: if a dropped file matches the staging
-    // CT pattern, the followup-upload route opens the Phase-2 PR, swaps in
-    // palliative options, and updates the boardCase. Server enforces the
-    // same gate; the client check just saves a round-trip for unrelated drops.
+    // Linda-only staging-CT cascade. Show a brief "analyzing" indicator so
+    // the agent's classification feels deliberate, then flip to the conflict
+    // banner if the route returns a PR id. Minimum 2.2s so the spinner reads.
     if (!arr.some((f) => STAGING_CT_RE.test(f.name))) return;
-    fetch(`/api/patients/${encodeURIComponent(patientId)}/followup-upload`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ fileNames: arr.map((f) => f.name) }),
-    })
-      .then(async (res) => {
-        if (res.status !== 200) return;
-        const body = (await res.json()) as { prId?: string };
-        if (body.prId) {
-          setConflictPrId(body.prId);
-          router.refresh();
+    setAnalyzing(true);
+    setConflictPrId(null);
+    const minDelay = new Promise<void>((res) => setTimeout(res, 2200));
+    const fetchPromise = fetch(
+      `/api/patients/${encodeURIComponent(patientId)}/followup-upload`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ fileNames: arr.map((f) => f.name) }),
+      },
+    );
+    Promise.all([fetchPromise, minDelay])
+      .then(async ([res]) => {
+        if (res.status === 200) {
+          const body = (await res.json()) as { prId?: string };
+          if (body.prId) {
+            setConflictPrId(body.prId);
+            router.refresh();
+          }
         }
       })
       .catch(() => {
-        /* file is already visible in the folder; route 204/4xx is harmless */
+        /* file is already visible; route 204/4xx is harmless */
+      })
+      .finally(() => {
+        setAnalyzing(false);
       });
   };
 
@@ -178,7 +187,18 @@ export function SpecialistFolder({
         </div>
       </header>
 
-      {conflictPrId ? (
+      {analyzing ? (
+        <div className="mt-5 flex items-center gap-2 rounded-lg border border-border bg-muted/40 px-3 py-2 text-[12px] text-foreground/80">
+          <Loader2 className="h-3.5 w-3.5 animate-spin text-violet-500" />
+          <span className="font-medium">
+            Analyzing dropped record against existing facts…
+          </span>
+          <span className="ml-auto inline-flex items-center gap-1 text-muted-foreground">
+            <Sparkles className="h-3 w-3 text-violet-500" />
+            <span className="mono text-[11px]">agent · scanning</span>
+          </span>
+        </div>
+      ) : conflictPrId ? (
         <Link
           href={`/patients/${encodeURIComponent(patientId)}/prs/${conflictPrId}`}
           className="mt-5 flex items-center gap-2 rounded-lg border border-amber-300 bg-amber-50/70 px-3 py-2 text-[12px] text-amber-900 transition-colors hover:bg-amber-100"
@@ -235,11 +255,7 @@ export function SpecialistFolder({
             ))}
           </ol>
         </div>
-      ) : (
-        <p className="mt-5 text-[12.5px] italic text-muted-foreground">
-          No files in this folder yet. Drop one above to get started.
-        </p>
-      )}
+      ) : null}
 
       {facts.length > 0 && (
         <details className="mt-8 group">

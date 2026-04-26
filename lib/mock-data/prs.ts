@@ -1,6 +1,7 @@
 import type { PullRequest } from "../types";
 
-export const pullRequests: PullRequest[] = [
+type _G = typeof globalThis & { __mockPullRequests?: PullRequest[] };
+const _SEED_PRS: PullRequest[] = [
   {
     id: "pr-tb-1",
     patientId: "thomas-b",
@@ -192,6 +193,9 @@ export const pullRequests: PullRequest[] = [
     author: { name: "Lab feed", role: "Auto-feed" },
   },
 ];
+
+export const pullRequests: PullRequest[] = ((globalThis as _G).__mockPullRequests ??=
+  _SEED_PRS);
 
 export function prsForPatient(id: string): PullRequest[] {
   return pullRequests.filter((pr) => pr.patientId === id);
